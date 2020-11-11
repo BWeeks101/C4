@@ -1,0 +1,440 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/*.........Media Queries*/
+
+/* iPhone 5/SE Portrait - 320px x 568px */
+@media (min-width: 320px) {
+    .header-nav {
+        padding: 5px 10px;
+    }
+
+    .header-divider, .title-container, .carousel-container, .footer-container {
+        padding: 0 10px;
+    }
+
+    .cta-image-btn {
+        width: calc(100% - 30px);
+        padding: .375rem .75rem;
+    }
+}
+
+/* Pixel 2 Portrait - 411px x 736px */
+@media (min-width: 411px) {
+    .menu-col ul li, .about-text-row p {
+        font-size: 1em;
+    }
+
+    .about-quote-wrapper h4 {
+        font-size: 1.5em;
+    }
+
+    .about-quote-wrapper h5 {
+        font-size: 1.25em;
+    }
+}
+
+/* Menu.html - carousel-nav height adjustment to account for wrapping*/
+@media (min-width: 451px) {
+    .carousel-item-spacer {
+        height: 145px
+    }
+}
+
+/* iPhone 5/SE Landscape - 568px x 320px */
+@media (min-width: 568px) {
+    .cta-image-width {
+        width: 450px;
+    }
+
+    .cta-image {
+        max-height: 300px;
+        max-width: 450px;
+    }
+}
+
+/* Galaxy S5, Moto G4 Landscape - 640px x 360px */
+@media (min-width: 640px) {
+    .cta-image-width {
+        width: 510px
+    }
+
+    .cta-image {
+        max-height: 340px;
+        max-width: 510px;
+    }
+}
+
+/* Galaxy Fold Landscape - 653px x 280px */
+@media (min-width: 653px) {    
+    .welcome-container {
+        margin-top: 5px;
+    }
+
+    .cta-image-width {
+        width: 390px
+    }
+
+    .cta-image {
+        max-height: 260px;
+        max-width: 390px;
+    }
+}
+
+/* iPhone 6/7/8 Landscape - 667px x 375px*/
+@media (min-width: 667px) {
+    .welcome-container {
+        margin-top: 0;
+    }
+
+    .cta-image-width {
+        width: 531px;
+    }
+
+    .cta-image {
+        max-height: 354px;
+        max-width: 531px;
+    }
+}
+
+/* Surface Duo Landscape - 720px x 540px*/
+@media (min-width: 720px) and (min-height: 412px) {
+    .cta-image-width {
+        width: 690px;
+    }
+
+    .cta-image {
+        max-height: 460px;
+        max-width: 690px;
+    }
+}
+
+/* iPhone 6/7/8 Plus, Pixel 2 Landscape - 731px/736px x 411px/414px */
+@media (min-width: 731px) {
+    .cta-image-width {
+        width: 591px;
+    }
+
+    .cta-image {
+        max-height: 394px;
+        max-width: 591px;
+    }
+}
+
+/* Galaxy S9/S9+, S10e Landscape - 740px/760px x 360px*/
+@media (min-width: 740px) {
+    .cta-image-width {
+        width: 510px;
+    }
+
+    .cta-image {
+        max-height: 340px;
+        max-width: 510px;
+    }
+}
+
+/* Bootstrap L (Max) Breakpoint - 768px */
+@media (max-width: 767px) {
+    .header-nav-list, .header-nav-list li {
+        padding: 5px;
+    }
+
+    .header-nav-link-icon {
+        text-align: center;
+        width: 1.25em;
+    }
+
+    .cta-image .hidden {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .cta-image .tint {
+        background-color: rgba(0,0,0,0)
+    }
+
+    .cta-image-btn, .cta-image-btn:hover, .cta-image-btn:active, .cta-image-btn:not(:disabled):not(.disabled):active, .cta-image-btn:focus, .cta-image-btn:not(:disabled):not(.disabled):active:focus {
+        background-color: rgba(0,0,0,0.5)
+    }
+
+    .cta-image-btn {
+        max-width: 350px;
+    }
+    
+    .locations-container:not(#last-location) {
+        margin-bottom: 0px;
+    }
+
+    .locations-text .btn-info {
+        margin-top: 1rem;
+    }
+}
+
+/* Bootstrap M (Min) Breakpoint - 768px */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        height: 40px;
+    }
+
+    .header-nav-tint {
+        background-color: transparent;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+        border-radius: 0;
+    }
+
+    .welcome-logo {
+        height: 75px;
+    }
+    
+    .charity-info p {
+        font-size: 1em;
+    }
+
+    .cta-image-width {
+        width: 1500px;
+    }
+
+    .cta-image {
+        max-height: 1000px;
+        max-width: 1500px;
+    }   
+
+    .cta-image-btn, .cta-image-btn:hover, .cta-image-btn:active, .cta-image-btn:not(:disabled):not(.disabled):active, .cta-image-btn:focus, .cta-image-btn:not(:disabled):not(.disabled):active:focus {
+        border-color: transparent;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+    }
+
+    #frappe-col, #bottled-col {
+        margin-bottom: 14px;
+    }
+
+    .locations-text {
+        padding-top: 0px;
+    }
+}
+
+/* iPhone X/XS Landscape - 812px x 375px*/
+@media (min-width: 812px) and (max-height: 375px) {
+
+    .cta-image-width {
+        width: 531px;
+    }
+
+    .cta-image {
+        max-height: 354px;
+        max-width: 531px;
+    }
+}
+
+/* Pixel 2 XL Landscape - 823px x 411px*/
+@media (min-width: 823px) and (max-height: 411px) {
+    .header-nav-tint {
+        background-color: transparent;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+        border-radius: 0;
+    }
+
+    .cta-image-width {
+        width: 591px;
+    }
+
+    .cta-image {
+        max-height: 394px;
+        max-width: 591px;
+    }    
+}
+
+/* Bootstrap L (Min) Breakpoint - 992px */
+@media (min-width: 992px) {
+    .header-nav-link-icon {
+        margin-right: 5px;
+        font-size: 1.25em;
+    }
+
+    .header-nav-link-text {
+        font-size: 1.4em;
+    }
+
+    .hero-image {
+        min-height: 640px;
+    }
+
+    .cta-image-width, .cta-text-wrapper {
+        width: 900px;
+    }
+
+    .cta-image {
+        max-height: 600px;
+        max-width: 900px;
+    }
+
+    .cta-text-wrapper h4, .modal-title {
+        font-size: 1.5em;
+    }
+    
+    .cta-text-wrapper p, .cta-text-wrapper span, .modal-footer button, .modal-footer input, .locations-modal-text span, .cta-text-wrapper a i, .locations-modal-text a i {
+        font-size: 1em;
+    }
+
+    .modal-footer button, .modal-footer input {
+        width: 90px;
+    }
+
+    .tooltiptext {
+        width: 90px;
+        height: 90px;
+        margin-left: -45px;
+    }
+
+    .locations-text .cta-btn {
+        width: 250px;
+    }
+
+    .locations-text .btn-info {
+        margin-top: 1rem;
+    }
+}
+
+/* Bootstrap XL (Min) Breakpoint - 1200px */
+@media (min-width: 1200px) {
+    .welcome-text {
+        font-size: 4em;
+    }
+
+    .charity-info p {
+        font-size: 1.4em;
+    }
+    
+    .cta-text-wrapper p, .cta-text-wrapper span, .modal-footer button, .modal-footer input, .locations-modal-text span {
+        font-size: 1.25em;
+    }
+
+    .cta-text-wrapper a i, .locations-modal-text a i {
+        font-size: 1.1em;
+    }
+
+    .modal-footer button, .modal-footer input {
+        width: 100px;
+    }
+
+    #savoury-col, #toast-col {
+        margin-bottom: 14px;
+    }
+    
+    .tooltiptext {
+        width: 110px;
+        height: 110px;
+        margin-left: -55px;
+    }
+}
+
+/* .locations col capped at 1420px width from 1440p until 1920p */
+@media (min-width: 1440px) {
+    .locations-col, .about-text-row .col-12 {
+        max-width: 1420px;
+    } 
+}
+
+/* 1080p Breakpoint - 1920px x 1080px */
+@media (min-width: 1920px) {
+    .cta-row>.col-12:not(.locations-col) {
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 50%;
+                flex: 0 0 50%;
+        max-width: 1070px;
+    }
+
+    .cta-image-col-left {
+        -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 1;
+                order: 1;
+    }
+
+    .cta-image-col-right {
+        -webkit-box-ordinal-group: 1;
+            -ms-flex-order: 0;
+                order: 0;
+    }
+
+    .cta-text-col-left {
+        -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 1;
+                order: 1;
+        text-align: left !important;
+        min-height: 187px;
+    }
+
+    .cta-text-col-right {
+        -webkit-box-ordinal-group: 1;
+            -ms-flex-order: 0;
+                order: 0;
+        text-align: right !important;
+        min-height: 187px;
+    }
+
+    .cta-flex-left {
+        -webkit-box-pack: start !important;
+            -ms-flex-pack: start !important;
+                justify-content: flex-start !important;
+        min-height: 187px;
+    }
+
+    .cta-flex-right {
+        -webkit-box-pack: end !important;
+            -ms-flex-pack: end !important;
+                justify-content: flex-end !important;
+        min-height: 187px;
+    }    
+
+    .cta-btn-left {
+        -ms-flex-item-align: start !important;
+            align-self: flex-start !important;
+    }
+
+    .cta-btn-right {
+        -ms-flex-item-align: end !important;
+            align-self: flex-end !important;
+    }
+
+    .cta-text-wrapper:not(.locations-text) {
+        min-height: 187px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+    }
+
+    .cta-image-text {
+        font-size: 1.75em;
+    }
+
+    .cta-image-icon {
+        font-size: 1.65em;
+    }
+
+    .locations-col, .about-text-row .col-12 {
+        max-width: 75%;
+    }    
+}
+
+/* .locations col capped at 75% width from 1920p until 2880px, maxing at 2140px */
+@media (min-width: 2880px) {
+    .locations-col, .about-text-row .col-12 {
+        max-width: 2140px;
+    } 
+}
+/*........./.media queries*/

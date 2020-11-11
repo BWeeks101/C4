@@ -1,0 +1,260 @@
+/*.................................................................................................................................................
+Colour Palette:
+#fafafa; Text Colour
+#262626; Background Colour
+#252526; Nav Dropdown/Menu Note/Tooltip Background
+
+#17a2b8; Bootstrap .btn-info Background Colour/Border Colour, .btn-outline-info Border Colour
+#6c757d; Bootstrap .btn-secondary Background Colour/Border Colour
+
+Heading Fonts:
+font-family: 'Roboto Slab', serif;
+
+Content Fonts:
+font-family: 'Roboto Mono', monospace;
+.................................................................................................................................................*/
+
+/*.................................................................................................................................................
+The Flex based 'Sticky Footer' method Utilised in this CSS is modified from https://css-tricks.com/couple-takes-sticky-footer/ 
+                                                                        and https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+
+Original CSS-Tricks Example Below:
+
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+
+Original PhilipWalton Example Below:
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+.................................................................................................................................................*/
+
+/*..........Bootstrap Stylesheet*/
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
+/*........../.bootstrap stylesheet*/
+
+
+/*..........Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/*........../.google fonts*/
+
+
+/*..........Set Page Defaults*/
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    min-width: 360px;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background-color: #262626;
+    color: #fafafa;
+    font-family: 'Roboto Mono', monospace;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1, h2, h4, h5 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+a, .header-nav-link-text, .btn-info, .btn-secondary {
+    color: #fafafa;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
+a:hover, .header-nav-link-text:hover {
+    color: #fafafa;
+    text-decoration: underline;
+}
+
+div, nav, ul, li, img, i, a, hr, .row, .header-nav-link, .header-nav-link-text {
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+div, nav, ul, li, img, i, a, p, span {
+    background-color: transparent;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:not(:disabled):not(.disabled):active, .btn-info:focus {
+    color: #fafafa;
+}
+
+.btn-outline-info, .btn-outline-info:hover, .btn-outline-info:active, .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:focus {
+    color: #fafafa;
+    background-color: transparent;
+}
+
+.navbar-toggler, .btn {
+    border-radius: 15px;
+}
+/*........../.set page defaults*/
+
+
+/*..........Custom Classes*/
+.active-page {
+    text-decoration: underline;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/*.tint idea acquired from the hero image .opaque-overlay utilised in the CI 'Whiskey Drop' project*/
+.tint {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+.underline {
+    padding-bottom: 2px;
+    border-bottom: solid 1px #fafafa;
+}
+/*........../.custom classes*/
+
+
+/*..........Header*/
+.header-nav {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 65px;
+    width: 100%;
+    padding: 5px 5px;
+    z-index: 101;
+    align-items: flex-start;
+}
+
+.header-divider {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 5px;
+    z-index: 100;
+}
+
+.header-divider hr {
+    border-top: solid 1px rgb(204,204,204);
+}
+
+.logo {
+    height: 40px;
+}
+
+.navbar-expand-md {
+    padding: 5px 0;
+}
+
+.header-nav-list {
+    list-style: none;
+}
+
+.header-nav-tint {
+    background-color: rgba(25,25,26,.95);
+    box-shadow: 5px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+.header-nav-link-text {
+    display: inline-block;
+}
+
+.header-nav-link-icon {
+    margin-right: 5px;
+    font-size: 1.1em;
+}
+
+.header-nav-link-text {
+    font-size: 1.25em;
+}
+
+.title-container {
+    margin-top: 30px;
+    width: 100%;
+    padding: 0 5px;
+}
+
+.title-text {
+    padding-bottom: 2px;
+    border-bottom: solid 1px;
+}
+/*........../.header*/
+
+
+/*..........Footer*/
+footer {
+    flex-shrink: 0;
+}
+
+.footer-container {
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
+
+.footer-divider {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.footer-row {
+    width: 100%;
+}
+
+.footer-divider hr {
+    border-top: solid 1px rgb(204,204,204);
+}
+
+.social-media-row .col-auto i {
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.footer-logo-container {
+    text-align: right;
+}
+
+.footer-logo-container a {
+    padding: 5px 0;
+}
+/*........../.footer*/
