@@ -16,18 +16,17 @@
     <header>
         <nav class="navbar header-nav justify-content-md-between align-items-top navbar-dark">
             
-                <button class="navbar-toggler" type="button" onclick="openNav()" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="sidenav-disabledoc" onclick="closeNav()" id="mySidenavol"></div>
-                <div class="sidenav text-left header-nav-tint" id="mySidenav">
-                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
-                </div>
-                
+            <button class="navbar-toggler" type="button" onclick="openNav()" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="sidenav-doc-overlay" onclick="closeNav()" id="sideNavDocOverlay"></div>
+            <div class="sidenav text-left header-nav-tint" id="sideNav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>                
             
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logotest.png" alt="K4 Logo">                        
@@ -96,7 +95,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     
-
     <!--Local Javascript-->
     <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
 

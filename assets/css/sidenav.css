@@ -1,29 +1,31 @@
 /*
-* SideNav taken from W3 Schools Example
+* SideNav taken from W3 Schools Example and modified
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
  
  /* The side navigation menu */
-.sidenav, .sidenav-disabledoc {
+.sidenav, .sidenav-doc-overlay {
   height: 100%; /* 100% Full-height */
-  width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1000; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color: rgba(25,25,26,.90); /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
-.sidenav-disabledoc {
-    height: 100%;
+.sidenav-doc-overlay {
     width: 100%;    
     z-index: -1000;
     background-color: rgba(0,0,0,0.0);
-    transition: 0.5s;
 }
+
+.sidenav {
+  width: 0; /* 0 width - change this with JavaScript */
+  z-index: 1000; /* Stay on top */
+  background-color: rgba(45,45,45,.95); /* Black*/
+}
+
 
 /* The navigation menu links */
 .sidenav a {
@@ -37,7 +39,9 @@
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color: #f1f1f1;
+  /*color: #f1f1f1;*/
+  color: hotpink;
+  transition: 0.5s;
 }
 
 /* Position and style the close button (top right corner) */

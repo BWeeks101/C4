@@ -1,16 +1,21 @@
+/*
+* SideNav taken from W3 Schools Example and modified
+* https://www.w3schools.com/howto/howto_js_sidenav.asp
+*/
+
 /* Set the width of the side navigation to 250px */
 function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("mySidenavol").style.zIndex = "999";
-  document.getElementById("mySidenavol").style.backgroundColor = "rgba(0,0,0,0.5)";
-  document.getElementById("mySidenavol").style.left = "250px"
+  document.getElementById("sideNav").style.width = "250px";
+  document.getElementById("sideNavDocOverlay").style.zIndex = "999";
+  document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.7)";
+  document.getElementById("sideNavDocOverlay").style.left = "250px"
 
 }
 
 /* Set the width of the side navigation to 0 */
 function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("mySidenavol").style.zIndex = "-1000";
-  document.getElementById("mySidenavol").style.backgroundColor = "rgba(0,0,0,0.0)";
-  document.getElementById("mySidenavol").style.left = "0px"
+  document.getElementById("sideNav").style.width = "0";
+  document.getElementById("sideNavDocOverlay").style.zIndex = "-1000";
+  document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.0)";
+  document.getElementById("sideNavDocOverlay").style.left = "0px"
 }
