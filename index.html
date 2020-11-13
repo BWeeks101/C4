@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K4</title>
 
-    <!--Font Awesome-->
-    <script src="https://kit.fontawesome.com/ace03ffe36.js" crossorigin="anonymous"></script>
-
-     <!--Local Stylesheets-->
+    <!--Local Stylesheets-->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/media-queries.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/sidenav.css" type="text/css">
     
 </head>
 <body>
     <!--Nav-->
     <header>
         <nav class="navbar header-nav justify-content-md-between align-items-top navbar-dark">
-            <div>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleMenu" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
+            
+                <button class="navbar-toggler" type="button" onclick="openNav()" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse text-left header-nav-tint" id="navbarToggleMenu">
-                    <ul class="header-nav-list">
-                        <li class="d-md-inline-block"><a href="#" class="header-nav-link"><i class="fas fa-home header-nav-link-icon"></i><span class="header-nav-link-text active-page">Home</span></a></li>
-                        <li class="d-md-inline-block"><a href="menu.html" class="header-nav-link"><i class="fas fa-coffee header-nav-link-icon"></i><span class="header-nav-link-text">Menu</span></a></li>
-                        <li class="d-md-inline-block"><a href="locations.html" class="header-nav-link"><i class="fas fa-map-marker-alt header-nav-link-icon"></i><span class="header-nav-link-text">Locations</span></a></li>
-                        <li class="d-md-inline-block"><a href="about.html" class="header-nav-link"><i class="fas fa-question-circle header-nav-link-icon"></i><span class="header-nav-link-text">About</span></a></li>                            
-                        <li class="d-md-inline-block"><a href="#" class="header-nav-link" data-toggle="modal" data-target="#contactModal"><i class="fas fa-envelope header-nav-link-icon"></i><span class="header-nav-link-text">Contact Us</span></a></li>
-                    </ul>
+                <div class="sidenav text-left header-nav-tint" id="mySidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a>
                 </div>
-            </div>
+                <div class="sidenav-disabledoc" onclick="closeNav()" id="mySidenavol"></div>
+            
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logotest.png" alt="K4 Logo">                        
             </a>            
@@ -83,17 +80,24 @@
                 </div>
                 <div class="d-none d-md-inline-block col-md-4 footer-logo-container">
                     <a href="index.html" class="d-inline-block">
-                        <img class="logo" src="assets/images/logotest.png" alt="B3C Logo">
+                        <img class="logo" src="assets/images/logotest.png" alt="K4 Logo">
                     </a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!--Font Awesome-->
+    <script src="https://kit.fontawesome.com/ace03ffe36.js" crossorigin="anonymous"></script>
+
      <!--Bootstrap Javascript-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <!--./bootstrap javascript-->
+    
+
+    <!--Local Javascript-->
+    <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
