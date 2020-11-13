@@ -21,9 +21,10 @@
 }
 
 .sidenav {
-  width: 0; /* 0 width - change this with JavaScript */
+  width: 250px; /* 0 width - change this with JavaScript */
   z-index: 1000; /* Stay on top */
   background-color: rgba(45,45,45,.95); /* Black*/
+  left: -250px;
 }
 
 
