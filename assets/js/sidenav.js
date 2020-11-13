@@ -3,6 +3,7 @@ function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("mySidenavol").style.zIndex = "999";
   document.getElementById("mySidenavol").style.backgroundColor = "rgba(0,0,0,0.5)";
+  document.getElementById("mySidenavol").style.left = "250px"
 
 }
 
@@ -11,4 +12,5 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("mySidenavol").style.zIndex = "-1000";
   document.getElementById("mySidenavol").style.backgroundColor = "rgba(0,0,0,0.0)";
+  document.getElementById("mySidenavol").style.left = "0px"
 }
