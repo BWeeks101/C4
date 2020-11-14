@@ -2,11 +2,34 @@
 * SideNav taken from W3 Schools Example and modified
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
-
-onLoad();
+$(document).ready(onLoad);
 
 function onLoad() {
-    closeNav();    
+    let navOffset = getNavWidth()[1];
+    document.getElementById("sideNav").style.left = navOffset;
+    document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s";
+}
+
+/* Set width and negative offset for sideNav on screen resize*/
+function sideNavResize() {
+    console.time('sideNavResize Vars Set');
+    let navArray = getNavWidth();
+    let navWidth = navArray[0];
+    let navOffset = navArray[1];
+    console.log("Vars : Width " + navWidth + " : Offset " + navOffset)
+    console.timeEnd('sideNavResize Vars Set');
+    
+    console.time('sideNavResize sideNav Update');
+    if (document.getElementById("sideNav").classList.contains("d-none")) {
+        document.getElementById("sideNav").style.Width = navWidth;
+        document.getElementById("sideNav").style.left = navOffset;
+        console.log("sideNav Hidden : " + document.getElementById("sideNav").style.Width + " : " + document.getElementById("sideNav").style.left);
+    } else {
+        document.getElementById("sideNav").style.Width = navWidth;
+        document.getElementById("sideNavDocOverlay").style.left = navWidth;
+        console.log("sideNav Shown : " + document.getElementById("sideNav").style.Width + " : " + document.getElementById("sideNavDocOverlay").style.left);
+    }
+    console.timeEnd('sideNavResize sideNav Update');    
 }
 
 /* Return width and negative offset for sideNav */
@@ -14,45 +37,80 @@ function getNavWidth() {
     let navWidth = calcNavWidth();
     
     if (navWidth < 310) {
-        navWidth = 310;
+        navWidth = "310px";
+    } else {
+        navWidth = `${navWidth}px`;
     }
 
-    let navOffset = (0 - navWidth);
+    let navOffset = `-${navWidth}`
     
-    let navArray = [navWidth + "px", navOffset + "px"];
+    let navArray = [navWidth, navOffset];
+
+    console.log("Get Nav Array: " + navArray);
     
     return navArray;
 }
 
 /* Calculate width of sideNav */
 function calcNavWidth() {
-    let sWidth = screen.width;
+    let cWidth = window.innerWidth;
     let percentage = 33;
 
-    return (sWidth/100)*percentage;
+    return (cWidth/100)*percentage;
+}
+
+/* Toggle sidenav visibility */
+function sideNavDisplayToggle() {
+    document.getElementById("sideNav").classList.toggle("d-none");
+}
+
+/* Toggle sideNavDocOverlay left transition duration */
+function sideNavDocOverlayLTD() {
+    if (document.getElementById("sideNavDocOverlay").style.transition == "left 0.5s ease 0s, background-color 0.5s ease 0s") {
+        document.getElementById("sideNavDocOverlay").style.transition = "left 0s ease 0s, background-color 0.5s ease 0s";
+    } else {
+        document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s";
+    }
 }
 
 /* Set the width of the side navigation to 250px */
-function openNav() {
-    let navArray = getNavWidth();
-    let navWidth = navArray[0];
-    let navOffset = navArray[1];
-        
+function openNav() {    
+    sideNavDisplayToggle();
+    document.getElementById("navBarToggler").disabled = true;
+    setTimeout(function() {
+        showNav();
+        setTimeout(function() {
+            sideNavDocOverlayLTD();
+        }, 600);
+    }, 50);
+}
+
+function showNav() {
+    let navWidth = getNavWidth()[0];
+
     document.getElementById("sideNav").style.left = "0px";
     document.getElementById("sideNavDocOverlay").style.zIndex = "999";
     document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.7)";
-    document.getElementById("sideNavDocOverlay").style.left = navWidth;    
+    document.getElementById("sideNavDocOverlay").style.left = navWidth;
 }
 
 /* Set the width of the side navigation to 0 */
 function closeNav() {
-    let navOffset = getNavWidth()[1];
+    sideNavDocOverlayLTD();
+    setTimeout(function() {
+        hideNav();    
+        setTimeout(function() {
+            sideNavDisplayToggle();
+            document.getElementById("navBarToggler").disabled = false;
+        }, 600);
+    }, 50);    
+}
 
-    console.log(navOffset);
+function hideNav() {
+    let navOffset = getNavWidth()[1];
 
     document.getElementById("sideNav").style.left = navOffset;
     document.getElementById("sideNavDocOverlay").style.zIndex = "-1000";
     document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.0)";
     document.getElementById("sideNavDocOverlay").style.left = "0px"
-
 }
