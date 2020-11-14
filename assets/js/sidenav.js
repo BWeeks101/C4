@@ -58,7 +58,6 @@ function sideNavDisplayToggle() {
 
 /* Toggle sideNavDocOverlay disabled status */
 function sideNavDocOverlayClickDisabled() {
-    console.log(document.getElementById("sideNavDocOverlay").getAttribute("onClick"));
     if (document.getElementById("sideNavDocOverlay").hasAttribute("onClick")) {
         document.getElementById("sideNavDocOverlay").removeAttribute("onClick");
     } else {
