@@ -12,24 +12,17 @@ function onLoad() {
 
 /* Set width and negative offset for sideNav on screen resize*/
 function sideNavResize() {
-    console.time('sideNavResize Vars Set');
     let navArray = getNavWidth();
     let navWidth = navArray[0];
     let navOffset = navArray[1];
-    console.log("Vars : Width " + navWidth + " : Offset " + navOffset)
-    console.timeEnd('sideNavResize Vars Set');
-    
-    console.time('sideNavResize sideNav Update');
+
     if (document.getElementById("sideNav").classList.contains("d-none")) {
         document.getElementById("sideNav").style.Width = navWidth;
         document.getElementById("sideNav").style.left = navOffset;
-        console.log("sideNav Hidden : " + document.getElementById("sideNav").style.Width + " : " + document.getElementById("sideNav").style.left);
     } else {
         document.getElementById("sideNav").style.Width = navWidth;
         document.getElementById("sideNavDocOverlay").style.left = navWidth;
-        console.log("sideNav Shown : " + document.getElementById("sideNav").style.Width + " : " + document.getElementById("sideNavDocOverlay").style.left);
     }
-    console.timeEnd('sideNavResize sideNav Update');    
 }
 
 /* Return width and negative offset for sideNav */
@@ -45,8 +38,6 @@ function getNavWidth() {
     let navOffset = `-${navWidth}`
     
     let navArray = [navWidth, navOffset];
-
-    console.log("Get Nav Array: " + navArray);
     
     return navArray;
 }
