@@ -53,6 +53,17 @@ function calcNavWidth() {
 /* Toggle sidenav visibility */
 function sideNavDisplayToggle() {
     document.getElementById("sideNav").classList.toggle("d-none");
+    document.getElementById("sideNavDocOverlay").classList.toggle("d-none");
+}
+
+/* Toggle sideNavDocOverlay disabled status */
+function sideNavDocOverlayClickDisabled() {
+    console.log(document.getElementById("sideNavDocOverlay").getAttribute("onClick"));
+    if (document.getElementById("sideNavDocOverlay").hasAttribute("onClick")) {
+        document.getElementById("sideNavDocOverlay").removeAttribute("onClick");
+    } else {
+        document.getElementById("sideNavDocOverlay").setAttribute("onClick", "closeNav()");
+    }    
 }
 
 /* Toggle sideNavDocOverlay left transition duration */
@@ -65,13 +76,14 @@ function sideNavDocOverlayLTD() {
 }
 
 /* Set the width of the side navigation to 250px */
-function openNav() {    
+function openNav() {
     sideNavDisplayToggle();
     document.getElementById("navBarToggler").disabled = true;
     setTimeout(function() {
         showNav();
         setTimeout(function() {
             sideNavDocOverlayLTD();
+            sideNavDocOverlayClickDisabled();
         }, 600);
     }, 50);
 }
@@ -88,6 +100,7 @@ function showNav() {
 /* Set the width of the side navigation to 0 */
 function closeNav() {
     sideNavDocOverlayLTD();
+    sideNavDocOverlayClickDisabled();
     setTimeout(function() {
         hideNav();    
         setTimeout(function() {
