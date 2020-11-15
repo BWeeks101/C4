@@ -86,19 +86,23 @@
 
     <!--Main Div-->
     <main>
-        <section>
+        <div class="container-fluid" id="mainBlockContainer">
             <div class="row" id="mainBlock">
                 <div class="col-12">
-                    <img src="assets/images/logo-red.png" alt="C4 Logo">
+                    <img src="assets/images/logo-red.png" alt="C4 Logo">                    
                 </div>
             </div>
+        </div>
+        
+        <div class="container-fluid" id="menuBlockContainer">
             <div class="row" id="menuBlockRow">
                 <div class="col-12" id="menuBlockCol">
-                    <p>Test</p>
+                    <div id="menuBlock">
+                        <p>Test</p>
+                    </div>                    
                 </div>
             </div>
-            
-        </section>
+        </div>
     </main>
 
     <!--Footer-->
@@ -106,7 +110,7 @@
         <div class="container-fluid footer-container">
             <div class="footer-divider"><hr></div>
             <div class="row no-gutters justify-content-center justify-content-md-end align-items-center">                
-                <div class="col col-md-4">
+                <div class="col">
                     <div class="container-fluid justify-content-center align-items-center">
                         <div class="row justify-content-center align-items-center social-media-row">
                             <div class="col-auto">
@@ -126,12 +130,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-none d-md-inline-block col-md-4 footer-logo-container">
-                    <a href="index.html" class="d-inline-block">
-                        <img class="logo" src="assets/images/logo-red.png" alt="K4 Logo">
-                    </a>
-                </div>
+                </div>                
             </div>
         </div>
     </footer>

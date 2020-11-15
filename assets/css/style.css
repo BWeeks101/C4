@@ -72,31 +72,13 @@ body {
     padding: 0;
     background-color: #262626;
     color: #fafafa;
-    font-family: 'Roboto Mono', monospace;
 }
 
 main {
     flex: 1 0 auto;
 }
 
-h1, h2, h4, h5 {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
-    background-color: transparent;
-}
-
-a, .header-nav-link-text, .btn-info, .btn-secondary {
-    color: #fafafa;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 500;
-}
-
-a:hover, .header-nav-link-text:hover {
-    color: #fafafa;
-    text-decoration: underline;
-}
-
-div, nav, ul, li, img, i, a, hr, .row, .header-nav-link, .header-nav-link-text {
+div, hr, .row, nav {
     margin: 0;
     padding: 0;
 }
@@ -105,52 +87,19 @@ div, nav, ul, li, img, i, a, hr, .row, .header-nav-link, .header-nav-link-text {
     padding: 0;
 }
 
-div, nav, ul, li, img, i, a, p, span {
-    background-color: transparent;
-}
-
-.btn-info, .btn-info:hover, .btn-info:active, .btn-info:not(:disabled):not(.disabled):active, .btn-info:focus {
+a {
     color: #fafafa;
 }
 
-.btn-outline-info, .btn-outline-info:hover, .btn-outline-info:active, .btn-outline-info:not(:disabled):not(.disabled):active, .btn-outline-info:focus {
+a:hover, .header-nav-link-text:hover {
     color: #fafafa;
-    background-color: transparent;
-}
-
-.navbar-toggler, .btn {
-    border-radius: 15px;
-}
-/*........../.set page defaults*/
-
-
-/*..........Custom Classes*/
-.active-page {
     text-decoration: underline;
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+.navbar-toggler {
+    border-radius: 15px;
 }
-
-/*.tint idea acquired from the hero image .opaque-overlay utilised in the CI 'Whiskey Drop' project*/
-.tint {
-    background-color: rgba(0,0,0,0.5);
-}
-
-.hidden {
-    display: none;
-}
-
-.underline {
-    padding-bottom: 2px;
-    border-bottom: solid 1px #fafafa;
-}
-/*........../.custom classes*/
+/*........../.set page defaults*/
 
 
 /*..........Header*/
@@ -178,44 +127,6 @@ div, nav, ul, li, img, i, a, p, span {
 
 .logo {
     height: 40px;
-}
-
-.navbar-expand-md {
-    padding: 5px 0;
-}
-
-.header-nav-list {
-    list-style: none;
-}
-
-.header-nav-tint {
-    background-color: rgba(25,25,26,.95);
-    box-shadow: 5px 5px rgba(0,0,0,0.1);
-    border-radius: 15px;
-}
-
-.header-nav-link-text {
-    display: inline-block;
-}
-
-.header-nav-link-icon {
-    margin-right: 5px;
-    font-size: 1.1em;
-}
-
-.header-nav-link-text {
-    font-size: 1.25em;
-}
-
-.title-container {
-    margin-top: 30px;
-    width: 100%;
-    padding: 0 5px;
-}
-
-.title-text {
-    padding-bottom: 2px;
-    border-bottom: solid 1px;
 }
 
 .navbar-toggler {
@@ -250,6 +161,7 @@ div, nav, ul, li, img, i, a, p, span {
 /*..........Footer*/
 footer {
     flex-shrink: 0;
+    height: 50px;
 }
 
 .footer-container {
