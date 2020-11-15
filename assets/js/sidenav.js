@@ -2,9 +2,9 @@
 * SideNav taken from W3 Schools Example and modified
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
-$(document).ready(onLoad);
+$(document).ready(sideNavOnLoad);
 
-function onLoad() {
+function sideNavOnLoad() {
     let navOffset = getNavWidth()[1];
     document.getElementById("sideNav").style.left = navOffset;
     document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s";
@@ -17,10 +17,10 @@ function sideNavResize() {
     let navOffset = navArray[1];
 
     if (document.getElementById("sideNav").classList.contains("d-none")) {
-        document.getElementById("sideNav").style.Width = navWidth;
+        document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNav").style.left = navOffset;
     } else {
-        document.getElementById("sideNav").style.Width = navWidth;
+        document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNavDocOverlay").style.left = navWidth;
     }
 }

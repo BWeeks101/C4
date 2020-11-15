@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/media-queries.css" type="text/css">
     <link rel="stylesheet" href="assets/css/sidenav.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/index.css" type="text/css">
     
 </head>
 <body onresize="sideNavResize()">
     <!--Nav-->
-    <header>
+    <header id="header">
         <nav class="navbar header-nav justify-content-md-between align-items-top navbar-dark">
             
             <button class="navbar-toggler" type="button" id="navBarToggler" onclick="openNav()" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +23,60 @@
             <div class="sidenav-doc-overlay d-none" id="sideNavDocOverlay"></div>
             <div class="sidenav d-none" id="sideNav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">View Leaderboard</a>
-                <a href="#">Rules</a>
-            </div>                
-            
+                <a class="options d-none" href="#">Back to Options</a>
+                <hr class="sidenav-divider options d-none">
+                <a class="settings d-none" href="#">User Settings</a>
+                <hr class="sidenav-divider settings d-none">
+                <a class="leaderboard default" href="#">View Leaderboard</a>
+                <hr class="sidenav-divider leaderboard default">
+                <a class="rules default" href="#">Rules</a>
+                <hr class="sidenav-divider rules default">
+                <a class="cancel-create d-none" href="#">Cancel Game Creation</a>
+                <hr class="sidenav-divider cancel-create d-none">
+                <a class="cancel-join d-none" href="#">Cancel Joining a Game</a>
+                <hr class="sidenav-divider cancel-join d-none">
+                <div class="type-group d-none">
+                    <h5>Game Type</h5>
+                    <a class="underheader" href="#">Single Player</a>
+                    <a class="underheader" href="#">Hotseat</a>
+                    <a class="underheader" href="#">Online Multiplayer</a>
+                    <hr class="sidenav-divider">
+                </div>
+                <div class="diff-group d-none">
+                <h5>Difficulty</h5>
+                    <a class="underheader" href="#">Easy</a>
+                    <a class="underheader" href="#">Normal</a>
+                    <a class="underheader" href="#">Hard</a>
+                    <hr class="sidenav-divider">
+                </div>
+                <div class="turn-group d-none">
+                <h5>Turn Time Limit</h5>
+                    <a class="underheader" href="#">5s</a>
+                    <a class="underheader" href="#">10s</a>
+                    <a class="underheader" href="#">15s</a>
+                    <a class="underheader" href="#">20s</a>
+                    <a class="underheader" href="#">25s</a>
+                    <a class="underheader" href="#">30s</a>
+                    <hr class="sidenav-divider">
+                </div>
+                <div class="ctrl-group d-none">
+                    <a class="pause-reset" href="#">Pause</a>
+                    <a class="pause-reset" href="# pause-reset">Reset</a>
+                    <hr class="sidenav-divider pause-reset">
+                    <a class="concede" href="#">Concede</a>                
+                    <hr class="sidenav-divider concede">
+                    <a class="quit" href="#">Quit</a>
+                    <hr class="sidenav-divider quit">
+                </div>
+                <div class="sout-group d-none">
+                    <a class="sout" href="#">Sign Out</a>
+                    <hr class="sidenav-divider sout">
+                    <a class="sout-mult" href="#">Sign Out (P1)</a>
+                    <a class="sout-mult" href="#">Sign Out (P2)</a>
+                    <a class="sout-mult" href="#">Sign Out (Both)</a>
+                    <hr class="sidenav-divider sout-mult">
+                </div>
+            </div>            
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logo-red.png" alt="K4 Logo">                        
             </a>            
@@ -36,9 +87,14 @@
     <!--Main Div-->
     <main>
         <section>
-            <div class="row">
+            <div class="row" id="mainBlock">
                 <div class="col-12">
-                    <div><br><p>TEST</p></div>    
+                    <img src="assets/images/logo-red.png" alt="C4 Logo">
+                </div>
+            </div>
+            <div class="row" id="menuBlockRow">
+                <div class="col-12" id="menuBlockCol">
+                    <p>Test</p>
                 </div>
             </div>
             
@@ -46,7 +102,7 @@
     </main>
 
     <!--Footer-->
-    <footer>
+    <footer id="footer">
         <div class="container-fluid footer-container">
             <div class="footer-divider"><hr></div>
             <div class="row no-gutters justify-content-center justify-content-md-end align-items-center">                
@@ -90,6 +146,7 @@
     
     <!--Local Javascript-->
     <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
+    <script src="assets/js/main.js" crossorigin="anonymous"></script>
 
 </body>
 </html>

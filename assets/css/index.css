@@ -1,0 +1,17 @@
+#mainBlock {
+    text-align: center;    
+}
+
+#menuBlock img {
+    height: 200px;
+    width: 200px;
+}
+
+#menuBlockRow {
+    border: 1px solid lightblue;
+}
+
+#menuBlockCol {
+    text-align: center;
+    background-color: hotpink;
+}
