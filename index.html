@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/index.css" type="text/css">
     
 </head>
-<body onresize="sideNavResize()">
+<body onresize="mainOnResize()">
     <!--Nav-->
     <header id="header">
         <nav class="navbar header-nav justify-content-md-between align-items-top navbar-dark">
@@ -23,58 +23,58 @@
             <div class="sidenav-doc-overlay d-none" id="sideNavDocOverlay"></div>
             <div class="sidenav d-none" id="sideNav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a class="options d-none" href="#">Back to Options</a>
-                <hr class="sidenav-divider options d-none">
-                <a class="settings d-none" href="#">User Settings</a>
-                <hr class="sidenav-divider settings d-none">
-                <a class="leaderboard default" href="#">View Leaderboard</a>
-                <hr class="sidenav-divider leaderboard default">
-                <a class="rules default" href="#">Rules</a>
-                <hr class="sidenav-divider rules default">
-                <a class="cancel-create d-none" href="#">Cancel Game Creation</a>
-                <hr class="sidenav-divider cancel-create d-none">
-                <a class="cancel-join d-none" href="#">Cancel Joining a Game</a>
-                <hr class="sidenav-divider cancel-join d-none">
-                <div class="type-group d-none">
+                <a id="optionsLink" class="sn-options d-none" onclick="showDefault()" href="#">Back to Options</a>
+                <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
+                <a id="settingsLink" class="sn-settings d-none" href="#">User Settings</a>
+                <hr id="settingsDivider" class="sn-settings sidenav-divider d-none">
+                <a id="leaderboardLink" class="sn-leaderboard default" href="#">View Leaderboard</a>
+                <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">
+                <a id="rulesLink" class="sn-rules default" onclick="showRules()" href="#">Rules</a>
+                <hr id="rulesDivider" class="sn-rules sidenav-divider default">
+                <a id="cancelCreateLink" class="sn-cancelcreate d-none" href="#">Cancel Game Creation</a>
+                <hr id="cancelCreateDivider" class="sn-cancel-create sidenav-divider d-none">
+                <a id="cancelJoinLink" class="cancel-join d-none" href="#">Cancel Joining a Game</a>
+                <hr id="cancelJoinDivider" class="cancel-join sidenav-divider d-none">
+                <div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
-                    <a class="underheader" href="#">Single Player</a>
-                    <a class="underheader" href="#">Hotseat</a>
-                    <a class="underheader" href="#">Online Multiplayer</a>
-                    <hr class="sidenav-divider">
+                    <a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>
+                    <a id="typeHSLink" class="sn-typegroup underheader" href="#">Hotseat</a>
+                    <a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>
+                    <hr id="typeGroupDivider" class="sn-typegroup sidenav-divider">
                 </div>
-                <div class="diff-group d-none">
+                <div id="diffGroup" class="sn-diffgroup d-none">
                 <h5>Difficulty</h5>
-                    <a class="underheader" href="#">Easy</a>
-                    <a class="underheader" href="#">Normal</a>
-                    <a class="underheader" href="#">Hard</a>
-                    <hr class="sidenav-divider">
+                    <a id="diffEasyLink" class="sn-diffgroup underheader" href="#">Easy</a>
+                    <a id="diffMedLink" class="sn-diffgroup underheader" href="#">Normal</a>
+                    <a id="diffHardLink" class="sn-diffgroup underheader" href="#">Hard</a>
+                    <hr id="diffGroupDivider" class="sn-diffgroup sidenav-divider">
                 </div>
-                <div class="turn-group d-none">
+                <div id="turnGroup" class="sn-turngroup d-none">
                 <h5>Turn Time Limit</h5>
-                    <a class="underheader" href="#">5s</a>
-                    <a class="underheader" href="#">10s</a>
-                    <a class="underheader" href="#">15s</a>
-                    <a class="underheader" href="#">20s</a>
-                    <a class="underheader" href="#">25s</a>
-                    <a class="underheader" href="#">30s</a>
-                    <hr class="sidenav-divider">
+                    <a id="turn5Link" class="sn-turngroup underheader" href="#">5s</a>
+                    <a id="turn10Link" class="sn-turngroup underheader" href="#">10s</a>
+                    <a id="turn15Link" class="sn-turngroup underheader" href="#">15s</a>
+                    <a id="turn20Link" class="sn-turngroup underheader" href="#">20s</a>
+                    <a id="turn25Link" class="sn-turngroup underheader" href="#">25s</a>
+                    <a id="turn30Link" class="sn-turngroup underheader" href="#">30s</a>
+                    <hr id="turnGroupDivider" class="sn-turngroup sidenav-divider">
                 </div>
-                <div class="ctrl-group d-none">
-                    <a class="pause-reset" href="#">Pause</a>
-                    <a class="pause-reset" href="# pause-reset">Reset</a>
-                    <hr class="sidenav-divider pause-reset">
-                    <a class="concede" href="#">Concede</a>                
-                    <hr class="sidenav-divider concede">
-                    <a class="quit" href="#">Quit</a>
-                    <hr class="sidenav-divider quit">
+                <div id="ctrlGroup" class="sn-ctrlgroup d-none">
+                    <a id="ctrlPauseLink" class="sn-ctrlgroup pause-reset" href="#">Pause</a>
+                    <a id="ctrlResetLink" class="sn-ctrlgroup pause-reset" href="#">Reset</a>
+                    <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider pause-reset">
+                    <a id="concedeLink" class="sn-ctrlgroup" href="#">Concede</a>                
+                    <hr id="concedeDivider" class="sn-ctrlgroup sidenav-divider">
+                    <a id="quitLink" class="sn-ctrlgroup" href="#">Quit</a>
+                    <hr id="quitDivider" class="sn-ctrlgroup sidenav-divider">
                 </div>
-                <div class="sout-group d-none">
-                    <a class="sout" href="#">Sign Out</a>
-                    <hr class="sidenav-divider sout">
-                    <a class="sout-mult" href="#">Sign Out (P1)</a>
-                    <a class="sout-mult" href="#">Sign Out (P2)</a>
-                    <a class="sout-mult" href="#">Sign Out (Both)</a>
-                    <hr class="sidenav-divider sout-mult">
+                <div id="soutGroup" class="sn-soutgroup d-none">
+                    <a id="soutLink" class="sn-soutgroup" href="#">Sign Out</a>
+                    <hr id="soutDivider" class="sn-soutgroup sidenav-divider">
+                    <a id="soutMultP1Link" class="sn-soutgroup sout-mult" href="#">Sign Out (P1)</a>
+                    <a id="soutMultP2Link" class="sn-soutgroup sout-mult" href="#">Sign Out (P2)</a>
+                    <a id="soutMultBothLink" class="sn-soutgroup sout-mult" href="#">Sign Out (Both)</a>
+                    <hr id="soutMultDivider" class="sn-soutgroup sidenav-divider sout-mult">
                 </div>
             </div>            
             <a href="index.html" class="d-inline-block navbar-brand">
@@ -85,24 +85,29 @@
     </header>
 
     <!--Main Div-->
-    <main>
-        <div class="container-fluid" id="mainBlockContainer">
-            <div class="row" id="mainBlock">
-                <div class="col-12">
-                    <img src="assets/images/logo-red.png" alt="C4 Logo">                    
-                </div>
+    <main id="main">
+        <div class="container-fluid text-center default" id="mainBlockContainer">
+            <div id="imgContainer" class="default">
+                <img src="assets/images/logo-red.png" alt="C4 Logo">                                
+            </div>
+            <div class="d-none" id="rulesContainer">
+                <h1>Rules</h1>
+                <p>Lorem Ipsum</p>
             </div>
         </div>
         
-        <div class="container-fluid" id="menuBlockContainer">
-            <div class="row" id="menuBlockRow">
-                <div class="col-12" id="menuBlockCol">
-                    <div id="menuBlock">
-                        <p>Test</p>
-                    </div>                    
+        <div class="container-fluid default" id="menuBlockContainer">
+            <div class="d-none" id="menuBlock">
+                <div id="menuContent">
+                    <div id="menuContentContainer">
+                        <h3 id="menuTitle">Enter your Username</h3>
+                        <form>
+                            <input type="text"><input type="submit" value="Submit">
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </div>                    
+        </div>        
     </main>
 
     <!--Footer-->
@@ -144,6 +149,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     
     <!--Local Javascript-->
+    <script src="assets/js/sidenavmenu.js" crossorigin="anonymous"></script>
     <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
     <script src="assets/js/main.js" crossorigin="anonymous"></script>
 

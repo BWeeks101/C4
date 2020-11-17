@@ -2,7 +2,6 @@
 * SideNav taken from W3 Schools Example and modified
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
-$(document).ready(sideNavOnLoad);
 
 function sideNavOnLoad() {
     let navOffset = getNavWidth()[1];
@@ -52,8 +51,8 @@ function calcNavWidth() {
 
 /* Toggle sidenav visibility */
 function sideNavDisplayToggle() {
-    document.getElementById("sideNav").classList.toggle("d-none");
-    document.getElementById("sideNavDocOverlay").classList.toggle("d-none");
+    elementDisplayToggle("sideNav");
+    elementDisplayToggle("sideNavDocOverlay");
 }
 
 /* Toggle sideNavDocOverlay disabled status */

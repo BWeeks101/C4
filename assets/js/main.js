@@ -1,18 +1,20 @@
 $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
-    let menuWidth = calcMenuWidth();
-    let menuHeight = calcMenuHeight();
-    document.getElementById("menuBlock").style.width = menuWidth;
-    document.getElementById("menuBlock").style.height = menuHeight;
-    
-
-    let test = getElementPos("header")
-    test = getElementPos("mainBlock")
-    test = getElementPos("menuBlock")
-    test = getElementPos("footer")
+    sideNavOnLoad();
+    setMenuHeight();
+    elementDisplayToggle("menuBlock");
 }
 
+function mainOnResize() {
+    sideNavResize();
+    menuBlockResize();
+}
+
+function menuBlockResize() {
+    let menuHeight = calcMenuHeight();
+    document.getElementById("menuBlock").style.height = menuHeight;
+}
 
 /* Get position and size of element */
 function getElementPos(elementId) {
@@ -20,35 +22,58 @@ function getElementPos(elementId) {
     elementPos.top = elementPos.top + window.pageYOffset;
     elementPos.right = elementPos.right + window.pageXOffset;
     elementPos.bottom = elementPos.bottom + window.pageYOffset;
-    elementPos.left = elementPos.left + window.pageXOffset;
-    console.log(window.pageYOffset);
-    console.log(elementPos);
+    elementPos.left = elementPos.left + window.pageXOffset;    
     return elementPos;
 }
 
 /* Calculate desired height of menuBlock */
 function calcMenuHeight() {
-    let cHeight = window.innerHeight;
+    /* Browser Viewport Height */
+    let wHeight = window.innerHeight;
+
+    /* Min Supported Browser Height */
+    if (wHeight < 760) {
+        wHeight = 760;
+    }
+
+    /* Fixed Header and Footer Heights */
     let headerHeight = 66;
-    let mainBlockImgHeight = getElementPos("mainBlockContainer").height;
     let footerHeight = 50;
 
-    let menuHeight = cHeight - (headerHeight + mainBlockImgHeight + footerHeight);
+    /* main Element Height */
+    let mainHeight = getElementPos("main").height;
+
+    /* Large Logo Height */
+    let mainBlockImgHeight = getElementPos("mainBlockContainer").height;
+    
+    /* Calculated Menu Height */
+    let menuHeight = mainHeight - mainBlockImgHeight;
+
+    /* Calculated Full Content Height */
+    let contentHeight = headerHeight + mainBlockImgHeight + menuHeight + footerHeight;
+
+    /* If Calculated Full Content Height is Greater than Browser Viewport */
+    /* Reduce Menu Height by the difference to prevent vertial scroll */
+    /* Will need revising for mobile views in portrait - probably add a minheight */
+    if (contentHeight > wHeight) {
+        menuHeight = menuHeight - (contentHeight - wHeight);
+    }
 
     return `${menuHeight}px`;
 }
 
-/* Calculate desired width of menuBlock */
-function calcMenuWidth() {
-    let cWidth = window.innerWidth;
-    let percentage = 90;
-    let menuWidth = (cWidth/100)*percentage;
+function setMenuHeight() {
+    document.getElementById("menuBlock").style.height = calcMenuHeight();    
+}
 
-    if (menuWidth < 324) {
-        menuWidth = "324px";
-    } else {
-        menuWidth = `${menuWidth}px`;
-    }    
+function elementDisplayToggle(elementID) {
+    document.getElementById(elementID).classList.toggle("d-none");
+}
 
-    return menuWidth;
+function elementDisplayHide(elementID) {
+    document.getElementById(elementID).classList.add("d-none");
+}
+
+function elementDisplayShow(elementID) {
+    document.getElementById(elementID).classList.remove("d-none");
 }
