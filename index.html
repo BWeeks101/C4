@@ -23,11 +23,13 @@
             <div class="sidenav-doc-overlay d-none" id="sideNavDocOverlay"></div>
             <div class="sidenav d-none" id="sideNav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a id="optionsLink" class="sn-options d-none" onclick="showDefault()" href="#">Back to Options</a>
+                <a id="optionsLink" class="sn-options d-none" onclick="showOptions()" href="#">Back to Options</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
-                <a id="settingsLink" class="sn-settings d-none" href="#">User Settings</a>
+                <a id="signInLink" class="sn-signin d-none" onclick="showDefault()" href="#">Back to Sign In</a>
+                <hr id="signInDivider" class="sn-signin sidenav-divider d-none">
+                <a id="settingsLink" class="sn-settings d-none" onclick="showSettings()" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider d-none">
-                <a id="leaderboardLink" class="sn-leaderboard default" href="#">View Leaderboard</a>
+                <a id="leaderboardLink" class="sn-leaderboard default" onclick="showLeaderboard()" href="#">View Leaderboard</a>
                 <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">
                 <a id="rulesLink" class="sn-rules default" onclick="showRules()" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
@@ -60,21 +62,21 @@
                     <hr id="turnGroupDivider" class="sn-turngroup sidenav-divider">
                 </div>
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
-                    <a id="ctrlPauseLink" class="sn-ctrlgroup pause-reset" href="#">Pause</a>
-                    <a id="ctrlResetLink" class="sn-ctrlgroup pause-reset" href="#">Reset</a>
-                    <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider pause-reset">
+                    <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" href="#">Pause</a>
+                    <a id="ctrlResetLink" class="sn-ctrlgroup sn-pause-reset" href="#">Reset</a>
+                    <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider sn-pause-reset">
                     <a id="concedeLink" class="sn-ctrlgroup" href="#">Concede</a>                
                     <hr id="concedeDivider" class="sn-ctrlgroup sidenav-divider">
                     <a id="quitLink" class="sn-ctrlgroup" href="#">Quit</a>
                     <hr id="quitDivider" class="sn-ctrlgroup sidenav-divider">
                 </div>
                 <div id="soutGroup" class="sn-soutgroup d-none">
-                    <a id="soutLink" class="sn-soutgroup" href="#">Sign Out</a>
-                    <hr id="soutDivider" class="sn-soutgroup sidenav-divider">
-                    <a id="soutMultP1Link" class="sn-soutgroup sout-mult" href="#">Sign Out (P1)</a>
-                    <a id="soutMultP2Link" class="sn-soutgroup sout-mult" href="#">Sign Out (P2)</a>
-                    <a id="soutMultBothLink" class="sn-soutgroup sout-mult" href="#">Sign Out (Both)</a>
-                    <hr id="soutMultDivider" class="sn-soutgroup sidenav-divider sout-mult">
+                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="showDefault()" href="#">Sign Out</a>
+                    <hr id="soutDivider" class="sn-soutgroup sidenav-divider sn-sout">
+                    <a id="soutMultP1Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P1)</a>
+                    <a id="soutMultP2Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P2)</a>
+                    <a id="soutMultBothLink" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (Both)</a>
+                    <hr id="soutMultDivider" class="sn-soutgroup sidenav-divider sn-sout-mult">
                 </div>
             </div>            
             <a href="index.html" class="d-inline-block navbar-brand">
@@ -94,16 +96,40 @@
                 <h1>Rules</h1>
                 <p>Lorem Ipsum</p>
             </div>
+            <div class="d-none" id="leaderboardContainer">
+                <h1>Leaderboard</h1>
+                <p>Lorem Ipsum</p>
+            </div>
         </div>
         
-        <div class="container-fluid default" id="menuBlockContainer">
-            <div class="d-none" id="menuBlock">
+        <div class="container-fluid d-none default" id="menuBlockContainer">
+            <div id="menuBlock">
                 <div id="menuContent">
                     <div id="menuContentContainer">
-                        <h3 id="menuTitle">Enter your Username</h3>
-                        <form>
-                            <input type="text"><input type="submit" value="Submit">
-                        </form>
+                        <div id="menuSignIn" class="menu-content default">
+                            <h3 class="menuTitle">Enter your Username</h3>
+                            <form>
+                                <input type="text"><input type="submit" onclick="showOptions()" value="Submit">
+                            </form>
+                        </div>
+                        <div id="menuOptions" class="menu-content d-none">
+                            <h3 class="menuTitle">Options</h3>
+                            <form>
+                                <button>Create Game</button><br>
+                                <button>Join Game</button><br>
+                                <button onclick="showSettings()">User Settings</button>
+                            </form>
+                        </div>
+                        <div id="menuSettings" class="menu-content d-none">
+                            <h3 class="menuTitle">User Settings</h3>
+                            <form>
+                                <p>Token Colour</p>
+                                <p>Alt Token Colour</p>
+                                <button>Upload Token Image</button><br>
+                                <button>Upload Profile Image</button><br>
+                                <button onclick="showOptions()">Cancel</button><button>Ok</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>                    

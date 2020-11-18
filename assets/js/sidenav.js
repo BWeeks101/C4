@@ -15,12 +15,20 @@ function sideNavResize() {
     let navWidth = navArray[0];
     let navOffset = navArray[1];
 
-    if (document.getElementById("sideNav").classList.contains("d-none")) {
+    if (sideNavState() == "closed") {
         document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNav").style.left = navOffset;
     } else {
         document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNavDocOverlay").style.left = navWidth;
+    }
+}
+
+function sideNavState() {
+    if (document.getElementById("sideNav").classList.contains("d-none")) {
+        return "closed";
+    } else {
+        return "open"
     }
 }
 

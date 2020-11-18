@@ -3,7 +3,7 @@ $(document).ready(mainOnLoad);
 function mainOnLoad() {
     sideNavOnLoad();
     setMenuHeight();
-    elementDisplayToggle("menuBlock");
+    elementDisplayToggle("menuBlockContainer");
 }
 
 function mainOnResize() {

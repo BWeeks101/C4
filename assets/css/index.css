@@ -25,14 +25,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    width: 100%;
-    height: 25%;
-    background-color: rgb(45,45,45);
-    border: solid 1px #fafafa;
     font-size: 1em;
 }
 
 #menuContent h3 {
     font-size: 1em;
+}
+
+.menu-content {
+    background-color: rgb(45,45,45);
+    border: solid 1px #fafafa;
+    padding: 10px;
 }
