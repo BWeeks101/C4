@@ -109,15 +109,16 @@
                         <div id="menuSignIn" class="menu-content default">
                             <h3 class="menuTitle">Enter your Username</h3>
                             <form>
-                                <input type="text"><input type="submit" onclick="show('options', 'options')" value="Submit">
+                                <input type="text">
+                                <button type="button" onclick="show('options', 'options')">Ok</button>
                             </form>
                         </div>
                         <div id="menuOptions" class="menu-content d-none">
                             <h3 class="menuTitle">Options</h3>
                             <form>
-                                <button onclick="show('creategame', 'creategame')">Create Game</button><br>
-                                <button>Join Game</button><br>
-                                <button onclick="show('settings', 'settings')">User Settings</button>
+                                <button type="button" onclick="show('creategame', 'creategame')">Create Game</button><br>
+                                <button type="button">Join Game</button><br>
+                                <button type="button" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
                         <div id="menuSettings" class="menu-content d-none">
@@ -125,10 +126,10 @@
                             <form>
                                 <p>Token Colour</p>
                                 <p>Alt Token Colour</p>
-                                <button>Upload Token Image</button><br>
-                                <button>Upload Profile Image</button><br>
+                                <button type="button">Upload Token Image</button><br>
+                                <button type="button">Upload Profile Image</button><br>
                                 <div class="control-buttons">
-                                    <button onclick="show('options', 'options')">Cancel</button><button>Ok</button>
+                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Ok</button>
                                 </div>
                             </form>
                         </div>
@@ -143,7 +144,7 @@
                                     <input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
                                     <label for="createOnlineMultiplayer">Online Multiplayer</label><br>
                                     <div class="control-buttons">
-                                        <button onclick="show('options', 'options')">Back</button><button onclick="beginCreateGame()">Next</button>
+                                        <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="beginCreateGame()">Next</button>
                                     </div>                                   
                                 </form>                                    
                             </div>
@@ -159,12 +160,12 @@
                                     <input type="radio" id="diffHard" name="diff" value="hard">
                                     <label for="diffHard">Hard</label><br>                                    
                                     <div class="control-buttons">
-                                        <button onclick="show('creategame', 'creategame')">Back</button><button>Next</button>
+                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="createGameSetDifficulty()">Next</button>
                                     </div>
                                 </form>                                    
                             </div>
                         </div>
-                        <div id="menuCreateSetTurnTime" class="mc-creategame-setturntime d-none">
+                        <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
                                 <select name="turntime" id="turnTime">
@@ -176,7 +177,7 @@
                                     <option value="30">30 Seconds</option>
                                 </select>
                                 <div class="control-buttons">
-                                    <button>Back</button><button>Next</button>
+                                    <button type="button" onclick="createSetTurnTimeBackButton()">Back</button><button type="button">Ok</button>
                                 </div>
                             </form>                        
                         </div>

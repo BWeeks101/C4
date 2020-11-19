@@ -1,6 +1,10 @@
+/* Global 'state' variable */
+let state;
+
 $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
+    state = "default";
     sideNavOnLoad();
     setMenuHeight();
     elementDisplay("toggle","menuBlockContainer");

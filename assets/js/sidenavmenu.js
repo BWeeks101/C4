@@ -1,21 +1,14 @@
-/* Global 'state' variable */
-let state = "default"
-
 function show(option, newstate) {
-    console.log(`original state: ${state}`);
     if (newstate != undefined) {
         state = newstate;
     }
-    console.log(`new state: ${state}`);
     mainShow(option);
     if (sideNavState() == "open") {
-        console.log(`nav is open. close and wait 650ms`);
         closeNav();
         setTimeout(function() {
             sideNavShow(option);
         }, 650);
     } else {
-        console.log(`nav is closed.  Continue.`)
         sideNavShow(option);
     };
 }
@@ -82,6 +75,12 @@ function mainShow(option) {
         case "creategame":
             elementDisplay("show", "menuCreateGame"); 
             break;
+        case "createsingle":
+            elementDisplay("show", "menuCreateSingle");
+            break;
+        case "createsetturntime":
+            elementDisplay("show", "menuCreateSetTurnTime");
+            break;
     }        
 }
 
@@ -144,8 +143,14 @@ function sideNavShow(option) {
             sideNavSoutSelectShow("sout");
             break;
         case "creategame":
+        case "createsingle":
+        case "createhotseat":
+        case "createmultiplayer":
+        case "createsetturntime":
             sideNavLinkDisplay("show", "sn-cancelcreate");    
             sideNavSoutSelectShow("sout");
+            break;
+        default:
             break;
     }        
 }
@@ -166,11 +171,15 @@ function beginCreateGame() {
     createGameNextButton(radioGroupGetValue("creategame"));
 }
 
+function createGameSetDifficulty() {
+    createGameNextButton(radioGroupGetValue("diff"));
+}
+
 function radioGroupGetValue(option) {
     let elementCollection = document.getElementsByName(option);
     let i;
     for (i = 0; i < elementCollection.length; i++) {        
-        if (elementCollection[i].checked) {                     
+        if (elementCollection[i].checked) {            
             return elementCollection[i].value;
         }
     }     
@@ -179,11 +188,30 @@ function radioGroupGetValue(option) {
 function createGameNextButton(value) {
     switch (value) {
         case "single":
-            console.log("it worked");
+            show("createsingle", "createsingle");
             break;
         case "hotseat":
             break;
         case "multiplayer":
+            break;
+        case "easy":
+        case "normal":
+        case "hard":
+            show("createsetturntime", state);
+            break;
+    }
+}
+
+function createSetTurnTimeBackButton() {
+    switch (state) {
+        case "createsingle":
+            show("createsingle", state);
+            break;
+        case "createhotseat":
+            show("createhotseat", state);
+            break;
+        case "createmultiplayer":
+            show("createmultiplayer", state);
             break;
     }
 }
