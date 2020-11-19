@@ -37,3 +37,11 @@
     border: solid 1px #fafafa;
     padding: 10px;
 }
+
+.control-container {
+    text-align: left
+}
+
+.control-buttons {
+    text-align: right;
+}

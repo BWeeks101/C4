@@ -3,7 +3,7 @@ $(document).ready(mainOnLoad);
 function mainOnLoad() {
     sideNavOnLoad();
     setMenuHeight();
-    elementDisplayToggle("menuBlockContainer");
+    elementDisplay("toggle","menuBlockContainer");
 }
 
 function mainOnResize() {
@@ -66,14 +66,16 @@ function setMenuHeight() {
     document.getElementById("menuBlock").style.height = calcMenuHeight();    
 }
 
-function elementDisplayToggle(elementID) {
-    document.getElementById(elementID).classList.toggle("d-none");
-}
-
-function elementDisplayHide(elementID) {
-    document.getElementById(elementID).classList.add("d-none");
-}
-
-function elementDisplayShow(elementID) {
-    document.getElementById(elementID).classList.remove("d-none");
+function elementDisplay(action, elementID) {
+    switch (action) {
+        case "toggle":
+            document.getElementById(elementID).classList.toggle("d-none");
+            break;
+        case "show":
+            document.getElementById(elementID).classList.remove("d-none");
+            break;
+        case "hide":
+            document.getElementById(elementID).classList.add("d-none");
+            break;            
+    }
 }

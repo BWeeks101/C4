@@ -1,206 +1,189 @@
 /* Global 'state' variable */
 let state = "default"
 
-function showDefault() {
-    state = "default";
-    mainShowDefault();
-    closeNav();
-    setTimeout(function() {
-        sideNavShowDefault();
-    }, 650);    
-}
-
-function showRules() {
-    mainHideAll();
-    elementDisplayShow("rulesContainer");
-    closeNav();
-    setTimeout(function() {
-        sideNavHideAll();
-        switch (state) {
-            case "default":
-                sideNavLinkShow("sn-signin");
-                break;
-            case "options":
-                sideNavLinkShow("sn-options");
-                sideNavSoutSelectShow("sout");
-                break;
-            case "settings":
-                sideNavLinkShow("sn-options");
-                sideNavSoutSelectShow("sout");
-                break;
-        }        
-        sideNavLinkShow("sn-leaderboard");
-    }, 650);    
-}
-
-function showLeaderboard() {
-    mainHideAll();
-    elementDisplayShow("leaderboardContainer");
-    closeNav();
-    setTimeout(function() {
-        sideNavHideAll();
-        switch (state) {
-            case "default":
-                sideNavLinkShow("sn-signin");
-                break;
-            case "options":
-                sideNavLinkShow("sn-options");
-                sideNavSoutSelectShow("sout");
-                break;
-            case "settings":
-                sideNavLinkShow("sn-options");
-                sideNavSoutSelectShow("sout");
-                break;
-        }        
-        sideNavLinkShow("sn-rules");
-    }, 650);
-}
-
-function showOptions() {
-    state = "options";
-    mainShowOptions();
+function show(option, newstate) {
+    console.log(`original state: ${state}`);
+    if (newstate != undefined) {
+        state = newstate;
+    }
+    console.log(`new state: ${state}`);
+    mainShow(option);
     if (sideNavState() == "open") {
+        console.log(`nav is open. close and wait 650ms`);
         closeNav();
         setTimeout(function() {
-            sideNavShowOptions();
+            sideNavShow(option);
         }, 650);
     } else {
-        sideNavShowOptions();
-    };
-}
-
-function showSettings() {
-    state = "settings";
-    mainShowSettings();
-    if (sideNavState() == "open") {
-        closeNav();
-        setTimeout(function() {
-            sideNavShowSettings();
-        }, 650);
-    } else {
-        sideNavShowSettings();
+        console.log(`nav is closed.  Continue.`)
+        sideNavShow(option);
     };
 }
 
 function signOut() {
-    showDefault();
+    show("default", "default");
 }
 
-function sideNavLinkToggle(className) {
+function sideNavLinkDisplay(action, className) {
     let elementCollection = document.getElementsByClassName(className)
     let i;
     for (i = 0; i < elementCollection.length; i++) {
-        elementDisplayToggle(elementCollection[i].id);
+       elementDisplay(action, elementCollection[i].id);
     }
 }
 
-function sideNavLinkShow(className) {
-    let elementCollection = document.getElementsByClassName(className)
+/* options are 'sideNav', 'mainBlockContainer', or 'menuContentContainer' */
+function hideAll(option) {
+    let elementCollection = document.getElementById(option).children;
     let i;
-    for (i = 0; i < elementCollection.length; i++) {
-        elementDisplayShow(elementCollection[i].id);
+    if (option == "sideNav") {
+        i = 1;
+    } else {
+        i = 0;
+    }
+    for (i; i < elementCollection.length; i++) {
+        elementDisplay("hide", elementCollection[i].id);        
+    }    
+    if (option == "mainBlockContainer") {
+        elementDisplay("hide", "menuBlockContainer");
+        hideAll("menuContentContainer");
     }
 }
 
-function sideNavLinkHide(className) {
-    let elementCollection = document.getElementsByClassName(className)
-    let i;
-    for (i = 0; i < elementCollection.length; i++) {
-        elementDisplayHide(elementCollection[i].id);
-    }
+function mainShow(option) {
+    hideAll("mainBlockContainer");
+    if (option != "rules" && option != "leaderboard") {
+        elementDisplay("show", "imgContainer");
+        hideAll("menuContentContainer");
+        elementDisplay("show", "menuBlockContainer");                
+    }    
+    switch (option) {
+        case "default":            
+            let elementCollection = document.getElementsByClassName("default");
+            let i;    
+            for (i = 0; i < elementCollection.length; i++) {        
+                if (elementCollection[i].parentElement.id == "main" || elementCollection[i].parentElement.id == "mainBlockContainer" || elementCollection[i].parentElement.id == "menuContentContainer") {                        
+                    elementDisplay("show", elementCollection[i].id);
+                }
+            }             
+            break;
+        case "rules":
+            elementDisplay("show", "rulesContainer");
+            break;
+        case "leaderboard":
+            elementDisplay("show", "leaderboardContainer");
+            break;
+        case "options":
+            elementDisplay("show", "menuOptions");  
+            break;
+        case "settings":
+            elementDisplay("show", "menuSettings");
+            break;
+        case "creategame":
+            elementDisplay("show", "menuCreateGame"); 
+            break;
+    }        
 }
 
-function sideNavHideAll() {
-    let elementCollection = document.getElementById("sideNav").children;
-    let i;
-    for (i = 1; i < elementCollection.length; i++) {
-        elementDisplayHide(elementCollection[i].id);        
-    }
-}
-
-function mainHideAll() {
-    let elementCollection = document.getElementById("mainBlockContainer").children;
-    let i;
-    for (i = 0; i < elementCollection.length; i++) {
-        elementDisplayHide(elementCollection[i].id);      
-    }
-    elementDisplayHide("menuBlockContainer");
-    mainHideMenuContent();
-}
-
-function mainHideMenuContent() {
-    let elementCollection = document.getElementById("menuContentContainer").children;
-    let i;
-    for (i = 0; i < elementCollection.length; i++) {
-        elementDisplayHide(elementCollection[i].id);      
-    }
-}
-
-function mainShowDefault() {
-    mainHideAll();
-    let elementCollection = document.getElementsByClassName("default");
-    let i;    
-    for (i = 0; i < elementCollection.length; i++) {        
-        if (elementCollection[i].parentElement.id == "main" || elementCollection[i].parentElement.id == "mainBlockContainer" || elementCollection[i].parentElement.id == "menuContentContainer") {
-            console.log(elementCollection[i].id)
-            elementDisplayShow(elementCollection[i].id);
-        }
-    }
-}
-
-function sideNavShowOptions() {
-    sideNavHideAll();
-    sideNavLinkShow("sn-settings");
-    sideNavLinkShow("sn-leaderboard");
-    sideNavLinkShow("sn-rules");
-    sideNavSoutSelectShow("sout");
-}
-
-function mainShowOptions() {    
-    mainHideAll();
-    elementDisplayShow("imgContainer");
-    mainHideMenuContent();
-    elementDisplayShow("menuBlockContainer");
-    elementDisplayShow("menuOptions");    
-}
-
-function sideNavShowSettings() {
-    sideNavHideAll();
-    sideNavLinkShow("sn-options");
-    sideNavLinkShow("sn-leaderboard");
-    sideNavLinkShow("sn-rules");
-    sideNavSoutSelectShow("sout");
-}
-
-function mainShowSettings() {
-    mainHideAll();
-    elementDisplayShow("imgContainer");
-    mainHideMenuContent();
-    elementDisplayShow("menuBlockContainer");
-    elementDisplayShow("menuSettings");
+function sideNavShow(option) {
+    hideAll("sideNav");
+    switch (option) {
+        case "default":            
+            let elementCollection = document.getElementsByClassName("default");
+                let i;    
+                for (i = 0; i < elementCollection.length; i++) {
+                    if (elementCollection[i].parentElement.id == "sideNav") {
+                    elementDisplay("show", elementCollection[i].id);
+                }        
+            }                
+            break;
+        case "rules":
+            switch (state) {
+                case "default":
+                    sideNavLinkDisplay("show", "sn-signin");
+                    break;
+                case "options":
+                    sideNavLinkDisplay("show", "sn-options");
+                    sideNavSoutSelectShow("sout");
+                    break;
+                case "settings":
+                    sideNavLinkDisplay("show", "sn-options");
+                    sideNavLinkDisplay("show", "sn-settings");
+                    sideNavSoutSelectShow("sout");
+                    break;
+            }        
+            sideNavLinkDisplay("show", "sn-leaderboard");
+            break;
+        case "leaderboard":
+            switch (state) {
+                case "default":
+                    sideNavLinkDisplay("show", "sn-signin");
+                    break;
+                case "options":
+                    sideNavLinkDisplay("show", "sn-options");
+                    sideNavSoutSelectShow("sout");
+                    break;
+                case "settings":
+                    sideNavLinkDisplay("show", "sn-options");
+                    sideNavLinkDisplay("show", "sn-settings");
+                    sideNavSoutSelectShow("sout");
+                    break;
+            }        
+            sideNavLinkDisplay("show", "sn-rules");
+            break;
+        case "options":
+            sideNavLinkDisplay("show", "sn-settings");
+            sideNavLinkDisplay("show", "sn-leaderboard");
+            sideNavLinkDisplay("show", "sn-rules");
+            sideNavSoutSelectShow("sout");
+            break;
+        case "settings":
+            sideNavLinkDisplay("show", "sn-options");
+            sideNavLinkDisplay("show", "sn-leaderboard");
+            sideNavLinkDisplay("show", "sn-rules");
+            sideNavSoutSelectShow("sout");
+            break;
+        case "creategame":
+            sideNavLinkDisplay("show", "sn-cancelcreate");    
+            sideNavSoutSelectShow("sout");
+            break;
+    }        
 }
 
 function sideNavSoutSelectShow(option) {
     if (option === undefined || option === "sout") {
-        sideNavLinkHide("sn-sout-mult");
-        sideNavLinkShow("sn-sout");
-        elementDisplayShow("soutGroup");
+        sideNavLinkDisplay("hide", "sn-sout-mult");
+        sideNavLinkDisplay("show", "sn-sout");
+        elementDisplay("show", "soutGroup");
     } else {
-        sideNavLinkHide("sn-sout");
-        sideNavLinkShow("sn-sout-mult");
-        elementDisplayShow("soutGroup");
+        sideNavLinkDisplay("hide", "sn-sout");
+        sideNavLinkDisplay("show", "sn-sout-mult");
+        elementDisplay("show", "soutGroup");
     };    
 }
 
+function beginCreateGame() {
+    createGameNextButton(radioGroupGetValue("creategame"));
+}
 
+function radioGroupGetValue(option) {
+    let elementCollection = document.getElementsByName(option);
+    let i;
+    for (i = 0; i < elementCollection.length; i++) {        
+        if (elementCollection[i].checked) {                     
+            return elementCollection[i].value;
+        }
+    }     
+}
 
-function sideNavShowDefault() {
-    sideNavHideAll();
-    let elementCollection = document.getElementsByClassName("default");
-    let i;    
-    for (i = 0; i < elementCollection.length; i++) {
-        if (elementCollection[i].parentElement.id == "sideNav") {
-            elementDisplayShow(elementCollection[i].id);
-        }        
+function createGameNextButton(value) {
+    switch (value) {
+        case "single":
+            console.log("it worked");
+            break;
+        case "hotseat":
+            break;
+        case "multiplayer":
+            break;
     }
 }

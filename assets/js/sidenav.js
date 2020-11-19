@@ -59,8 +59,8 @@ function calcNavWidth() {
 
 /* Toggle sidenav visibility */
 function sideNavDisplayToggle() {
-    elementDisplayToggle("sideNav");
-    elementDisplayToggle("sideNavDocOverlay");
+    elementDisplay("toggle", "sideNav");
+    elementDisplay("toggle", "sideNavDocOverlay");
 }
 
 /* Toggle sideNavDocOverlay disabled status */

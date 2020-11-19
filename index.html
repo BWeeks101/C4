@@ -23,20 +23,20 @@
             <div class="sidenav-doc-overlay d-none" id="sideNavDocOverlay"></div>
             <div class="sidenav d-none" id="sideNav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a id="optionsLink" class="sn-options d-none" onclick="showOptions()" href="#">Back to Options</a>
+                <a id="optionsLink" class="sn-options d-none" onclick="show('options', 'options')" href="#">Back to Options</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
-                <a id="signInLink" class="sn-signin d-none" onclick="showDefault()" href="#">Back to Sign In</a>
+                <a id="signInLink" class="sn-signin d-none" onclick="show('default', 'default')" href="#">Back to Sign In</a>
                 <hr id="signInDivider" class="sn-signin sidenav-divider d-none">
-                <a id="settingsLink" class="sn-settings d-none" onclick="showSettings()" href="#">User Settings</a>
+                <a id="settingsLink" class="sn-settings d-none" onclick="show('settings', 'settings')" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider d-none">
-                <a id="leaderboardLink" class="sn-leaderboard default" onclick="showLeaderboard()" href="#">View Leaderboard</a>
+                <a id="leaderboardLink" class="sn-leaderboard default" onclick="show('leaderboard')" href="#">View Leaderboard</a>
                 <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">
-                <a id="rulesLink" class="sn-rules default" onclick="showRules()" href="#">Rules</a>
+                <a id="rulesLink" class="sn-rules default" onclick="show('rules')" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
-                <a id="cancelCreateLink" class="sn-cancelcreate d-none" href="#">Cancel Game Creation</a>
-                <hr id="cancelCreateDivider" class="sn-cancel-create sidenav-divider d-none">
-                <a id="cancelJoinLink" class="cancel-join d-none" href="#">Cancel Joining a Game</a>
-                <hr id="cancelJoinDivider" class="cancel-join sidenav-divider d-none">
+                <a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
+                <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">
+                <a id="cancelJoinLink" class="sn-canceljoin d-none" href="#">Cancel Joining a Game</a>
+                <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">
                 <div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
                     <a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>
@@ -71,7 +71,7 @@
                     <hr id="quitDivider" class="sn-ctrlgroup sidenav-divider">
                 </div>
                 <div id="soutGroup" class="sn-soutgroup d-none">
-                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="showDefault()" href="#">Sign Out</a>
+                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="show('default', 'default')" href="#">Sign Out</a>
                     <hr id="soutDivider" class="sn-soutgroup sidenav-divider sn-sout">
                     <a id="soutMultP1Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P1)</a>
                     <a id="soutMultP2Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P2)</a>
@@ -109,15 +109,15 @@
                         <div id="menuSignIn" class="menu-content default">
                             <h3 class="menuTitle">Enter your Username</h3>
                             <form>
-                                <input type="text"><input type="submit" onclick="showOptions()" value="Submit">
+                                <input type="text"><input type="submit" onclick="show('options', 'options')" value="Submit">
                             </form>
                         </div>
                         <div id="menuOptions" class="menu-content d-none">
                             <h3 class="menuTitle">Options</h3>
                             <form>
-                                <button>Create Game</button><br>
+                                <button onclick="show('creategame', 'creategame')">Create Game</button><br>
                                 <button>Join Game</button><br>
-                                <button onclick="showSettings()">User Settings</button>
+                                <button onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
                         <div id="menuSettings" class="menu-content d-none">
@@ -127,8 +127,58 @@
                                 <p>Alt Token Colour</p>
                                 <button>Upload Token Image</button><br>
                                 <button>Upload Profile Image</button><br>
-                                <button onclick="showOptions()">Cancel</button><button>Ok</button>
+                                <div class="control-buttons">
+                                    <button onclick="show('options', 'options')">Cancel</button><button>Ok</button>
+                                </div>
                             </form>
+                        </div>
+                        <div id="menuCreateGame" class="menu-content d-none">
+                            <h3 class="menuTitle">Create a Game</h3>
+                            <div class="control-container">
+                                <form>
+                                    <input type="radio" id="createSinglePlayer" name="creategame" value="single">
+                                    <label for="createSinglePlayer">Single Player</label><br>
+                                    <input type="radio" id="createHotseat" name="creategame" value="hotseat">
+                                    <label for="createHotseat">Hotseat</label><br>
+                                    <input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
+                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>
+                                    <div class="control-buttons">
+                                        <button onclick="show('options', 'options')">Back</button><button onclick="beginCreateGame()">Next</button>
+                                    </div>                                   
+                                </form>                                    
+                            </div>
+                        </div>
+                        <div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
+                            <h3 class="menuTitle">Set Difficulty</h3>
+                            <div class="control-container">
+                                <form>
+                                    <input type="radio" id="diffEasy" name="diff" value="easy">
+                                    <label for="diffeasy">Easy</label><br>
+                                    <input type="radio" id="diffNormal" name="diff" value="normal">
+                                    <label for="diffNormal">Normal</label><br>
+                                    <input type="radio" id="diffHard" name="diff" value="hard">
+                                    <label for="diffHard">Hard</label><br>                                    
+                                    <div class="control-buttons">
+                                        <button onclick="show('creategame', 'creategame')">Back</button><button>Next</button>
+                                    </div>
+                                </form>                                    
+                            </div>
+                        </div>
+                        <div id="menuCreateSetTurnTime" class="mc-creategame-setturntime d-none">
+                            <h3 class="menuTitle">Set Turn Time Limit</h3>
+                            <form>
+                                <select name="turntime" id="turnTime">
+                                    <option value="5">5 Seconds</option>
+                                    <option value="10">10 Seconds</option>
+                                    <option value="15">15 Seconds</option>
+                                    <option value="20">20 Seconds</option>
+                                    <option value="25">25 Seconds</option>
+                                    <option value="30">30 Seconds</option>
+                                </select>
+                                <div class="control-buttons">
+                                    <button>Back</button><button>Next</button>
+                                </div>
+                            </form>                        
                         </div>
                     </div>
                 </div>
