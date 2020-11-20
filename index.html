@@ -35,7 +35,7 @@
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
                 <a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
                 <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">
-                <a id="cancelJoinLink" class="sn-canceljoin d-none" href="#">Cancel Joining a Game</a>
+                <a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="show('options', 'options')" href="#">Cancel Joining a Game</a>
                 <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">
                 <div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
@@ -117,7 +117,7 @@
                             <h3 class="menuTitle">Options</h3>
                             <form>
                                 <button type="button" onclick="show('creategame', 'creategame')">Create Game</button><br>
-                                <button type="button">Join Game</button><br>
+                                <button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>
                                 <button type="button" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
@@ -154,7 +154,7 @@
                             <div class="control-container">
                                 <form>
                                     <input type="radio" id="diffEasy" name="diff" value="easy">
-                                    <label for="diffeasy">Easy</label><br>
+                                    <label for="diffEasy">Easy</label><br>
                                     <input type="radio" id="diffNormal" name="diff" value="normal">
                                     <label for="diffNormal">Normal</label><br>
                                     <input type="radio" id="diffHard" name="diff" value="hard">
@@ -163,6 +163,31 @@
                                         <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="createGameSetDifficulty()">Next</button>
                                     </div>
                                 </form>                                    
+                            </div>
+                        </div>
+                        <div id="menuCreateHotseat" class="menu-content d-none mc-creategame-hotseat">
+                            <h3 class="menuTitle">Enter Player 2 Username</h3>
+                            <div class="control-container">
+                                <form>                                   
+                                    <input type="text">                                    
+                                    <div class="control-buttons">
+                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="createGameSetP2()">Next</button>
+                                    </div>
+                                </form>                                    
+                            </div>
+                        </div>
+                        <div id="menuCreateP2Settings" class="menu-content d-none mc-creategame-p2settings">
+                            <h3 class="menuTitle">Player 2 Settings</h3>
+                            <div class="control-container">
+                                <form>
+                                    <p>Token Colour</p>
+                                    <p>Alt Token Colour</p>
+                                    <button type="button">Upload Token Image</button><br>
+                                    <button type="button">Upload Profile Image</button><br>
+                                    <div class="control-buttons">
+                                        <button type="button" onclick="show('createhotseat', 'createhotseat')">Cancel</button><button type="button" onclick="createGameP2Settings()">Ok</button>
+                                    </div>
+                                </form>                                 
                             </div>
                         </div>
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
@@ -177,10 +202,55 @@
                                     <option value="30">30 Seconds</option>
                                 </select>
                                 <div class="control-buttons">
-                                    <button type="button" onclick="createSetTurnTimeBackButton()">Back</button><button type="button">Ok</button>
+                                    <button type="button" onclick="createSetTurnTimeBackButton()">Back</button><button type="button" onclick="show('createmultiplayer', 'createmultiplayer')">Ok</button>
                                 </div>
                             </form>                        
+                        </div>                        
+                        <div id="menuCreateMultiplayer" class="menu-content d-none mc-creategame-multiplayer">
+                            <h3 class="menuTitle">Waiting for other Player</h3>
+                            <div class="control-container">
+                                <form>                                   
+                                    <p>SPINNING WAIT IMAGE HERE</p>
+                                    <div class="control-buttons">
+                                        <button type="button" onclick="show('createsetturntime', 'createmultiplayer');">Back</button>
+                                    </div>
+                                </form>                                    
+                            </div>
                         </div>
+                        <div id="menuJoinGame" class="menu-content d-none mc-joingame">
+                            <h3 class="menuTitle">Available Games</h3>
+                            <div class="control-container">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <h3>Host Name</h3>
+                                        <div class="row">
+                                            test
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h3>Host Name</h3>
+                                        <div class="row">
+                                            test
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h3>Host Name</h3>
+                                        <div class="row">
+                                            test
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <h3>Host Name</h3>
+                                        <div class="row">
+                                            test
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-buttons">
+                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Join</button>
+                                </div>
+                            </div>                        
+                        </div>                        
                     </div>
                 </div>
             </div>                    

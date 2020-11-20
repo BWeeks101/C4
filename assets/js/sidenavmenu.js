@@ -78,8 +78,20 @@ function mainShow(option) {
         case "createsingle":
             elementDisplay("show", "menuCreateSingle");
             break;
+        case "createhotseat":
+            elementDisplay("show", "menuCreateHotseat");
+            break;
+        case "createp2settings":
+            elementDisplay("show", "menuCreateP2Settings");
+            break;
+        case "createmultiplayer":
+            elementDisplay("show", "menuCreateMultiplayer");
+            break;
         case "createsetturntime":
             elementDisplay("show", "menuCreateSetTurnTime");
+            break;
+        case "joingame":
+            elementDisplay("show", "menuJoinGame");
             break;
     }        
 }
@@ -146,8 +158,13 @@ function sideNavShow(option) {
         case "createsingle":
         case "createhotseat":
         case "createmultiplayer":
+        case "createp2settings":
         case "createsetturntime":
             sideNavLinkDisplay("show", "sn-cancelcreate");    
+            sideNavSoutSelectShow("sout");
+            break;
+        case "joingame":
+            sideNavLinkDisplay("show", "sn-canceljoin");
             sideNavSoutSelectShow("sout");
             break;
         default:
@@ -175,6 +192,14 @@ function createGameSetDifficulty() {
     createGameNextButton(radioGroupGetValue("diff"));
 }
 
+function createGameSetP2() {
+    createGameNextButton("setp2");
+}
+
+function createGameP2Settings() {
+    show("createsetturntime", state);
+}
+
 function radioGroupGetValue(option) {
     let elementCollection = document.getElementsByName(option);
     let i;
@@ -191,14 +216,18 @@ function createGameNextButton(value) {
             show("createsingle", "createsingle");
             break;
         case "hotseat":
+            show("createhotseat", "createhotseat");
             break;
         case "multiplayer":
+            show("createsetturntime", "createmultiplayer");
             break;
         case "easy":
         case "normal":
         case "hard":
             show("createsetturntime", state);
             break;
+        case "setp2":
+            show("createp2settings", state);
     }
 }
 
@@ -208,10 +237,10 @@ function createSetTurnTimeBackButton() {
             show("createsingle", state);
             break;
         case "createhotseat":
-            show("createhotseat", state);
+            show("createp2settings", state);
             break;
         case "createmultiplayer":
-            show("createmultiplayer", state);
+            show("creategame", state);
             break;
     }
 }
