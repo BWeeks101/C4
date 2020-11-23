@@ -1,6 +1,17 @@
 /* Global 'state' variable */
 let state;
 
+let gridtestarray = [];
+let firstcol = [];
+let secondcol = [];
+let thirdcol = [];
+
+firstcol = ["Turn Time Limit", "25s", "10s", "5s"];
+secondcol = ["Host", "AAAAA", "CCCCC", "BBBBB"];
+thirdcol = ["Leaderboard Position", "3", "1", "2"];
+
+gridtestarray = [firstcol, secondcol, thirdcol];
+
 $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
@@ -8,6 +19,8 @@ function mainOnLoad() {
     sideNavOnLoad();
     setMenuHeight();
     elementDisplay("toggle","menuBlockContainer");
+
+    createDataGrid(gridtestarray, "gameList");
 }
 
 function mainOnResize() {

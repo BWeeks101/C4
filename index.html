@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="assets/css/media-queries.css" type="text/css">
     <link rel="stylesheet" href="assets/css/sidenav.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/datagrid.css" type="text/css">
     <link rel="stylesheet" href="assets/css/index.css" type="text/css">
     
 </head>
@@ -220,35 +221,16 @@
                         <div id="menuJoinGame" class="menu-content d-none mc-joingame">
                             <h3 class="menuTitle">Available Games</h3>
                             <div class="control-container">
+                                <div class="datagrid-container" id="gameList">
+                                    <!--Insert Game List Datagrid Here-->
+                                </div>
                                 <div class="row">
-                                    <div class="col-3">
-                                        <h3>Host Name</h3>
-                                        <div class="row">
-                                            test
-                                        </div>
+                                    <div class="col-12">
+                                        <div class="control-buttons">
+                                            <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Join</button>
+                                        </div>    
                                     </div>
-                                    <div class="col-3">
-                                        <h3>Host Name</h3>
-                                        <div class="row">
-                                            test
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <h3>Host Name</h3>
-                                        <div class="row">
-                                            test
-                                        </div>
-                                    </div>
-                                    <div class="col-3">
-                                        <h3>Host Name</h3>
-                                        <div class="row">
-                                            test
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="control-buttons">
-                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Join</button>
-                                </div>
+                                </div>                                
                             </div>                        
                         </div>                        
                     </div>
@@ -298,7 +280,8 @@
     <!--Local Javascript-->
     <script src="assets/js/sidenavmenu.js" crossorigin="anonymous"></script>
     <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
+    <script src="assets/js/datagrid.js" crossorigin="anonymous"></script>
     <script src="assets/js/main.js" crossorigin="anonymous"></script>
-
+    
 </body>
 </html>

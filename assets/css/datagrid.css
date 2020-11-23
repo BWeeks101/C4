@@ -1,0 +1,23 @@
+.datagrid-container {
+    margin-bottom: 10px;
+}
+
+.header-col-first, .content-col-first {
+    border-right: 1px solid #fafafa;
+}
+
+.header-col-last, .content-col-last {
+    border-left: 1px solid #fafafa;
+}
+
+.content-row {
+    border-bottom: 1px solid #fafafa;
+}
+
+.content-row-first {
+    border-top: 1px solid #fafafa;
+}
+
+.content-row-last {
+    border-bottom: none;
+}
