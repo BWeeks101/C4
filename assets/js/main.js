@@ -1,16 +1,23 @@
 /* Global 'state' variable */
 let state;
 
+/* Dummy Data for Join Game List */
 let gridtestarray = [];
 let firstcol = [];
 let secondcol = [];
 let thirdcol = [];
+let headers = [];
 
-firstcol = ["Turn Time Limit", "25s", "10s", "5s"];
-secondcol = ["Host", "AAAAA", "CCCCC", "BBBBB"];
-thirdcol = ["Leaderboard Position", "3", "1", "2"];
+headers = ["Turn Time Limit", "Host", "Leaderboard Position"];
+firstcol = ["25s", "10s", "5s"];
+secondcol = ["AAAAA", "CCCCC", "BBBBB", "DDDDD",];
+thirdcol = ["3", "1", "2", "4", "5"];
+fourthcol = []
 
 gridtestarray = [firstcol, secondcol, thirdcol];
+
+let gameListDG = new DataGrid(headers, gridtestarray);
+/* End Dummy Data for Join Game List */
 
 $(document).ready(mainOnLoad);
 
@@ -19,8 +26,6 @@ function mainOnLoad() {
     sideNavOnLoad();
     setMenuHeight();
     elementDisplay("toggle","menuBlockContainer");
-
-    createDataGrid(gridtestarray, "gameList");
 }
 
 function mainOnResize() {

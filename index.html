@@ -36,7 +36,7 @@
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
                 <a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
                 <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">
-                <a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="show('options', 'options')" href="#">Cancel Joining a Game</a>
+                <a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="cancelJoinGame()" href="#">Cancel Joining a Game</a>
                 <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">
                 <div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
@@ -72,7 +72,7 @@
                     <hr id="quitDivider" class="sn-ctrlgroup sidenav-divider">
                 </div>
                 <div id="soutGroup" class="sn-soutgroup d-none">
-                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="show('default', 'default')" href="#">Sign Out</a>
+                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="signOut()" href="#">Sign Out</a>
                     <hr id="soutDivider" class="sn-soutgroup sidenav-divider sn-sout">
                     <a id="soutMultP1Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P1)</a>
                     <a id="soutMultP2Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P2)</a>
@@ -224,10 +224,15 @@
                                 <div class="datagrid-container" id="gameList">
                                     <!--Insert Game List Datagrid Here-->
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
+                                <div class="row no-gutters">
+                                    <div class="col">
+                                        <div class="refresh-button">
+                                            <button type="button" onclick="refreshJoinGame()">Refresh</button>
+                                        </div>
+                                    </div>
+                                    <div class="col">
                                         <div class="control-buttons">
-                                            <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Join</button>
+                                            <button type="button" onclick="cancelJoinGame()">Cancel</button><button type="button">Join</button>
                                         </div>    
                                     </div>
                                 </div>                                

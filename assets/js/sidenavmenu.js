@@ -91,6 +91,7 @@ function mainShow(option) {
             elementDisplay("show", "menuCreateSetTurnTime");
             break;
         case "joingame":
+            displayDataGrid(gameListDG, "gameList");
             elementDisplay("show", "menuJoinGame");
             break;
     }        
@@ -182,6 +183,24 @@ function sideNavSoutSelectShow(option) {
         sideNavLinkDisplay("show", "sn-sout-mult");
         elementDisplay("show", "soutGroup");
     };    
+}
+
+function cancelJoinGame() {    
+    dataGridDisplayRemove("gameList");
+    show("options", "options");
+}
+
+function signOut() {
+    switch (state) {
+        case "joingame":
+            dataGridDisplayRemove("gameList");
+    }
+
+    show("default", "default");
+}
+
+function refreshJoinGame() {
+    dataGridDisplayRefresh(gameListDG, "gameList");
 }
 
 function beginCreateGame() {

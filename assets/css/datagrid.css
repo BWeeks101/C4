@@ -3,33 +3,34 @@
     text-align: center;
 }
 
-.header-col-first, .content-col-first {
+.datagrid-header-col-first, .datagrid-content-col-first {
     border-right: 1px solid #fafafa;
 }
 
-.header-col-last, .content-col-last {
+.datagrid-header-col-last, .datagrid-content-col-last {
     border-left: 1px solid #fafafa;
 }
 
-.content-row {
+.datagrid-content-row {
     border-bottom: 1px solid #fafafa;
+    transition: background-color 0.5s;
 }
 
-.content-row-first {
+.datagrid-content-row-first {
     border-top: 1px solid #fafafa;
 }
 
-.content-row-last {
+.datagrid-content-row-last {
     border-bottom: none;
 }
 
-.click-overlay {
+.datagrid-click-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 900;
 }
 
-.row-selected {
+.datagrid-row-selected {
     background-color: rgb(236,76,76);
 }
