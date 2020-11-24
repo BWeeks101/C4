@@ -1,5 +1,6 @@
 .datagrid-container {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .header-col-first, .content-col-first {
@@ -20,4 +21,15 @@
 
 .content-row-last {
     border-bottom: none;
+}
+
+.click-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+}
+
+.row-selected {
+    background-color: rgb(236,76,76);
 }

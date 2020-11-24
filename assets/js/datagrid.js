@@ -6,6 +6,9 @@ function createDataGrid(array, target) {
     let colCount = array.length;
     let rowCount = array[0].length-1;
 
+    document.getElementById(target).classList.add("colCount-" + colCount);
+    document.getElementById(target).classList.add("rowCount-" + rowCount);
+
     let headerTarget = `${target}HeaderRow`;
     let contentTarget = `${target}ContentRow`;
     document.getElementById(target).insertAdjacentHTML('afterbegin',`<div class="row flex-nowrap header-row" id="${headerTarget}"></div>`);
@@ -13,17 +16,21 @@ function createDataGrid(array, target) {
 
     let colStart = `<div class="col-4" id="${target}`;
     let hColTag = "Hcol-";
-    let cColTag = "Ccol-";
+    let cColTag = "Ccol-";    
     let headerColMid = `"><h3>`;
     let headerColEnd = `</h3></div>`;
     let contentRowEnd = `"></div>`
     let contentColStart = `<div class="row flex-nowrap content-row rowid-`;
     let contentColId = `" id="`
-    let contentColMid = `"><div class="col">`;
+    let contentColMid = `"><div class="col content-col">`;
     let contentColEnd = `</div></div>`;
+    let contentRowOverlayStart = `<div class="click-overlay" onclick="dataGridClicked(this)" id="`;
+    let contentRowOverlayEnd = `"></div>`;
+    
     let hColId;
     let cColId;
     let cRowId;
+    let cOverlayId;
 
     let style = `
         .content-col {
@@ -37,7 +44,7 @@ function createDataGrid(array, target) {
         document.getElementById(contentTarget).insertAdjacentHTML('beforeend', colStart + cColTag + i + contentRowEnd);
         
         hColId = `${target}${hColTag}${i}`;
-        cColId = `${target}${cColTag}${i}`;
+        cColId = `${target}${cColTag}${i}`;        
         
         document.getElementById(hColId).classList.add("header-col");
         document.getElementById(cColId).classList.add("content-col");
@@ -52,13 +59,15 @@ function createDataGrid(array, target) {
 
         for (ii = 0; ii < rowCount; ii++) {
             cRowId = `${target}Col${i}RowId${ii}`;
-            document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + array[i][ii+1] + contentColEnd);
+            cOverlayId = `${target}OverlayCol${i}Row${ii}`
+            
+            document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + cOverlayId + contentRowOverlayEnd + array[i][ii+1] + contentColEnd);
 
             if (ii == 0) {
-                document.getElementById(cRowId).classList.add("content-row-first");
+                document.getElementById(cRowId).classList.add("content-row-first");            
             } else if (ii == rowCount-1) {
                 document.getElementById(cRowId).classList.add("content-row-last");
-            }
+            }            
         }
     }
 
@@ -66,4 +75,51 @@ function createDataGrid(array, target) {
     styleSheet.type = "text/css"
     styleSheet.innerText = style;
     document.head.appendChild(styleSheet);
+}
+
+function dataGridClicked(object) {
+    let rowId = object.id.slice(object.id.lastIndexOf("w")+1, object.id.length);    
+    let datagrid = object.closest(".datagrid-container");
+    let gridId = datagrid.id;
+    
+    let gridCounts = dataGridGetCounts(datagrid);
+
+    dataGridClearSelected(gridId, gridCounts[0], gridCounts[1]);    
+
+    dataGridSetSelected(gridId, gridCounts[0], rowId);
+}
+
+function dataGridGetCounts(datagrid) {
+    let colCount;
+    let rowCount;
+
+    for (i = 0; i < datagrid.classList.length; i++) {
+        if (datagrid.classList.item(i).slice(0, 9) == "colCount-") {
+            colCount = datagrid.classList.item(i).slice(9, datagrid.classList.item(i).length);
+        } else if (datagrid.classList.item(i).slice(0, 9) == "rowCount-") {
+            rowCount = datagrid.classList.item(i).slice(9, datagrid.classList.item(i).length);
+        }
+    }
+
+    return [colCount, rowCount];
+}
+
+function dataGridClearSelected(gridId, colCount, rowCount) {
+    let selectedId;
+
+    for (i = 0; i < colCount; i++) {
+        for (ii = 0; ii < rowCount; ii++) {
+            selectedId = `${gridId}Col${i}RowId${ii}`;
+            document.getElementById(selectedId).classList.remove("row-selected");
+        }
+    }
+}
+
+function dataGridSetSelected(gridId, colCount, rowId) {
+    let selectedId;
+
+    for (i = 0; i < colCount; i++) {
+        selectedId = `${gridId}Col${i}RowId${rowId}`;
+        document.getElementById(selectedId).classList.add("row-selected");
+    }
 }
