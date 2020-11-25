@@ -174,7 +174,7 @@ function dataGridDisplayClicked(object) {
     let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
     
     if (gridCounts == false) {
-        console.log(`function dataGridDisplayClicked failed.  Unable to get ${dataGridDisplayId} column and/or row counts.`);
+        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
         return false;
     }
 
@@ -221,7 +221,7 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
             console.log(`dataGridDisplayId (${dataGridDisplayId}) has no defined rowCount.`);
         }
 
-        console.log(`function dataGridDisplayGetCounts Failed.  dataGridDisplayId (${dataGridDisplayId}) missing classes.`);
+        console.log(`function dataGridDisplayGetCounts Failed.  dataGridDisplayId (${dataGridDisplayId}) missing class(es).`);
         return false;
     }
 
@@ -242,7 +242,7 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
         let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
 
         if (gridCounts == false) {
-            console.log(`function dataGridDisplayClearSelected failed.  Unable to get ${dataGridDisplayId} column and/or row counts.`);
+            console.log(`function dataGridDisplayClearSelected failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
             return false;
         }
 
