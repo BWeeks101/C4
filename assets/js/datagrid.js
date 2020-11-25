@@ -71,8 +71,8 @@ function DataGrid (headers, content) {
 /* DataGrid visual Output */
 /* Requires: /*
 /* dataGrid: DataGrid Object */
-/* target: element id of the datagrid-container which will hold the DataGrid output */
-/* NOTE: target MUST have the datagrid-container class */
+/* dataGridDisplayId: element id of the datagrid-container which will hold the DataGrid output */
+/* NOTE: dataGridDisplayId MUST have the datagrid-container class */
 function displayDataGrid(dataGrid, dataGridDisplayId) {
 
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
@@ -152,7 +152,7 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
 /* Call this on load */
 /* Prevents any margins or padding on the .content-col class */
 /* This class is applied to the innermost column of a dataGridDisplay content row */
-/* These columns should always be full width - any margin or padding will compromise the formatting */
+/* These columns should always be full width and height of their parent - any margin or padding will compromise the formatting */
 function dataGridDisplayContentColStyle() {
     let style = `
         .datagrid-content-col {
