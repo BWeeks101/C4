@@ -19,17 +19,17 @@ function DataGrid (headers, content) {
 
     if (objectIsObject(headers, "Headers") == false || objectIsObject(content, "Content") == false) {
         console.log("function DataGrid failed.  Invalid parameters supplied - array objects required for headers and content.");
-        return;
+        return false;
     }
 
     if (dataGridHeaderContentColCountMatch(headers.length, content.length) == false) {
         console.log("function DataGrid failed.  Number of supplied Headers does not equal the Number of Content columns.");
-        return;
+        return false;
     }
 
     if (dataGridHeadersAreStrings(headers) == false) {
         console.log("function DataGrid failed.  All supplied Headers must be Strings.");
-        return;
+        return false;
     }
 
     this.headers = headers;
@@ -77,12 +77,12 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
 
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function displayDataGrid failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
-        return;
+        return false;
     }
 
     if (objectIsDataGrid(dataGrid) == false) {
         console.log(`function displayDataGrid failed.  Object (${dataGrid}) is not a dataGrid object.`)
-        return;
+        return false;
     }
 
     let colCount = dataGrid.colCount;
@@ -172,20 +172,33 @@ function dataGridDisplayClicked(object) {
     let dataGridDisplayId = object.closest(".datagrid-container").id;
     
     let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
+    
+    if (gridCounts == false) {
+        console.log(`function dataGridDisplayClicked failed.  Unable to get ${dataGridDisplayId} column and/or row counts.`);
+        return false;
+    }
 
-    dataGridDisplayClearSelected(dataGridDisplayId, gridCounts[0], gridCounts[1]);    
+    let result = dataGridDisplayClearSelected(dataGridDisplayId, gridCounts[0], gridCounts[1]);
+    if (result == false) {
+        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplayClearSelected(${dataGridDisplayId}, ${gridCounts[0]}, ${gridCounts[1]}).`);
+        return false;
+    }
 
-    dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[0], rowId);
+    result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[0], rowId);
+    if (result == false) {
+        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[0]}, ${rowId}).`);
+        return false;
+    }
+
+    return true;
 }
 
 /* Get the column and row counts from a dataGridDisplay element id */
 /* returns an array with colCount (position 0) and rowCount (position 1) */
-
-/* ADD ERROR HANDLING HERE FOR MISSING colCount AND/OR rowCount CLASSES */
 function dataGridDisplayGetCounts(dataGridDisplayId) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
-        return;
+        return false;
     }
 
     let colCount;
@@ -199,6 +212,19 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
         }
     }
 
+    if (colCount == undefined || rowCount == undefined) {
+        if (colCount == undefined) {
+            console.log(`dataGridDisplayId (${dataGridDisplayId}) has no defined colCount.`);
+        }
+
+        if (rowCount == undefined) {
+            console.log(`dataGridDisplayId (${dataGridDisplayId}) has no defined rowCount.`);
+        }
+
+        console.log(`function dataGridDisplayGetCounts Failed.  dataGridDisplayId (${dataGridDisplayId}) missing classes.`);
+        return false;
+    }
+
     return [colCount, rowCount];
 }
 
@@ -207,13 +233,19 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
 function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayClearSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
-        return;
+        return false;
     }
     
     let selectedId;
     
     if (colCount == undefined || rowCount == undefined) {
         let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
+
+        if (gridCounts == false) {
+            console.log(`function dataGridDisplayClearSelected failed.  Unable to get ${dataGridDisplayId} column and/or row counts.`);
+            return false;
+        }
+
         if (colCount == undefined) {
             colCount = gridCounts[0];
         }
@@ -229,13 +261,15 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
             document.getElementById(selectedId).classList.remove("datagrid-row-selected");
         }
     }
+
+    return true;
 }
 
 /* Highlight a row on a dataGridDisplay */
 function dataGridDisplaySetSelected(dataGridDisplayId, colCount, rowId) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplaySetSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
-        return;
+        return false;
     }
 
     let selectedId;
@@ -244,13 +278,15 @@ function dataGridDisplaySetSelected(dataGridDisplayId, colCount, rowId) {
         selectedId = `${dataGridDisplayId}Col${i}RowId${rowId}`;
         document.getElementById(selectedId).classList.add("datagrid-row-selected");
     }
+
+    return true;
 }
 
 /* Remove a dataGridDisplay */
 function dataGridDisplayRemove(dataGridDisplayId) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayRemove failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
-        return;        
+        return false;        
     }
 
     let classNames = [];
@@ -269,12 +305,24 @@ function dataGridDisplayRemove(dataGridDisplayId) {
     for (i = 0; i < classNames.length; i++) {
         document.getElementById(dataGridDisplayId).classList.remove(classNames[i]);
     }
+
+    return true;
 }
 
 /* Refresh a dataGridDisplay */
 function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
-    dataGridDisplayRemove(dataGridDisplayId);
-    displayDataGrid(dataGrid, dataGridDisplayId)
+    let result = dataGridDisplayRemove(dataGridDisplayId);
+    if (result == false) {
+        console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with dataGridDisplayRemove(${dataGridDisplayId}).`);
+        return false;
+    }
+    result = displayDataGrid(dataGrid, dataGridDisplayId);
+    if (result == false) {
+        console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with displayDataGrid(${dataGrid}, ${dataGridDisplayId}).`);
+        return false;
+    }
+
+    return true;
 }
 
 /* Verify element is a datagrid-container */
