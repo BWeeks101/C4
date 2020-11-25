@@ -92,11 +92,20 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
     document.getElementById(dataGridDisplayId).classList.add("datagrid-rowCount-" + rowCount);
 
     let headerRow = `${dataGridDisplayId}HeaderRow`;
+    let contentContainer = `${dataGridDisplayId}ContentContainer`;
     let contentRow = `${dataGridDisplayId}ContentRow`;
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div>`);
-    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div>`);
+    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
-    let colStart = `<div class="col-4" id="${dataGridDisplayId}`;
+    let numCols;
+
+    if (colCount < 12) {
+        bootstrapColWidth = Math.ceil(12 / colCount);
+    } else {
+        bootstrapColWidth = 1;
+    }
+
+    let colStart = `<div class="col-${bootstrapColWidth}" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
     let cColTag = "Ccol-";    
     let headerColMid = `"><h3>`;
@@ -104,10 +113,10 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
     let contentRowEnd = `"></div>`
     let contentColStart = `<div class="row flex-nowrap datagrid-content-row rowid-`;
     let contentColId = `" id="`
-    let contentColMid = `"><div class="col datagrid-content-col">`;
-    let contentColEnd = `</div></div>`;
+    let contentColMid = `"><div class="col datagrid-content-inner-col">`;
+    let contentColEnd = `</div></div></div>`;
     let contentRowOverlayStart = `<div class="datagrid-click-overlay" onclick="dataGridDisplayClicked(this)" id="`;
-    let contentRowOverlayEnd = `"></div>`;
+    let contentRowOverlayEnd = `"></div><div class="datagrid-cell-value">`;
     
     let hColId;
     let cColId;
@@ -155,7 +164,7 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
 /* These columns should always be full width and height of their parent - any margin or padding will compromise the formatting */
 function dataGridDisplayContentColStyle() {
     let style = `
-        .datagrid-content-col {
+        .datagrid-content-col, .datagrid-content-inner-col {
             padding: 0 !important;
             margin: 0 !important;
         }`

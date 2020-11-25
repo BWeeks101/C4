@@ -1,23 +1,38 @@
 .datagrid-container {
-    margin-bottom: 10px;
+    padding-bottom: 10px;
     text-align: center;
 }
 
-.datagrid-header-col-first, .datagrid-content-col-first {
-    border-right: 1px solid #fafafa;
+.datagrid-header-col {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 1px solid #fafafa;
+    border-bottom: 1px solid #fafafa;
 }
 
-.datagrid-header-col-last, .datagrid-content-col-last {
+.datagrid-content-col {
     border-left: 1px solid #fafafa;
 }
 
-.datagrid-content-row {
+.datagrid-content-inner-col {
     border-bottom: 1px solid #fafafa;
-    transition: background-color 0.5s;
 }
 
-.datagrid-content-row-first {
-    border-top: 1px solid #fafafa;
+.datagrid-cell-value {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.datagrid-header-col-first, .datagrid-content-col-first {
+    border-left: none;
+}
+
+.datagrid-content-container {
+    overflow-y: auto;
+}
+
+.datagrid-content-row {
+    transition: background-color 0.5s;
 }
 
 .datagrid-content-row-last {

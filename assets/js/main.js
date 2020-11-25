@@ -9,9 +9,9 @@ let thirdcol = [];
 let headers = [];
 
 headers = ["Turn Time Limit", "Host", "Leaderboard Position"];
-firstcol = ["25s", "10s", "5s"];
-secondcol = ["AAAAA", "CCCCC", "BBBBB", "DDDDD",];
-thirdcol = ["3", "1", "2", "4", "5"];
+firstcol = ["25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s"];
+secondcol = ["AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD"];
+thirdcol = ["3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5"];
 fourthcol = []
 
 gridtestarray = [firstcol, secondcol, thirdcol];
@@ -34,8 +34,47 @@ function mainOnResize() {
 }
 
 function menuBlockResize() {
-    let menuHeight = calcMenuHeight();
-    document.getElementById("menuBlock").style.height = menuHeight;
+    menuBlockHeight = calcMenuHeight();
+    document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;
+
+    if (document.getElementById("menuJoinGame").classList.contains("d-none") == false) {
+        
+        document.getElementById("menuJoinGame").style.removeProperty("height")
+        document.getElementById("menuJoinControlContainer").style.removeProperty("height")
+        document.getElementById("gameList").style.removeProperty("height")
+        document.getElementById("gameListContentContainer").style.removeProperty("height")
+        
+        if (getElementPos("menuJoinGame").height < menuBlockHeight) {
+            return;
+        }
+
+        document.getElementById("menuJoinGame").style.height = `${menuBlockHeight}px`;
+        
+        jgtHeight = getElementPos("menuJoinGameTitle").height
+
+        mjgTopPad = window.getComputedStyle(document.getElementById("menuJoinGame"), null).getPropertyValue('padding-top');
+        mjgTopPad = Number(mjgTopPad.slice(0, mjgTopPad.length-2));
+
+        mjgBottomPad = window.getComputedStyle(document.getElementById("menuJoinGame"), null).getPropertyValue('padding-bottom');
+        mjgBottomPad = Number(mjgBottomPad.slice(0, mjgBottomPad.length-2));
+
+        jccHeight = menuBlockHeight - (jgtHeight + mjgTopPad + mjgBottomPad);
+        document.getElementById("menuJoinControlContainer").style.height = `${jccHeight}px`;
+        
+        jcrHeight = getElementPos("menuJoinControlRow").height;
+        glHeight = jccHeight - jcrHeight;
+        document.getElementById("gameList").style.height = `${glHeight}px`;
+
+        glTopPad = window.getComputedStyle(document.getElementById("gameList"), null).getPropertyValue('padding-top')
+        glTopPad = Number(glTopPad.slice(0, glTopPad.length-2));
+
+        glBottomPad = window.getComputedStyle(document.getElementById("gameList"), null).getPropertyValue('padding-bottom')
+        glBottomPad = Number(glBottomPad.slice(0, glBottomPad.length-2));
+
+        glhHeight = getElementPos("gameListHeaderRow").height;
+        glccHeight = glHeight - (glhHeight + glTopPad + glBottomPad);
+        document.getElementById("gameListContentContainer").style.height = `${glccHeight}px`;
+    }
 }
 
 /* Get position and size of element */
@@ -67,25 +106,40 @@ function calcMenuHeight() {
 
     /* Large Logo Height */
     let mainBlockImgHeight = getElementPos("mainBlockContainer").height;
+
+    /* Is Image Hidden */
+    let imgHidden = document.getElementById("mainBlockContainer").classList.contains("d-none");
     
     /* Calculated Menu Height */
-    let menuHeight = mainHeight - mainBlockImgHeight;
+    let menuHeight;
+
+    if (imgHidden == true) {
+        menuHeight = mainHeight - 10;
+    } else {
+        menuHeight = mainHeight - mainBlockImgHeight - 10;
+    }
 
     /* Calculated Full Content Height */
-    let contentHeight = headerHeight + mainBlockImgHeight + menuHeight + footerHeight;
+    let contentHeight;
 
+    if (imgHidden == true) {
+        contentHeight = headerHeight + menuHeight + footerHeight + 10;
+    } else {
+        contentHeight = headerHeight + mainBlockImgHeight + menuHeight + footerHeight + 10;
+    }
+    
     /* If Calculated Full Content Height is Greater than Browser Viewport */
-    /* Reduce Menu Height by the difference to prevent vertial scroll */
+    /* Reduce Menu Height by the difference to prevent vertical scroll */
     /* Will need revising for mobile views in portrait - probably add a minheight */
     if (contentHeight > wHeight) {
         menuHeight = menuHeight - (contentHeight - wHeight);
     }
 
-    return `${menuHeight}px`;
+    return menuHeight;
 }
 
 function setMenuHeight() {
-    document.getElementById("menuBlock").style.height = calcMenuHeight();    
+    document.getElementById("menuBlock").style.height = `${calcMenuHeight()}px`;
 }
 
 function elementDisplay(action, elementID) {

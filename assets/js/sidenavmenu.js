@@ -94,7 +94,9 @@ function mainShow(option) {
             displayDataGrid(gameListDG, "gameList");
             elementDisplay("show", "menuJoinGame");
             break;
-    }        
+    }
+
+    menuBlockResize();
 }
 
 function sideNavShow(option) {
@@ -201,6 +203,7 @@ function signOut() {
 
 function refreshJoinGame() {
     dataGridDisplayRefresh(gameListDG, "gameList");
+    menuBlockResize();
 }
 
 function beginCreateGame() {
