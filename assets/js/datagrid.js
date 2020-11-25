@@ -18,14 +18,17 @@ function dataGridOnLoad() {
 function DataGrid (headers, content) {
 
     if (objectIsObject(headers, "Headers") == false || objectIsObject(content, "Content") == false) {
+        console.log("function DataGrid failed.  Invalid parameters supplied - array objects required for headers and content.");
         return;
     }
 
     if (dataGridHeaderContentColCountMatch(headers.length, content.length) == false) {
+        console.log("function DataGrid failed.  Number of supplied Headers does not equal the Number of Content columns.");
         return;
     }
 
     if (dataGridHeadersAreStrings(headers) == false) {
+        console.log("function DataGrid failed.  All supplied Headers must be Strings.");
         return;
     }
 
@@ -70,28 +73,30 @@ function DataGrid (headers, content) {
 /* dataGrid: DataGrid Object */
 /* target: element id of the datagrid-container which will hold the DataGrid output */
 /* NOTE: target MUST have the datagrid-container class */
-function displayDataGrid(dataGrid, target) {
+function displayDataGrid(dataGrid, dataGridDisplayId) {
 
-    if (elementIsDataGridContainer(target) == false) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function displayDataGrid failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return;
     }
 
     if (objectIsDataGrid(dataGrid) == false) {
+        console.log(`function displayDataGrid failed.  Object (${dataGrid}) is not a dataGrid object.`)
         return;
     }
 
     let colCount = dataGrid.colCount;
     let rowCount = dataGrid.rowCount;
 
-    document.getElementById(target).classList.add("datagrid-colCount-" + colCount);
-    document.getElementById(target).classList.add("datagrid-rowCount-" + rowCount);
+    document.getElementById(dataGridDisplayId).classList.add("datagrid-colCount-" + colCount);
+    document.getElementById(dataGridDisplayId).classList.add("datagrid-rowCount-" + rowCount);
 
-    let headerTarget = `${target}HeaderRow`;
-    let contentTarget = `${target}ContentRow`;
-    document.getElementById(target).insertAdjacentHTML('afterbegin',`<div class="row flex-nowrap datagrid-header-row" id="${headerTarget}"></div>`);
-    document.getElementById(target).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-content-row" id="${contentTarget}"></div>`);
+    let headerRow = `${dataGridDisplayId}HeaderRow`;
+    let contentRow = `${dataGridDisplayId}ContentRow`;
+    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div>`);
+    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div>`);
 
-    let colStart = `<div class="col-4" id="${target}`;
+    let colStart = `<div class="col-4" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
     let cColTag = "Ccol-";    
     let headerColMid = `"><h3>`;
@@ -111,11 +116,11 @@ function displayDataGrid(dataGrid, target) {
     
     for (i = 0; i < colCount; i++) {
 
-        document.getElementById(headerTarget).insertAdjacentHTML('beforeend', colStart + hColTag + i + headerColMid + dataGrid.headers[i] + headerColEnd);
-        document.getElementById(contentTarget).insertAdjacentHTML('beforeend', colStart + cColTag + i + contentRowEnd);
+        document.getElementById(headerRow).insertAdjacentHTML('beforeend', colStart + hColTag + i + headerColMid + dataGrid.headers[i] + headerColEnd);
+        document.getElementById(contentRow).insertAdjacentHTML('beforeend', colStart + cColTag + i + contentRowEnd);
         
-        hColId = `${target}${hColTag}${i}`;
-        cColId = `${target}${cColTag}${i}`;        
+        hColId = `${dataGridDisplayId}${hColTag}${i}`;
+        cColId = `${dataGridDisplayId}${cColTag}${i}`;        
         
         document.getElementById(hColId).classList.add("datagrid-header-col");
         document.getElementById(cColId).classList.add("datagrid-content-col");
@@ -129,8 +134,8 @@ function displayDataGrid(dataGrid, target) {
         }
 
         for (ii = 0; ii < rowCount; ii++) {
-            cRowId = `${target}Col${i}RowId${ii}`;
-            cOverlayId = `${target}OverlayCol${i}Row${ii}`
+            cRowId = `${dataGridDisplayId}Col${i}RowId${ii}`;
+            cOverlayId = `${dataGridDisplayId}OverlayCol${i}Row${ii}`
 
             document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd);
 
@@ -164,30 +169,33 @@ function dataGridDisplayContentColStyle() {
 /* Highlight the selected dataGridDisplay row */
 function dataGridDisplayClicked(object) {
     let rowId = object.id.slice(object.id.lastIndexOf("w")+1, object.id.length);
-    let gridId = object.closest(".datagrid-container").id;
+    let dataGridDisplayId = object.closest(".datagrid-container").id;
     
-    let gridCounts = dataGridDisplayGetCounts(gridId);
+    let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
 
-    dataGridDisplayClearSelected(gridId, gridCounts[0], gridCounts[1]);    
+    dataGridDisplayClearSelected(dataGridDisplayId, gridCounts[0], gridCounts[1]);    
 
-    dataGridDisplaySetSelected(gridId, gridCounts[0], rowId);
+    dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[0], rowId);
 }
 
 /* Get the column and row counts from a dataGridDisplay element id */
 /* returns an array with colCount (position 0) and rowCount (position 1) */
-function dataGridDisplayGetCounts(dataGridDisplay) {
-    if (elementIsDataGridContainer(dataGridDisplay) == false) {
+
+/* ADD ERROR HANDLING HERE FOR MISSING colCount AND/OR rowCount CLASSES */
+function dataGridDisplayGetCounts(dataGridDisplayId) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return;
     }
 
     let colCount;
     let rowCount;
     
-    for (i = 0; i < document.getElementById(dataGridDisplay).classList.length; i++) {
-        if (document.getElementById(dataGridDisplay).classList.item(i).slice(0, 18) == "datagrid-colCount-") {
-            colCount = document.getElementById(dataGridDisplay).classList.item(i).slice(18, document.getElementById(dataGridDisplay).classList.item(i).length);
-        } else if (document.getElementById(dataGridDisplay).classList.item(i).slice(0, 18) == "datagrid-rowCount-") {
-            rowCount = document.getElementById(dataGridDisplay).classList.item(i).slice(18, document.getElementById(dataGridDisplay).classList.item(i).length);
+    for (i = 0; i < document.getElementById(dataGridDisplayId).classList.length; i++) {
+        if (document.getElementById(dataGridDisplayId).classList.item(i).slice(0, 18) == "datagrid-colCount-") {
+            colCount = document.getElementById(dataGridDisplayId).classList.item(i).slice(18, document.getElementById(dataGridDisplayId).classList.item(i).length);
+        } else if (document.getElementById(dataGridDisplayId).classList.item(i).slice(0, 18) == "datagrid-rowCount-") {
+            rowCount = document.getElementById(dataGridDisplayId).classList.item(i).slice(18, document.getElementById(dataGridDisplayId).classList.item(i).length);
         }
     }
 
@@ -196,15 +204,16 @@ function dataGridDisplayGetCounts(dataGridDisplay) {
 
 /* Clear highlighted rows on a dataGridDisplay */
 /* If either colCount or rowCount are ommitted, they will be calculated */
-function dataGridDisplayClearSelected(gridId, colCount, rowCount) {
-    if (elementIsDataGridContainer(gridId) == false) {
+function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplayClearSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return;
     }
     
     let selectedId;
     
     if (colCount == undefined || rowCount == undefined) {
-        let gridCounts = dataGridDisplayGetCounts(gridId);
+        let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
         if (colCount == undefined) {
             colCount = gridCounts[0];
         }
@@ -216,69 +225,71 @@ function dataGridDisplayClearSelected(gridId, colCount, rowCount) {
 
     for (i = 0; i < colCount; i++) {
         for (ii = 0; ii < rowCount; ii++) {
-            selectedId = `${gridId}Col${i}RowId${ii}`;
+            selectedId = `${dataGridDisplayId}Col${i}RowId${ii}`;
             document.getElementById(selectedId).classList.remove("datagrid-row-selected");
         }
     }
 }
 
 /* Highlight a row on a dataGridDisplay */
-function dataGridDisplaySetSelected(gridId, colCount, rowId) {
-    if (elementIsDataGridContainer(gridId) == false) {
+function dataGridDisplaySetSelected(dataGridDisplayId, colCount, rowId) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplaySetSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return;
     }
 
     let selectedId;
 
     for (i = 0; i < colCount; i++) {
-        selectedId = `${gridId}Col${i}RowId${rowId}`;
+        selectedId = `${dataGridDisplayId}Col${i}RowId${rowId}`;
         document.getElementById(selectedId).classList.add("datagrid-row-selected");
     }
 }
 
 /* Remove a dataGridDisplay */
-function dataGridDisplayRemove(target) {
-    if (elementIsDataGridContainer(target) == false) {
+function dataGridDisplayRemove(dataGridDisplayId) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplayRemove failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return;        
     }
 
     let classNames = [];
     let classSlice;
 
-    document.getElementById(target).innerHTML = ""
+    document.getElementById(dataGridDisplayId).innerHTML = ""
 
-    for (i = 0; i < document.getElementById(target).classList.length; i++) {        
-        classSlice = document.getElementById(target).classList.item(i).slice(0, 18)
+    for (i = 0; i < document.getElementById(dataGridDisplayId).classList.length; i++) {        
+        classSlice = document.getElementById(dataGridDisplayId).classList.item(i).slice(0, 18)
         
         if (classSlice == "datagrid-colCount-" || classSlice == "datagrid-rowCount-") {            
-            classNames.push(document.getElementById(target).classList.item(i))
+            classNames.push(document.getElementById(dataGridDisplayId).classList.item(i))
         }
     }
 
     for (i = 0; i < classNames.length; i++) {
-        document.getElementById(target).classList.remove(classNames[i]);
+        document.getElementById(dataGridDisplayId).classList.remove(classNames[i]);
     }
 }
 
 /* Refresh a dataGridDisplay */
-function dataGridDisplayRefresh(dataGrid, target) {
-    dataGridDisplayRemove(target);
-    displayDataGrid(dataGrid, target)
+function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
+    dataGridDisplayRemove(dataGridDisplayId);
+    displayDataGrid(dataGrid, dataGridDisplayId)
 }
 
 /* Verify element is a datagrid-container */
-function elementIsDataGridContainer(target) {
-    let valid = document.getElementById(target);
+function elementIsDataGridContainer(dataGridDisplayId) {
+    let valid = document.getElementById(dataGridDisplayId);
 
     if (valid == null) {
-        console.log(`Error.  Target element (${target}) does not exist.`);
+        console.log(`Error.  Target element (${dataGridDisplayId}) does not exist.`);
         return false;
     }
 
-    valid = document.getElementById(target).classList.contains("datagrid-container");
+    valid = document.getElementById(dataGridDisplayId).classList.contains("datagrid-container");
     
     if (valid == false) {
-        console.log(`Error.  Target element (${target}) does not have the required datagrid-container class.`)
+        console.log(`Error.  Target element (${dataGridDisplayId}) does not have the required datagrid-container class.`)
         return false;
     }
 
