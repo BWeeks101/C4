@@ -91,10 +91,11 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
     document.getElementById(dataGridDisplayId).classList.add("datagrid-colCount-" + colCount);
     document.getElementById(dataGridDisplayId).classList.add("datagrid-rowCount-" + rowCount);
 
+    let headerContainer = `${dataGridDisplayId}HeaderContainer`;
     let headerRow = `${dataGridDisplayId}HeaderRow`;
     let contentContainer = `${dataGridDisplayId}ContentContainer`;
     let contentRow = `${dataGridDisplayId}ContentRow`;
-    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div>`);
+    document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class"datagrid-header-container" id="${headerContainer}"><div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div></div>`);
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
     let numCols;
@@ -157,10 +158,10 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
     }
 }
 
-/* Hardcode removal of margins and padding for .content-col */
+/* Hardcode removal of margins and padding for .datagrid-content-col, datagrid-content-inner-col */
 /* Call this on load */
-/* Prevents any margins or padding on the .content-col class */
-/* This class is applied to the innermost column of a dataGridDisplay content row */
+/* Prevents any margins or padding on the .datagrid-content-col and datagrid-content-inner-col classes */
+/* These classes are applied to the outer and innermost columns of a dataGridDisplay content row */
 /* These columns should always be full width and height of their parent - any margin or padding will compromise the formatting */
 function dataGridDisplayContentColStyle() {
     let style = `
@@ -173,6 +174,18 @@ function dataGridDisplayContentColStyle() {
     styleSheet.type = "text/css"
     styleSheet.innerText = style;
     document.head.appendChild(styleSheet);
+}
+
+/* Display of vertical ScrollBars on Content will push Content Columns out of alignment with Header Columns */
+/* When ScrollBars are shown, add padding-right to the Header Container equivalent to the ScrollBar Width */
+/* Call this when the dataGrid is displayed, and on resize */
+function dataGridAdjustForScrollBars(dataGridDisplayId) {
+    let rPad = document.getElementById(`${dataGridDisplayId}ContentContainer`).offsetWidth - document.getElementById(`${dataGridDisplayId}ContentContainer`).clientWidth;
+    if (rPad == 0 || rPad === "" ) {
+        document.getElementById(`${dataGridDisplayId}HeaderContainer`).style.removeProperty("padding-right");
+    } else {
+        document.getElementById(`${dataGridDisplayId}HeaderContainer`).style.paddingRight = `${rPad}px`;
+    }    
 }
 
 /* Highlight the selected dataGridDisplay row */

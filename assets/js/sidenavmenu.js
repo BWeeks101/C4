@@ -1,5 +1,5 @@
-function show(option, newstate) {
-    if (newstate != undefined) {
+function show(option, newstate) {    
+    if (newstate != undefined) {        
         state = newstate;
     }
     mainShow(option);
@@ -11,10 +11,6 @@ function show(option, newstate) {
     } else {
         sideNavShow(option);
     };
-}
-
-function signOut() {
-    show("default", "default");
 }
 
 function sideNavLinkDisplay(action, className) {
@@ -64,6 +60,8 @@ function mainShow(option) {
             elementDisplay("show", "rulesContainer");
             break;
         case "leaderboard":
+            dataGridDisplayRemove("lBoard");
+            displayDataGrid(lBoardDG, "lBoard");
             elementDisplay("show", "leaderboardContainer");
             break;
         case "options":
@@ -96,7 +94,7 @@ function mainShow(option) {
             break;
     }
 
-    menuBlockResize();
+    mainOnResize();
 }
 
 function sideNavShow(option) {

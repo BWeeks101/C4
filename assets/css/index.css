@@ -3,10 +3,9 @@ body {
 }
 
 #mainBlockContainer {
-    display: flex;
-    align-items: center;
+    display: flex;    
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 10px;
     height: 20%;
     min-height: 220px;
 }
@@ -44,7 +43,7 @@ body {
     padding: 10px;
 }
 
-.menuTitle {
+.mainTitle, .menuTitle {
     margin: 0;
     padding-bottom: 10px;
 }
