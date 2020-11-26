@@ -233,3 +233,88 @@ function mainHideMenuContent() {
         elementDisplay("hide", elementCollection[i].id);      
     }
 }
+
+
+/* Calculate desired height of menuBlock */
+function calcMenuHeight() {
+    /* Browser Viewport Height */
+    let wHeight = window.innerHeight;
+
+    /* Min Supported Browser Height */
+    if (wHeight < 760) {
+        wHeight = 760;
+    }
+
+    /* Fixed Header and Footer Heights */
+    let headerHeight = 66;
+    let footerHeight = 50;
+
+    /* main Element Height */
+    let mainHeight = getElementPos("main").height;
+
+    /* Large Logo Height */
+    let mainBlockImgHeight = getElementPos("mainBlockContainer").height;
+
+    /* Is Image Hidden */
+    let imgHidden = document.getElementById("mainBlockContainer").classList.contains("d-none");
+    
+    /* Calculated Menu Height */
+    let menuHeight;
+
+    if (imgHidden == true) {
+        menuHeight = mainHeight - 10;
+    } else {
+        menuHeight = mainHeight - mainBlockImgHeight - 10;
+    }
+
+    /* Calculated Full Content Height */
+    let contentHeight;
+
+    if (imgHidden == true) {
+        contentHeight = headerHeight + menuHeight + footerHeight + 10;
+    } else {
+        contentHeight = headerHeight + mainBlockImgHeight + menuHeight + footerHeight + 10;
+    }
+    
+    /* If Calculated Full Content Height is Greater than Browser Viewport */
+    /* Reduce Menu Height by the difference to prevent vertical scroll */
+    /* Will need revising for mobile views in portrait - probably add a minheight */
+    if (contentHeight > wHeight) {
+        menuHeight = menuHeight - (contentHeight - wHeight);
+    }
+
+    return menuHeight;
+}
+
+/* Calculate desired height of mainBlock */
+function calcMainBHeight() {
+    /* Browser Viewport Height */
+    let wHeight = window.innerHeight;
+
+    /* Min Supported Browser Height */
+    if (wHeight < 760) {
+        wHeight = 760;
+    }
+
+    /* Fixed Header and Footer Heights */
+    let headerHeight = 66;
+    let footerHeight = 50;
+
+    /* main Element Height */
+    let mainHeight = getElementPos("main").height;
+
+    /* Calculated Main Block Container Height */
+    let mainBHeight = mainHeight;
+    
+    /* Calculated Full Content Height */
+    let contentHeight = headerHeight + mainBHeight + footerHeight;
+    
+    /* If Calculated Full Content Height is Greater than Browser Viewport */
+    /* Reduce Menu Height by the difference to prevent vertical scroll */
+    /* Will need revising for mobile views in portrait - probably add a minheight */
+    if (contentHeight > wHeight) {
+        mainBHeight = mainBHeight - (contentHeight - wHeight);
+    }
+
+    return mainBHeight;
+}

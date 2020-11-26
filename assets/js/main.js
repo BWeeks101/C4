@@ -25,9 +25,9 @@ $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
     state = "default";
-    sideNavOnLoad();
-    setMenuHeight();
+    sideNavOnLoad();    
     elementDisplay("toggle","menuBlockContainer");
+    mainOnResize();
 }
 
 function mainOnResize() {
@@ -40,7 +40,7 @@ function mainBlockResize() {
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
-        mainBlockContainerHeight = calcMainBHeight();
+        mainBlockContainerHeight = calcBlockHeight();
         document.getElementById("mainBlockContainer").style.height = `${mainBlockContainerHeight}px`;
         document.getElementById("mainBlockContainer").style.paddingBottom = "10px";
 
@@ -62,7 +62,7 @@ function mainBlockResize() {
 }
 
 function menuBlockResize() {
-    menuBlockHeight = calcMenuHeight();
+    menuBlockHeight = calcBlockHeight();
     document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;
 
     if (document.getElementById("menuJoinGame").classList.contains("d-none") == false) {
@@ -118,8 +118,16 @@ function getElementPos(elementId) {
     return elementPos;
 }
 
-/* Calculate desired height of menuBlock */
-function calcMenuHeight() {
+/* Calculate Desired Height of mainBlock or menuBlock */
+/* If: 
+/* mainBlockContainer is Hidden, and menuBlockContainer is visible
+/* Or:
+/* mainBlockContainer and menuBlockContainer are both visible
+/* Then:
+/* Output is suitable for menuBlockContainer
+/* Else:
+/* Output is suitable for mainBlockContainer */
+function calcBlockHeight() {
     /* Browser Viewport Height */
     let wHeight = window.innerHeight;
 
@@ -135,75 +143,44 @@ function calcMenuHeight() {
     /* main Element Height */
     let mainHeight = getElementPos("main").height;
 
-    /* Large Logo Height */
-    let mainBlockImgHeight = getElementPos("mainBlockContainer").height;
+    /* Is mainBlockContainer Hidden */
+    let mainBlockContainerHidden = document.getElementById("mainBlockContainer").classList.contains("d-none");
 
-    /* Is Image Hidden */
-    let imgHidden = document.getElementById("mainBlockContainer").classList.contains("d-none");
-    
-    /* Calculated Menu Height */
-    let menuHeight;
+    /* mainBlockContainer Height */
+    let mainBlockContainerHeight;
 
-    if (imgHidden == true) {
-        menuHeight = mainHeight - 10;
-    } else {
-        menuHeight = mainHeight - mainBlockImgHeight - 10;
+    if (mainBlockContainerHidden == false) {        
+        mainBlockContainerHeight = getElementPos("mainBlockContainer").height;
     }
 
-    /* Calculated Full Content Height */
+    /* Is menuBlockContainer Hidden */
+    let menuBlockContainerHidden = document.getElementById("menuBlockContainer").classList.contains("d-none");
+    
+    /* Calculated Block Height and Full Content Height */
+    let blockHeight;
     let contentHeight;
 
-    if (imgHidden == true) {
-        contentHeight = headerHeight + menuHeight + footerHeight + 10;
-    } else {
-        contentHeight = headerHeight + mainBlockImgHeight + menuHeight + footerHeight + 10;
+    if (mainBlockContainerHidden == true && menuBlockContainerHidden == false) {
+        blockHeight = mainHeight - 10;
+        contentHeight = headerHeight + blockHeight + footerHeight + 10;
+    } else if (mainBlockContainerHidden == false && menuBlockContainerHidden == false) {
+        blockHeight = mainHeight - mainBlockContainerHeight - 10;
+        contentHeight = headerHeight + mainBlockContainerHeight + blockHeight + footerHeight + 10;
+    } else if (mainBlockContainerHidden == false && menuBlockContainerHidden == true) {
+        blockHeight = mainHeight;
+        contentHeight = headerHeight + blockHeight + footerHeight;
     }
+
     
+
     /* If Calculated Full Content Height is Greater than Browser Viewport */
-    /* Reduce Menu Height by the difference to prevent vertical scroll */
+    /* Reduce Block Height by the difference to prevent vertical scroll */
     /* Will need revising for mobile views in portrait - probably add a minheight */
     if (contentHeight > wHeight) {
-        menuHeight = menuHeight - (contentHeight - wHeight);
+        blockHeight = blockHeight - (contentHeight - wHeight);
     }
 
-    return menuHeight;
-}
-
-/* Calculate desired height of mainBlock */
-function calcMainBHeight() {
-    /* Browser Viewport Height */
-    let wHeight = window.innerHeight;
-
-    /* Min Supported Browser Height */
-    if (wHeight < 760) {
-        wHeight = 760;
-    }
-
-    /* Fixed Header and Footer Heights */
-    let headerHeight = 66;
-    let footerHeight = 50;
-
-    /* main Element Height */
-    let mainHeight = getElementPos("main").height;
-
-    /* Calculated Main Block Container Height */
-    let mainBHeight = mainHeight;
-    
-    /* Calculated Full Content Height */
-    let contentHeight = headerHeight + mainBHeight + footerHeight;
-    
-    /* If Calculated Full Content Height is Greater than Browser Viewport */
-    /* Reduce Menu Height by the difference to prevent vertical scroll */
-    /* Will need revising for mobile views in portrait - probably add a minheight */
-    if (contentHeight > wHeight) {
-        mainBHeight = mainBHeight - (contentHeight - wHeight);
-    }
-
-    return mainBHeight;
-}
-
-function setMenuHeight() {
-    document.getElementById("menuBlock").style.height = `${calcMenuHeight()}px`;
+    return blockHeight;
 }
 
 function elementDisplay(action, elementID) {
