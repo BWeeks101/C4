@@ -37,17 +37,13 @@ function mainOnResize() {
 }
 
 function mainBlockResize() {
-    let padTop;
-    let padBottom;
-    let padTotal;
-
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
         mainBlockContainerHeight = calcBlockHeight();
         document.getElementById("mainBlockContainer").style.height = `${mainBlockContainerHeight}px`;
-        padBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
-        document.getElementById("mainBlockContainer").style.paddingBottom = `${padBottom}px`;
+        mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
+        document.getElementById("mainBlockContainer").style.paddingBottom = `${mainBlockContainerPadBottom}px`;
 
         if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
 
@@ -55,24 +51,24 @@ function mainBlockResize() {
             document.getElementById("lBoard").style.removeProperty("height");
             document.getElementById("lBoardContentContainer").style.removeProperty("height");
 
-            if (getElementPos("leaderboardMainContent").height < mainBlockContainerHeight - (padBottom * 2)) {
+            if (getElementPos("leaderboardMainContent").height < mainBlockContainerHeight - (mainBlockContainerPadBottom * 2)) {
                 dataGridAdjustForScrollBars("lBoard");
                 return;
             }
 
-            padTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
-            padBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
-            padTotal = padTop + padBottom;
+            mainBlockContainerPadTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
+            mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
+            mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
             
-            leaderboardContainerHeight = mainBlockContainerHeight - (padTotal);
+            leaderboardContainerHeight = mainBlockContainerHeight - (mainBlockContainerPadTotal);
             document.getElementById("leaderboardContainer").style.height = `${leaderboardContainerHeight}px`;
 
-            padTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "int");
-            padBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "int");            
-            padTotal = padTop + padBottom;
+            leaderboardMainContentPadTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "int");
+            leaderboardMainContentPadBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "int");            
+            leaderboardMainContentPadTotal = leaderboardMainContentPadTop + leaderboardMainContentPadBottom;
 
             lBoardTitleHeight = getElementPos("leaderboardTitle").height;
-            lBoardHeight = leaderboardContainerHeight - (lBoardTitleHeight + padTotal);
+            lBoardHeight = leaderboardContainerHeight - (lBoardTitleHeight + leaderboardMainContentPadTotal);
             document.getElementById("lBoard").style.height = `${lBoardHeight}px`;            
             
             lBoardHeaderRowHeight = getElementPos("lBoardHeaderRow").height;
