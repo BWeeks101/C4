@@ -55,13 +55,8 @@ function mainBlockResize() {
             document.getElementById("lBoard").style.removeProperty("height");
             document.getElementById("lBoardContentContainer").style.removeProperty("height");
 
-            console.log(getElementPos("leaderboardMainContent").height);
-            console.log(mainBlockContainerHeight);
-            console.log(padBottom * 2);
-
             if (getElementPos("leaderboardMainContent").height < mainBlockContainerHeight - (padBottom * 2)) {
                 dataGridAdjustForScrollBars("lBoard");
-                console.log("done")
                 return;
             }
 
@@ -83,12 +78,6 @@ function mainBlockResize() {
             lBoardHeaderRowHeight = getElementPos("lBoardHeaderRow").height;
             lBoardContentContainerHeight = lBoardHeight - lBoardHeaderRowHeight;            
             document.getElementById("lBoardContentContainer").style.height = `${lBoardContentContainerHeight}px`;
-
-            /*
-            lBoardContentRowHeight = getElementPos("lBoardContentRow").height;
-            leaderboardMainContentHeight = lBoardTitleHeight + lBoardHeaderRowHeight + lBoardContentRowHeight + padTotal;
-            document.getElementById("leaderboardMainContent").style.height = `${leaderboardMainContentHeight}px`;
-            */
 
             dataGridAdjustForScrollBars("lBoard");
         }
