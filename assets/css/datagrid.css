@@ -1,5 +1,6 @@
 .datagrid-container {
     padding-bottom: 10px;
+    overflow: hidden;
     text-align: center;
 }
 

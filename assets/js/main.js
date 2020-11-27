@@ -37,24 +37,58 @@ function mainOnResize() {
 }
 
 function mainBlockResize() {
+    let padTop;
+    let padBottom;
+    let padTotal;
+
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
         mainBlockContainerHeight = calcBlockHeight();
         document.getElementById("mainBlockContainer").style.height = `${mainBlockContainerHeight}px`;
-        document.getElementById("mainBlockContainer").style.paddingBottom = "10px";
+        padBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "num");
+        document.getElementById("mainBlockContainer").style.paddingBottom = `${padBottom}px`;
 
         if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
-            leaderboardContainerHeight = mainBlockContainerHeight - 20;
+
+            document.getElementById("leaderboardContainer").style.removeProperty("height");
+            document.getElementById("lBoard").style.removeProperty("height");
+            document.getElementById("lBoardContentContainer").style.removeProperty("height");
+
+            console.log(getElementPos("leaderboardMainContent").height);
+            console.log(mainBlockContainerHeight);
+            console.log(padBottom * 2);
+
+            if (getElementPos("leaderboardMainContent").height < mainBlockContainerHeight - (padBottom * 2)) {
+                dataGridAdjustForScrollBars("lBoard");
+                console.log("done")
+                return;
+            }
+
+            padTop = getElementPropertyVal("mainBlockContainer", "padding-top", "num");
+            padBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "num");
+            padTotal = padTop + padBottom;
+            
+            leaderboardContainerHeight = mainBlockContainerHeight - (padTotal);
             document.getElementById("leaderboardContainer").style.height = `${leaderboardContainerHeight}px`;
 
-            lBoardTitleHeight = getElementPos("leaderboardTitle").height;
-            lBoardHeight = leaderboardContainerHeight - lBoardTitleHeight;
-            document.getElementById("lBoard").style.height = `${lBoardHeight}px`;
+            padTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "num");
+            padBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "num");            
+            padTotal = padTop + padBottom;
 
+            lBoardTitleHeight = getElementPos("leaderboardTitle").height;
+            lBoardHeight = leaderboardContainerHeight - (lBoardTitleHeight + padTotal);
+            document.getElementById("lBoard").style.height = `${lBoardHeight}px`;            
+            
             lBoardHeaderRowHeight = getElementPos("lBoardHeaderRow").height;
-            lBoardContentContainerHeight = lBoardHeight - lBoardHeaderRowHeight;
+            lBoardContentContainerHeight = lBoardHeight - lBoardHeaderRowHeight;            
             document.getElementById("lBoardContentContainer").style.height = `${lBoardContentContainerHeight}px`;
+
+            /*
+            lBoardContentRowHeight = getElementPos("lBoardContentRow").height;
+            leaderboardMainContentHeight = lBoardTitleHeight + lBoardHeaderRowHeight + lBoardContentRowHeight + padTotal;
+            document.getElementById("leaderboardMainContent").style.height = `${leaderboardMainContentHeight}px`;
+            */
 
             dataGridAdjustForScrollBars("lBoard");
         }
@@ -81,30 +115,38 @@ function menuBlockResize() {
         
         menuJoinGameTitleHeight = getElementPos("menuJoinGameTitle").height
 
-        menuJoinGamePadTop = window.getComputedStyle(document.getElementById("menuJoinGame"), null).getPropertyValue('padding-top');
-        menuJoinGamePadTop = Number(menuJoinGamePadTop.slice(0, menuJoinGamePadTop.length-2));
+        menuJoinGamePadTop = getElementPropertyVal("menuJoinGame", "padding-top", "num");        
+        menuJoinGamePadBottom = getElementPropertyVal("menuJoinGame", "padding-bottom", "num");
+        menuJoinGamePadTotal = menuJoinGamePadTop + menuJoinGamePadBottom;
 
-        menuJoinGamePadBottom = window.getComputedStyle(document.getElementById("menuJoinGame"), null).getPropertyValue('padding-bottom');
-        menuJoinGamePadBottom = Number(menuJoinGamePadBottom.slice(0, menuJoinGamePadBottom.length-2));
-
-        menuJoinControlContainerHeight = menuBlockHeight - (menuJoinGameTitleHeight + menuJoinGamePadTop + menuJoinGamePadBottom);
+        menuJoinControlContainerHeight = menuBlockHeight - (menuJoinGameTitleHeight + menuJoinGamePadTotal);
         document.getElementById("menuJoinControlContainer").style.height = `${menuJoinControlContainerHeight}px`;
         
         menuJoinControlRowHeight = getElementPos("menuJoinControlRow").height;
         gameListHeight = menuJoinControlContainerHeight - menuJoinControlRowHeight;
         document.getElementById("gameList").style.height = `${gameListHeight}px`;
 
-        gameListPadTop = window.getComputedStyle(document.getElementById("gameList"), null).getPropertyValue('padding-top')
-        gameListPadTop = Number(gameListPadTop.slice(0, gameListPadTop.length-2));
-
-        gameListPadBottom = window.getComputedStyle(document.getElementById("gameList"), null).getPropertyValue('padding-bottom')
-        gameListPadBottom = Number(gameListPadBottom.slice(0, gameListPadBottom.length-2));
+        gameListPadTop = getElementPropertyVal("gameList", "padding-top", "num");
+        gameListPadBottom = getElementPropertyVal("gameList", "padding-bottom", "num");
+        gameListPadTotal = gameListPadTop + gameListPadBottom;
 
         gameListHeaderRowHeight = getElementPos("gameListHeaderRow").height;
-        gameListContentContainerHeight = gameListHeight - (gameListHeaderRowHeight + gameListPadTop + gameListPadBottom);
+        gameListContentContainerHeight = gameListHeight - (gameListHeaderRowHeight + gameListPadTotal);
         document.getElementById("gameListContentContainer").style.height = `${gameListContentContainerHeight}px`;
 
         dataGridAdjustForScrollBars("gameList");
+    }
+}
+
+/* Get Computed Property of element */
+function getElementPropertyVal(elementId, propertyName, resFormat) {
+    let propertyVal = window.getComputedStyle(document.getElementById(elementId), null).getPropertyValue(propertyName);
+    switch (resFormat) {
+        case "num":
+            let propertyNum = Number(propertyVal.slice(0, propertyVal.length-2));
+            return propertyNum;
+        default:
+            return propertyVal;
     }
 }
 
