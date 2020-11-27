@@ -46,7 +46,7 @@ function mainBlockResize() {
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
         mainBlockContainerHeight = calcBlockHeight();
         document.getElementById("mainBlockContainer").style.height = `${mainBlockContainerHeight}px`;
-        padBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "num");
+        padBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
         document.getElementById("mainBlockContainer").style.paddingBottom = `${padBottom}px`;
 
         if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
@@ -60,15 +60,15 @@ function mainBlockResize() {
                 return;
             }
 
-            padTop = getElementPropertyVal("mainBlockContainer", "padding-top", "num");
-            padBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "num");
+            padTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
+            padBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
             padTotal = padTop + padBottom;
             
             leaderboardContainerHeight = mainBlockContainerHeight - (padTotal);
             document.getElementById("leaderboardContainer").style.height = `${leaderboardContainerHeight}px`;
 
-            padTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "num");
-            padBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "num");            
+            padTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "int");
+            padBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "int");            
             padTotal = padTop + padBottom;
 
             lBoardTitleHeight = getElementPos("leaderboardTitle").height;
@@ -104,8 +104,8 @@ function menuBlockResize() {
         
         menuJoinGameTitleHeight = getElementPos("menuJoinGameTitle").height
 
-        menuJoinGamePadTop = getElementPropertyVal("menuJoinGame", "padding-top", "num");        
-        menuJoinGamePadBottom = getElementPropertyVal("menuJoinGame", "padding-bottom", "num");
+        menuJoinGamePadTop = getElementPropertyVal("menuJoinGame", "padding-top", "int");        
+        menuJoinGamePadBottom = getElementPropertyVal("menuJoinGame", "padding-bottom", "int");
         menuJoinGamePadTotal = menuJoinGamePadTop + menuJoinGamePadBottom;
 
         menuJoinControlContainerHeight = menuBlockHeight - (menuJoinGameTitleHeight + menuJoinGamePadTotal);
@@ -115,8 +115,8 @@ function menuBlockResize() {
         gameListHeight = menuJoinControlContainerHeight - menuJoinControlRowHeight;
         document.getElementById("gameList").style.height = `${gameListHeight}px`;
 
-        gameListPadTop = getElementPropertyVal("gameList", "padding-top", "num");
-        gameListPadBottom = getElementPropertyVal("gameList", "padding-bottom", "num");
+        gameListPadTop = getElementPropertyVal("gameList", "padding-top", "int");
+        gameListPadBottom = getElementPropertyVal("gameList", "padding-bottom", "int");
         gameListPadTotal = gameListPadTop + gameListPadBottom;
 
         gameListHeaderRowHeight = getElementPos("gameListHeaderRow").height;
@@ -131,9 +131,12 @@ function menuBlockResize() {
 function getElementPropertyVal(elementId, propertyName, resFormat) {
     let propertyVal = window.getComputedStyle(document.getElementById(elementId), null).getPropertyValue(propertyName);
     switch (resFormat) {
-        case "num":
-            let propertyNum = Number(propertyVal.slice(0, propertyVal.length-2));
+        case "int":
+            let propertyNum = parseInt(propertyVal);
             return propertyNum;
+        case "float":
+            let propertyFloat = parseFloat(propertyVal);
+            return propertyFloat;
         default:
             return propertyVal;
     }
