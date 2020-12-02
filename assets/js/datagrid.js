@@ -368,7 +368,10 @@ function dataGridDisplaySetSelected(dataGridDisplayId, count, selId, option) {
         document.getElementById(selectedId).classList.add(`datagrid-${option}-selected`);
     }
 
-    return [option, selId];
+    /* option: col or row (what we are selecting) */
+    /* count: number of rows in selected column, or number of columns in selected row */
+    /* selId: id of selected column or row (0 based) */
+    return [option, count, selId];
 }
 
 /* Remove a dataGridDisplay */
