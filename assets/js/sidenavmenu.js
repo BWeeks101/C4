@@ -80,6 +80,9 @@ function mainShow(option) {
             elementDisplay("show", "menuCreateHotseat");
             break;
         case "starthotseat":
+            dataGridDisplayRemove("gBoard");
+            displayDataGrid(gBoardDG, "gBoard", "col");
+            dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
             elementDisplay("show", "gameBoardContainer");
             break;
         case "createp2settings":
