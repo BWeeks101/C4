@@ -1,9 +1,11 @@
 $(document).ready(dataGridOnLoad);
 
 /* Call function to ensure proper formatting of innermost content columns */
+/*
 function dataGridOnLoad() {
     dataGridDisplayContentColStyle();
 }
+*/
 
 /* DataGrid object constructor */
 /* Expects: */
@@ -210,7 +212,23 @@ function dataGridAdjustForScrollBars(dataGridDisplayId) {
     }    
 }
 
+/* Replace default onclick attribute function */
+function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
+        return false;
+    }
+
+    let elementCollection = document.querySelectorAll(`#${dataGridDisplayId} .datagrid-click-overlay`);
+    for (i = 0; i < elementCollection.length; i++) {
+        elementCollection[i].setAttribute("onclick", newFunction);
+    }    
+}
+
+/* Default dataGrid Display onclick function */
 /* Highlight the selected dataGridDisplay row/col */
+/* returns id of the selected row/col */
+/* eg, col-0 or row-2 */
 function dataGridDisplayClicked(object, option) {
     if (option != undefined) {
         option = option.toLowerCase();
