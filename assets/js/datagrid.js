@@ -106,8 +106,6 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class"datagrid-header-container" id="${headerContainer}"><div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div></div>`);
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
-    let numCols;
-
     if (colCount < 12) {
         bootstrapColWidth = Math.ceil(12 / colCount);
     } else {
