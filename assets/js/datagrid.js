@@ -1,4 +1,4 @@
-$(document).ready(dataGridOnLoad);
+//$(document).ready(dataGridOnLoad);
 
 /* Call function to ensure proper formatting of innermost content columns */
 /*
