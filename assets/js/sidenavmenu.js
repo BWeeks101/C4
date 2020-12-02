@@ -41,7 +41,7 @@ function hideAll(option) {
 
 function mainShow(option) {
     hideAll("mainBlockContainer");
-    if (option != "rules" && option != "leaderboard") {
+    if (option != "rules" && option != "leaderboard" && option !="starthotseat") {
         elementDisplay("show", "imgContainer");
         hideAll("menuContentContainer");
         elementDisplay("show", "menuBlockContainer");                
@@ -78,6 +78,9 @@ function mainShow(option) {
             break;
         case "createhotseat":
             elementDisplay("show", "menuCreateHotseat");
+            break;
+        case "starthotseat":
+            elementDisplay("show", "gameBoard");
             break;
         case "createp2settings":
             elementDisplay("show", "menuCreateP2Settings");
@@ -228,6 +231,20 @@ function radioGroupGetValue(option) {
             return elementCollection[i].value;
         }
     }     
+}
+
+function startGame() {
+    switch (state) {
+        case "createhotseat":
+            show("starthotseat");
+            break;
+        case "createmultiplayer":
+            show("createmultiplayer");
+            break;
+        case "createsingle":
+            show("startsingle");
+            break;
+    }
 }
 
 function createGameNextButton(value) {
