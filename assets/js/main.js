@@ -21,6 +21,14 @@ let lBoardgridtestarray = [lBoardfirstcol, lBoardsecondcol, lBoardthirdcol];
 let lBoardDG = new DataGrid(lBoardHeaders, lBoardgridtestarray);
 /* End Dummy Data for Leaderboard */
 
+/* Game Board */
+let gBoardHeaders = ["","","","","","",""];
+let gBoardCols = ["","","","","",""];
+let gBoardgridarray = [gBoardCols, gBoardCols, gBoardCols, gBoardCols, gBoardCols, gBoardCols, gBoardCols]
+
+let gBoardDG = new DataGrid(gBoardHeaders, gBoardgridarray);
+/* end Game Board */
+
 $(document).ready(mainOnLoad);
 
 function mainOnLoad() {

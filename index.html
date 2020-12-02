@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/sidenav.css" type="text/css">
     <link rel="stylesheet" href="assets/css/datagrid.css" type="text/css">
     <link rel="stylesheet" href="assets/css/index.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/game.css" type="text/css">
     
 </head>
 <body onresize="mainOnResize()">
@@ -115,9 +116,13 @@
                     <div class="col-6" id="player2Info">
                         <span>Player 2</span>
                     </div>
-                </div>                
+                </div>
+                <div class="datagrid-container" id="gBoard">
+                    <!--Create GameBoard Here-->
+                </div>
+                <!--
                 <table class="gbTable" id="gbTable">
-                    <tr class="gbRow" id="gbRow-0">
+                    <tr class="gbRow" id="gbRow-0" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=0-0"></td>
                         <td class="gbCol" id="gbCol=0-1"></td>
                         <td class="gbCol" id="gbCol=0-2"></td>
@@ -126,7 +131,7 @@
                         <td class="gbCol" id="gbCol=0-5"></td>
                         <td class="gbCol" id="gbCol=0-6"></td>
                     </tr>
-                    <tr class="gbRow" id="gbRow-1">
+                    <tr class="gbRow" id="gbRow-1" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=1-0"></td>
                         <td class="gbCol" id="gbCol=1-1"></td>
                         <td class="gbCol" id="gbCol=1-2"></td>
@@ -135,7 +140,7 @@
                         <td class="gbCol" id="gbCol=1-5"></td>
                         <td class="gbCol" id="gbCol=1-6"></td>
                     </tr>
-                    <tr class="gbRow" id="gbRow-2">
+                    <tr class="gbRow" id="gbRow-2" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=2-0"></td>
                         <td class="gbCol" id="gbCol=2-1"></td>
                         <td class="gbCol" id="gbCol=2-2"></td>
@@ -144,7 +149,7 @@
                         <td class="gbCol" id="gbCol=2-5"></td>
                         <td class="gbCol" id="gbCol=2-6"></td>
                     </tr>
-                    <tr class="gbRow" id="gbRow-3">
+                    <tr class="gbRow" id="gbRow-3" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=3-0"></td>
                         <td class="gbCol" id="gbCol=3-1"></td>
                         <td class="gbCol" id="gbCol=3-2"></td>
@@ -153,7 +158,7 @@
                         <td class="gbCol" id="gbCol=3-5"></td>
                         <td class="gbCol" id="gbCol=3-6"></td>
                     </tr>
-                    <tr class="gbRow" id="gbRow-4">
+                    <tr class="gbRow" id="gbRow-4" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=4-0"></td>
                         <td class="gbCol" id="gbCol=4-1"></td>
                         <td class="gbCol" id="gbCol=4-2"></td>
@@ -162,7 +167,7 @@
                         <td class="gbCol" id="gbCol=4-5"></td>
                         <td class="gbCol" id="gbCol=4-6"></td>
                     </tr>
-                    <tr class="gbRow" id="gbRow-5">
+                    <tr class="gbRow" id="gbRow-5" onclick="gameClicked(this)">
                         <td class="gbCol" id="gbCol=5-0"></td>
                         <td class="gbCol" id="gbCol=5-1"></td>
                         <td class="gbCol" id="gbCol=5-2"></td>
@@ -172,6 +177,7 @@
                         <td class="gbCol" id="gbCol=5-6"></td>
                     </tr>
                 </table>
+                -->
             </div>
         </div>
         
@@ -356,6 +362,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     
     <!--Local Javascript-->
+    <script src="assets/js/game.js" crossorigin="anonymous"></script>
     <script src="assets/js/sidenavmenu.js" crossorigin="anonymous"></script>
     <script src="assets/js/sidenav.js" crossorigin="anonymous"></script>
     <script src="assets/js/datagrid.js" crossorigin="anonymous"></script>
