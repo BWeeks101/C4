@@ -247,11 +247,11 @@ function dataGridDisplayClicked(object, option) {
     
     result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[gcId], selId, option);
     if (result == false) {
-        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[gcid]}, ${selId}, ${option}).`);
+        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[gcId]}, ${selId}, ${option}).`);
         return false;
     }
 
-    return true;
+    return result;
 }
 
 /* Get the column and row counts from a dataGridDisplay element id */
