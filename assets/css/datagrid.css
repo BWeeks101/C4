@@ -12,16 +12,20 @@
 }
 
 .datagrid-content-col {
+    padding: 0 !important;
+    margin: 0 !important;
     border-left: 1px solid #fafafa;
 }
 
 .datagrid-content-inner-col {
+    padding: 0 !important;
+    margin: 0 !important;
     border-bottom: 1px solid #fafafa;
 }
 
 .datagrid-cell-value {
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 5px;    
 }
 
 .datagrid-header-col-first, .datagrid-content-col-first {
