@@ -1,0 +1,51 @@
+#playerInfoContainer {
+    padding: 20px;
+}
+
+#player1Info {
+    text-align: left;
+}
+
+#player2Info {
+    text-align: right;
+}
+
+#gBoardHeaderContainer {
+    border: none;
+    display: none;
+}
+
+#gBoardContentContainer {
+    border: 1px solid #fafafa;
+}
+
+#gBoardContentRow, #gBoardContentRow .datagrid-content-col, #gBoardContentRow .datagrid-content-row, #gBoardContentRow .datagrid-content-inner-col {
+    border: none;
+}
+
+#gBoardContentRow .datagrid-content-inner-col {
+    padding: 1px !important;
+}
+
+#gBoardContentRow .datagrid-col-selected {
+    background-color: initial;
+}
+
+#gBoardContentRow .datagrid-cell-value {
+    border: 1px solid #fafafa;
+    border-radius: 50%;
+    background-color: rgb(45,45,45);
+    padding: 0;
+    min-width: 45px;
+    min-height: 45px;
+    width: 100%;
+    padding-top: calc(100% - 2px);
+}
+
+.gbP1 {
+    background-color: rgb(236,76,76);
+}
+
+.gbP2 {
+    background-color: blue;
+}
