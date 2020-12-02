@@ -63,3 +63,12 @@ body {
 .refresh-button {
     text-align: left;
 }
+
+.gbTable {
+    border: 1px solid #fafafa;
+}
+
+.gbTable .gbRow .gbCol {
+    border: 1px solid #fafafa;
+    border-radius: 50%;
+}
