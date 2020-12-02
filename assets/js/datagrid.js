@@ -210,7 +210,7 @@ function dataGridAdjustForScrollBars(dataGridDisplayId) {
     }    
 }
 
-/* Replace default onclick attribute function */
+/* Replace default onclick function */
 function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
@@ -368,7 +368,7 @@ function dataGridDisplaySetSelected(dataGridDisplayId, count, selId, option) {
         document.getElementById(selectedId).classList.add(`datagrid-${option}-selected`);
     }
 
-    return `${option}-${selId}`;
+    return [option, selId];
 }
 
 /* Remove a dataGridDisplay */
