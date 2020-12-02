@@ -72,8 +72,10 @@ function DataGrid (headers, content) {
 /* Requires: /*
 /* dataGrid: DataGrid Object */
 /* dataGridDisplayId: element id of the datagrid-container which will hold the DataGrid output */
+/* selectOption: OPTIONAL.  Default is ROW. */
+/*                          Options are ROW, COL, OFF */
 /* NOTE: dataGridDisplayId MUST have the datagrid-container class */
-function displayDataGrid(dataGrid, dataGridDisplayId) {
+function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
 
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function displayDataGrid failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
@@ -84,6 +86,10 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
         console.log(`function displayDataGrid failed.  Object (${dataGrid}) is not a dataGrid object.`)
         return false;
     }
+
+    if (selectOption != undefined) {
+        selectOption = selectOption.toLowerCase();
+    }    
 
     let colCount = dataGrid.colCount;
     let rowCount = dataGrid.rowCount;
@@ -116,13 +122,29 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
     let contentColId = `" id="`
     let contentColMid = `"><div class="col datagrid-content-inner-col">`;
     let contentColEnd = `</div></div></div>`;
-    let contentRowOverlayStart = `<div class="datagrid-click-overlay" onclick="dataGridDisplayClicked(this)" id="`;
+    let contentRowOverlayStart = `<div class="datagrid-click-overlay" `;
+    let contentRowOverlaySelectRow = `onclick="dataGridDisplayClicked(this, 'row')" `;
+    let contentRowOverlaySelectCol = `onclick="dataGridDisplayClicked(this, 'col')" `;
+    let contentRowOverlaySelectType;
+    let contentRowOverlayMid = `id="`;
     let contentRowOverlayEnd = `"></div><div class="datagrid-cell-value">`;
     
     let hColId;
     let cColId;
     let cRowId;
     let cOverlayId;
+
+    switch (selectOption) {
+        case "col":
+            contentRowOverlaySelectType = contentRowOverlaySelectCol;
+            break;
+        case "off":
+            contentRowOverlaySelectType = "";
+            break;
+        default: //row or Undefined
+            contentRowOverlaySelectType = contentRowOverlaySelectRow;
+            break;
+    }
     
     for (i = 0; i < colCount; i++) {
 
@@ -147,7 +169,7 @@ function displayDataGrid(dataGrid, dataGridDisplayId) {
             cRowId = `${dataGridDisplayId}Col${i}RowId${ii}`;
             cOverlayId = `${dataGridDisplayId}OverlayCol${i}Row${ii}`
 
-            document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd);
+            document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd);
 
             if (ii == 0) {
                 document.getElementById(cRowId).classList.add("datagrid-content-row-first");            
@@ -188,9 +210,12 @@ function dataGridAdjustForScrollBars(dataGridDisplayId) {
     }    
 }
 
-/* Highlight the selected dataGridDisplay row */
-function dataGridDisplayClicked(object) {
-    let rowId = object.id.slice(object.id.lastIndexOf("w")+1, object.id.length);
+/* Highlight the selected dataGridDisplay row/col */
+function dataGridDisplayClicked(object, option) {
+    if (option != undefined) {
+        option = option.toLowerCase();
+    }
+
     let dataGridDisplayId = object.closest(".datagrid-container").id;
     
     let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
@@ -206,9 +231,23 @@ function dataGridDisplayClicked(object) {
         return false;
     }
 
-    result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[0], rowId);
+    let selId;
+    let gcId;
+
+    switch (option) {
+        case "row":
+            selId = object.id.slice(object.id.lastIndexOf("w")+1, object.id.length);
+            gcId = 0;
+            break;
+        case "col":
+            selId = object.id.slice(object.id.lastIndexOf("l")+1, object.id.lastIndexOf("R"));
+            gcId = 1;
+            break;
+    }    
+    
+    result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[gcId], selId, option);
     if (result == false) {
-        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[0]}, ${rowId}).`);
+        console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[gcid]}, ${selId}, ${option}).`);
         return false;
     }
 
@@ -250,7 +289,7 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
     return [colCount, rowCount];
 }
 
-/* Clear highlighted rows on a dataGridDisplay */
+/* Clear highlighted rows/cols on a dataGridDisplay */
 /* If either colCount or rowCount are ommitted, they will be calculated */
 function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
@@ -281,27 +320,39 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
         for (ii = 0; ii < rowCount; ii++) {
             selectedId = `${dataGridDisplayId}Col${i}RowId${ii}`;
             document.getElementById(selectedId).classList.remove("datagrid-row-selected");
+            document.getElementById(selectedId).classList.remove("datagrid-col-selected");
         }
     }
 
     return true;
 }
 
-/* Highlight a row on a dataGridDisplay */
-function dataGridDisplaySetSelected(dataGridDisplayId, colCount, rowId) {
+/* Highlight a row/col on a dataGridDisplay */
+function dataGridDisplaySetSelected(dataGridDisplayId, count, selId, option) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplaySetSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
     }
 
-    let selectedId;
-
-    for (i = 0; i < colCount; i++) {
-        selectedId = `${dataGridDisplayId}Col${i}RowId${rowId}`;
-        document.getElementById(selectedId).classList.add("datagrid-row-selected");
+    if (option != undefined) {
+        option = option.toLowerCase();
     }
 
-    return true;
+    let selectedId;
+
+    for (i = 0; i < count; i++) {
+        switch (option) {
+            case "row":
+                selectedId = `${dataGridDisplayId}Col${i}RowId${selId}`;
+                break;
+            case "col":
+                selectedId = `${dataGridDisplayId}Col${selId}RowId${i}`;
+                break;
+        }
+        document.getElementById(selectedId).classList.add(`datagrid-${option}-selected`);
+    }
+
+    return `${option}-${selId}`;
 }
 
 /* Remove a dataGridDisplay */

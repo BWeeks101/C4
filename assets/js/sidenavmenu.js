@@ -61,7 +61,7 @@ function mainShow(option) {
             break;
         case "leaderboard":
             dataGridDisplayRemove("lBoard");
-            displayDataGrid(lBoardDG, "lBoard");
+            displayDataGrid(lBoardDG, "lBoard", "off");
             elementDisplay("show", "leaderboardContainer");
             break;
         case "options":

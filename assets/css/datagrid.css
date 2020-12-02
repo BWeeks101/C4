@@ -50,3 +50,7 @@
 .datagrid-row-selected {
     background-color: rgb(236,76,76);
 }
+
+.datagrid-col-selected {
+    background-color: rgb(236,76,76);
+}
