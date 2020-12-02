@@ -80,7 +80,7 @@ function mainShow(option) {
             elementDisplay("show", "menuCreateHotseat");
             break;
         case "starthotseat":
-            elementDisplay("show", "gameBoard");
+            elementDisplay("show", "gameBoardContainer");
             break;
         case "createp2settings":
             elementDisplay("show", "menuCreateP2Settings");

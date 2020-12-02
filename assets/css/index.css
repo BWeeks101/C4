@@ -64,11 +64,35 @@ body {
     text-align: left;
 }
 
+#playerInfoContainer {
+    padding: 20px;
+}
+
+#player1Info {
+    text-align: left;
+}
+
+#player2Info {
+    text-align: right;
+}
+
 .gbTable {
+    border-collapse: separate;
     border: 1px solid #fafafa;
 }
 
 .gbTable .gbRow .gbCol {
     border: 1px solid #fafafa;
     border-radius: 50%;
+    background-color: rgb(45,45,45);
+    width: 45px;
+    height: 45px;
+}
+
+.gbP1 {
+    background-color: rgb(236,76,76);
+}
+
+.gbP2 {
+    background-color: blue;
 }
