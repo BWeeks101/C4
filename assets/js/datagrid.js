@@ -213,7 +213,7 @@ function dataGridAdjustForScrollBars(dataGridDisplayId) {
 /* Replace default onclick function */
 function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
-        console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
+        console.log(`function dataGridDisplaySetOnClick failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
     }
 
