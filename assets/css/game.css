@@ -17,6 +17,7 @@
 
 #gBoardContentContainer {
     border: 1px solid #fafafa;
+    overflow-y: initial;
 }
 
 #gBoardContentRow, #gBoardContentRow .datagrid-content-col, #gBoardContentRow .datagrid-content-row, #gBoardContentRow .datagrid-content-inner-col {
