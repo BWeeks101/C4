@@ -223,6 +223,45 @@ function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
     }    
 }
 
+/* Change default col width */
+/* cols = number value representing the bootstrap column width */
+/* if cols == "" or undefined, then the col class is used by default */
+function dataGridDisplaySetCols(dataGridDisplayId, cols) {
+    if (isNaN(cols) == false && cols != "") {
+        cols = `col-${Math.ceil(cols)}`;
+    } else if (cols == undefined || cols == "") {
+        cols = "col";
+    } else {
+        console.log(`function dataGridDisplaySetCols failed.  Supplied cols (${cols}) is not a number.`);
+        return false;
+    }
+
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+        console.log(`function dataGridDisplaySetCols failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
+        return false;
+    }
+
+    let elementCollection = document.querySelectorAll(`#${dataGridDisplayId}ContentRow .datagrid-content-col`);
+    let bootstrapColClass;
+    for (i = 0; i < elementCollection.length; i++) {
+        for (ii = 0; ii < elementCollection[i].classList.length; ii++) {
+            if (elementCollection[i].classList.item(ii).slice(0, 3) == "col") {
+                if (elementCollection[i].classList.item(ii).length == 3) {
+                    elementCollection[i].classList.remove("col");
+                } else if (elementCollection[i].classList.item(ii).slice(0, 4) == "col-") {
+                    bootstrapColClass = elementCollection[i].classList.item(ii).slice(4, elementCollection[i].classList.item(ii).length);                    
+                    if (isNaN(bootstrapColClass) == true) {
+                        console.log(`${elementCollection[i].id} class="${elementCollection[i].classList.item(ii)}" not a valid Bootstrap Col Class.  Ignoring.`);
+                    } else {
+                        elementCollection[i].classList.remove(`col-${bootstrapColClass}`);
+                    }
+                }
+            }
+        }
+        elementCollection[i].classList.add(cols);
+    }
+}
+
 /* Default dataGrid Display onclick function */
 /* Highlight the selected dataGridDisplay row/col */
 /* returns id of the selected row/col */
