@@ -13,6 +13,8 @@ let gameState = [
 /* Game Board */
 let gBoardHeaders = ["","","","","","",""];
 let gBoardDG = new DataGrid(gBoardHeaders, gameState);
+
+console.log(gBoardDG)
 /* end Game Board */
 
 function gameClicked(object) {

@@ -77,7 +77,7 @@ function DataGrid (headers, content) {
 /* selectOption: OPTIONAL.  Default is ROW. */
 /*                          Options are ROW, COL, OFF */
 /* NOTE: dataGridDisplayId MUST have the datagrid-container class */
-function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
+function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefined) {
 
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function displayDataGrid failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
@@ -91,7 +91,7 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
 
     if (selectOption != undefined) {
         selectOption = selectOption.toLowerCase();
-    }    
+    }
 
     let colCount = dataGrid.colCount;
     let rowCount = dataGrid.rowCount;
@@ -133,6 +133,8 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
     let cColId;
     let cRowId;
     let cOverlayId;
+    
+    let cHtml;
 
     switch (selectOption) {
         case "col":
@@ -168,8 +170,30 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption) {
         for (ii = 0; ii < rowCount; ii++) {
             cRowId = `${dataGridDisplayId}Col${i}RowId${ii}`;
             cOverlayId = `${dataGridDisplayId}OverlayCol${i}Row${ii}`
+            cHtml = contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd;
+            if (dataGrid.content[i][ii] == undefined) {
+                switch (ignoreUndefined) {
+                    case false:
+                        cHtml = cHtml + contentColEnd;
+                        break;
+                    case true:
+                        cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd;
+                        break;
+                    default:
+                        if (typeof ignoreUndefined == "string") {
+                            cHtml = cHtml + ignoreUndefined + contentColEnd;
+                        } else {
+                            cHtml = cHtml + "No Data" + contentColEnd;
+                        }
+                        break;
+                }
+            } else {
+                cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd;
+            }
 
-            document.getElementById(cColId).insertAdjacentHTML('beforeend', contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd);
+            /*contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd*/
+
+            document.getElementById(cColId).insertAdjacentHTML('beforeend', cHtml);
 
             if (ii == 0) {
                 document.getElementById(cRowId).classList.add("datagrid-content-row-first");            

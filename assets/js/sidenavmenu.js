@@ -81,7 +81,7 @@ function mainShow(option) {
             break;
         case "starthotseat":
             dataGridDisplayRemove("gBoard");
-            displayDataGrid(gBoardDG, "gBoard", "col");
+            displayDataGrid(gBoardDG, "gBoard", "col", false);
             dataGridDisplaySetCols("gBoard");
             setupHotseat();
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
