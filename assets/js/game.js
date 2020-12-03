@@ -10,6 +10,11 @@ let gameState = [
     [undefined,undefined,undefined,undefined,undefined,undefined]
 ];
 
+/* Game Board */
+let gBoardHeaders = ["","","","","","",""];
+let gBoardDG = new DataGrid(gBoardHeaders, gameState);
+/* end Game Board */
+
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {        
