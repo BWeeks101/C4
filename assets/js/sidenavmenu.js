@@ -175,6 +175,11 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-canceljoin");
             sideNavSoutSelectShow("sout");
             break;
+        case "starthotseat":
+            sideNavLinkDisplay("show", "sn-ctrlgroup");
+            sideNavLinkDisplay("hide", "sn-concede");
+            sideNavSoutSelectShow("sn-out-mult");
+            break;
         default:
             break;
     }        
