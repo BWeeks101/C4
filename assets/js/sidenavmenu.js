@@ -83,6 +83,7 @@ function mainShow(option) {
             dataGridDisplayRemove("gBoard");
             displayDataGrid(gBoardDG, "gBoard", "col");
             dataGridDisplaySetCols("gBoard");
+            setupHotseat();
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
             elementDisplay("show", "gameBoardContainer");
             break;
