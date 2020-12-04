@@ -83,169 +83,251 @@ function selectCol(object) {
 
 /* Check For Win Condition */
 function checkWin(x, y) {
-    x = parseInt(x);
-    y = parseInt(y);
-
-    console.log(`Col x: ${x}`);
-    console.log(`Row y: ${y}`);
-
     if (completedTurns < 7) {
+        console.log("Game cannot be won in less than 7 turns.  Skipping");
         return false; //Game cannot be won in less than 7 turns
     }
 
-    let tokenCount = 1;
-    //Check right from current position if as long as we are not in the last col
-    if (x < 6) {
-        for (i = x+1; i < 7; i++) {
-            if (gameState[i][y] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Right Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Right Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
-        }        
+    x = parseInt(x);
+    y = parseInt(y);
+
+    //console.log(`Col x: ${x}`);
+    //console.log(`Row y: ${y}`);    
+
+    /* Horizontal Scan */
+    //console.log(`Start Scan Right`);
+    let tokenCount = scanDir("r", x, y);
+    //console.log(`Scan Right Found ${tokenCount} tokens`);
+    if (tokenCount < 4) {
+        //console.log(`Start Scan Left`);
+        tokenCount = scanDir("l", x, y, tokenCount);
+        //console.log(`Scan Left Found ${tokenCount} tokens`);
     }
 
-    //We didn't get a winner yet, so search left from starting position as long as we are not in the first col
-    if (x > 0) {
-        for (i = x-1; i > -1; i--) {
-            if (gameState[i][y] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Left Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Left Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
-        }
+    /* Vertical Scan */
+    if (tokenCount < 4) {
+        //console.log(`Start Scan Down`);
+        tokenCount = scanDir("d", x, y);
+        //console.log(`Scan Down Found ${tokenCount} tokens`);
     }
-    
-    //Still no winner, so reset token count and start looking vertically
-    tokenCount = 1;
 
-    //Check down from current position as long as we are not in the bottom row
-    if (y < 5) {
-        for (i = y+1; i < 6; i++) {
-            if (gameState[x][i] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Down Scan starting at Col: ${x} on Row: ${y}.  Match at Row ${i}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Down Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
+    /* Diagonal Scan, Right/Down, Left/Up */
+    if (tokenCount < 4) {
+        //console.log(`Start Scan Right/Down`);
+        tokenCount = scanDir("rd", x, y);
+        //console.log(`Scan Right/Down Found ${tokenCount} tokens`);
+        if (tokenCount < 4) {
+            //console.log(`Start Scan Left/Up`);
+            tokenCount = scanDir("lu", x, y, tokenCount);
+            //console.log(`Scan Left/Up Found ${tokenCount} tokens`);
         }
     }
 
-    //No point in Up Scan, as we can't insert tokens below existing tokens!
+    /* Diagonal Scan, Left/Down, Right/Up */
+    if (tokenCount < 4) {
+        //console.log(`Start Scan Left/Down`);
+        tokenCount = scanDir("ld", x, y);
+        //console.log(`Scan Left/Down Found ${tokenCount} tokens`);
+        if (tokenCount < 4) {
+            //console.log(`Start Scan Right/Up`);
+            tokenCount = scanDir("ru", x, y, tokenCount);
+            //console.log(`Scan Right/Up Found ${tokenCount} tokens`);
+        }
+    }
 
-    //Still no winner, so reset token count and start looking diagonally
-    tokenCount = 1;
+    //console.log(`Counted ${tokenCount} tokens`);
+    if (tokenCount == 4) {
+        //console.log(`Win for P${activePlayer}`);
+        return activePlayer;
+    } else {
+        //console.log(`No Winner Yet`);
+        return false;
+    }    
+}
+
+function scanDir(scanDir, startX, startY, tokenCount) {
+    x = parseInt(startX);
+    y = parseInt(startY);
+    if (tokenCount == undefined) {
+        tokenCount = 1;        
+    } else {
+        tokenCount = parseInt(tokenCount);
+    }
+
+    let i;
     let ii;
-    console.log("Start Diagonal Search");
+    let brk;
+    let dBrk;
+    let mod;
+    let dMod;
+    let inc = 1;
+    let dec = -1;
+    let scanDesc;
+    let val;
 
-    //Check Right and Down from current position, as long as we are not in the bottom row or the last column
-    if (x < 6 && y < 5) {
-        ii = y+1;
-        for (i = x+1; i < 6; i++) {
-            console.log(`Move To Col ${i}, Row ${ii}`);
-            if (gameState[i][ii] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Right/Down Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}, Row ${ii}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Right/Down Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
+    //console.log(`Prepping Scan Values`)
+    switch (scanDir) {
+        case "r":
+            if (x < 6) {
+                scanDesc = "Right";
+                i = x+1;
+                brk = 7;
+                mod = inc;
+            } else {
+                //console.log(`Right Scan Aborted.  Rightmost Col Selected (${x})`);
+                return tokenCount;
+            }
+            break;
+        case "l":
+            if (x > 0) {
+                scanDesc = "Left";
+                i = x-1;
+                brk = -1;
+                mod = dec;
+            } else {
+                //console.log(`Left Scan Aborted.  Leftmost Col Selected (${x})`);
+                return tokenCount;
+            }
+            break;
+        case "d":
+            if (y < 5) {
+                scanDesc = "Down";
+                i = y+1;
+                brk = 6;
+                mod = inc;
+            } else {
+                //console.log(`Down Scan Aborted.  Token in Bottom Row (${y})`);
+                return tokenCount;
+            }
+            break;
+        case "rd":
+            if (x < 6 && y < 5) {
+                scanDesc = "Right/Down";
+                i = x+1;
+                ii = y+1;
+                brk = 7;
+                dBrk = 6;
+                mod = inc;
+                dMod = inc;
+            } else {
+                /*
+                if (x > 5) {
+                    console.log(`Right/Down Scan Aborted.  Rightmost Col Selected (${x})`);
                 }
-            } else {
-                break;
+                if (y > 4) {
+                    console.log(`Right/Down Scan Aborted.  Token in Bottom Row (${y})`);
+                }
+                */               
+                return tokenCount;
             }
-            if (ii < 5) {
-                ii = ii+1;
+            break;
+        case "lu":
+            if (x > 0 && y > 0) {
+                scanDesc = "Left/Up";
+                i = x-1;
+                ii = y-1;
+                brk = -1;
+                dBrk = -1;
+                mod = dec;
+                dMod = dec;
             } else {
-                break;
+                /*
+                if (x < 1) {
+                    console.log(`Left/Up Scan Aborted.  Leftmost Col Selected (${x})`);
+                }
+                if (y < 1) {
+                    console.log(`Left/Up Scan Aborted.  Token in Top Row (${y})`);
+                }
+                */               
+                return tokenCount;
             }
+            break;
+        case "ld":
+            if (x > 0 && y < 5) {
+                scanDesc = "Left/Down";
+                i = x-1;
+                ii = y+1;
+                brk = -1;
+                dBrk = 6;
+                mod = dec;
+                dMod = inc;
+            } else {
+                /*
+                if (x < 1) {
+                    console.log(`Left/Down Scan Aborted.  Leftmost Col Selected (${x})`);
+                }
+                if (y > 4) {
+                    console.log(`Left/Down Scan Aborted.  Token in Bottom Row (${y})`);
+                }
+                */               
+                return tokenCount;
+            }
+            break;
+        case "ru":
+            if (x < 6 && y > 0) {
+                scanDesc = "Right/Up";
+                i = x+1;
+                ii = y-1;
+                brk = 7;
+                dBrk = -1;
+                mod = inc;
+                dMod = dec;
+            } else {
+                /*
+                if (x > 5) {
+                    console.log(`Right/Up Scan Aborted.  Rightmost Col Selected (${x})`);
+                }
+                if (y < 1) {
+                    console.log(`Right/Up Scan Aborted.  Token in Top Row (${y})`);
+                }
+                */               
+                return tokenCount;
+            }
+            break;
+    }
+
+    //console.log(`Starting For Loop`);
+    //console.log(`${i}, ${ii}, ${brk}, ${dBrk}, ${mod}, ${dMod}`);
+    for (i;;i = i+mod) {
+        if (i == brk) {
+            //console.log (`i(${i}) == brk(${brk})`);
+            break;
+        } else if (ii != undefined && ii == dBrk) {
+            //console.log (`ii(${ii}) == dBrk(${dBrk})`);
+            break;
+        }
+
+        switch (scanDir) {
+            case "r":
+            case "l":
+                val = gameState[i][y];
+                break;
+            case "d":
+                val = gameState[x][i];
+                break;
+            case "rd":
+            case "lu":
+            case "ld":
+            case "ru":
+                val = gameState[i][ii];
+                break;                
+        }
+        //console.log(`value: ${val}`);
+        if (val == activePlayer) {            
+            tokenCount++;            
+            //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}.  Count: ${tokenCount}.`);
+            if (tokenCount == 4) {
+                //console.log(`${scanDesc} Scan from Col: ${x} on Row: ${y}`);
+                return tokenCount;
+            }
+        } else {
+            break;
+        }
+
+        if (ii != undefined) {
+            ii = ii+dMod;
         }
     }
 
-    //We didn't get a winner yet, so check Left and Up from current position, as long as we are not in the top row or the first column
-    if (x > 0 && y > 0) {
-        ii = y-1;
-        for (i = x-1; i > -1; i--) {
-            console.log(`Move To Col ${i}, Row ${ii}`);
-            if (gameState[i][ii] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Left/Up Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}, Row ${ii}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Left/Up Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
-            if (ii > -1) {
-                ii = ii-1;
-            } else {
-                break;
-            }
-        }
-    }
-
-    //still no winner, so reset token count and start looking diagonally in the opposite directions
-    tokenCount = 1;
-
-    //We didn't get a winner yet, so check Left and Down from current position, as long as we are not in the bottom row or the first column
-    if (x > 0 && y < 5) {
-        ii = y+1;
-        for (i = x-1; i > -1; i--) {
-            console.log(`Move To Col ${i}, Row ${ii}`);
-            if (gameState[i][ii] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Left/Down Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}, Row ${ii}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Left/Down Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
-            if (ii < 5) {
-                ii = ii+1;
-            } else {
-                break;
-            }
-        }
-    }
-
-    //We didn't get a winner yet, so check Right and Up from current position, as long as we are not in the top row or the last column
-    if (x < 6 && y > 0) {
-        ii = y-1;
-        for (i = x+1; i < 6; i++) {
-            console.log(`Move To Col ${i}, Row ${ii}`);
-            if (gameState[i][ii] == activePlayer) {                
-                tokenCount = tokenCount+1;
-                console.log(`MATCH on Player ${activePlayer}.  Right/Up Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}, Row ${ii}.  Count: ${tokenCount}.`);
-                if (tokenCount == 4) {
-                    console.log(`Right/Up Scan from Col: ${x} on Row: ${y}`);
-                    return activePlayer;
-                }
-            } else {
-                break;
-            }
-            if (ii > -1) {
-                ii = ii-1;
-            } else {
-                break;
-            }
-        }
-    }
-
-    return false;
+    return tokenCount;
 }
