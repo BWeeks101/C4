@@ -50,3 +50,13 @@
 .gbP2 {
     background-color: blue;
 }
+
+.winner-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    z-index: 800;
+
+    background-color: rgb(45,45,45);
+}

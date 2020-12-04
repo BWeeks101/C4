@@ -17,26 +17,82 @@ let gBoardDG = new DataGrid(gBoardHeaders, gameState);
 
 function gameClicked(object) {
     //Only Fire on Single Click!
-    if (event.detail == 1) {        
-        done = selectCol(object);
-        if (done != false) {
-            console.log(`P${activePlayer} Wins!`);
+    if (event.detail == 1) {
+        if (document.getElementById("winnerPopup").classList.contains("d-none") == false) {
+            return;
+        } else {
+            done = selectCol(object);
+            if (done != false) {
+                console.log(`P${activePlayer} Wins!`);
+                winnerPopup();
+            } else if (completedTurns == 42) {
+                console.log("draw");
+                winnerPopup("draw");
+            }
+            switchPlayer();
         }
-        if (completedTurns == 42) {
-            console.log("draw");
-        }
-        switchPlayer();
     }
     
 }
 
-function setupHotseat() {
+function winnerPopup(result) {
+    if (result == "draw") {
+        document.getElementById("winnerPopupText").innerHTML = "<h2>Draw!</h2>";
+        document.getElementById("winnerPopupText").style.color = "#fafafa";
+    } else {
+        document.getElementById("winnerPopupText").innerHTML = `<h2>P${activePlayer} Wins!</h2>`;
+        switch (activePlayer) {
+            case 1:
+                document.getElementById("winnerPopupText").style.color = "rgb(236,76,76)";
+                break;
+            case 2:
+                document.getElementById("winnerPopupText").style.color = "blue";
+                break;
+        }
+    }
+    
+    elementDisplay("show", "winnerPopup");
+}
+
+function refreshHotseat() {
+    elementDisplay("hide", "winnerPopup");
+    clearGameState();
     resetTurnCount();
-    switchPlayer();
+    getActivePlayer();
+}
+
+function clearGameState() {
+    let i = gameState.length;
+    let ii;
+
+    for (i = 0; i < gameState.length; i++) {
+        for (ii = 0; ii < gameState[i].length; ii++) {
+            gameState[i][ii] = undefined;
+        }
+    }
+
+    console.log(gameState);
+    console.log(gBoardDG);
 }
 
 function resetTurnCount() {
     completedTurns = 0;
+}
+
+function getActivePlayer() {
+    switch (activePlayer) {
+        case 1:
+            document.getElementById("player1Info").style.color = "rgb(236,76,76)";
+            document.getElementById("player2Info").style.color = "#fafafa";
+            break;
+        case 2:
+            document.getElementById("player2Info").style.color = "blue";
+            document.getElementById("player1Info").style.color = "#fafafa";
+            break;
+        default:
+            switchActivePlayer();
+            break;
+    }
 }
 
 function switchPlayer() {

@@ -80,10 +80,10 @@ function mainShow(option) {
             elementDisplay("show", "menuCreateHotseat");
             break;
         case "starthotseat":
+            refreshHotseat();
             dataGridDisplayRemove("gBoard");
             displayDataGrid(gBoardDG, "gBoard", "col", false);
-            dataGridDisplaySetCols("gBoard");
-            setupHotseat();
+            dataGridDisplaySetCols("gBoard");            
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
             elementDisplay("show", "gameBoardContainer");
             break;
