@@ -76,13 +76,11 @@ function stopHotseat() {
 
 function startTurnTimer() {
     document.getElementById("turnTimeLimit").innerHTML = `${turnTimeLimit}`;
-    console.log(`Set Timer Counter Initial: ${document.getElementById("turnTimeLimit").innerHTML}`);
     activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function updateTurnTimer() {
     timerVal = parseInt(document.getElementById("turnTimeLimit").innerHTML);
-    console.log(`Read Timer Counter Current Value: ${timerVal}`);
     if (timerVal > 0) {
         document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
     } else {
@@ -181,12 +179,8 @@ function selectRandCol() {
             colArray.push(i);
         }
     }
-
-    console.log(colArray);
     
     let col = colArray[Math.floor((Math.random() * colArray.length))];
-
-    console.log(col);
 
     for (i = 5; i > -1; i--) {
         if (gameState[i][col] == undefined) {
