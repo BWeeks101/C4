@@ -90,10 +90,12 @@ function updateTurnTimer() {
             console.log(`P${activePlayer} Wins!`);
             winnerPopup();
             stopTurnTimer();
+            return;
         } else if (completedTurns == 42) {
             console.log("draw");
             winnerPopup("draw");
             stopTurnTimer();
+            return;
         }
         switchPlayer();
         restartTurnTimer();
