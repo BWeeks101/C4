@@ -233,6 +233,14 @@ function createGameP2Settings() {
     show("createsetturntime", state);
 }
 
+function refreshGameBoard() {
+    switch (state) {
+        case "createhotseat":
+            mainShow("starthotseat");
+            break;
+    }
+}
+
 function radioGroupGetValue(option) {
     let elementCollection = document.getElementsByName(option);
     let i;
