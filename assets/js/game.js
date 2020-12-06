@@ -32,12 +32,14 @@ function gameClicked(object) {
                 winnerPopup("draw");
             }
             switchPlayer();
+            restartTurnTimer();
         }
     }
     
 }
 
 function winnerPopup(result) {
+    stopTurnTimer();
     if (result == "draw") {
         document.getElementById("winnerPopupText").innerHTML = "<h2>Draw!</h2>";
         document.getElementById("winnerPopupText").style.color = "#fafafa";
@@ -51,7 +53,7 @@ function winnerPopup(result) {
                 document.getElementById("winnerPopupText").style.color = "blue";
                 break;
         }
-    }
+    } 
     
     elementDisplay("show", "winnerPopup");
 }
@@ -74,20 +76,40 @@ function stopHotseat() {
 
 function startTurnTimer() {
     document.getElementById("turnTimeLimit").innerHTML = `${turnTimeLimit}`;
+    console.log(`Set Timer Counter Initial: ${document.getElementById("turnTimeLimit").innerHTML}`);
     activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function updateTurnTimer() {
     timerVal = parseInt(document.getElementById("turnTimeLimit").innerHTML);
+    console.log(`Read Timer Counter Current Value: ${timerVal}`);
     if (timerVal > 0) {
         document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
     } else {
-        console.log(`P${activePlayer} Missed Turn`)
+        console.log(`P${activePlayer} Missed Turn - selecting random column`)
+        done = selectRandCol();
+        if (done != false) {
+            console.log(`P${activePlayer} Wins!`);
+            winnerPopup();
+            stopTurnTimer();
+        } else if (completedTurns == 42) {
+            console.log("draw");
+            winnerPopup("draw");
+            stopTurnTimer();
+        }
+        switchPlayer();
+        restartTurnTimer();
     }    
 }
 
 function stopTurnTimer() {
     clearInterval(activeTurnTimer);
+    document.getElementById("turnTimeLimit").innerHTML = ``;
+}
+
+function restartTurnTimer() {
+    stopTurnTimer();
+    startTurnTimer();
 }
 
 function clearGameState() {
@@ -152,8 +174,38 @@ function switchActivePlayer() {
     }
 }
 
+function selectRandCol() {
+    let colArray = [];
+    for (i = 0; i < 7; i++) {
+        if (gameState[0][i] == undefined) {
+            colArray.push(i);
+        }
+    }
+
+    console.log(colArray);
+    
+    let col = colArray[Math.floor((Math.random() * colArray.length))];
+
+    console.log(col);
+
+    for (i = 5; i > -1; i--) {
+        if (gameState[i][col] == undefined) {
+            gameState[i][col] = activePlayer;
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstChild.lastChild.classList.add(`gbP${activePlayer}`);
+            completedTurns = completedTurns + 1;
+            console.log(`Col: ${col}, Row: ${i}`);
+            winner = checkWin(col, i);
+            return winner;
+        }
+    }
+
+    return false;
+}
+
 function selectCol(object) {
     let result = dataGridDisplayClicked(object, "col");
+    console.log(result);
+    console.log(object);
 
     for (i = result[1]; i > 0; i--) {
         if (gameState[result[2]][i-1] == undefined) {
