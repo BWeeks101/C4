@@ -1,5 +1,7 @@
 let activePlayer;
 let completedTurns = 0;
+let turnTimeLimit = 30;
+let activeTurnTimer;
 let gameState = [
     [undefined,undefined,undefined,undefined,undefined,undefined],
     [undefined,undefined,undefined,undefined,undefined,undefined],
@@ -55,10 +57,37 @@ function winnerPopup(result) {
 }
 
 function refreshHotseat() {
+    stopTurnTimer();
     elementDisplay("hide", "winnerPopup");
     clearGameState();
     resetTurnCount();
     getActivePlayer();
+    startTurnTimer();
+}
+
+function stopHotseat() {
+    stopTurnTimer();
+    elementDisplay("hide", "winnerPopup");
+    clearGameState();
+    resetTurnCount();
+}
+
+function startTurnTimer() {
+    document.getElementById("turnTimeLimit").innerHTML = `${turnTimeLimit}`;
+    activeTurnTimer = setInterval(updateTurnTimer, 1000);
+}
+
+function updateTurnTimer() {
+    timerVal = parseInt(document.getElementById("turnTimeLimit").innerHTML);
+    if (timerVal > 0) {
+        document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
+    } else {
+        console.log(`P${activePlayer} Missed Turn`)
+    }    
+}
+
+function stopTurnTimer() {
+    clearInterval(activeTurnTimer);
 }
 
 function clearGameState() {

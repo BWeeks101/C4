@@ -207,6 +207,11 @@ function signOut() {
     switch (state) {
         case "joingame":
             dataGridDisplayRemove("gameList");
+            break;
+        case "createhotseat":
+            dataGridDisplayRemove("gBoard");
+            stopHotseat();
+            break;
     }
 
     show("default", "default");
@@ -252,6 +257,7 @@ function radioGroupGetValue(option) {
 }
 
 function startGame() {
+    setTurnTimeLimit()
     switch (state) {
         case "createhotseat":
             show("starthotseat");
@@ -263,6 +269,10 @@ function startGame() {
             show("startsingle");
             break;
     }
+}
+
+function setTurnTimeLimit() {
+    turnTimeLimit = document.getElementById("turnTime").value;
 }
 
 function createGameNextButton(value) {
