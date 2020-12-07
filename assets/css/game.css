@@ -75,7 +75,7 @@
     animation-iteration-count: infinite;
 }
 
-.winner-popup {
+.feedback-container {
     display: flex;
     flex-direction: column;
     justify-content: center;

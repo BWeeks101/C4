@@ -66,7 +66,7 @@
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
                     <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" onclick="pauseGame()" href="#">Pause</a>
                     <a id="ctrlResumeLink" class="sn-ctrlgroup sn-pause-reset d-none" onclick="resumeGame()" href="#">Resume</a>
-                    <a id="ctrlResetLink" class="sn-ctrlgroup sn-pause-reset" href="#">Reset</a>
+                    <a id="ctrlResetLink" class="sn-ctrlgroup sn-pause-reset" href="#" onclick="resetGame()">Reset</a>
                     <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider sn-pause-reset">
                     <a id="concedeLink" class="sn-ctrlgroup sn-concede" href="#">Concede</a>                
                     <hr id="concedeDivider" class="sn-ctrlgroup sn-concede sidenav-divider">
@@ -125,11 +125,11 @@
                     <div class="datagrid-container" id="gBoard">
                         <!--Create GameBoard Here-->
                     </div>
-                    <div class="winner-popup d-none" id="winnerPopup">
-                        <div class="popup-messge" id="winnerPopupText">
+                    <div class="feedback-container d-none" id="feedbackContainer">
+                        <div class="feedback-message" id="feedbackMessage">
                             <!--Winner Message Here-->
                         </div>
-                        <div class="row winner-popup-control-row">
+                        <div class="row feedback-control-row">
                             <div class="col">
                                 <button onclick="refreshGameBoard()">Rematch</button>
                             </div>
@@ -137,7 +137,7 @@
                                 <button>Continue</button>
                             </div>
                         </div>
-                    </div>                                        
+                    </div>
                 </div>
             </div>
         </div>

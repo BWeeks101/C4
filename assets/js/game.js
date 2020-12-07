@@ -20,7 +20,7 @@ let gBoardDG = new DataGrid(gBoardHeaders, gameState);
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {
-        if (document.getElementById("winnerPopup").classList.contains("d-none") == false || document.getElementById("ctrlPauseLink").classList.contains("d-none") == true) {
+        if (document.getElementById("feedbackContainer").classList.contains("d-none") == false || document.getElementById("ctrlPauseLink").classList.contains("d-none") == true) {
             return;
         } else {
             parseColSelection(selectCol(object));
@@ -28,28 +28,28 @@ function gameClicked(object) {
     }    
 }
 
-function winnerPopup(result) {
+function feedbackWinner(result) {
     stopTurnTimer();
     if (result == "draw") {
-        document.getElementById("winnerPopupText").innerHTML = "<h2>Draw!</h2>";
-        document.getElementById("winnerPopupText").style.color = "#fafafa";
+        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>";
+        document.getElementById("feedbackMessage").style.color = "#fafafa";
     } else {
-        document.getElementById("winnerPopupText").innerHTML = `<h2>P${activePlayer} Wins!</h2>`;
+        document.getElementById("feedbackMessage").innerHTML = `<h2>P${activePlayer} Wins!</h2>`;
         switch (activePlayer) {
             case 1:
-                document.getElementById("winnerPopupText").style.color = "rgb(236,76,76)";
+                document.getElementById("feedbackMessage").style.color = "rgb(236,76,76)";
                 break;
             case 2:
-                document.getElementById("winnerPopupText").style.color = "blue";
+                document.getElementById("feedbackMessage").style.color = "blue";
                 break;
         }
     }     
-    elementDisplay("show", "winnerPopup");
+    elementDisplay("show", "feedbackContainer");
 }
 
 function refreshHotseat() {
     stopTurnTimer();
-    elementDisplay("hide", "winnerPopup");
+    elementDisplay("hide", "feedbackContainer");
     clearGameState();
     resetTurnCount();
     getActivePlayer();
@@ -58,7 +58,7 @@ function refreshHotseat() {
 
 function stopHotseat() {
     stopTurnTimer();
-    elementDisplay("hide", "winnerPopup");
+    elementDisplay("hide", "feedbackContainer");
     clearGameState();
     resetTurnCount();
 }
@@ -202,11 +202,11 @@ function selectCol(object) {
 function parseColSelection(result) {
     if (result != false) {
         //console.log(`P${activePlayer} Wins!`);
-        winnerPopup();
+        feedbackWinner();
         return true;
     } else if (completedTurns == 42) {
         //console.log("draw");
-        winnerPopup("draw");
+        feedbackWinner("draw");
         return true;
     }
     switchPlayer();  

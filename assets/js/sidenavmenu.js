@@ -261,6 +261,7 @@ function pauseGame() {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()});
             pauseTurnTimer();
+            break;
     }
 }
 
@@ -269,6 +270,15 @@ function resumeGame() {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()});
             resumeTurnTimer();
+            break;
+    }
+}
+
+function resetGame() {
+    switch (state) {
+        case "createhotseat":
+            checkSideNavState(function(){refreshGameBoard()});
+            break;
     }
 }
 
