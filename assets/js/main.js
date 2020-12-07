@@ -18,28 +18,28 @@ let lBoardgridtestarray = [lBoardfirstcol, lBoardsecondcol, lBoardthirdcol];
 let lBoardDG = new DataGrid(lBoardHeaders, lBoardgridtestarray);
 /* End Dummy Data for Leaderboard */
 
-/* Global 'state' variable */
-//let state;
+/* Global settings object*/
+class appGlobals {
+    constructor() {
+        this.activePlayer;
+        this.completedTurns = 0;
+        this.turnTimeLimit = 30;
+        this.activeTurnTimer;
+        this.gameState = [
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined],
+            [undefined, undefined, undefined, undefined, undefined, undefined]
+        ];
+    }
+}
 
 let c4 = new appGlobals();
 
 $(document).ready(mainOnLoad);
-
-function appGlobals() {
-    this.activePlayer;
-    this.completedTurns = 0;
-    this.turnTimeLimit = 30;
-    this.activeTurnTimer;
-    this.gameState = [
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined],
-        [undefined,undefined,undefined,undefined,undefined,undefined]
-    ];
-}
 
 function mainOnLoad() {
     c4.state = "default";
