@@ -25,8 +25,7 @@ function gameClicked(object) {
         } else {
             parseColSelection(selectCol(object));
         }
-    }
-    
+    }    
 }
 
 function winnerPopup(result) {
@@ -44,8 +43,7 @@ function winnerPopup(result) {
                 document.getElementById("winnerPopupText").style.color = "blue";
                 break;
         }
-    } 
-    
+    }     
     elementDisplay("show", "winnerPopup");
 }
 
@@ -78,21 +76,6 @@ function updateTurnTimer() {
         console.log(`P${activePlayer} Missed Turn - selecting random column`)
         parseColSelection(selectRandCol());
     }    
-}
-
-function parseColSelection(result) {
-    if (result != false) {
-        //console.log(`P${activePlayer} Wins!`);
-        winnerPopup();
-        return true;
-    } else if (completedTurns == 42) {
-        //console.log("draw");
-        winnerPopup("draw");
-        return true;
-    }
-    switchPlayer();  
-    restartTurnTimer();
-    return false;
 }
 
 function stopTurnTimer() {
@@ -154,16 +137,16 @@ function switchPlayer() {
 }
 
 function switchActivePlayer() {
-        switch (activePlayer) {
-        case 1:
-            activePlayer = 2;
-            break;
-        case 2:
-            activePlayer = 1;
-            break;
-        default:
-            activePlayer = 1;
-            break;
+    switch (activePlayer) {
+    case 1:
+        activePlayer = 2;
+        break;
+    case 2:
+        activePlayer = 1;
+        break;
+    default:
+        activePlayer = 1;
+        break;
     }
 }
 
@@ -189,7 +172,6 @@ function selectRandCol() {
             return winner;
         }
     }
-
     return false;
 }
 
@@ -207,6 +189,21 @@ function selectCol(object) {
             return winner;
         }
     }
+}
+
+function parseColSelection(result) {
+    if (result != false) {
+        //console.log(`P${activePlayer} Wins!`);
+        winnerPopup();
+        return true;
+    } else if (completedTurns == 42) {
+        //console.log("draw");
+        winnerPopup("draw");
+        return true;
+    }
+    switchPlayer();  
+    restartTurnTimer();
+    return false;
 }
 
 /* Check For Win Condition */
@@ -273,11 +270,18 @@ function checkWin(x, y) {
     //console.log(`Counted ${tokenCount} tokens`);
     if (tokenCount == 4) {
         //console.log(`Win for P${activePlayer}`);
+        highlightWinningCells(results);
         return activePlayer;
     } else {
         //console.log(`No Winner Yet`);
         return false;
     }    
+}
+
+function highlightWinningCells(results) {
+    for (i = 1; i < 5; i++) {
+        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstChild.lastChild.classList.add(`highlightP${activePlayer}`);
+    }
 }
 
 function scanDir(scanDir, startX, startY, results) {
@@ -489,6 +493,5 @@ function scanDir(scanDir, startX, startY, results) {
             ii = ii+dMod;
         }
     }
-
     return results;
 }
