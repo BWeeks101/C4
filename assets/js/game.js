@@ -23,18 +23,7 @@ function gameClicked(object) {
         if (document.getElementById("winnerPopup").classList.contains("d-none") == false) {
             return;
         } else {
-            done = selectCol(object);
-            if (done != false) {
-                console.log(`P${activePlayer} Wins!`);
-                winnerPopup();
-                return;
-            } else if (completedTurns == 42) {
-                console.log("draw");
-                winnerPopup("draw");
-                return;
-            }
-            switchPlayer();
-            restartTurnTimer();
+            parseColSelection(selectCol(object));
         }
     }
     
@@ -87,19 +76,23 @@ function updateTurnTimer() {
         document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
     } else {
         console.log(`P${activePlayer} Missed Turn - selecting random column`)
-        done = selectRandCol();
-        if (done != false) {
-            console.log(`P${activePlayer} Wins!`);
-            winnerPopup();
-            return;
-        } else if (completedTurns == 42) {
-            console.log("draw");
-            winnerPopup("draw");
-            return;
-        }
-        switchPlayer();  
-        restartTurnTimer();
+        parseColSelection(selectRandCol());
     }    
+}
+
+function parseColSelection(result) {
+    if (result != false) {
+        //console.log(`P${activePlayer} Wins!`);
+        winnerPopup();
+        return true;
+    } else if (completedTurns == 42) {
+        //console.log("draw");
+        winnerPopup("draw");
+        return true;
+    }
+    switchPlayer();  
+    restartTurnTimer();
+    return false;
 }
 
 function stopTurnTimer() {
