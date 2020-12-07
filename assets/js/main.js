@@ -1,6 +1,3 @@
-/* Global 'state' variable */
-let state;
-
 /* Dummy Data for Join Game List */
 let gameListheaders = ["Turn Time Limit", "Host", "Leaderboard Position"];
 let gameListfirstcol = ["25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s"];
@@ -21,10 +18,31 @@ let lBoardgridtestarray = [lBoardfirstcol, lBoardsecondcol, lBoardthirdcol];
 let lBoardDG = new DataGrid(lBoardHeaders, lBoardgridtestarray);
 /* End Dummy Data for Leaderboard */
 
+/* Global 'state' variable */
+//let state;
+
+let c4 = new appGlobals();
+
 $(document).ready(mainOnLoad);
 
+function appGlobals() {
+    this.activePlayer;
+    this.completedTurns = 0;
+    this.turnTimeLimit = 30;
+    this.activeTurnTimer;
+    this.gameState = [
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined],
+        [undefined,undefined,undefined,undefined,undefined,undefined]
+    ];
+}
+
 function mainOnLoad() {
-    state = "default";
+    c4.state = "default";
     sideNavOnLoad();    
     elementDisplay("toggle","menuBlockContainer");
     mainOnResize();

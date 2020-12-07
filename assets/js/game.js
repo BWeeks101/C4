@@ -1,3 +1,4 @@
+/*
 let activePlayer;
 let completedTurns = 0;
 let turnTimeLimit = 30;
@@ -11,10 +12,11 @@ let gameState = [
     [undefined,undefined,undefined,undefined,undefined,undefined],
     [undefined,undefined,undefined,undefined,undefined,undefined]
 ];
+*/
 
 /* Game Board */
 let gBoardHeaders = ["","","","","","",""];
-let gBoardDG = new DataGrid(gBoardHeaders, gameState);
+let gBoardDG = new DataGrid(gBoardHeaders, c4.gameState);
 /* end Game Board */
 
 function gameClicked(object) {
@@ -34,8 +36,8 @@ function feedbackWinner(result) {
         document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>";
         document.getElementById("feedbackMessage").style.color = "#fafafa";
     } else {
-        document.getElementById("feedbackMessage").innerHTML = `<h2>P${activePlayer} Wins!</h2>`;
-        switch (activePlayer) {
+        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.activePlayer} Wins!</h2>`;
+        switch (c4.activePlayer) {
             case 1:
                 document.getElementById("feedbackMessage").style.color = "rgb(236,76,76)";
                 break;
@@ -64,8 +66,8 @@ function stopHotseat() {
 }
 
 function startTurnTimer() {
-    document.getElementById("turnTimeLimit").innerHTML = `${turnTimeLimit}`;
-    activeTurnTimer = setInterval(updateTurnTimer, 1000);
+    document.getElementById("turnTimeLimit").innerHTML = `${c4.turnTimeLimit}`;
+    c4.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function updateTurnTimer() {
@@ -73,21 +75,21 @@ function updateTurnTimer() {
     if (timerVal > 0) {
         document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
     } else {
-        //console.log(`P${activePlayer} Missed Turn - selecting random column`)
+        //console.log(`P${c4.activePlayer} Missed Turn - selecting random column`)
         parseColSelection(selectRandCol());
     }    
 }
 
 function pauseTurnTimer() {
-    clearInterval(activeTurnTimer);
+    clearInterval(c4.activeTurnTimer);
 }
 
 function resumeTurnTimer() {
-    activeTurnTimer = setInterval(updateTurnTimer, 1000);
+    c4.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function stopTurnTimer() {
-    clearInterval(activeTurnTimer);
+    clearInterval(c4.activeTurnTimer);
     document.getElementById("turnTimeLimit").innerHTML = ``;
 }
 
@@ -97,25 +99,25 @@ function restartTurnTimer() {
 }
 
 function clearGameState() {
-    let i = gameState.length;
+    let i = c4.gameState.length;
     let ii;
 
-    for (i = 0; i < gameState.length; i++) {
-        for (ii = 0; ii < gameState[i].length; ii++) {
-            gameState[i][ii] = undefined;
+    for (i = 0; i < c4.gameState.length; i++) {
+        for (ii = 0; ii < c4.gameState[i].length; ii++) {
+            c4.gameState[i][ii] = undefined;
         }
     }
 
-    //console.log(gameState);
+    //console.log(c4.gameState);
     //console.log(gBoardDG);
 }
 
 function resetTurnCount() {
-    completedTurns = 0;
+    c4.completedTurns = 0;
 }
 
 function getActivePlayer() {
-    switch (activePlayer) {
+    switch (c4.activePlayer) {
         case 1:
             document.getElementById("player1Info").style.color = "rgb(236,76,76)";
             document.getElementById("player2Info").style.color = "#fafafa";
@@ -132,7 +134,7 @@ function getActivePlayer() {
 
 function switchPlayer() {
     switchActivePlayer();
-    switch (activePlayer) {
+    switch (c4.activePlayer) {
         case 1:
             document.getElementById("player1Info").style.color = "rgb(236,76,76)";
             document.getElementById("player2Info").style.color = "#fafafa";
@@ -145,15 +147,15 @@ function switchPlayer() {
 }
 
 function switchActivePlayer() {
-    switch (activePlayer) {
+    switch (c4.activePlayer) {
     case 1:
-        activePlayer = 2;
+        c4.activePlayer = 2;
         break;
     case 2:
-        activePlayer = 1;
+        c4.activePlayer = 1;
         break;
     default:
-        activePlayer = 1;
+        c4.activePlayer = 1;
         break;
     }
 }
@@ -161,7 +163,7 @@ function switchActivePlayer() {
 function selectRandCol() {
     let colArray = [];
     for (i = 0; i < 7; i++) {
-        if (gameState[i][0] == undefined) {
+        if (c4.gameState[i][0] == undefined) {
             colArray.push(i);
         }
     }
@@ -171,10 +173,10 @@ function selectRandCol() {
     //console.log(col);
 
     for (i = 5; i > -1; i--) {
-        if (gameState[col][i] == undefined) {
-            gameState[col][i] = activePlayer;
-            document.getElementById(`gBoardCol${col}RowId${i}`).firstChild.lastChild.classList.add(`gbP${activePlayer}`);
-            completedTurns = completedTurns + 1;
+        if (c4.gameState[col][i] == undefined) {
+            c4.gameState[col][i] = c4.activePlayer;
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstChild.lastChild.classList.add(`gbP${c4.activePlayer}`);
+            c4.completedTurns++;
             //console.log(`Col: ${col}, Row: ${i}`);
             winner = checkWin(col, i);
             return winner;
@@ -189,10 +191,10 @@ function selectCol(object) {
     //console.log(object);
 
     for (i = result[1]; i > 0; i--) {
-        if (gameState[result[2]][i-1] == undefined) {
-            gameState[result[2]][i-1] = activePlayer;
-            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstChild.lastChild.classList.add(`gbP${activePlayer}`);
-            completedTurns = completedTurns + 1;
+        if (c4.gameState[result[2]][i-1] == undefined) {
+            c4.gameState[result[2]][i-1] = c4.activePlayer;
+            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstChild.lastChild.classList.add(`gbP${c4.activePlayer}`);
+            c4.completedTurns++;
             winner = checkWin(result[2], i-1);
             return winner;
         }
@@ -201,10 +203,10 @@ function selectCol(object) {
 
 function parseColSelection(result) {
     if (result != false) {
-        //console.log(`P${activePlayer} Wins!`);
+        //console.log(`P${c4.activePlayer} Wins!`);
         feedbackWinner();
         return true;
-    } else if (completedTurns == 42) {
+    } else if (c4.completedTurns == 42) {
         //console.log("draw");
         feedbackWinner("draw");
         return true;
@@ -216,7 +218,7 @@ function parseColSelection(result) {
 
 /* Check For Win Condition */
 function checkWin(x, y) {
-    if (completedTurns < 7) {
+    if (c4.completedTurns < 7) {
         //console.log("Game cannot be won in less than 7 turns.  Skipping");
         return false; //Game cannot be won in less than 7 turns
     }
@@ -277,9 +279,9 @@ function checkWin(x, y) {
 
     //console.log(`Counted ${tokenCount} tokens`);
     if (tokenCount == 4) {
-        //console.log(`Win for P${activePlayer}`);
+        //console.log(`Win for P${c4.activePlayer}`);
         highlightWinningCells(results);
-        return activePlayer;
+        return c4.activePlayer;
     } else {
         //console.log(`No Winner Yet`);
         return false;
@@ -288,7 +290,7 @@ function checkWin(x, y) {
 
 function highlightWinningCells(results) {
     for (i = 1; i < 5; i++) {
-        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstChild.lastChild.classList.add(`highlightP${activePlayer}`);
+        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstChild.lastChild.classList.add(`highlightP${c4.activePlayer}`);
     }
 }
 
@@ -453,38 +455,38 @@ function scanDir(scanDir, startX, startY, results) {
         switch (scanDir) {
             case "r":
             case "l":
-                val = gameState[i][y];
+                val = c4.gameState[i][y];
                 break;
             case "d":
-                val = gameState[x][i];
+                val = c4.gameState[x][i];
                 break;
             case "rd":
             case "lu":
             case "ld":
             case "ru":
-                val = gameState[i][ii];
+                val = c4.gameState[i][ii];
                 break;                
         }
         //console.log(`value: ${val}`);
-        if (val == activePlayer) {            
+        if (val == c4.activePlayer) {            
             tokenCount++;
             results[0] = tokenCount;
             switch (scanDir) {
                 case "r":
                 case "l":
                     results[tokenCount] = [i,y];
-                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${y}.  Count: ${tokenCount}.`);
+                    //console.log(`MATCH on Player ${c4.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${y}.  Count: ${tokenCount}.`);
                     break;
                 case "d":
                     results[tokenCount] = [x,i];
-                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${x} on Row: ${i}.  Count: ${tokenCount}.`);
+                    //console.log(`MATCH on Player ${c4.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${x} on Row: ${i}.  Count: ${tokenCount}.`);
                     break;
                 case "rd":
                 case "lu":
                 case "ld":
                 case "ru":
                     results[tokenCount] = [i,ii];
-                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${ii}.  Count: ${tokenCount}.`);
+                    //console.log(`MATCH on Player ${c4.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${ii}.  Count: ${tokenCount}.`);
                     break;
             }
             if (tokenCount == 4) {
