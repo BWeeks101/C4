@@ -1,12 +1,3 @@
-//$(document).ready(dataGridOnLoad);
-
-/* Call function to ensure proper formatting of innermost content columns */
-/*
-function dataGridOnLoad() {
-    dataGridDisplayContentColStyle();
-}
-*/
-
 /* DataGrid object constructor */
 /* Expects: */
 /* header = array containing column headers */
@@ -190,9 +181,6 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
             } else {
                 cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd;
             }
-
-            /*contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd + dataGrid.content[i][ii] + contentColEnd*/
-
             document.getElementById(cColId).insertAdjacentHTML('beforeend', cHtml);
 
             if (ii == 0) {
@@ -202,24 +190,6 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
             }            
         }
     }
-}
-
-/* Hardcode removal of margins and padding for .datagrid-content-col, datagrid-content-inner-col */
-/* Call this on load */
-/* Prevents any margins or padding on the .datagrid-content-col and datagrid-content-inner-col classes */
-/* These classes are applied to the outer and innermost columns of a dataGridDisplay content row */
-/* These columns should always be full width and height of their parent - any margin or padding will compromise the formatting */
-function dataGridDisplayContentColStyle() {
-    let style = `
-        .datagrid-content-col, .datagrid-content-inner-col {
-            padding: 0 !important;
-            margin: 0 !important;
-        }`
-
-    let styleSheet = document.createElement("style");
-    styleSheet.type = "text/css"
-    styleSheet.innerText = style;
-    document.head.appendChild(styleSheet);
 }
 
 /* Display of vertical ScrollBars on Content will push Content Columns out of alignment with Header Columns */
@@ -288,8 +258,10 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
 
 /* Default dataGrid Display onclick function */
 /* Highlight the selected dataGridDisplay row/col */
-/* returns id of the selected row/col */
-/* eg, col-0 or row-2 */
+/* returns array:
+/* option: col or row (what we are selecting) */
+/* count: number of rows in selected column, or number of columns in selected row */
+/* selId: id of selected column or row (0 based) */
 function dataGridDisplayClicked(object, option) {
     if (option != undefined) {
         option = option.toLowerCase();
@@ -329,7 +301,6 @@ function dataGridDisplayClicked(object, option) {
         console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[gcId]}, ${selId}, ${option}).`);
         return false;
     }
-
     return result;
 }
 
@@ -364,7 +335,6 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
         console.log(`function dataGridDisplayGetCounts Failed.  dataGridDisplayId (${dataGridDisplayId}) missing class(es).`);
         return false;
     }
-
     return [colCount, rowCount];
 }
 
@@ -402,7 +372,6 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
             document.getElementById(selectedId).classList.remove("datagrid-col-selected");
         }
     }
-
     return true;
 }
 
@@ -460,7 +429,6 @@ function dataGridDisplayRemove(dataGridDisplayId) {
     for (i = 0; i < classNames.length; i++) {
         document.getElementById(dataGridDisplayId).classList.remove(classNames[i]);
     }
-
     return true;
 }
 
@@ -476,7 +444,6 @@ function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
         console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with displayDataGrid(${dataGrid}, ${dataGridDisplayId}).`);
         return false;
     }
-
     return true;
 }
 
@@ -495,7 +462,6 @@ function elementIsDataGridContainer(dataGridDisplayId) {
         console.log(`Error.  Target element (${dataGridDisplayId}) does not have the required datagrid-container class.`)
         return false;
     }
-
     return true;
 }
 
@@ -514,7 +480,6 @@ function objectIsDataGrid(object) {
         console.log(`Error.  dataGrid object expected.  Object is not correct type.`);
         return false;
     }
-
     return true;
 }
 
@@ -529,7 +494,6 @@ function objectIsObject(object, description) {
         console.log(`Error. ${description}rray object expected.  Got ${object} (${typeof object})`);
         return false;
     }
-
     return true;
 }
 
@@ -544,7 +508,6 @@ function dataGridHeaderContentColCountMatch(hLen, cLen) {
             return false;
         }
     }
-
     return true;
 }
 
@@ -556,6 +519,5 @@ function dataGridHeadersAreStrings(headers) {
             return false;
         }
     }
-
     return true;
 }
