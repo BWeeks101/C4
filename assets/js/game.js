@@ -20,7 +20,7 @@ let gBoardDG = new DataGrid(gBoardHeaders, gameState);
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {
-        if (document.getElementById("winnerPopup").classList.contains("d-none") == false) {
+        if (document.getElementById("winnerPopup").classList.contains("d-none") == false || document.getElementById("ctrlPauseLink").classList.contains("d-none") == true) {
             return;
         } else {
             parseColSelection(selectCol(object));
@@ -73,9 +73,17 @@ function updateTurnTimer() {
     if (timerVal > 0) {
         document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
     } else {
-        console.log(`P${activePlayer} Missed Turn - selecting random column`)
+        //console.log(`P${activePlayer} Missed Turn - selecting random column`)
         parseColSelection(selectRandCol());
     }    
+}
+
+function pauseTurnTimer() {
+    clearInterval(activeTurnTimer);
+}
+
+function resumeTurnTimer() {
+    activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function stopTurnTimer() {
@@ -117,7 +125,7 @@ function getActivePlayer() {
             document.getElementById("player1Info").style.color = "#fafafa";
             break;
         default:
-            switchActivePlayer();
+            switchPlayer();
             break;
     }
 }
