@@ -3,13 +3,17 @@ function show(option, newstate) {
         state = newstate;
     }
     mainShow(option);
+    checkSideNavState(function(){sideNavShow(option)});
+}
+
+function checkSideNavState(func) {
     if (sideNavState() == "open") {
         closeNav();
         setTimeout(function() {
-            sideNavShow(option);
+            func();
         }, 650);
     } else {
-        sideNavShow(option);
+        func();
     };
 }
 
@@ -178,6 +182,7 @@ function sideNavShow(option) {
             break;
         case "starthotseat":
             sideNavLinkDisplay("show", "sn-ctrlgroup");
+            elementDisplay("hide", "ctrlResumeLink");
             sideNavLinkDisplay("hide", "sn-concede");
             sideNavSoutSelectShow("sn-out-mult");
             break;
@@ -243,6 +248,27 @@ function refreshGameBoard() {
         case "createhotseat":
             mainShow("starthotseat");
             break;
+    }
+}
+
+function togglePauseLink() {
+    elementDisplay("toggle", "ctrlPauseLink");
+    elementDisplay("toggle", "ctrlResumeLink");
+}
+
+function pauseGame() {
+    switch (state) {
+        case "createhotseat":
+            checkSideNavState(function(){togglePauseLink()});
+            pauseTurnTimer();
+    }
+}
+
+function resumeGame() {
+    switch (state) {
+        case "createhotseat":
+            checkSideNavState(function(){togglePauseLink()});
+            resumeTurnTimer();
     }
 }
 
