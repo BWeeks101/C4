@@ -27,9 +27,11 @@ function gameClicked(object) {
             if (done != false) {
                 console.log(`P${activePlayer} Wins!`);
                 winnerPopup();
+                return;
             } else if (completedTurns == 42) {
                 console.log("draw");
                 winnerPopup("draw");
+                return;
             }
             switchPlayer();
             restartTurnTimer();
@@ -89,15 +91,13 @@ function updateTurnTimer() {
         if (done != false) {
             console.log(`P${activePlayer} Wins!`);
             winnerPopup();
-            stopTurnTimer();
             return;
         } else if (completedTurns == 42) {
             console.log("draw");
             winnerPopup("draw");
-            stopTurnTimer();
             return;
         }
-        switchPlayer();
+        switchPlayer();  
         restartTurnTimer();
     }    
 }
@@ -122,8 +122,8 @@ function clearGameState() {
         }
     }
 
-    console.log(gameState);
-    console.log(gBoardDG);
+    //console.log(gameState);
+    //console.log(gBoardDG);
 }
 
 function resetTurnCount() {
@@ -177,19 +177,21 @@ function switchActivePlayer() {
 function selectRandCol() {
     let colArray = [];
     for (i = 0; i < 7; i++) {
-        if (gameState[0][i] == undefined) {
+        if (gameState[i][0] == undefined) {
             colArray.push(i);
         }
     }
     
+    //console.log(colArray);
     let col = colArray[Math.floor((Math.random() * colArray.length))];
+    //console.log(col);
 
     for (i = 5; i > -1; i--) {
-        if (gameState[i][col] == undefined) {
-            gameState[i][col] = activePlayer;
+        if (gameState[col][i] == undefined) {
+            gameState[col][i] = activePlayer;
             document.getElementById(`gBoardCol${col}RowId${i}`).firstChild.lastChild.classList.add(`gbP${activePlayer}`);
             completedTurns = completedTurns + 1;
-            console.log(`Col: ${col}, Row: ${i}`);
+            //console.log(`Col: ${col}, Row: ${i}`);
             winner = checkWin(col, i);
             return winner;
         }
@@ -200,8 +202,8 @@ function selectRandCol() {
 
 function selectCol(object) {
     let result = dataGridDisplayClicked(object, "col");
-    console.log(result);
-    console.log(object);
+    //console.log(result);
+    //console.log(object);
 
     for (i = result[1]; i > 0; i--) {
         if (gameState[result[2]][i-1] == undefined) {
@@ -217,7 +219,7 @@ function selectCol(object) {
 /* Check For Win Condition */
 function checkWin(x, y) {
     if (completedTurns < 7) {
-        console.log("Game cannot be won in less than 7 turns.  Skipping");
+        //console.log("Game cannot be won in less than 7 turns.  Skipping");
         return false; //Game cannot be won in less than 7 turns
     }
 
@@ -229,29 +231,34 @@ function checkWin(x, y) {
 
     /* Horizontal Scan */
     //console.log(`Start Scan Right`);
-    let tokenCount = scanDir("r", x, y);
+    let results = scanDir("r", x, y);
+    let tokenCount = results[0];
     //console.log(`Scan Right Found ${tokenCount} tokens`);
     if (tokenCount < 4) {
         //console.log(`Start Scan Left`);
-        tokenCount = scanDir("l", x, y, tokenCount);
+        results = scanDir("l", x, y, results);
+        tokenCount = results[0];
         //console.log(`Scan Left Found ${tokenCount} tokens`);
     }
 
     /* Vertical Scan */
     if (tokenCount < 4) {
         //console.log(`Start Scan Down`);
-        tokenCount = scanDir("d", x, y);
+        results = scanDir("d", x, y);
+        tokenCount = results[0];
         //console.log(`Scan Down Found ${tokenCount} tokens`);
     }
 
     /* Diagonal Scan, Right/Down, Left/Up */
     if (tokenCount < 4) {
         //console.log(`Start Scan Right/Down`);
-        tokenCount = scanDir("rd", x, y);
+        results = scanDir("rd", x, y);
+        tokenCount = results[0];
         //console.log(`Scan Right/Down Found ${tokenCount} tokens`);
         if (tokenCount < 4) {
             //console.log(`Start Scan Left/Up`);
-            tokenCount = scanDir("lu", x, y, tokenCount);
+            results = scanDir("lu", x, y, results);
+            tokenCount = results[0];
             //console.log(`Scan Left/Up Found ${tokenCount} tokens`);
         }
     }
@@ -259,11 +266,13 @@ function checkWin(x, y) {
     /* Diagonal Scan, Left/Down, Right/Up */
     if (tokenCount < 4) {
         //console.log(`Start Scan Left/Down`);
-        tokenCount = scanDir("ld", x, y);
+        results = scanDir("ld", x, y);
+        tokenCount = results[0];
         //console.log(`Scan Left/Down Found ${tokenCount} tokens`);
         if (tokenCount < 4) {
             //console.log(`Start Scan Right/Up`);
-            tokenCount = scanDir("ru", x, y, tokenCount);
+            results = scanDir("ru", x, y, results);
+            tokenCount = results[0];
             //console.log(`Scan Right/Up Found ${tokenCount} tokens`);
         }
     }
@@ -278,14 +287,20 @@ function checkWin(x, y) {
     }    
 }
 
-function scanDir(scanDir, startX, startY, tokenCount) {
+function scanDir(scanDir, startX, startY, results) {
     x = parseInt(startX);
     y = parseInt(startY);
-    if (tokenCount == undefined) {
-        tokenCount = 1;        
+    
+    if (results == undefined || results[0] == undefined) {
+        results = [1];
+        tokenCount = 1;
     } else {
-        tokenCount = parseInt(tokenCount);
+        tokenCount = parseInt(results[0]);
     }
+
+    /* results[0] = tokenCount */
+    /* results[1] through results[4] = array, containing x and y for each valid token */
+    results[1] = [x,y];
 
     let i;
     let ii;
@@ -308,7 +323,7 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 mod = inc;
             } else {
                 //console.log(`Right Scan Aborted.  Rightmost Col Selected (${x})`);
-                return tokenCount;
+                return results;
             }
             break;
         case "l":
@@ -319,7 +334,7 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 mod = dec;
             } else {
                 //console.log(`Left Scan Aborted.  Leftmost Col Selected (${x})`);
-                return tokenCount;
+                return results;
             }
             break;
         case "d":
@@ -330,7 +345,7 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 mod = inc;
             } else {
                 //console.log(`Down Scan Aborted.  Token in Bottom Row (${y})`);
-                return tokenCount;
+                return results;
             }
             break;
         case "rd":
@@ -350,8 +365,8 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 if (y > 4) {
                     console.log(`Right/Down Scan Aborted.  Token in Bottom Row (${y})`);
                 }
-                */               
-                return tokenCount;
+                */
+                return results;
             }
             break;
         case "lu":
@@ -371,8 +386,8 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 if (y < 1) {
                     console.log(`Left/Up Scan Aborted.  Token in Top Row (${y})`);
                 }
-                */               
-                return tokenCount;
+                */
+                return results;
             }
             break;
         case "ld":
@@ -392,8 +407,8 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 if (y > 4) {
                     console.log(`Left/Down Scan Aborted.  Token in Bottom Row (${y})`);
                 }
-                */               
-                return tokenCount;
+                */
+                return results;
             }
             break;
         case "ru":
@@ -413,8 +428,8 @@ function scanDir(scanDir, startX, startY, tokenCount) {
                 if (y < 1) {
                     console.log(`Right/Up Scan Aborted.  Token in Top Row (${y})`);
                 }
-                */               
-                return tokenCount;
+                */
+                return results;
             }
             break;
     }
@@ -447,14 +462,34 @@ function scanDir(scanDir, startX, startY, tokenCount) {
         }
         //console.log(`value: ${val}`);
         if (val == activePlayer) {            
-            tokenCount++;            
-            //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i}.  Count: ${tokenCount}.`);
+            tokenCount++;
+            results[0] = tokenCount;
+            switch (scanDir) {
+                case "r":
+                case "l":
+                    results[tokenCount] = [i,y];
+                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${y}.  Count: ${tokenCount}.`);
+                    break;
+                case "d":
+                    results[tokenCount] = [x,i];
+                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${x} on Row: ${i}.  Count: ${tokenCount}.`);
+                    break;
+                case "rd":
+                case "lu":
+                case "ld":
+                case "ru":
+                    results[tokenCount] = [i,ii];
+                    //console.log(`MATCH on Player ${activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${ii}.  Count: ${tokenCount}.`);
+                    break;
+            }
             if (tokenCount == 4) {
                 //console.log(`${scanDesc} Scan from Col: ${x} on Row: ${y}`);
-                return tokenCount;
+                //console.log(`TokenCount: ${tokenCount}`);
+                //console.log(results);
+                return results;
             }
-        } else {
-            break;
+        } else {            
+            break;            
         }
 
         if (ii != undefined) {
@@ -462,5 +497,5 @@ function scanDir(scanDir, startX, startY, tokenCount) {
         }
     }
 
-    return tokenCount;
+    return results;
 }
