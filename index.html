@@ -64,7 +64,8 @@
                     <hr id="turnGroupDivider" class="sn-turngroup sidenav-divider">
                 </div>
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
-                    <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" href="#">Pause</a>
+                    <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" onclick="pauseGame()" href="#">Pause</a>
+                    <a id="ctrlResumeLink" class="sn-ctrlgroup sn-pause-reset d-none" onclick="resumeGame()" href="#">Resume</a>
                     <a id="ctrlResetLink" class="sn-ctrlgroup sn-pause-reset" href="#">Reset</a>
                     <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider sn-pause-reset">
                     <a id="concedeLink" class="sn-ctrlgroup sn-concede" href="#">Concede</a>                
@@ -136,7 +137,7 @@
                                 <button>Continue</button>
                             </div>
                         </div>
-                    </div>
+                    </div>                                        
                 </div>
             </div>
         </div>
