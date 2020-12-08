@@ -18,15 +18,15 @@ function feedbackWinner(result) {
     stopTurnTimer();
     if (result == "draw") {
         document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>";
-        document.getElementById("feedbackMessage").style.color = "#fafafa";
+        document.getElementById("feedbackMessage").style.color = c4.game.colors.feedbackText;
     } else {
         document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`;
         switch (c4.game.activePlayer) {
             case 1:
-                document.getElementById("feedbackMessage").style.color = "rgb(236,76,76)";
+                document.getElementById("feedbackMessage").style.color = c4.game.colors.p1Background;
                 break;
             case 2:
-                document.getElementById("feedbackMessage").style.color = "blue";
+                document.getElementById("feedbackMessage").style.color = c4.game.colors.p2Background;
                 break;
         }
     }     
@@ -47,6 +47,17 @@ function stopHotseat() {
     elementDisplay("hide", "feedbackContainer");
     clearGameState();
     resetTurnCount();
+}
+
+function setPlayerSetting(setting, value) {
+    switch (setting) {
+        case "p1.name":
+            c4.game.p1.name = value;
+            break;
+        case "p2.name":
+            c4.game.p2.name = value;
+            break;
+    }
 }
 
 function startTurnTimer() {
@@ -103,12 +114,12 @@ function resetTurnCount() {
 function getActivePlayer() {
     switch (c4.game.activePlayer) {
         case 1:
-            document.getElementById("player1Info").style.color = "rgb(236,76,76)";
-            document.getElementById("player2Info").style.color = "#fafafa";
+            document.getElementById("player1Info").style.color = c4.game.colors.p1Background;
+            document.getElementById("player2Info").style.color = c4.text;
             break;
         case 2:
-            document.getElementById("player2Info").style.color = "blue";
-            document.getElementById("player1Info").style.color = "#fafafa";
+            document.getElementById("player2Info").style.color = c4.game.colors.p2Background;
+            document.getElementById("player1Info").style.color = c4.text;
             break;
         default:
             switchPlayer();
@@ -120,12 +131,12 @@ function switchPlayer() {
     switchActivePlayer();
     switch (c4.game.activePlayer) {
         case 1:
-            document.getElementById("player1Info").style.color = "rgb(236,76,76)";
-            document.getElementById("player2Info").style.color = "#fafafa";
+            document.getElementById("player1Info").style.color = c4.game.colors.p1Background;
+            document.getElementById("player2Info").style.color = c4.text;
             break;
         case 2:
-            document.getElementById("player2Info").style.color = "blue";
-            document.getElementById("player1Info").style.color = "#fafafa";
+            document.getElementById("player2Info").style.color = c4.game.colors.p2Background;
+            document.getElementById("player1Info").style.color = c4.text;
             break;
     }
 }
