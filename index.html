@@ -150,8 +150,10 @@
                         <div id="menuSignIn" class="menu-content default">
                             <h3 class="menuTitle">Enter your Username</h3>
                             <form>
-                                <input type="text">
-                                <button type="button" onclick="show('options', 'options')">Ok</button>
+                                <input type="text" maxlength="10">
+                                <div class="control-buttons">
+                                    <button type="button" onclick="setPlayerName(1, this.parentNode.previousElementSibling.value)">Ok</button>
+                                </div>
                             </form>
                         </div>
                         <div id="menuOptions" class="menu-content d-none">
@@ -210,9 +212,9 @@
                             <h3 class="menuTitle">Enter Player 2 Username</h3>
                             <div class="control-container">
                                 <form>                                   
-                                    <input type="text">                                    
+                                    <input type="text" maxlength="10">                                    
                                     <div class="control-buttons">
-                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="createGameSetP2()">Next</button>
+                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="setPlayerName(2, this.parentNode.previousElementSibling.value)">Next</button>
                                     </div>
                                 </form>                                    
                             </div>

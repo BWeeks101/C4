@@ -49,17 +49,6 @@ function stopHotseat() {
     resetTurnCount();
 }
 
-function setPlayerSetting(setting, value) {
-    switch (setting) {
-        case "p1.name":
-            c4.game.p1.name = value;
-            break;
-        case "p2.name":
-            c4.game.p2.name = value;
-            break;
-    }
-}
-
 function startTurnTimer() {
     document.getElementById("turnTimeLimit").innerHTML = `${c4.game.turnTimeLimit}`;
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
@@ -499,4 +488,38 @@ function scanDir(scanDir, startX, startY, results) {
         }
     }
     return results;
+}
+
+function setPlayerSetting(setting, value) {
+    switch (setting) {
+        case "p1.name":
+            c4.game.p1.name = value;
+            break;
+        case "p1.tokenColor":
+            c4.game.p1.tokenColor = value;
+            break;
+        case "p2.name":
+            c4.game.p2.name = value;
+            break;
+        case "p2.tokenColor":
+            c4.game.p2.tokenColor = value;
+            break;
+    }
+}
+
+function setPlayerName(player, name) {
+    if (name == undefined || name == "") {
+        name = `Player ${player}`;
+    }
+    setPlayerSetting(`p${player}.name`, name)
+    document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;
+    document.getElementById(`player${player}Info`).innerHTML = `<span>${name}</span>`;
+    switch (player) {
+        case 1:            
+            show("options", "options");
+            break;
+        case 2:
+            createGameSetP2();
+            break;
+    }
 }
