@@ -508,7 +508,7 @@ function setPlayerSetting(setting, value) {
 }
 
 function setPlayerName(player, name) {
-    if (name == undefined || name == "") {
+    if (name == undefined || name == "" || name.length < 1) {
         name = `Player ${player}`;
     }
     setPlayerSetting(`p${player}.name`, name)
