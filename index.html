@@ -121,15 +121,16 @@
                         <span>Player 2</span>
                     </div>
                 </div>
-                <div class="gameContainer">
+                <div class="gameContainer" id="gameContainer">
                     <div class="datagrid-container" id="gBoard">
                         <!--Create GameBoard Here-->
                     </div>
-                    <div class="feedback-container d-none" id="feedbackContainer">
+                    <div class="feedback-container" id="feedbackContainer">
+                        
                         <div class="feedback-message" id="feedbackMessage">
                             <!--Winner Message Here-->
                         </div>
-                        <div class="row feedback-control-row">
+                        <div class="row feedback-control-row" id="feedbackControlRow">
                             <div class="col">
                                 <button onclick="refreshGameBoard()">Rematch</button>
                             </div>

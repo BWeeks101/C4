@@ -37,6 +37,10 @@ body {
     font-size: 1em;
 }
 
+#rulesContainer, #leaderboardContainer, #gameBoardContainer {
+    width: calc(100% - 20px);
+}
+
 #lBoard {
     padding-bottom: 0;
 }

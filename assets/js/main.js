@@ -94,6 +94,42 @@ function mainBlockResize() {
             document.getElementById("lBoardContentContainer").style.height = `${lBoardContentContainerHeight}px`;
 
             dataGridAdjustForScrollBars("lBoard");
+        } else if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
+
+            document.getElementById("gameBoardContainer").style.removeProperty("height");
+            document.getElementById("gameBoardContainer").style.removeProperty("max-width");
+            document.getElementById("gameContainer").style.removeProperty("height");
+            document.getElementById("feedbackContainer").style.removeProperty("height");
+            document.getElementById("gBoardContentContainer").style.removeProperty("max-height");
+            document.getElementById("gBoard").style.removeProperty("height");
+
+            mainBlockContainerPadTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
+            mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
+            mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
+
+            gameBoardContainerHeight = mainBlockContainerHeight - (mainBlockContainerPadTotal);
+            document.getElementById("gameBoardContainer").style.height = `${gameBoardContainerHeight}px`;
+
+            playerInfoContainerHeight = getElementPos("playerInfoContainer").height;
+            gameContainerHeight = gameBoardContainerHeight - playerInfoContainerHeight;
+            document.getElementById("gameContainer").style.height = `${gameContainerHeight}px`;
+
+            feedbackMessageHeight = getElementPos("feedbackMessage").height;
+            feedbackControlRowHeight = getElementPos("feedbackControlRow").height;
+            feedbackContainerHeight = feedbackMessageHeight + feedbackControlRowHeight;
+            if (feedbackContainerHeight < 76) {
+                feedbackContainerHeight = 76;
+            }
+            document.getElementById("feedbackContainer").style.height = `${feedbackContainerHeight}px`;
+
+            gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight;
+            document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
+            gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;
+            document.getElementById("gameBoardContainer").style.maxWidth = `${gameBoardContainerMaxWidth}px`;
+
+            gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;            
+            gBoardHeight = gBoardContentContainerHeight;
+            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
         }
     }    
 }
