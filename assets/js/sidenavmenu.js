@@ -1,6 +1,6 @@
 function show(option, newstate) {    
     if (newstate != undefined) {        
-        c4.state = newstate;
+        c4.game.state = newstate;
     }
     mainShow(option);
     checkSideNavState(function(){sideNavShow(option)});
@@ -122,7 +122,7 @@ function sideNavShow(option) {
             }                
             break;
         case "rules":
-            switch (c4.state) {
+            switch (c4.game.state) {
                 case "default":
                     sideNavLinkDisplay("show", "sn-signin");
                     break;
@@ -139,7 +139,7 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-leaderboard");
             break;
         case "leaderboard":
-            switch (c4.state) {
+            switch (c4.game.state) {
                 case "default":
                     sideNavLinkDisplay("show", "sn-signin");
                     break;
@@ -209,7 +209,7 @@ function cancelJoinGame() {
 }
 
 function signOut() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "joingame":
             dataGridDisplayRemove("gameList");
             break;
@@ -240,11 +240,11 @@ function createGameSetP2() {
 }
 
 function createGameP2Settings() {
-    show("createsetturntime", c4.state);
+    show("createsetturntime", c4.game.state);
 }
 
 function refreshGameBoard() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createhotseat":
             mainShow("starthotseat");
             break;
@@ -257,7 +257,7 @@ function togglePauseLink() {
 }
 
 function pauseGame() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()});
             pauseTurnTimer();
@@ -266,7 +266,7 @@ function pauseGame() {
 }
 
 function resumeGame() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()});
             resumeTurnTimer();
@@ -275,7 +275,7 @@ function resumeGame() {
 }
 
 function resetGame() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createhotseat":
             checkSideNavState(function(){refreshGameBoard()});
             break;
@@ -294,7 +294,7 @@ function radioGroupGetValue(option) {
 
 function startGame() {
     setTurnTimeLimit()
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createhotseat":
             show("starthotseat");
             break;
@@ -308,7 +308,7 @@ function startGame() {
 }
 
 function setTurnTimeLimit() {
-    c4.turnTimeLimit = document.getElementById("turnTime").value;
+    c4.game.turnTimeLimit = document.getElementById("turnTime").value;
 }
 
 function createGameNextButton(value) {
@@ -325,23 +325,23 @@ function createGameNextButton(value) {
         case "easy":
         case "normal":
         case "hard":
-            show("createsetturntime", c4.state);
+            show("createsetturntime", c4.game.state);
             break;
         case "setp2":
-            show("createp2settings", c4.state);
+            show("createp2settings", c4.game.state);
     }
 }
 
 function createSetTurnTimeBackButton() {
-    switch (c4.state) {
+    switch (c4.game.state) {
         case "createsingle":
-            show("createsingle", c4.state);
+            show("createsingle", c4.game.state);
             break;
         case "createhotseat":
-            show("createp2settings", c4.state);
+            show("createp2settings", c4.game.state);
             break;
         case "createmultiplayer":
-            show("creategame", c4.state);
+            show("creategame", c4.game.state);
             break;
     }
 }
