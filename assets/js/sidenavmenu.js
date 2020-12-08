@@ -72,6 +72,8 @@ function mainShow(option) {
             elementDisplay("show", "menuOptions");  
             break;
         case "settings":
+            document.getElementById("p1TokenColor").value = getPlayerColor(1, "token");
+            document.getElementById("p1AltTokenColor").value = getPlayerColor(1, "altToken");
             elementDisplay("show", "menuSettings");
             break;
         case "creategame":
@@ -92,6 +94,8 @@ function mainShow(option) {
             elementDisplay("show", "gameBoardContainer");
             break;
         case "createp2settings":
+            document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
+            document.getElementById("p2AltTokenColor").value = getPlayerColor(2, "altToken");
             elementDisplay("show", "menuCreateP2Settings");
             break;
         case "createmultiplayer":
@@ -240,7 +244,13 @@ function createGameSetP2() {
 }
 
 function createGameP2Settings() {
+    setPlayerColors(2);
     show("createsetturntime", c4.game.state);
+}
+
+function saveP1Settings() {
+    setPlayerColors(1);
+    show("options", "options");
 }
 
 function refreshGameBoard() {

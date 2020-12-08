@@ -167,12 +167,14 @@
                         <div id="menuSettings" class="menu-content d-none">
                             <h3 class="menuTitle">User Settings</h3>
                             <form>
-                                <p>Token Colour</p>
-                                <p>Alt Token Colour</p>
+                                <label for="p1TokenColor">Token Colour</label>
+                                <input id="p1TokenColor" type="color"><br>
+                                <label for="p1AltTokenColor">Alt Token Colour</label>
+                                <input id="p1AltTokenColor" type="color"><br>
                                 <button type="button">Upload Token Image</button><br>
                                 <button type="button">Upload Profile Image</button><br>
                                 <div class="control-buttons">
-                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button">Ok</button>
+                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button" onclick="saveP1Settings()">Ok</button>
                                 </div>
                             </form>
                         </div>
@@ -223,8 +225,10 @@
                             <h3 class="menuTitle">Player 2 Settings</h3>
                             <div class="control-container">
                                 <form>
-                                    <p>Token Colour</p>
-                                    <p>Alt Token Colour</p>
+                                    <label for="p2TokenColor">Token Colour</label>
+                                    <input id="p2TokenColor" type="color"><br>
+                                    <label for="p2AltTokenColor">Alt Token Colour</label>
+                                    <input id="p2AltTokenColor" type="color"><br>
                                     <button type="button">Upload Token Image</button><br>
                                     <button type="button">Upload Profile Image</button><br>
                                     <div class="control-buttons">

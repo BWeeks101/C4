@@ -498,11 +498,17 @@ function setPlayerSetting(setting, value) {
         case "p1.tokenColor":
             c4.game.p1.tokenColor = value;
             break;
+        case "p1.altTokenColor":
+            c4.game.p1.altTokenColor = value;
+            break;
         case "p2.name":
             c4.game.p2.name = value;
             break;
         case "p2.tokenColor":
             c4.game.p2.tokenColor = value;
+            break;
+        case "p2.altTokenColor":
+            c4.game.p2.altTokenColor = value;
             break;
     }
 }
@@ -513,13 +519,46 @@ function setPlayerName(player, name) {
     }
     setPlayerSetting(`p${player}.name`, name)
     document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;
-    document.getElementById(`player${player}Info`).innerHTML = `<span>${name}</span>`;
+    document.getElementById(`player${player}Info`).innerHTML = `<span>${name}</span>`;    
     switch (player) {
-        case 1:            
+        case 1:
             show("options", "options");
             break;
         case 2:
             createGameSetP2();
+            break;
+    }
+}
+
+/* Options: */
+/* token */
+/* altToken */
+function setPlayerColor(player, option, elementId) {
+    setPlayerSetting(`p${player}.${option}Color`, document.getElementById(elementId).value);
+}
+
+function setPlayerColors(player) {
+    setPlayerColor(player, "token", `p${player}TokenColor`);
+    setPlayerColor(player, "altToken", `p${player}AltTokenColor`);
+}
+
+function getPlayerColor(player, option) {
+    switch (player) {
+        case 1:
+            switch (option) {
+                case "token":
+                    return c4.game.p1.tokenColor;
+                case "altToken":
+                    return c4.game.p1.altTokenColor;
+            }
+            break;
+        case 2:
+            switch (option) {
+                case "token":
+                    return c4.game.p2.tokenColor;
+                case "altToken":
+                    return c4.game.p2.altTokenColor;
+            }
             break;
     }
 }
