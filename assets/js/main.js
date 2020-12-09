@@ -35,6 +35,22 @@ function mainOnResize() {
     menuBlockResize();
 }
 
+function toggleColorMode() {
+    let mode = document.getElementById("colorMode").innerHTML;
+    switch (mode) {
+        case "Dark Mode":
+            document.getElementById("colorMode").innerHTML = "Light Mode";
+            switchColorMode("dark");
+            closeNav();
+            break;
+        case "Light Mode":
+            document.getElementById("colorMode").innerHTML = "Dark Mode";
+            switchColorMode("light");
+            closeNav();
+            break;
+    }
+}
+
 function mainBlockResize() {
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");

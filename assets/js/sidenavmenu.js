@@ -30,7 +30,7 @@ function hideAll(option) {
     let elementCollection = document.getElementById(option).children;
     let i;
     if (option == "sideNav") {
-        i = 1;
+        i = 2;
     } else {
         i = 0;
     }
@@ -329,6 +329,16 @@ function createDynamicGameStyle() {
     sheet.insertRule(`.gbP2 { background-color: ${c4.game.p2.tokenColor}; }`);
     sheet.insertRule(`@keyframes highlightP1 { 0% {background-color: ${c4.game.p1.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p1.tokenColor};} }`);
     sheet.insertRule(`@keyframes highlightP2 { 0% {background-color: ${c4.game.p2.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p2.tokenColor};} }`);
+}
+
+function switchColorMode(option) {
+    document.head.removeChild(document.getElementById("colorStyle"));
+    let colorModeStyle = document.createElement("link");
+    document.head.appendChild(colorModeStyle);
+    colorModeStyle.rel = "stylesheet";
+    colorModeStyle.type = "text/css";
+    colorModeStyle.id = "colorStyle";
+    colorModeStyle.href = `assets/css/${option}.css`;
 }
 
 function setTurnTimeLimit() {

@@ -7,20 +7,20 @@
 .datagrid-header-col {
     padding-left: 5px;
     padding-right: 5px;
-    border-left: 1px solid #fafafa;
-    border-bottom: 1px solid #fafafa;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .datagrid-content-col {
     padding: 0 !important;
     margin: 0 !important;
-    border-left: 1px solid #fafafa;
+    border-left: 1px solid black;
 }
 
 .datagrid-content-inner-col {
     padding: 0 !important;
     margin: 0 !important;
-    border-bottom: 1px solid #fafafa;
+    border-bottom: 1px solid black;
 }
 
 .datagrid-cell-value {
@@ -52,9 +52,9 @@
 }
 
 .datagrid-row-selected {
-    background-color: rgb(236,76,76);
+    background-color: blue;
 }
 
 .datagrid-col-selected {
-    background-color: rgb(236,76,76);
+    background-color: blue;
 }

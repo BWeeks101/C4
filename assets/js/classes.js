@@ -31,10 +31,9 @@ class dataGridDefaultColors {
 class gameDefaultColors {
     constructor() {
         this.border = "#fafafa";
-        this.p1Background = "#EC4C4C";
-        this.p2Background = "#0000FF";
-        this.feedbackBackground = "2D2D2D";
+        this.feedbackBackground = "#2D2D2D";
         this.feedbackText = "#fafafa";
+        this.pulseBackground = "#fafafa";
     }
 }
 
@@ -66,12 +65,12 @@ class gameSettings {
         this.colors = new gameDefaultColors();
         this.p1 = new playerSettings();        
         this.p1.name = "Player 1";
-        this.p1.tokenColor = this.colors.p1Background;
-        this.p1.altTokenColor = this.colors.p2Background;
+        this.p1.tokenColor = "#EC4C4C";
+        this.p1.altTokenColor = "#0000FF";
         this.p2 = new playerSettings();
         this.p2.name = "Player 2";
-        this.p2.tokenColor = this.colors.p2Background;
-        this.p2.altTokenColor = this.colors.p1Background;
+        this.p2.tokenColor = "#0000FF";
+        this.p2.altTokenColor = "#EC4C4C";
     }
 }
 

@@ -24,7 +24,7 @@
   min-width: 310px; /* 0 width - change this with JavaScript */
   width: 33%;
   z-index: 1000; /* Stay on top */
-  background-color: rgba(45,45,45,.95); /* Black*/
+  background-color: var(--sideNavBackground); /* Black*/
   left: -133%;
 }
 
@@ -33,7 +33,7 @@
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 1em;
-  color: #fafafa;
+  color: var(--sideNavLink);
   display: block;
   transition: 0.3s;
 }
@@ -48,13 +48,12 @@
 
 .sidenav-divider {
     margin: 0 33px 0 32px;
-    border-top: solid 1px #fafafa;
+    border-top: solid 1px var(--sideNavDivider);
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  /*color: #f1f1f1;*/
-  color: rgb(236,76,76);
+  color: var(--sideNavLinkHover);
   transition: 0.5s;
 }
 

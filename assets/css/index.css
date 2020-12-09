@@ -46,8 +46,8 @@ body {
 }
 
 .main-content, .menu-content {
-    background-color: rgb(45,45,45);
-    border: solid 1px #fafafa;
+    background-color: var(--mainBackground);
+    border: solid 1px var(--mainBorder);
     padding: 10px;
 }
 
