@@ -62,6 +62,7 @@ class gameSettings {
             [undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined]
         ];
+        this.gBoardDG = new DataGrid(["","","","","","",""], this.boardState);
         this.colors = new gameDefaultColors();
         this.p1 = new playerSettings();        
         this.p1.name = "Player 1";

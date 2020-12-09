@@ -1,8 +1,3 @@
-/* Game Board */
-let gBoardHeaders = ["","","","","","",""];
-let gBoardDG = new DataGrid(gBoardHeaders, c4.game.boardState);
-/* end Game Board */
-
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {
@@ -93,7 +88,7 @@ function clearGameState() {
     }
 
     //console.log(c4.game.boardState);
-    //console.log(gBoardDG);
+    //console.log(c4.game.gBoardDG);
 }
 
 function resetTurnCount() {
