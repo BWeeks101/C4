@@ -303,6 +303,7 @@ function radioGroupGetValue(option) {
 }
 
 function startGame() {
+    createDynamicGameStyle();
     setTurnTimeLimit()
     switch (c4.game.state) {
         case "createhotseat":
@@ -315,6 +316,17 @@ function startGame() {
             show("startsingle");
             break;
     }
+}
+
+function createDynamicGameStyle() {
+    let gameStyle = document.createElement("style");
+    document.head.appendChild(gameStyle);
+    let sheet = gameStyle.sheet;
+    sheet.type = "text/css";
+    sheet.insertRule(`.gbP1 { background-color: ${c4.game.p1.tokenColor}; }`);
+    sheet.insertRule(`.gbP2 { background-color: ${c4.game.p2.tokenColor}; }`);
+    sheet.insertRule(`@keyframes highlightP1 { 0% {background-color: ${c4.game.p1.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p1.tokenColor};} }`);
+    sheet.insertRule(`@keyframes highlightP2 { 0% {background-color: ${c4.game.p2.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p2.tokenColor};} }`);
 }
 
 function setTurnTimeLimit() {

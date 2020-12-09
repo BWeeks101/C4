@@ -23,10 +23,10 @@ function feedbackWinner(result) {
         document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`;
         switch (c4.game.activePlayer) {
             case 1:
-                document.getElementById("feedbackMessage").style.color = c4.game.colors.p1Background;
+                document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
                 break;
             case 2:
-                document.getElementById("feedbackMessage").style.color = c4.game.colors.p2Background;
+                document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
                 break;
         }
     }     
@@ -103,12 +103,12 @@ function resetTurnCount() {
 function getActivePlayer() {
     switch (c4.game.activePlayer) {
         case 1:
-            document.getElementById("player1Info").style.color = c4.game.colors.p1Background;
-            document.getElementById("player2Info").style.color = c4.text;
+            document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
+            document.getElementById("player2Info").style.color = c4.colors.text;
             break;
         case 2:
-            document.getElementById("player2Info").style.color = c4.game.colors.p2Background;
-            document.getElementById("player1Info").style.color = c4.text;
+            document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
+            document.getElementById("player1Info").style.color = c4.colors.text;
             break;
         default:
             switchPlayer();
@@ -120,12 +120,12 @@ function switchPlayer() {
     switchActivePlayer();
     switch (c4.game.activePlayer) {
         case 1:
-            document.getElementById("player1Info").style.color = c4.game.colors.p1Background;
-            document.getElementById("player2Info").style.color = c4.text;
+            document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
+            document.getElementById("player2Info").style.color = c4.colors.text;
             break;
         case 2:
-            document.getElementById("player2Info").style.color = c4.game.colors.p2Background;
-            document.getElementById("player1Info").style.color = c4.text;
+            document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
+            document.getElementById("player1Info").style.color = c4.colors.text;
             break;
     }
 }
