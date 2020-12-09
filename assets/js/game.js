@@ -28,13 +28,35 @@ function feedbackWinner(result) {
     elementDisplay("show", "feedbackContainer");
 }
 
+function feedbackStartDelay() {
+    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
+    document.getElementById("feedbackMessage").style.color = c4.colors.text;
+    elementDisplay("hide", "feedbackControlRow");
+    elementDisplay("show", "feedbackContainer");
+    startDelay = setInterval(function() {
+        timerVal = parseInt(document.getElementById("startDelay").innerHTML);
+        if (timerVal > 0) {
+            document.getElementById("startDelay").innerHTML = `${timerVal-1}`;
+        } else {
+            stopStartDelay();
+            elementDisplay("hide", "feedbackContainer");
+            elementDisplay("show", "feedbackControlRow");
+            document.getElementById("feedbackMessage").innerHTML = "";
+            startTurnTimer();
+        }
+    }, 1000);    
+}
+
+function stopStartDelay() {
+    clearInterval(startDelay);
+}
+
 function refreshHotseat() {
     stopTurnTimer();
     elementDisplay("hide", "feedbackContainer");
     clearGameState();
     resetTurnCount();
     getActivePlayer();
-    startTurnTimer();
 }
 
 function stopHotseat() {

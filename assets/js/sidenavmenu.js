@@ -92,6 +92,7 @@ function mainShow(option) {
             dataGridDisplaySetCols("gBoard");            
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
             elementDisplay("show", "gameBoardContainer");
+            feedbackStartDelay();
             break;
         case "createp2settings":
             document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
@@ -218,6 +219,7 @@ function signOut() {
             dataGridDisplayRemove("gameList");
             break;
         case "createhotseat":
+            stopStartDelay();
             dataGridDisplayRemove("gBoard");
             stopHotseat();
             break;

@@ -234,9 +234,7 @@ function calcBlockHeight() {
     } else if (mainBlockContainerHidden == false && menuBlockContainerHidden == true) {
         blockHeight = mainHeight;
         contentHeight = headerHeight + blockHeight + footerHeight;
-    }
-
-    
+    }    
 
     /* If Calculated Full Content Height is Greater than Browser Viewport */
     /* Reduce Block Height by the difference to prevent vertical scroll */
