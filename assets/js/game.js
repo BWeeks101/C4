@@ -13,11 +13,11 @@ function feedbackWinner(result) {
     stopTurnTimer();
     if (result == "draw") {
         document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>";
-        document.getElementById("feedbackMessage").style.color = c4.game.colors.feedbackText;
+        document.getElementById("feedbackMessage").style.removeProperty("color");
     } else {
         document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`;
         switch (c4.game.activePlayer) {
-            case 1:
+            case 1:                
                 document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
                 break;
             case 2:
@@ -29,8 +29,8 @@ function feedbackWinner(result) {
 }
 
 function feedbackStartDelay() {
+    document.getElementById("feedbackMessage").style.removeProperty("color");
     document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
-    document.getElementById("feedbackMessage").style.color = c4.colors.text;
     elementDisplay("hide", "feedbackControlRow");
     elementDisplay("show", "feedbackContainer");
     startDelay = setInterval(function() {
@@ -121,11 +121,11 @@ function getActivePlayer() {
     switch (c4.game.activePlayer) {
         case 1:
             document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
-            document.getElementById("player2Info").style.color = c4.colors.text;
+            document.getElementById("player2Info").style.removeProperty("color");
             break;
         case 2:
             document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
-            document.getElementById("player1Info").style.color = c4.colors.text;
+            document.getElementById("player1Info").style.removeProperty("color");
             break;
         default:
             switchPlayer();
@@ -138,11 +138,11 @@ function switchPlayer() {
     switch (c4.game.activePlayer) {
         case 1:
             document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
-            document.getElementById("player2Info").style.color = c4.colors.text;
+            document.getElementById("player2Info").style.removeProperty("color");
             break;
         case 2:
             document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
-            document.getElementById("player1Info").style.color = c4.colors.text;
+            document.getElementById("player1Info").style.removeProperty("color");
             break;
     }
 }
