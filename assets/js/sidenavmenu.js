@@ -331,16 +331,6 @@ function createDynamicGameStyle() {
     sheet.insertRule(`@keyframes highlightP2 { 0% {background-color: ${c4.game.p2.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p2.tokenColor};} }`);
 }
 
-function switchColorMode(option) {
-    document.head.removeChild(document.getElementById("colorStyle"));
-    let colorModeStyle = document.createElement("link");
-    document.head.appendChild(colorModeStyle);
-    colorModeStyle.rel = "stylesheet";
-    colorModeStyle.type = "text/css";
-    colorModeStyle.id = "colorStyle";
-    colorModeStyle.href = `assets/css/${option}.css`;
-}
-
 function setTurnTimeLimit() {
     c4.game.turnTimeLimit = document.getElementById("turnTime").value;
 }

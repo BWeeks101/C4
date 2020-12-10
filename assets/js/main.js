@@ -49,6 +49,16 @@ function toggleColorMode() {
     }
 }
 
+function switchColorMode(option) {
+    document.head.removeChild(document.getElementById("colorStyle"));
+    let colorModeStyle = document.createElement("link");
+    document.head.appendChild(colorModeStyle);
+    colorModeStyle.rel = "stylesheet";
+    colorModeStyle.type = "text/css";
+    colorModeStyle.id = "colorStyle";
+    colorModeStyle.href = `assets/css/${option}.css`;
+}
+
 function mainBlockResize() {
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
