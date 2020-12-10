@@ -34,28 +34,28 @@
                 <hr id="signInDivider" class="sn-signin sidenav-divider d-none">
                 <a id="settingsLink" class="sn-settings d-none" onclick="show('settings', 'settings')" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider d-none">
-                <a id="leaderboardLink" class="sn-leaderboard default" onclick="show('leaderboard')" href="#">View Leaderboard</a>
-                <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">
+                <!--<a id="leaderboardLink" class="sn-leaderboard default" onclick="show('leaderboard')" href="#">View Leaderboard</a>
+                <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">-->
                 <a id="rulesLink" class="sn-rules default" onclick="show('rules')" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
                 <a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
                 <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">
-                <a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="cancelJoinGame()" href="#">Cancel Joining a Game</a>
-                <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">
+                <!--<a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="cancelJoinGame()" href="#">Cancel Joining a Game</a>
+                <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">-->
                 <div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
-                    <a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>
+                    <!--<a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>-->
                     <a id="typeHSLink" class="sn-typegroup underheader" href="#">Hotseat</a>
-                    <a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>
+                    <!--<a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>-->
                     <hr id="typeGroupDivider" class="sn-typegroup sidenav-divider">
                 </div>
-                <div id="diffGroup" class="sn-diffgroup d-none">
+                <!--<div id="diffGroup" class="sn-diffgroup d-none">
                 <h5>Difficulty</h5>
                     <a id="diffEasyLink" class="sn-diffgroup underheader" href="#">Easy</a>
                     <a id="diffMedLink" class="sn-diffgroup underheader" href="#">Normal</a>
                     <a id="diffHardLink" class="sn-diffgroup underheader" href="#">Hard</a>
                     <hr id="diffGroupDivider" class="sn-diffgroup sidenav-divider">
-                </div>
+                </div>-->
                 <div id="turnGroup" class="sn-turngroup d-none">
                 <h5>Turn Time Limit</h5>
                     <a id="turn5Link" class="sn-turngroup underheader" href="#">5s</a>
@@ -104,14 +104,14 @@
                     <p>Lorem Ipsum</p>
                 </div>
             </div>
-            <div class="d-none" id="leaderboardContainer">
+            <!--<div class="d-none" id="leaderboardContainer">
                 <div class="main-content" id="leaderboardMainContent">
                     <h2 class="mainTitle" id="leaderboardTitle">Leaderboard</h2>
-                    <div class="datagrid-container" id="lBoard">
+                    <div class="datagrid-container" id="lBoard">-->
                         <!--Insert Leaderboard Datagrid Here-->
-                    </div>
+                    <!--</div>
                 </div>
-            </div>
+            </div>-->
             <div class="d-none" id="gameBoardContainer">
                 <div class="row" id="playerInfoContainer">
                     <div class="col-5" id="player1Info">
@@ -163,7 +163,7 @@
                             <h3 class="menuTitle">Options</h3>
                             <form>
                                 <button type="button" onclick="show('creategame', 'creategame')">Create Game</button><br>
-                                <button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>
+                                <!--<button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>-->
                                 <button type="button" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
@@ -185,19 +185,19 @@
                             <h3 class="menuTitle">Create a Game</h3>
                             <div class="control-container">
                                 <form>
-                                    <input type="radio" id="createSinglePlayer" name="creategame" value="single">
-                                    <label for="createSinglePlayer">Single Player</label><br>
+                                    <!--<input type="radio" id="createSinglePlayer" name="creategame" value="single">
+                                    <label for="createSinglePlayer">Single Player</label><br>-->
                                     <input type="radio" id="createHotseat" name="creategame" value="hotseat">
                                     <label for="createHotseat">Hotseat</label><br>
-                                    <input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
-                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>
+                                    <!--<input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
+                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>-->
                                     <div class="control-buttons">
                                         <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="beginCreateGame()">Next</button>
                                     </div>                                   
                                 </form>                                    
                             </div>
                         </div>
-                        <div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
+                        <!--<div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
                             <h3 class="menuTitle">Set Difficulty</h3>
                             <div class="control-container">
                                 <form>
@@ -212,7 +212,7 @@
                                     </div>
                                 </form>                                    
                             </div>
-                        </div>
+                        </div>-->
                         <div id="menuCreateHotseat" class="menu-content d-none mc-creategame-hotseat">
                             <h3 class="menuTitle">Enter Player 2 Username</h3>
                             <div class="control-container">
@@ -256,7 +256,7 @@
                                 </div>
                             </form>                        
                         </div>                        
-                        <div id="menuCreateMultiplayer" class="menu-content d-none mc-creategame-multiplayer">
+                        <!--<div id="menuCreateMultiplayer" class="menu-content d-none mc-creategame-multiplayer">
                             <h3 class="menuTitle">Waiting for other Player</h3>
                             <div class="control-container">
                                 <form>                                   
@@ -270,9 +270,9 @@
                         <div id="menuJoinGame" class="menu-content d-none mc-joingame">
                             <h3 class="menuTitle" id="menuJoinGameTitle">Available Games</h3>
                             <div class="control-container" id="menuJoinControlContainer">
-                                <div class="datagrid-container" id="gameList">
+                                <div class="datagrid-container" id="gameList">-->
                                     <!--Insert Game List Datagrid Here-->
-                                </div>
+                                <!--</div>
                                 <div class="row no-gutters" id="menuJoinControlRow">
                                     <div class="col">
                                         <div class="refresh-button">
@@ -286,7 +286,7 @@
                                     </div>
                                 </div>                                
                             </div>                        
-                        </div>                                                                     
+                        </div>-->                                                                     
                     </div>
                 </div>
             </div>                    
