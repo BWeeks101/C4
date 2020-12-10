@@ -39,14 +39,12 @@ function toggleColorMode() {
     let mode = document.getElementById("colorMode").innerHTML;
     switch (mode) {
         case "Dark Mode":
-            document.getElementById("colorMode").innerHTML = "Light Mode";
+            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Light Mode";});
             switchColorMode("dark");
-            closeNav();
             break;
         case "Light Mode":
-            document.getElementById("colorMode").innerHTML = "Dark Mode";
+            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Dark Mode";});
             switchColorMode("light");
-            closeNav();
             break;
     }
 }
