@@ -129,16 +129,16 @@ function sideNavShow(option) {
         case "rules":
             switch (c4.game.state) {
                 case "default":
-                    sideNavLinkDisplay("show", "sn-signin");
-                    break;
+                    /*sideNavLinkDisplay("show", "sn-signin");
+                    break;*/
                 case "options":
-                    sideNavLinkDisplay("show", "sn-options");
+                    /*sideNavLinkDisplay("show", "sn-options");
                     sideNavSoutSelectShow("sout");
-                    break;
+                    break;*/
                 case "settings":
                     sideNavLinkDisplay("show", "sn-options");
                     sideNavLinkDisplay("show", "sn-settings");
-                    sideNavSoutSelectShow("sout");
+                    /*sideNavSoutSelectShow("sout");*/
                     break;
             }        
             sideNavLinkDisplay("show", "sn-leaderboard");
