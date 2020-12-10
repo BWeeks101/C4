@@ -67,14 +67,18 @@ function stopHotseat() {
 }
 
 function startTurnTimer() {
-    document.getElementById("turnTimeLimit").innerHTML = `${c4.game.turnTimeLimit}`;
+    console.log(c4.game.turnTimeLimit);
+    console.log(document.getElementById("turnTimeLimit").firstElementChild);
+    console.log(document.getElementById("turnTimeLimit").firstElementChild.innerHTML);
+
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`;
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
 function updateTurnTimer() {
-    timerVal = parseInt(document.getElementById("turnTimeLimit").innerHTML);
+    timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML);
     if (timerVal > 0) {
-        document.getElementById("turnTimeLimit").innerHTML = `${timerVal-1}`;
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${timerVal-1}`;
     } else {
         //console.log(`P${c4.game.activePlayer} Missed Turn - selecting random column`)
         parseColSelection(selectRandCol());
@@ -91,7 +95,7 @@ function resumeTurnTimer() {
 
 function stopTurnTimer() {
     clearInterval(c4.game.activeTurnTimer);
-    document.getElementById("turnTimeLimit").innerHTML = ``;
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = ``;
 }
 
 function restartTurnTimer() {
@@ -176,7 +180,7 @@ function selectRandCol() {
     for (i = 5; i > -1; i--) {
         if (c4.game.boardState[col][i] == undefined) {
             c4.game.boardState[col][i] = c4.game.activePlayer;
-            document.getElementById(`gBoardCol${col}RowId${i}`).firstChild.lastChild.classList.add(`gbP${c4.game.activePlayer}`);
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`);
             c4.game.completedTurns++;
             //console.log(`Col: ${col}, Row: ${i}`);
             winner = checkWin(col, i);
@@ -194,7 +198,7 @@ function selectCol(object) {
     for (i = result[1]; i > 0; i--) {
         if (c4.game.boardState[result[2]][i-1] == undefined) {
             c4.game.boardState[result[2]][i-1] = c4.game.activePlayer;
-            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstChild.lastChild.classList.add(`gbP${c4.game.activePlayer}`);
+            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`);
             c4.game.completedTurns++;
             winner = checkWin(result[2], i-1);
             return winner;
@@ -291,7 +295,7 @@ function checkWin(x, y) {
 
 function highlightWinningCells(results) {
     for (i = 1; i < 5; i++) {
-        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstChild.lastChild.classList.add(`highlightP${c4.game.activePlayer}`);
+        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstElementChild.lastElementChild.classList.add(`highlightP${c4.game.activePlayer}`);
     }
 }
 
@@ -536,7 +540,7 @@ function setPlayerName(player, name) {
     }
     setPlayerSetting(`p${player}.name`, name)
     document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;
-    document.getElementById(`player${player}Info`).innerHTML = `<span>${name}</span>`;    
+    document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;    
     switch (player) {
         case 1:
             show("options", "options");
@@ -556,7 +560,7 @@ function setPlayerColor(player, option, elementId) {
 
 function setPlayerColors(player) {
     setPlayerColor(player, "token", `p${player}TokenColor`);
-    setPlayerColor(player, "altToken", `p${player}AltTokenColor`);
+    /*setPlayerColor(player, "altToken", `p${player}AltTokenColor`);*/
 }
 
 function getPlayerColor(player, option) {
