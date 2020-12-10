@@ -96,7 +96,7 @@ function mainShow(option) {
             break;
         case "createp2settings":
             document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
-            document.getElementById("p2AltTokenColor").value = getPlayerColor(2, "altToken");
+            /*document.getElementById("p2AltTokenColor").value = getPlayerColor(2, "altToken");*/
             elementDisplay("show", "menuCreateP2Settings");
             break;
         case "createmultiplayer":
@@ -164,13 +164,13 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-settings");
             sideNavLinkDisplay("show", "sn-leaderboard");
             sideNavLinkDisplay("show", "sn-rules");
-            sideNavSoutSelectShow("sout");
+            /*sideNavSoutSelectShow("sout");*/
             break;
         case "settings":
             sideNavLinkDisplay("show", "sn-options");
             sideNavLinkDisplay("show", "sn-leaderboard");
             sideNavLinkDisplay("show", "sn-rules");
-            sideNavSoutSelectShow("sout");
+            /*sideNavSoutSelectShow("sout");*/
             break;
         case "creategame":
         case "createsingle":
@@ -179,7 +179,7 @@ function sideNavShow(option) {
         case "createp2settings":
         case "createsetturntime":
             sideNavLinkDisplay("show", "sn-cancelcreate");    
-            sideNavSoutSelectShow("sout");
+            /*sideNavSoutSelectShow("sout");*/
             break;
         case "joingame":
             sideNavLinkDisplay("show", "sn-canceljoin");
@@ -189,14 +189,14 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-ctrlgroup");
             elementDisplay("hide", "ctrlResumeLink");
             sideNavLinkDisplay("hide", "sn-concede");
-            sideNavSoutSelectShow("sn-out-mult");
+            /*sideNavSoutSelectShow("sn-out-mult");*/
             break;
         default:
             break;
     }        
 }
 
-function sideNavSoutSelectShow(option) {
+/*function sideNavSoutSelectShow(option) {
     if (option === undefined || option === "sout") {
         sideNavLinkDisplay("hide", "sn-sout-mult");
         sideNavLinkDisplay("show", "sn-sout");
@@ -206,14 +206,14 @@ function sideNavSoutSelectShow(option) {
         sideNavLinkDisplay("show", "sn-sout-mult");
         elementDisplay("show", "soutGroup");
     };    
-}
+}*/
 
 function cancelJoinGame() {    
     dataGridDisplayRemove("gameList");
     show("options", "options");
 }
 
-function signOut() {
+function quitGame() {
     switch (c4.game.state) {
         case "joingame":
             dataGridDisplayRemove("gameList");
@@ -225,7 +225,7 @@ function signOut() {
             break;
     }
 
-    show("default", "default");
+    show("options", "default");
 }
 
 function refreshJoinGame() {
@@ -245,15 +245,15 @@ function createGameSetP2() {
     createGameNextButton("setp2");
 }
 
-function createGameP2Settings() {
+/*function createGameP2Settings() {
     setPlayerColors(2);
     show("createsetturntime", c4.game.state);
-}
+}*/
 
-function saveP1Settings() {
+/*function saveP1Settings() {
     setPlayerColors(1);
     show("options", "options");
-}
+}*/
 
 function refreshGameBoard() {
     switch (c4.game.state) {

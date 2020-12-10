@@ -67,10 +67,6 @@ function stopHotseat() {
 }
 
 function startTurnTimer() {
-    console.log(c4.game.turnTimeLimit);
-    console.log(document.getElementById("turnTimeLimit").firstElementChild);
-    console.log(document.getElementById("turnTimeLimit").firstElementChild.innerHTML);
-
     document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`;
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
@@ -511,25 +507,24 @@ function scanDir(scanDir, startX, startY, results) {
     return results;
 }
 
+function saveSettings(player) {
+    setPlayerName(player, document.getElementById(`p${player}UserName`).value);
+    setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);    
+}
+
 function setPlayerSetting(setting, value) {
     switch (setting) {
-        case "p1.name":
+        case "p1Name":
             c4.game.p1.name = value;
             break;
-        case "p1.tokenColor":
+        case "p1TokenColor":
             c4.game.p1.tokenColor = value;
             break;
-        case "p1.altTokenColor":
-            c4.game.p1.altTokenColor = value;
-            break;
-        case "p2.name":
+        case "p2Name":
             c4.game.p2.name = value;
             break;
-        case "p2.tokenColor":
+        case "p2TokenColor":
             c4.game.p2.tokenColor = value;
-            break;
-        case "p2.altTokenColor":
-            c4.game.p2.altTokenColor = value;
             break;
     }
 }
@@ -539,29 +534,26 @@ function setPlayerName(player, name) {
         name = `Player ${player}`;
     }
     setPlayerSetting(`p${player}.name`, name)
-    document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;
+    /*document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;*/
     document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;    
-    switch (player) {
+    /*switch (player) {
         case 1:
             show("options", "options");
             break;
         case 2:
             createGameSetP2();
             break;
-    }
+    }*/
 }
 
-/* Options: */
-/* token */
-/* altToken */
-function setPlayerColor(player, option, elementId) {
+/*function setPlayerColor(player, option, elementId) {
     setPlayerSetting(`p${player}.${option}Color`, document.getElementById(elementId).value);
-}
+}*/
 
-function setPlayerColors(player) {
+/*function setPlayerColors(player) {
     setPlayerColor(player, "token", `p${player}TokenColor`);
-    /*setPlayerColor(player, "altToken", `p${player}AltTokenColor`);*/
-}
+    setPlayerColor(player, "altToken", `p${player}AltTokenColor`);
+}*/
 
 function getPlayerColor(player, option) {
     switch (player) {

@@ -30,25 +30,25 @@
                 <a id="colorMode" class="colorMode" onclick="toggleColorMode()" href="#">Light Mode</a>
                 <a id="optionsLink" class="sn-options d-none" onclick="show('options', 'options')" href="#">Back to Options</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
-                <a id="signInLink" class="sn-signin d-none" onclick="show('default', 'default')" href="#">Back to Sign In</a>
-                <hr id="signInDivider" class="sn-signin sidenav-divider d-none">
-                <a id="settingsLink" class="sn-settings d-none" onclick="show('settings', 'settings')" href="#">User Settings</a>
-                <hr id="settingsDivider" class="sn-settings sidenav-divider d-none">
+                <!--<a id="signInLink" class="sn-signin d-none" onclick="show('default', 'default')" href="#">Back to Sign In</a>
+                <hr id="signInDivider" class="sn-signin sidenav-divider d-none">-->
+                <a id="settingsLink" class="sn-settings default" onclick="show('settings', 'settings')" href="#">User Settings</a>
+                <hr id="settingsDivider" class="sn-settings sidenav-divider default">
                 <!--<a id="leaderboardLink" class="sn-leaderboard default" onclick="show('leaderboard')" href="#">View Leaderboard</a>
                 <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">-->
                 <a id="rulesLink" class="sn-rules default" onclick="show('rules')" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
-                <a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
-                <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">
+                <!--<a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
+                <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">-->
                 <!--<a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="cancelJoinGame()" href="#">Cancel Joining a Game</a>
                 <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">-->
-                <div id="typeGroup" class="sn-typegroup d-none">
+                <!--<div id="typeGroup" class="sn-typegroup d-none">
                     <h5>Game Type</h5>
-                    <!--<a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>-->
+                    <a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>
                     <a id="typeHSLink" class="sn-typegroup underheader" href="#">Hotseat</a>
-                    <!--<a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>-->
+                    <a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>
                     <hr id="typeGroupDivider" class="sn-typegroup sidenav-divider">
-                </div>
+                </div>-->
                 <!--<div id="diffGroup" class="sn-diffgroup d-none">
                 <h5>Difficulty</h5>
                     <a id="diffEasyLink" class="sn-diffgroup underheader" href="#">Easy</a>
@@ -56,7 +56,7 @@
                     <a id="diffHardLink" class="sn-diffgroup underheader" href="#">Hard</a>
                     <hr id="diffGroupDivider" class="sn-diffgroup sidenav-divider">
                 </div>-->
-                <div id="turnGroup" class="sn-turngroup d-none">
+                <!--<div id="turnGroup" class="sn-turngroup d-none">
                 <h5>Turn Time Limit</h5>
                     <a id="turn5Link" class="sn-turngroup underheader" href="#">5s</a>
                     <a id="turn10Link" class="sn-turngroup underheader" href="#">10s</a>
@@ -65,7 +65,7 @@
                     <a id="turn25Link" class="sn-turngroup underheader" href="#">25s</a>
                     <a id="turn30Link" class="sn-turngroup underheader" href="#">30s</a>
                     <hr id="turnGroupDivider" class="sn-turngroup sidenav-divider">
-                </div>
+                </div>-->
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
                     <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" onclick="pauseGame()" href="#">Pause</a>
                     <a id="ctrlResumeLink" class="sn-ctrlgroup sn-pause-reset d-none" onclick="resumeGame()" href="#">Resume</a>
@@ -73,17 +73,17 @@
                     <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider sn-pause-reset">
                     <a id="concedeLink" class="sn-ctrlgroup sn-concede" href="#">Concede</a>                
                     <hr id="concedeDivider" class="sn-ctrlgroup sn-concede sidenav-divider">
-                    <a id="quitLink" class="sn-ctrlgroup sn-quit" href="#">Quit</a>
+                    <a id="quitLink" class="sn-ctrlgroup sn-quit" href="#" onclick="quitGame()">Quit</a>
                     <hr id="quitDivider" class="sn-ctrlgroup sn-quit sidenav-divider">
                 </div>
-                <div id="soutGroup" class="sn-soutgroup d-none">
+                <!--<div id="soutGroup" class="sn-soutgroup d-none">
                     <a id="soutLink" class="sn-soutgroup sn-sout" onclick="signOut()" href="#">Sign Out</a>
                     <hr id="soutDivider" class="sn-soutgroup sidenav-divider sn-sout">
                     <a id="soutMultP1Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P1)</a>
                     <a id="soutMultP2Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P2)</a>
                     <a id="soutMultBothLink" class="sn-soutgroup sn-sout-mult" onclick="signOut()" href="#">Sign Out (Both)</a>
                     <hr id="soutMultDivider" class="sn-soutgroup sidenav-divider sn-sout-mult">
-                </div>
+                </div>-->
             </div>            
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logo-red.png" alt="K4 Logo">                        
@@ -150,7 +150,7 @@
             <div id="menuBlock">
                 <div id="menuContent">
                     <div id="menuContentContainer">
-                        <div id="menuSignIn" class="menu-content default">
+                        <!--<div id="menuSignIn" class="menu-content default">
                             <h3 class="menuTitle">Enter your Username</h3>
                             <form>
                                 <input type="text" maxlength="10">
@@ -158,48 +158,67 @@
                                     <button type="button" onclick="setPlayerName(1, this.parentNode.previousElementSibling.value)">Ok</button>
                                 </div>
                             </form>
-                        </div>
-                        <div id="menuOptions" class="menu-content d-none">
+                        </div>-->
+                        <div id="menuOptions" class="menu-content default">
                             <h3 class="menuTitle">Options</h3>
                             <form>
-                                <button type="button" onclick="show('creategame', 'creategame')">Create Game</button><br>
+                                <button type="button" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>
                                 <!--<button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>-->
                                 <button type="button" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
                         <div id="menuSettings" class="menu-content d-none">
                             <h3 class="menuTitle">User Settings</h3>
-                            <form>
-                                <label for="p1UserName">User Name</label>
-                                <input id="p1UserName" type="text" maxlength="10">                                
-                                <label for="p1TokenColor">Token Colour</label>
-                                <input id="p1TokenColor" type="color"><br>
-                                <!--<label for="p1AltTokenColor">Alt Token Colour</label>
-                                <input id="p1AltTokenColor" type="color"><br>
-                                <button type="button">Upload Token Image</button><br>
-                                <button type="button">Upload Profile Image</button><br>-->
-                                <div class="control-buttons">
-                                    <button type="button" onclick="show('options', 'options')">Cancel</button><button type="button" onclick="saveP1Settings()">Ok</button>
-                                </div>
-                            </form>
+                            
+                            <div class="control-container">
+                                <h3 class="menuTitle">Player 1 Settings</h3>
+                                <form>
+                                    <label for="p1UserName">User Name</label>
+                                    <input id="p1UserName" type="text" maxlength="10"><br>
+                                    <label for="p1TokenColor">Token Colour</label>
+                                    <input id="p1TokenColor" type="color"><br>
+                                    <!--<label for="p1AltTokenColor">Alt Token Colour</label>
+                                    <input id="p1AltTokenColor" type="color"><br>
+                                    <button type="button">Upload Token Image</button><br>
+                                    <button type="button">Upload Profile Image</button><br>-->
+                                    <div class="control-buttons">
+                                        <button type="button" onclick="saveSettings(1)">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="control-container">
+                                <h3 class="menuTitle">Player 2 Settings</h3>
+                                <form>
+                                    <label for="p2UserName">User Name</label>
+                                    <input id="p2UserName" type="text" maxlength="10"><br>
+                                    <label for="p2TokenColor">Token Colour</label>
+                                    <input id="p2TokenColor" type="color"><br>
+                                    <div class="control-buttons">
+                                        <button type="button" onclick="saveSettings(2)">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="control-buttons">
+                                <button type="button" onclick="show('options', 'options')">Back</button>
+                            </div>
                         </div>
-                        <div id="menuCreateGame" class="menu-content d-none">
+                        <!--<div id="menuCreateGame" class="menu-content d-none">
                             <h3 class="menuTitle">Create a Game</h3>
                             <div class="control-container">
                                 <form>
-                                    <!--<input type="radio" id="createSinglePlayer" name="creategame" value="single">
-                                    <label for="createSinglePlayer">Single Player</label><br>-->
+                                    <input type="radio" id="createSinglePlayer" name="creategame" value="single">
+                                    <label for="createSinglePlayer">Single Player</label><br>
                                     <input type="radio" id="createHotseat" name="creategame" value="hotseat">
                                     <label for="createHotseat">Hotseat</label><br>
-                                    <!--<input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
-                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>-->
+                                    <input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
+                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>
                                     <div class="control-buttons">
                                         <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="beginCreateGame()">Next</button>
                                     </div>                                   
                                 </form>                                    
                             </div>
                         </div>
-                        <!--<div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
+                        <div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
                             <h3 class="menuTitle">Set Difficulty</h3>
                             <div class="control-container">
                                 <form>
@@ -214,7 +233,7 @@
                                     </div>
                                 </form>                                    
                             </div>
-                        </div>-->
+                        </div>
                         <div id="menuCreateHotseat" class="menu-content d-none mc-creategame-hotseat">
                             <h3 class="menuTitle">Enter Player 2 Username</h3>
                             <div class="control-container">
@@ -230,6 +249,8 @@
                             <h3 class="menuTitle">Player 2 Settings</h3>
                             <div class="control-container">
                                 <form>
+                                    <label for="p2UserName">User Name</label>
+                                    <input id="p2UserName" type="text" maxlength="10"><br>
                                     <label for="p2TokenColor">Token Colour</label>
                                     <input id="p2TokenColor" type="color"><br>
                                     <label for="p2AltTokenColor">Alt Token Colour</label>
@@ -241,7 +262,7 @@
                                     </div>
                                 </form>                                 
                             </div>
-                        </div>
+                        </div>-->
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
@@ -254,7 +275,7 @@
                                     <option value="30">30 Seconds</option>
                                 </select>
                                 <div class="control-buttons">
-                                    <button type="button" onclick="createSetTurnTimeBackButton()">Back</button><button type="button" onclick="startGame()">Ok</button>
+                                    <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="startGame()">Ok</button>
                                 </div>
                             </form>                        
                         </div>                        
