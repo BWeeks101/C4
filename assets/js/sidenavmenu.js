@@ -73,7 +73,7 @@ function mainShow(option) {
             break;
         case "settings":
             document.getElementById("p1TokenColor").value = getPlayerColor(1, "token");
-            document.getElementById("p1AltTokenColor").value = getPlayerColor(1, "altToken");
+            /*document.getElementById("p1AltTokenColor").value = getPlayerColor(1, "altToken");*/
             elementDisplay("show", "menuSettings");
             break;
         case "creategame":
