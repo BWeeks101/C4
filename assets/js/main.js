@@ -23,7 +23,7 @@ let c4 = new appGlobals();
 $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
-    c4.state = "default";
+    c4.game.state = "default";
     sideNavOnLoad();    
     elementDisplay("toggle","menuBlockContainer");
     mainOnResize();
@@ -68,7 +68,7 @@ function mainBlockResize() {
         mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
         document.getElementById("mainBlockContainer").style.paddingBottom = `${mainBlockContainerPadBottom}px`;
 
-        if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
+        /*if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
 
             document.getElementById("leaderboardContainer").style.removeProperty("height");
             document.getElementById("lBoard").style.removeProperty("height");
@@ -99,7 +99,7 @@ function mainBlockResize() {
             document.getElementById("lBoardContentContainer").style.height = `${lBoardContentContainerHeight}px`;
 
             dataGridAdjustForScrollBars("lBoard");
-        } else if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
+        } else*/ if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
 
             document.getElementById("gameBoardContainer").style.removeProperty("height");
             document.getElementById("gameBoardContainer").style.removeProperty("max-width");
@@ -143,7 +143,7 @@ function menuBlockResize() {
     menuBlockHeight = calcBlockHeight();
     document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;
 
-    if (document.getElementById("menuJoinGame").classList.contains("d-none") == false) {
+    /*if (document.getElementById("menuJoinGame").classList.contains("d-none") == false) {
         
         document.getElementById("menuJoinGame").style.removeProperty("height")
         document.getElementById("menuJoinControlContainer").style.removeProperty("height")
@@ -179,7 +179,7 @@ function menuBlockResize() {
         document.getElementById("gameListContentContainer").style.height = `${gameListContentContainerHeight}px`;
 
         dataGridAdjustForScrollBars("gameList");
-    }
+    }*/
 }
 
 /* Get Computed Property of element */
