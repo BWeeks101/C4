@@ -38,5 +38,6 @@ class gameSettings {
 class appGlobals {
     constructor() {
         this.game = new gameSettings();
+        this.sideNavState = "closed";
     }
 }
