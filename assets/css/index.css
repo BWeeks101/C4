@@ -66,21 +66,25 @@ body {
     width: 100%;
 }
 
-/* Copied from dropbox btn-lg and tweaked */
-.c4-button-large {
-    padding: .5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .9rem;
-}
-
 .c4-button {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .45rem;
     border-width: 1px;
     border-style: solid;
     transition: 0.5s;
     color: var(--togglerIconBackground);
     border-color: var(--darkToggler);
     background-color: var(--mainBackground);
+}
+
+/* Copied from dropbox btn-lg and tweaked */
+.c4-button-large {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .9rem;
 }
 
 .c4-button:hover {
