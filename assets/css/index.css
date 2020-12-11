@@ -41,9 +41,11 @@ body {
     width: calc(100% - 20px);
 }
 
+/*
 #lBoard {
     padding-bottom: 0;
 }
+*/
 
 .main-content, .menu-content {
     background-color: var(--mainBackground);
@@ -54,6 +56,36 @@ body {
 .mainTitle, .menuTitle {
     margin: 0;
     padding-bottom: 10px;
+}
+
+.c4-button-margin-bottom {
+    margin-bottom: 5px;
+}
+
+.c4-button-full-width {
+    width: 100%;
+}
+
+/* Copied from dropbox btn-lg and tweaked */
+.c4-button-large {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .9rem;
+}
+
+.c4-button {
+    border-width: 1px;
+    border-style: solid;
+    transition: 0.5s;
+    color: var(--togglerIconBackground);
+    border-color: var(--darkToggler);
+    background-color: var(--mainBackground);
+}
+
+.c4-button:hover {
+    border-color: var(--togglerHoverBorder);
+    color: var(--togglerHoverIcon);
 }
 
 .control-container {
