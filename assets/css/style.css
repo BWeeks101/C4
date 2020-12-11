@@ -98,7 +98,7 @@ a:hover, .header-nav-link-text:hover {
 }
 
 .navbar-toggler {
-    border-radius: 15px;
+    border-radius: .9rem;
 }
 /*........../.set page defaults*/
 
