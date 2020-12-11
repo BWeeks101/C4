@@ -25,7 +25,7 @@ function sideNavResize() {
 }
 
 function sideNavState() {
-    if (document.getElementById("sideNav").classList.contains("d-none")) {
+    if (c4.sideNavState == "closed" || c4.sideNavState == "closing") {
         return "closed";
     } else {
         return "open"
@@ -83,6 +83,11 @@ function sideNavDocOverlayLTD() {
 
 /* Set the width of the side navigation to 250px */
 function openNav() {
+    if (c4.sideNavState == "open" || c4.sideNavState == "opening") {
+        console.log(`sideNav already ${c4.sideNavState}.`);
+        return;
+    }
+    c4.sideNavState = "opening";
     sideNavDisplayToggle();
     document.getElementById("navBarToggler").disabled = true;
     setTimeout(function() {
@@ -90,6 +95,7 @@ function openNav() {
         setTimeout(function() {
             sideNavDocOverlayLTD();
             sideNavDocOverlayClickDisabled();
+            c4.sideNavState = "open";
         }, 600);
     }, 50);
 }
@@ -105,6 +111,11 @@ function showNav() {
 
 /* Set the width of the side navigation to 0 */
 function closeNav() {
+    if (c4.sideNavState == "closed" || c4.sideNavState == "closing") {
+        console.log(`sideNav already ${c4.sideNavState}.`);
+        return;
+    }
+    c4.sideNavState = "closing";
     sideNavDocOverlayLTD();
     sideNavDocOverlayClickDisabled();
     setTimeout(function() {
@@ -112,6 +123,7 @@ function closeNav() {
         setTimeout(function() {
             sideNavDisplayToggle();
             document.getElementById("navBarToggler").disabled = false;
+            c4.sideNavState = "closed";
         }, 600);
     }, 50);    
 }
