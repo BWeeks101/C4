@@ -43,6 +43,7 @@ function feedbackStartDelay() {
             elementDisplay("show", "feedbackControlRow");
             document.getElementById("feedbackMessage").innerHTML = "";
             startTurnTimer();
+            showGameSideNavMenu();
         }
     }, 1000);    
 }

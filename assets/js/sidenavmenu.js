@@ -181,14 +181,16 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-cancelcreate");    
             /*sideNavSoutSelectShow("sout");*/
             break;
-        case "joingame":
+        /*case "joingame":
             sideNavLinkDisplay("show", "sn-canceljoin");
             sideNavSoutSelectShow("sout");
-            break;
+            break;*/
         case "starthotseat":
             sideNavLinkDisplay("show", "sn-ctrlgroup");
-            elementDisplay("hide", "ctrlResumeLink");
+            //elementDisplay("hide", "ctrlResumeLink");
+            sideNavLinkDisplay("hide", "sn-pause-reset")
             sideNavLinkDisplay("hide", "sn-concede");
+            
             /*sideNavSoutSelectShow("sn-out-mult");*/
             break;
         default:
@@ -207,6 +209,12 @@ function sideNavShow(option) {
         elementDisplay("show", "soutGroup");
     };    
 }*/
+
+
+function showGameSideNavMenu() {
+    sideNavLinkDisplay("show", "sn-pause-reset");
+    elementDisplay("hide", "ctrlResumeLink");            
+}
 
 function cancelJoinGame() {    
     dataGridDisplayRemove("gameList");
@@ -228,22 +236,22 @@ function quitGame() {
     show("options", "default");
 }
 
-function refreshJoinGame() {
+/*function refreshJoinGame() {
     dataGridDisplayRefresh(gameListDG, "gameList");
     menuBlockResize();
-}
+}*/
 
-function beginCreateGame() {
+/*function beginCreateGame() {
     createGameNextButton(radioGroupGetValue("creategame"));
-}
+}*/
 
-function createGameSetDifficulty() {
+/*function createGameSetDifficulty() {
     createGameNextButton(radioGroupGetValue("diff"));
-}
+}*/
 
-function createGameSetP2() {
+/*function createGameSetP2() {
     createGameNextButton("setp2");
-}
+}*/
 
 /*function createGameP2Settings() {
     setPlayerColors(2);
@@ -258,7 +266,7 @@ function createGameSetP2() {
 function refreshGameBoard() {
     switch (c4.game.state) {
         case "createhotseat":
-            mainShow("starthotseat");
+            show("starthotseat");
             break;
     }
 }
