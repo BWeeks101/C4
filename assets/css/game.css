@@ -91,7 +91,7 @@
 
 .feedback-container {
     width: 100%;
-    min-height: 76px;
+    min-height: 87px;
     padding: 5px 0;
     background-color: var(--feedbackBackground);
 }
