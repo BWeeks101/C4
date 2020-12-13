@@ -34,6 +34,7 @@ body {
 
 #menuContentContainer {
     width: 75%;
+    max-width: 360px;
 }
 
 #menuContent h3 {
