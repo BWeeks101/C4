@@ -16,6 +16,7 @@
 
     
 </head>
+
 <body onresize="mainOnResize()">
     <!--Nav-->
     <header id="header">
@@ -165,44 +166,49 @@
                                 <!--<button type="button" class="options-button options-button-margin btn btn-lg btn-danger" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>-->
                                 <button type="button" class="c4-button c4-button-large c4-button-full-width c4-button-margin-bottom" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>
                                 <!--<button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>-->
-                                <button type="button" class="options-button btn btn-lg btn-danger" onclick="show('settings', 'settings')">User Settings</button>
+                                <button type="button" class="c4-button c4-button-large c4-button-full-width" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
                         <div id="menuSettings" class="menu-content d-none">
                             <h3 class="menuTitle">User Settings</h3>
-                            <br>
                             <div class="control-container">
-                                <h3 class="menuTitle">Player 1 Settings</h3>
+                                <h3 class="menuTitle">Player 1</h3>
                                 <form>
-                                    <label for="p1UserName">User Name</label><br>
-                                    <input id="p1UserName" type="text" maxlength="10"><br>
-                                    <label for="p1TokenColor">Token Colour</label><br>
-                                    <input id="p1TokenColor" type="color"><br>
+                                    <div class="row no-gutters">
+                                        <div class="col-5"><label for="p1UserName">User Name</label></div>
+                                        <div class="col"><input id="p1UserName" type="text" class="c4-button c4-button-full-width c4-button-margin-bottom" maxlength="8"></div>
+                                    </div>
+                                    <div class="row no-gutters">
+                                        <div class="col-5"><label id="p1TokenColorLabel" for="p1TokenColor">Token Colour</label></div>
+                                        <div class="col"><input id="p1TokenColor" class="c4-button c4-button-full-width" type="color"></div>
+                                    </div>
                                     <!--<label for="p1AltTokenColor">Alt Token Colour</label>
                                     <input id="p1AltTokenColor" type="color"><br>
                                     <button type="button">Upload Token Image</button><br>
                                     <button type="button">Upload Profile Image</button><br>-->
                                     <div class="control-buttons">
-                                        <button type="button" onclick="saveSettings(1)">Save</button>
+                                        <button type="button" class="c4-button c4-button-margin-top" onclick="saveSettings(1)">Save</button>
                                     </div>
                                 </form>
                             </div>
-                            <br>
                             <div class="control-container">
-                                <h3 class="menuTitle">Player 2 Settings</h3>
+                                <h3 class="menuTitle">Player 2</h3>
                                 <form>
-                                    <label for="p2UserName">User Name</label><br>
-                                    <input id="p2UserName" type="text" maxlength="10"><br>
-                                    <label for="p2TokenColor">Token Colour</label><br>
-                                    <input id="p2TokenColor" type="color"><br>
+                                    <div class="row no-gutters">
+                                        <div class="col-5"><label for="p2UserName">User Name</label></div>
+                                        <div class="col"><input id="p2UserName" type="text" class="c4-button c4-button-full-width c4-button-margin-bottom" maxlength="8"></div>
+                                    </div>
+                                    <div class="row no-gutters">
+                                        <div class="col-5"><label for="p2TokenColor">Token Colour</label></div>
+                                        <div class="col"><input id="p2TokenColor" class="c4-button c4-button-full-width" type="color"></div>
+                                    </div>
                                     <div class="control-buttons">
-                                        <button type="button" onclick="saveSettings(2)">Save</button>
+                                        <button type="button" class="c4-button c4-button-margin-top" onclick="saveSettings(2)">Save</button>
                                     </div>
                                 </form>
                             </div>
-                            <br>
                             <div class="control-buttons">
-                                <button type="button" onclick="show('options', 'options')">Back</button>
+                                <button type="button" class="c4-button c4-button-margin-top" onclick="show('options', 'options')">Back</button>
                             </div>
                         </div>
                         <!--<div id="menuCreateGame" class="menu-content d-none">
@@ -269,7 +275,7 @@
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
-                                <select name="turntime" id="turnTime">
+                                <select class="c4-button" name="turntime" id="turnTime">
                                     <option value="5">5 Seconds</option>
                                     <option value="10">10 Seconds</option>
                                     <option value="15">15 Seconds</option>
@@ -278,7 +284,7 @@
                                     <option value="30">30 Seconds</option>
                                 </select>
                                 <div class="control-buttons">
-                                    <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="startGame()">Ok</button>
+                                    <button type="button" class="c4-button c4-button-margin-top c4-button-margin-right" onclick="show('options', 'options')">Back</button><button type="button" class="c4-button c4-button-margin-top" onclick="startGame()">Ok</button>
                                 </div>
                             </form>                        
                         </div>                        

@@ -221,8 +221,8 @@ function calcBlockHeight() {
     let wHeight = window.innerHeight;
 
     /* Min Supported Browser Height */
-    if (wHeight < 760) {
-        wHeight = 760;
+    if (wHeight < 620) {
+        wHeight = 620;
     }
 
     /* Fixed Header and Footer Heights */

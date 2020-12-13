@@ -2,11 +2,17 @@
     padding: 20px;
 }
 
+#playerInfoContainer h3 {
+    font-size: 1.18rem;
+}
+
 #player1Info {
+    padding: 0;
     text-align: left;
 }
 
 #player2Info {
+    padding: 0;
     text-align: right;
 }
 

@@ -45,11 +45,18 @@ function hideAll(option) {
 
 function mainShow(option) {
     hideAll("mainBlockContainer");
-    if (option != "rules" && option != "leaderboard" && option !="starthotseat") {
+    //if (option != "rules" && option != "leaderboard" && option !="starthotseat") {
+    if (option != "rules" && option !="starthotseat") {
         elementDisplay("show", "imgContainer");
         hideAll("menuContentContainer");
         elementDisplay("show", "menuBlockContainer");                
-    }    
+    } 
+    if (option == "settings") {
+        elementDisplay("hide", "mainBlockContainer");
+    } else {
+        elementDisplay("show", "mainBlockContainer");
+    }
+
     switch (option) {
         case "default":            
             let elementCollection = document.getElementsByClassName("default");

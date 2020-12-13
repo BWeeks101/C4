@@ -20,21 +20,24 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #menuContent {
-    display: flex;
-    /*
+    display: flex;    
     align-items: center;
     justify-content: center;
-    */
-    font-size: 1em;    
+    width: 100%;
+    font-size: 1rem;    
+}
+
+#menuContentContainer {
+    width: 75%;
 }
 
 #menuContent h3 {
-    font-size: 1em;
+    font-size: 1rem;
 }
 
 #rulesContainer, #leaderboardContainer, #gameBoardContainer {
@@ -62,15 +65,29 @@ body {
     margin-bottom: 5px;
 }
 
+.c4-button-margin-top {
+    margin-top: 5px;
+}
+
+.c4-button-margin-left {
+    margin-left: 5px;
+}
+
+.c4-button-margin-right {
+    margin-right: 5px;
+}
+
 .c4-button-full-width {
     width: 100%;
 }
 
 .c4-button {
-    padding: .375rem .75rem;
-    font-size: 1rem;
+    padding: .3rem .5rem;
+    font-size: .9rem;
     line-height: 1.5;
     border-radius: .45rem;
+    min-height: 33.2px;
+    min-width: 46px;
     border-width: 1px;
     border-style: solid;
     transition: 0.5s;
@@ -90,6 +107,10 @@ body {
 .c4-button:hover {
     border-color: var(--togglerHoverBorder);
     color: var(--togglerHoverIcon);
+}
+
+label {
+    font-size: .9rem;    
 }
 
 .control-container {
