@@ -1,3 +1,5 @@
+/* Requires Bootstrap 4.5.2+ */
+
 /* DataGrid object constructor */
 /* Expects: */
 /* header = array containing column headers */
