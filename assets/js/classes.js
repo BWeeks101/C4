@@ -23,7 +23,7 @@ class gameSettings {
             [undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined]
         ];
-        this.gBoardDG = new DataGrid(["","","","","","",""], this.boardState);
+        this.gBoardDG = new DataGrid(["","","","","","",""], this.boardState);        
         this.p1 = new playerSettings();        
         this.p1.name = "Player 1";
         this.p1.tokenColor = "#EC4C4C";
@@ -39,5 +39,6 @@ class appGlobals {
     constructor() {
         this.game = new gameSettings();
         this.sideNavState = "closed";
+        this.logoGrid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
     }
 }
