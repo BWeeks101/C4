@@ -59,6 +59,10 @@
     background-color: blue;
 }
 
+.datagrid-col-custom-5 {
+    width: 20%;
+}
+
 .datagrid-col-custom-7 {
     width: 14.28%;
 }
