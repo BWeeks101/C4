@@ -62,27 +62,27 @@ body {
     padding-bottom: 10px;
 }
 
-.c4-button-margin-bottom {
+.c4-control-margin-bottom {
     margin-bottom: 5px;
 }
 
-.c4-button-margin-top {
+.c4-control-margin-top {
     margin-top: 5px;
 }
 
-.c4-button-margin-left {
+.c4-control-margin-left {
     margin-left: 5px;
 }
 
-.c4-button-margin-right {
+.c4-control-margin-right {
     margin-right: 5px;
 }
 
-.c4-button-full-width {
+.c4-control-full-width {
     width: 100%;
 }
 
-.c4-button {
+.c4-control {
     padding: .3rem .5rem;
     font-size: .9rem;
     line-height: 1.5;
@@ -105,8 +105,11 @@ body {
     border-radius: .9rem;
 }
 
-.c4-button:hover {
+.c4-control:hover {
     border-color: var(--togglerHoverBorder);
+}
+
+.c4-button:hover, .c4-button-large:hover {
     color: var(--togglerHoverIcon);
 }
 
