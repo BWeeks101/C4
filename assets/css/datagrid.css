@@ -58,3 +58,23 @@
 .datagrid-col-selected {
     background-color: blue;
 }
+
+.datagrid-col-custom-7 {
+    width: 14.28%;
+}
+
+.datagrid-col-custom-8 {
+    width: 12.5%;
+}
+
+.datagrid-col-custom-9 {
+    width: 11.11%;
+}
+
+.datagrid-col-custom-10 {
+    width: 10%;
+}
+
+.datagrid-col-custom-11 {
+    width: 9.09%;
+}

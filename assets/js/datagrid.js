@@ -97,13 +97,43 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class"datagrid-header-container" id="${headerContainer}"><div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div></div>`);
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
-    if (colCount < 12) {
-        bootstrapColWidth = Math.ceil(12 / colCount);
-    } else {
-        bootstrapColWidth = 1;
+    switch (colCount) {
+        case 1:
+            bootstrapColWidth = "-12";
+            break;
+        case 2:
+            bootstrapColWidth = "-6";
+            break;
+        case 3:
+            bootstrapColWidth = "-4";
+            break;
+        case 4:
+            bootstrapColWidth = "-3";
+            break;
+        case 6:
+            bootstrapColWidth = "-2";
+            break;
+        case 7:
+            bootstrapColWidth = " datagrid-col-custom-7";
+            break;
+        case 8:
+            bootstrapColWidth = " datagrid-col-custom-8";
+            break;
+        case 9:
+            bootstrapColWidth = " datagrid-col-custom-9";
+            break;
+        case 10:
+            bootstrapColWidth = " datagrid-col-custom-10";
+            break;
+        case 11:
+            bootstrapColWidth = " datagrid-col-custom-11";
+            break;
+        default:
+            bootstrapColWidth = "-1";
+            break;
     }
-
-    let colStart = `<div class="col-${bootstrapColWidth}" id="${dataGridDisplayId}`;
+        
+    let colStart = `<div class="col${bootstrapColWidth}" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
     let cColTag = "Ccol-";    
     let headerColMid = `"><h3>`;
