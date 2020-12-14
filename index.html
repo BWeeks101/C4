@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/sidenav.css" type="text/css">
     <link rel="stylesheet" href="assets/css/datagrid.css" type="text/css">
     <link rel="stylesheet" href="assets/css/index.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/logo.css" type="text/css">
     <link rel="stylesheet" href="assets/css/game.css" type="text/css">
     <link id="colorStyle" rel="stylesheet" href="assets/css/dark.css" type="text/css">
 
@@ -97,7 +98,10 @@
     <main id="main">
         <div class="container-fluid text-center default" id="mainBlockContainer">
             <div id="imgContainer" class="default">
-                <img src="assets/images/logo-red.png" alt="C4 Logo">                                
+                <!--<img src="assets/images/logo-red.png" alt="C4 Logo">-->
+                <div class="datagrid-container" id="logoGrid">
+                    <!--Logo Grid Here-->
+                </div>
             </div>
             <div class="d-none" id="rulesContainer">
                 <div class="main-content" id="rulesMainContent">
@@ -135,11 +139,11 @@
                             <!--Winner Message Here-->
                         </div>
                         <div class="row feedback-control-row" id="feedbackControlRow">
-                            <div class="col">
-                                <button class="c4-control c4-button" onclick="refreshGameBoard()">Rematch</button>
+                            <div class="col-6">
+                                <button class="c4-control c4-button c4-control-full-width" onclick="refreshGameBoard()">Rematch</button>
                             </div>
-                            <div class="col">
-                                <button class="c4-control c4-button" onclick="quitGame()">Quit</button>
+                            <div class="col-6">
+                                <button class="c4-control c4-button c4-control-full-width" onclick="quitGame()">Quit</button>
                             </div>
                         </div>
                     </div>
@@ -185,10 +189,15 @@
                                     <!--<label for="p1AltTokenColor">Alt Token Colour</label>
                                     <input id="p1AltTokenColor" type="color"><br>
                                     <button type="button">Upload Token Image</button><br>
-                                    <button type="button">Upload Profile Image</button><br>-->
-                                    <div class="control-buttons">
-                                        <button type="button" class="c4-control c4-button c4-control-margin-top" onclick="saveSettings(1)">Save</button>
-                                    </div>
+                                    <button type="button">Upload Profile Image</button><br>-->                                    
+                                    <div class="row no-gutters">
+                                        <div class="col-5"></div>
+                                        <div class="col">
+                                            <div class="control-buttons">
+                                                <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top c4-control-margin-bottom" onclick="saveSettings(1)">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>                                    
                                 </form>
                             </div>
                             <div class="control-container">
@@ -202,9 +211,15 @@
                                         <div class="col-5"><label for="p2TokenColor">Token Colour</label></div>
                                         <div class="col"><input id="p2TokenColor" class="c4-control c4-control-full-width" type="color"></div>
                                     </div>
-                                    <div class="control-buttons">
-                                        <button type="button" class="c4-control c4-button c4-control-margin-top" onclick="saveSettings(2)">Save</button>
+                                    <div class="row no-gutters">
+                                        <div class="col-5"></div>
+                                        <div class="col">
+                                            <div class="control-buttons">
+                                                <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top c4-control-margin-bottom" onclick="saveSettings(2)">Save</button>
+                                            </div>
+                                        </div>
                                     </div>
+                                    
                                 </form>
                             </div>
                             <div class="control-buttons">
