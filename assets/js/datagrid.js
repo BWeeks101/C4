@@ -68,6 +68,9 @@ function DataGrid (headers, content) {
 /* selectOption: OPTIONAL.  Default is ROW. */
 /*                          Options are ROW, COL, OFF */
 /* NOTE: dataGridDisplayId MUST have the datagrid-container class */
+/* Limitations: */
+/* Currently Cols will only display properly if there are 12 or less columns of data */
+/* Only Vertical Scroll of the content row is supported */
 function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefined) {
 
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
@@ -97,7 +100,11 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class"datagrid-header-container" id="${headerContainer}"><div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div></div>`);
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
-    let colClass = datagridDisplayColClass(colCount);
+    let colClass = dataGridDisplayColClass(colCount);
+    if (colClass == false) {
+        console.log(`function displayDataGrid failed.  Cascade failure originating with dataGridDisplayColClass(${colCount}).`);
+        return false;
+    }
         
     let colStart = `<div class="${colClass}" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
@@ -189,6 +196,13 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
 }
 
 function dataGridDisplayColClass(colCount) {
+    colCount = parseInt(colCount);
+
+    if (isNaN(colCount) == true) {
+        console.log(`Supplied Column Count (${colCount}) is not a valid integer`);
+        return false;
+    }
+
     switch (colCount) {
         case 1:
             colClass = "-12";
@@ -201,6 +215,9 @@ function dataGridDisplayColClass(colCount) {
             break;
         case 4:
             colClass = "-3";
+            break;
+        case 5:
+            colClass = " datagrid-col-custom-5";
             break;
         case 6:
             colClass = "-2";
@@ -225,7 +242,7 @@ function dataGridDisplayColClass(colCount) {
             break;
     }
 
-    return `col${colClass}`;
+    return String(`col${colClass}`);
 }
 
 /* Display of vertical ScrollBars on Content will push Content Columns out of alignment with Header Columns */
@@ -254,13 +271,28 @@ function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
 }
 
 /* Change default col width */
-/* cols = number value representing the bootstrap column width */
-/* if cols == "" or undefined, then the col class is used by default */
+/* cols = [number] : value representing the bootstrap column width */
+/*                   (provided decimal values will be rounded UP) */
+/* cols = [auto] : column size determined automatically */
+/* cols = [""] or [undefined] : col class is used by default */
 function dataGridDisplaySetCols(dataGridDisplayId, cols) {
+    let colClass;
+    let colCount;
     if (isNaN(cols) == false && cols != "") {
-        cols = `col-${Math.ceil(cols)}`;
+        colClass = `col-${Math.ceil(cols)}`;
+    } else if (cols == "auto") {
+        colCount = dataGridDisplayGetCounts(dataGridDisplayId)[0]
+        if (colCount == false) {
+            console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
+            return false;
+        }
+        colClass = dataGridDisplayColClass(colCount).split(" ");
+        if (colClass == false) {
+            console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayColClass(${colCount}).split(" ").`);
+            return false;
+        }
     } else if (cols == undefined || cols == "") {
-        cols = "col";
+        colClass = "col";
     } else {
         console.log(`function dataGridDisplaySetCols failed.  Supplied cols (${cols}) is not a number.`);
         return false;
@@ -273,22 +305,45 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
 
     let elementCollection = document.querySelectorAll(`#${dataGridDisplayId}ContentRow .datagrid-content-col`);
     let bootstrapColClass;
+    let datagridCustomClass;
+    let removalList = [];
     for (i = 0; i < elementCollection.length; i++) {
-        for (ii = 0; ii < elementCollection[i].classList.length; ii++) {
-            if (elementCollection[i].classList.item(ii).slice(0, 3) == "col") {
-                if (elementCollection[i].classList.item(ii).length == 3) {
-                    elementCollection[i].classList.remove("col");
+        for (ii = 0; ii < elementCollection[i].classList.length; ii++) {            
+            if (elementCollection[i].classList.item(ii).slice(0, 3) == "col") {                
+                if (elementCollection[i].classList.item(ii).length == 3) {                    
+                    removalList.push(`col`);
                 } else if (elementCollection[i].classList.item(ii).slice(0, 4) == "col-") {
                     bootstrapColClass = elementCollection[i].classList.item(ii).slice(4, elementCollection[i].classList.item(ii).length);                    
                     if (isNaN(bootstrapColClass) == true) {
                         console.log(`${elementCollection[i].id} class="${elementCollection[i].classList.item(ii)}" not a valid Bootstrap Col Class.  Ignoring.`);
                     } else {
-                        elementCollection[i].classList.remove(`col-${bootstrapColClass}`);
+                        removalList.push(`col-${bootstrapColClass}`);
                     }
+                } 
+            } else if (elementCollection[i].classList.item(ii).slice(0, 20) == "datagrid-col-custom-") {     
+                datagridCustomClass = elementCollection[i].classList.item(ii).slice(20, elementCollection[i].classList.item(ii).length);
+                if (isNaN(datagridCustomClass) == true) {
+                    console.log(`${elementCollection[i].id} class="${elementCollection[i].classList.item(ii)}" not a valid Datagrid Custom Col Class.  Ignoring.`);
+                } else {
+                    removalList.push(`datagrid-col-custom-${datagridCustomClass}`);
                 }
             }
         }
-        elementCollection[i].classList.add(cols);
+
+        for (iii = 0; iii < removalList.length; iii++) {            
+            elementCollection[i].classList.remove(removalList[iii]);
+        }
+
+        removalList = [];
+
+        //Process colClass as array if isArray true
+        if (Array.isArray(colClass) == true) {            
+            for (iiii = 0; iiii < colClass.length; iiii++) {
+                elementCollection[i].classList.add(colClass[iiii]);        
+            }
+        } else {
+            elementCollection[i].classList.add(colClass);
+        }        
     }
 }
 
