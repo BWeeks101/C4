@@ -1,0 +1,45 @@
+#imgContainer {
+    width: 100%;
+    max-width: 340px;
+}
+
+#logoGrid {
+    padding-bottom: 0;
+}
+
+#logoGridHeaderContainer, #logoGridHeaderRow, #logoGridHeaderRow .col {
+    border: none;
+    /*display: none;*/
+}
+
+#logoGridContentContainer {
+    border: 1px solid var(--gameBorder);
+    overflow-y: initial;
+}
+
+#logoGridContentRow, #logoGridContentRow .datagrid-content-col, #logoGridContentRow .datagrid-content-row, #logoGridContentRow .datagrid-content-inner-col {
+    border: none;
+}
+
+#logoGridContentRow .datagrid-content-inner-col {
+    padding: 1px !important;
+}
+
+#logoGridContentRow .datagrid-col-selected {
+    background-color: initial !important;
+}
+
+#logoGridContentRow .datagrid-cell-value {
+    transition: background-color 0.5s;
+    border: 1px solid var(--gameBorder);
+    border-radius: 50%;
+    padding: 0;
+    min-width: 40px;
+    min-height: 40px;
+    width: 100%;
+    padding-top: calc(100% - 2px);
+}
+
+#logoGridCcol-2 {
+    width: 100px !important;
+}
