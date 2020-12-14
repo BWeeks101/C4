@@ -97,7 +97,7 @@ function mainShow(option) {
             refreshHotseat();
             dataGridDisplayRemove("gBoard");
             displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false);
-            dataGridDisplaySetCols("gBoard");            
+            //dataGridDisplaySetCols("gBoard"); //Unnecessary with addition of datagrid-custom-col-n classes
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
             elementDisplay("show", "gameBoardContainer");
             feedbackStartDelay();
