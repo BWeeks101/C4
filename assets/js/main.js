@@ -24,7 +24,8 @@ $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
     c4.game.state = "default";
-    sideNavOnLoad();    
+    sideNavOnLoad();
+    drawLogoGrid();
     elementDisplay("toggle","menuBlockContainer");
     mainOnResize();
 }
@@ -33,6 +34,12 @@ function mainOnResize() {
     sideNavResize();
     mainBlockResize();
     menuBlockResize();
+}
+
+function drawLogoGrid() {
+    dataGridDisplayRemove("logoGrid");
+    displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
+    dataGridDisplaySetCols("logoGrid", "auto"); 
 }
 
 function toggleColorMode() {
@@ -122,8 +129,8 @@ function mainBlockResize() {
             feedbackMessageHeight = getElementPos("feedbackMessage").height;
             feedbackControlRowHeight = getElementPos("feedbackControlRow").height;
             feedbackContainerHeight = feedbackMessageHeight + feedbackControlRowHeight;
-            if (feedbackContainerHeight < 76) {
-                feedbackContainerHeight = 76;
+            if (feedbackContainerHeight < 87) {
+                feedbackContainerHeight = 87;
             }
             document.getElementById("feedbackContainer").style.height = `${feedbackContainerHeight}px`;
 
