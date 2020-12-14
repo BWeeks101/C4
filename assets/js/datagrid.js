@@ -97,43 +97,9 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class"datagrid-header-container" id="${headerContainer}"><div class="row flex-nowrap datagrid-header-row" id="${headerRow}"></div></div>`);
     document.getElementById(dataGridDisplayId).insertAdjacentHTML('beforeend',`<div class="datagrid-content-container" id="${contentContainer}"><div class="row flex-nowrap datagrid-content-row" id="${contentRow}"></div></div>`);
 
-    switch (colCount) {
-        case 1:
-            bootstrapColWidth = "-12";
-            break;
-        case 2:
-            bootstrapColWidth = "-6";
-            break;
-        case 3:
-            bootstrapColWidth = "-4";
-            break;
-        case 4:
-            bootstrapColWidth = "-3";
-            break;
-        case 6:
-            bootstrapColWidth = "-2";
-            break;
-        case 7:
-            bootstrapColWidth = " datagrid-col-custom-7";
-            break;
-        case 8:
-            bootstrapColWidth = " datagrid-col-custom-8";
-            break;
-        case 9:
-            bootstrapColWidth = " datagrid-col-custom-9";
-            break;
-        case 10:
-            bootstrapColWidth = " datagrid-col-custom-10";
-            break;
-        case 11:
-            bootstrapColWidth = " datagrid-col-custom-11";
-            break;
-        default:
-            bootstrapColWidth = "-1";
-            break;
-    }
+    let bootstrapColClass = datagridDisplayColClass(colCount);
         
-    let colStart = `<div class="col${bootstrapColWidth}" id="${dataGridDisplayId}`;
+    let colStart = `<div class="${bootstrapColClass}" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
     let cColTag = "Ccol-";    
     let headerColMid = `"><h3>`;
@@ -220,6 +186,46 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
             }            
         }
     }
+}
+
+function dataGridDisplayColClass(colCount) {
+    switch (colCount) {
+        case 1:
+            bootstrapClass = "-12";
+            break;
+        case 2:
+            bootstrapClass = "-6";
+            break;
+        case 3:
+            bootstrapClass = "-4";
+            break;
+        case 4:
+            bootstrapClass = "-3";
+            break;
+        case 6:
+            bootstrapClass = "-2";
+            break;
+        case 7:
+            bootstrapClass = " datagrid-col-custom-7";
+            break;
+        case 8:
+            bootstrapClass = " datagrid-col-custom-8";
+            break;
+        case 9:
+            bootstrapClass = " datagrid-col-custom-9";
+            break;
+        case 10:
+            bootstrapClass = " datagrid-col-custom-10";
+            break;
+        case 11:
+            bootstrapClass = " datagrid-col-custom-11";
+            break;
+        default:
+            bootstrapClass = "-1";
+            break;
+    }
+
+    return `col${bootstrapClass}`;
 }
 
 /* Display of vertical ScrollBars on Content will push Content Columns out of alignment with Header Columns */
