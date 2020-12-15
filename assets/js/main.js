@@ -36,12 +36,6 @@ function mainOnResize() {
     menuBlockResize();
 }
 
-function drawLogoGrid() {
-    dataGridDisplayRemove("logoGrid");
-    displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
-    dataGridDisplaySetCols("logoGrid", "auto"); 
-}
-
 function toggleColorMode() {
     let mode = document.getElementById("colorMode").innerHTML;
     switch (mode) {

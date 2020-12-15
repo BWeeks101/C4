@@ -76,13 +76,13 @@ function mainShow(option) {
             elementDisplay("show", "leaderboardContainer");
             break;
         case "options":
-            elementDisplay("show", "menuOptions");  
+            elementDisplay("show", "menuOptions");            
             break;
         case "settings":
             document.getElementById("p1TokenColor").value = getPlayerColor(1, "token");
             /*document.getElementById("p1AltTokenColor").value = getPlayerColor(1, "altToken");*/
             document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
-            elementDisplay("show", "menuSettings");
+            elementDisplay("show", "menuSettings");            
             break;
         case "creategame":
             elementDisplay("show", "menuCreateGame"); 
@@ -229,6 +229,16 @@ function cancelJoinGame() {
     show("options", "options");
 }
 
+function menuBackButton(refreshLogo) {
+    if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) {
+        show("options", "options");
+    } else {
+        show("options", "options");
+        refreshLogoGrid();
+    }
+    
+}
+
 function quitGame() {
     switch (c4.game.state) {
         case "joingame":
@@ -242,6 +252,7 @@ function quitGame() {
     }
 
     show("options", "default");
+    refreshLogoGrid();
 }
 
 /*function refreshJoinGame() {

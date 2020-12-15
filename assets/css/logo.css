@@ -1,6 +1,6 @@
 #imgContainer {
-    width: 100%;
-    max-width: 340px;
+    width: calc(100% - 20px);
+    max-width: 360px;
 }
 
 #logoGrid {
@@ -9,16 +9,19 @@
 
 #logoGridHeaderContainer, #logoGridHeaderRow, #logoGridHeaderRow .col {
     border: none;
-    /*display: none;*/
 }
 
 #logoGridContentContainer {
-    border: 1px solid var(--gameBorder);
+    border: none;
     overflow-y: initial;
 }
 
-#logoGridContentRow, #logoGridContentRow .datagrid-content-col, #logoGridContentRow .datagrid-content-row, #logoGridContentRow .datagrid-content-inner-col {
+#logoGridContentRow .datagrid-content-col, #logoGridContentRow .datagrid-content-row, #logoGridContentRow .datagrid-content-inner-col {
     border: none;
+}
+
+#logoGridContentRow {
+    border: 1px solid var(--gameBorder);
 }
 
 #logoGridContentRow .datagrid-content-inner-col {
@@ -42,4 +45,18 @@
 
 #logoGridCcol-2 {
     width: 100px !important;
+}
+
+.datagrid-header-col h3 {
+    position: absolute;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background: none;
+}
+
+#logoGridContentRow {
+    margin-top: 42px;
 }
