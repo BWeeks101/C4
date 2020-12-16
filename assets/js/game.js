@@ -510,9 +510,9 @@ function scanDir(scanDir, startX, startY, results) {
 
 function saveSettings(player) {
     if (player == undefined) {
-        setPlayerName(player, document.getElementById(`p1UserName`).value);
+        setPlayerName(1, document.getElementById(`p1UserName`).value);
         setPlayerSetting(`p1TokenColor`, document.getElementById(`p1TokenColor`).value);
-        setPlayerName(player, document.getElementById(`p2UserName`).value);
+        setPlayerName(2, document.getElementById(`p2UserName`).value);
         setPlayerSetting(`p1TokenColor`, document.getElementById(`p2TokenColor`).value);
     } else {
         setPlayerName(player, document.getElementById(`p${player}UserName`).value);
