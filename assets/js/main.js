@@ -24,6 +24,7 @@ $(document).ready(mainOnLoad);
 
 function mainOnLoad() {
     c4.game.state = "default";
+    loadColorMode();
     sideNavOnLoad();
     drawLogoGrid();
     elementDisplay("toggle","menuBlockContainer");
@@ -37,21 +38,33 @@ function mainOnResize() {
     menuBlockResize();
 }
 
-function toggleColorMode() {
+
+/*function toggleColorMode() {
     let mode = document.getElementById("colorMode").innerHTML;
     switch (mode) {
         case "Dark Mode":
             checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Light Mode";});
-            switchColorMode("dark");
+            switchColorMode("dark");            
             break;
         case "Light Mode":
             checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Dark Mode";});
             switchColorMode("light");
             break;
     }
-}
+}*/
 
-function switchColorMode(option) {
+function switchColorMode(ihtml) {
+    let option;
+    switch (ihtml) {
+        case "Dark Mode":
+            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Light Mode";});
+            option = "dark";
+            break;
+        case "Light Mode":
+            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Dark Mode";});
+            option = "light";
+            break;
+    }
     document.head.removeChild(document.getElementById("colorStyle"));
     let colorModeStyle = document.createElement("link");
     document.head.appendChild(colorModeStyle);
@@ -59,6 +72,16 @@ function switchColorMode(option) {
     colorModeStyle.type = "text/css";
     colorModeStyle.id = "colorStyle";
     colorModeStyle.href = `assets/css/${option}.css`;
+    localStorage.removeItem("colorMode");
+    localStorage.setItem("colorMode", option);
+}
+
+function loadColorMode() {    
+    if (localStorage.getItem("colorMode") == "light") {        
+        switchColorMode("Light Mode");
+    } else {        
+        switchColorMode("Dark Mode");
+    }    
 }
 
 function mainBlockResize() {
