@@ -235,6 +235,7 @@ function menuBackButton(refreshLogo) {
     if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) {
         show("options", "options");
     } else {
+        saveSettings();
         show("options", "options");
         refreshLogoGrid();
     }
