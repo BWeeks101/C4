@@ -513,7 +513,7 @@ function saveSettings(player) {
         setPlayerName(1, document.getElementById(`p1UserName`).value);
         setPlayerSetting(`p1TokenColor`, document.getElementById(`p1TokenColor`).value);
         setPlayerName(2, document.getElementById(`p2UserName`).value);
-        setPlayerSetting(`p1TokenColor`, document.getElementById(`p2TokenColor`).value);
+        setPlayerSetting(`p2TokenColor`, document.getElementById(`p2TokenColor`).value);
     } else {
         setPlayerName(player, document.getElementById(`p${player}UserName`).value);
         setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);
