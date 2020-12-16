@@ -1,5 +1,6 @@
 #playerInfoContainer {
-    padding: 20px;
+    padding: 10px 0;
+    background-color: var(--feedbackBackground);
 }
 
 #playerInfoContainer h3 {
@@ -83,10 +84,6 @@
     animation-name: highlightP2;
     animation-duration: 3s;
     animation-iteration-count: infinite;
-}
-
-#playerInfoContainer {
-    padding: 10px 0;
 }
 
 .feedback-container {
