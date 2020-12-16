@@ -32,9 +32,9 @@ function dropChar(colId) {
             clearInterval(id);
             document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.zIndex = "2";
             if (colId % 2 == 0) {
-                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.classList.add(`gbP1`);
+                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p1TokenColor`).trim();
             } else {
-                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.classList.add(`gbP2`);
+                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
             }
             return true;
         } else {
