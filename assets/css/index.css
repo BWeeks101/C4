@@ -45,6 +45,12 @@ body {
     width: calc(100% - 20px);
 }
 
+#rulesContainer {
+    text-align: left;
+    overflow-y: auto;
+    border: 1px solid var(--mainBorder);
+}
+
 /*
 #lBoard {
     padding-bottom: 0;
@@ -55,6 +61,10 @@ body {
     background-color: var(--mainBackground);
     border: solid 1px var(--mainBorder);
     padding: 10px;
+}
+
+#rulesMainContent {
+    border: none;
 }
 
 .mainTitle, .menuTitle {
