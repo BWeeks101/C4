@@ -30,7 +30,7 @@ function hideAll(option) {
     let elementCollection = document.getElementById(option).children;
     let i;
     if (option == "sideNav") {
-        i = 2;
+        i = 3;
     } else {
         i = 0;
     }
