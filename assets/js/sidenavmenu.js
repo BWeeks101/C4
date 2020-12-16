@@ -189,7 +189,8 @@ function sideNavShow(option) {
         case "createmultiplayer":
         case "createp2settings":
         case "createsetturntime":
-            sideNavLinkDisplay("show", "sn-cancelcreate");    
+            sideNavLinkDisplay("show", "sn-back");    
+            /*sideNavLinkDisplay("show", "sn-cancelcreate");*/
             /*sideNavSoutSelectShow("sout");*/
             break;
         /*case "joingame":
