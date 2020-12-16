@@ -24,7 +24,9 @@ function feedbackWinner(result) {
                 document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
                 break;
         }
-    }     
+    }
+    elementDisplay("hide", "ctrlPauseLink")
+    document.getElementById("ctrlResetLink").innerHTML = "Rematch";
     elementDisplay("show", "feedbackContainer");
 }
 

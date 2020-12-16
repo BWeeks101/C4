@@ -198,6 +198,7 @@ function sideNavShow(option) {
             sideNavSoutSelectShow("sout");
             break;*/
         case "starthotseat":
+            document.getElementById("ctrlResetLink").innerHTML = "Reset";
             sideNavLinkDisplay("show", "sn-ctrlgroup");
             //elementDisplay("hide", "ctrlResumeLink");
             sideNavLinkDisplay("hide", "sn-pause-reset")
