@@ -78,10 +78,12 @@ function mainShow(option) {
         case "options":
             elementDisplay("show", "menuOptions");            
             break;
-        case "settings":
-            document.getElementById("p1TokenColor").value = getPlayerColor(1, "token");
+        case "settings":            
+            document.getElementById("p1UserName").value = c4.game.p1.name;
+            document.getElementById("p1TokenColor").value = c4.game.p1.tokenColor;
             /*document.getElementById("p1AltTokenColor").value = getPlayerColor(1, "altToken");*/
-            document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
+            document.getElementById("p2UserName").value = c4.game.p2.name;
+            document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
             elementDisplay("show", "menuSettings");            
             break;
         case "creategame":

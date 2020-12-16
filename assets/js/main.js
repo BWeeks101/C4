@@ -27,6 +27,7 @@ function mainOnLoad() {
     sideNavOnLoad();
     drawLogoGrid();
     elementDisplay("toggle","menuBlockContainer");
+    loadPlayerSettings();
     mainOnResize();
 }
 

@@ -513,19 +513,49 @@ function saveSettings(player) {
     setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);    
 }
 
+function loadPlayerSettings() {
+    let p1Name = localStorage.getItem("p1Name");
+    if (p1Name != null) {
+        c4.game.p1.name = p1Name;
+    }
+    
+    let p1TokenColor = localStorage.getItem("p1TokenColor");
+    if (p1TokenColor != null) {
+        c4.game.p1.tokenColor = p1TokenColor;
+    }
+    
+    let p2Name = localStorage.getItem("p2Name");
+    if (p2Name != null) {
+        c4.game.p2.name = p2Name;
+    }
+    
+    let p2TokenColor = localStorage.getItem("p2TokenColor");
+    if (p2TokenColor != null) {
+        c4.game.p2.tokenColor = p2TokenColor;
+    }
+}
+
 function setPlayerSetting(setting, value) {
     switch (setting) {
         case "p1Name":
             c4.game.p1.name = value;
+            localStorage.removeItem("p1Name");
+            localStorage.setItem("p1Name", value);
             break;
         case "p1TokenColor":
             c4.game.p1.tokenColor = value;
+            localStorage.removeItem("p1TokenColor");
+            localStorage.setItem("p1TokenColor", value);
             break;
         case "p2Name":
             c4.game.p2.name = value;
+            localStorage.removeItem("p2Name");
+            localStorage.setItem("p2Name", value);
             break;
         case "p2TokenColor":
             c4.game.p2.tokenColor = value;
+            localStorage.removeItem("p2TokenColor");
+            localStorage.setItem("p2TokenColor", value);
             break;
     }
 }
@@ -534,7 +564,7 @@ function setPlayerName(player, name) {
     if (name == undefined || name == "" || name.length < 1) {
         name = `Player ${player}`;
     }
-    setPlayerSetting(`p${player}.name`, name)
+    setPlayerSetting(`p${player}Name`, name)
     /*document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;*/
     document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;    
     /*switch (player) {
