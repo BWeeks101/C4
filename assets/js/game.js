@@ -509,8 +509,15 @@ function scanDir(scanDir, startX, startY, results) {
 }
 
 function saveSettings(player) {
-    setPlayerName(player, document.getElementById(`p${player}UserName`).value);
-    setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);    
+    if (player == undefined) {
+        setPlayerName(player, document.getElementById(`p1UserName`).value);
+        setPlayerSetting(`p1TokenColor`, document.getElementById(`p1TokenColor`).value);
+        setPlayerName(player, document.getElementById(`p2UserName`).value);
+        setPlayerSetting(`p1TokenColor`, document.getElementById(`p2TokenColor`).value);
+    } else {
+        setPlayerName(player, document.getElementById(`p${player}UserName`).value);
+        setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);
+    }    
 }
 
 function loadPlayerSettings() {
