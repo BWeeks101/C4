@@ -113,6 +113,7 @@ function mainShow(option) {
             elementDisplay("show", "menuCreateMultiplayer");
             break;
         case "createsetturntime":
+            loadTurnTimeLimit();
             elementDisplay("show", "menuCreateSetTurnTime");
             break;
         case "joingame":
@@ -233,6 +234,7 @@ function cancelJoinGame() {
 
 function menuBackButton(refreshLogo) {
     if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) {
+        saveTurnTimeLimit();
         show("options", "options");
     } else {
         saveSettings();
@@ -240,6 +242,18 @@ function menuBackButton(refreshLogo) {
         refreshLogoGrid();
     }
     
+}
+
+function saveTurnTimeLimit() {
+    localStorage.removeItem("turnTimeLimit");
+    localStorage.setItem("turnTimeLimit", document.getElementById("turnTime").value);
+};
+
+function loadTurnTimeLimit() {
+    let turnTimeLimit = localStorage.getItem("turnTimeLimit");
+    if (turnTimeLimit != null) {
+        document.getElementById("turnTime").value = turnTimeLimit;
+    }
 }
 
 function quitGame() {
@@ -339,6 +353,7 @@ function startGame() {
     setTurnTimeLimit()
     switch (c4.game.state) {
         case "createhotseat":
+            saveTurnTimeLimit();
             show("starthotseat");
             break;
         case "createmultiplayer":
