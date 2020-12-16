@@ -584,6 +584,11 @@ function setPlayerName(player, name) {
     }*/
 }
 
+function setDefaultSettings(player) {
+    document.getElementById(`p${player}UserName`).value = `Player ${player}`;
+    document.getElementById(`p${player}TokenColor`).value = getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim();
+}
+
 /*function setPlayerColor(player, option, elementId) {
     setPlayerSetting(`p${player}.${option}Color`, document.getElementById(elementId).value);
 }*/
