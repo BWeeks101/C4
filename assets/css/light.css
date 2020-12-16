@@ -11,31 +11,37 @@
 
     /* sideNav */
     --sideNavDocOverlayBackground: rgba(0, 0, 0, 0);
-    --sideNavBackground: rgba(250,250,250,.95);
+    /*--sideNavBackground: rgba(250,250,250,.95);*/
+    --sideNavBackground: rgba(235,235,235,.95);
     --sideNavDivider: #262626;
     --sideNavLink: #262626;
     --sideNavLinkHover: #EC4C4C;
 
     /* Datagrid */
-    --dataGridBorder: #262626;
+    /*--dataGridBorder: #262626;*/
+    --dataGridBorder: #242423;
     --dataGridRowSelected: #EC4C4C;
     --dataGridColSelected: #EC4C4C;
 
     /* Game */
     --gameBorder: #262626;
     --p1TokenColor: #EC4C4C;
-    --p1AltTokenColor: #0000FF;
-    --p2TokenColor: #0000FF;
-    --p1AltTokenColor: #EC4C4C;
-    --feedbackBackground: #fafafa;
+    /*--p1AltTokenColor: #0000FF;*/
+    /*--p2TokenColor: #0000FF;*/
+    --p2TokenColor: #4B4BEC;
+    /*--p1AltTokenColor: #EC4C4C;*/
+    /*--feedbackBackground: #fafafa;*/
+    --feedbackBackground: #EbEbEb;
     --feedbackText: #262626;
     --pulseBackground: #fafafa;
 
     /* Main */
     --mainText: #262626;
     --mainBorder: #262626;
-    --mainBackground: #d9d9d9;
-    --mainAltBackground: #d9d9d9;
+    /*--mainBackground: #d9d9d9;
+    --mainAltBackground: #d9d9d9;*/
+    --mainBackground: #eaeae8;
+    --mainAltBackground: #eaeae8;
     --headerDivider: #8C8C8C;
     --footerDivider: #8C8C8C;
     --socialMediaLink: #262626;
@@ -45,8 +51,7 @@
 /* Datagrid */
 .datagrid-header-col {
     border-left-color: var(--dataGridBorder);
-    border-bottom-color: var(--dataGridBorder);
-    
+    border-bottom-color: var(--dataGridBorder);    
 }
 
 .datagrid-content-col {

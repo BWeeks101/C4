@@ -24,9 +24,10 @@
     /* Game */
     --gameBorder: #fafafa;
     --p1TokenColor: #EC4C4C;
-    --p1AltTokenColor: #0000FF;
-    --p2TokenColor: #0000FF;
-    --p1AltTokenColor: #EC4C4C;
+    /*--p1AltTokenColor: #0000FF;*/
+    /*--p2TokenColor: #0000FF;*/
+    --p2TokenColor: #4B4BEC;
+    /*--p1AltTokenColor: #EC4C4C;*/
     --feedbackBackground: #2D2D2D;
     --feedbackText: #fafafa;
     --pulseBackground: #fafafa;
@@ -45,8 +46,7 @@
 /* Datagrid */
 .datagrid-header-col {
     border-left-color: var(--dataGridBorder);
-    border-bottom-color: var(--dataGridBorder);
-    
+    border-bottom-color: var(--dataGridBorder);    
 }
 
 .datagrid-content-col {
