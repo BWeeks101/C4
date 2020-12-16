@@ -290,7 +290,7 @@
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
-                                <select class="c4-control" name="turntime" id="turnTime">
+                                <select class="c4-control c4-control-full-width" name="turntime" id="turnTime">
                                     <option value="5">5 Seconds</option>
                                     <option value="10">10 Seconds</option>
                                     <option value="15">15 Seconds</option>
@@ -298,8 +298,14 @@
                                     <option value="25">25 Seconds</option>
                                     <option value="30">30 Seconds</option>
                                 </select>
-                                <div class="control-buttons">
-                                    <button type="button" class="c4-control c4-button c4-control-margin-top c4-control-margin-right" onclick="menuBackButton()">Back</button><button type="button" class="c4-control c4-button c4-control-margin-top" onclick="startGame()">Ok</button>
+                                <div class="row no-gutters control-buttons">
+                                    <div class="col-6 lcol">
+                                        <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="menuBackButton()">Back</button>
+                                    </div>
+                                    <div class="col-6 rcol">
+                                        <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="startGame()">Ok</button>
+                                    </div>
+                                    
                                 </div>
                             </form>                        
                         </div>                        

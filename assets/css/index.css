@@ -121,8 +121,16 @@ label {
     text-align: left;
 }
 
-.control-buttons {
+/*.control-buttons {
     text-align: right;
+}*/
+
+.control-buttons .lcol {
+    padding-right: 5px;
+}
+
+.control-buttons .rcol {
+    padding-left: 5px;
 }
 
 .refresh-button {
