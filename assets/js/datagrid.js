@@ -577,14 +577,20 @@ function dataGridDisplayRemove(dataGridDisplayId) {
 }
 
 /* Refresh a dataGridDisplay */
+/* Requires: */
+/*      dataGrid: dataGrid object */
+/*      dataGridDisplayId: Id of the datagrid container element that holds the dataGridDisplay */
 function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
+    /* Remove dataGridDisplayId innerHTML */
     let result = dataGridDisplayRemove(dataGridDisplayId);
-    if (result == false) {
+    if (result == false) { //If the innerHTML cannot be removed, then fail
         console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with dataGridDisplayRemove(${dataGridDisplayId}).`);
         return false;
     }
+
+    /* Create a new dataGridDisplay using the provided dataGrid object */
     result = displayDataGrid(dataGrid, dataGridDisplayId);
-    if (result == false) {
+    if (result == false) { //If the dataGridDisplay cannot be created, then fail
         console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with displayDataGrid(${dataGrid}, ${dataGridDisplayId}).`);
         return false;
     }
@@ -592,62 +598,72 @@ function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
 }
 
 /* Verify element is a datagrid-container */
+/* Requires: */
+/*      dataGridDisplayId: Id of the element that we wish to validate as a datagrid container */
 function elementIsDataGridContainer(dataGridDisplayId) {
+    /* Verify that provided element Id relates to a valid HTML element */
     let valid = document.getElementById(dataGridDisplayId);
-
-    if (valid == null) {
+    if (valid == null) { //If not, return false
         console.log(`Error.  Target element (${dataGridDisplayId}) does not exist.`);
         return false;
     }
 
-    valid = document.getElementById(dataGridDisplayId).classList.contains("datagrid-container");
-    
-    if (valid == false) {
+    /* Verify that the provided element Id relates to an element with the datagrid-container class */
+    valid = document.getElementById(dataGridDisplayId).classList.contains("datagrid-container");    
+    if (valid == false) { //If not, return false
         console.log(`Error.  Target element (${dataGridDisplayId}) does not have the required datagrid-container class.`)
         return false;
     }
-    return true;
+    return true; //Otherwise we have a valid datagrid-container, so return true
 }
 
 /* Verify object is a DataGrid */
+/* Requires: */
+/*      object: object that we wish to validate as a datagrid */
 function objectIsDataGrid(object) {
+    /* Verify that provided argument value is an object */
     let valid = typeof object;
-
-    if (valid != "object") {
+    if (valid != "object") { //If not, return false
         console.log(`Error.  dataGrid object expected.  Got ${typeof object} (${object})`);
         return false;
     }
 
+    /* Verify that provided object has the objectType property, and that the value is "datagrid" */
     valid = object.objectType;
-
-    if (valid != "datagrid") {
+    if (valid != "datagrid") { //If not, return false
         console.log(`Error.  dataGrid object expected.  Object is not correct type.`);
         return false;
     }
-    return true;
+    return true; //Otherwise we have a valid datagrid object, so return true
 }
 
 /* Verify header and content column count match */
+/* Requires: */
+/*      hLen: Number of header columns */
+/*      cLen: Number of data columns */
 function dataGridHeaderContentColCountMatch(hLen, cLen) {
     if (hLen != cLen) {
-        if (hLen > cLen) {
+        if (hLen > cLen) { //Headers outnumber data columns, so return false
             console.log(`Error.  Number of Headers (${hLen}) exceeds Number of Content Columns (${cLen}).  Columns cannot be empty.`);
             return false;
-        } else if (hLen < cLen) {
+        } else if (hLen < cLen) { //Data columns outnumber headers, so return false
             console.log(`Error.  Number of Content Columns (${cLen}) exceeds Number of Headers (${hLen}).  Columns must have a Header.`);
             return false;
         }
     }
-    return true;
+    return true; //Otherwise return true
 }
 
 /* Verify header string content */
+/* Requires: */
+/*      headers: Array containing column headers */
 function dataGridHeadersAreStrings(headers) {
+    /* Iterate through the array, validating that each entry is a string, and if not return false */
     for (i = 0; i < headers.length; i++) {
         if (typeof headers[i] != "string") {
             console.log(`Error.  Headers must contain string data.  Got ${typeof headers[i]} (${headers[i]}) in Column ${i}`);
             return false;
         }
     }
-    return true;
+    return true; //Otherwise we have a valid header array, so return true
 }
