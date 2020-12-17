@@ -303,6 +303,8 @@ function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
 /*      dataGridDisplayId: Id of the datagrid-container element */
 /*      cols = [number] : value representing the bootstrap column width */
 /*                        (decimal values will be rounded UP) */
+/*                        NB: This value is NOT internally validated.  */
+/*                        If the value does not apply to a valid bootstrap class, or results in all cols being more than 12 cols wide, the display format will be compromised. */
 /*      cols = [auto] : column size determined automatically (uses dataGridDisplayColClass()) */
 /*      cols = [""] or [undefined] : .col class is used by default */
 function dataGridDisplaySetCols(dataGridDisplayId, cols) {
@@ -379,16 +381,21 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
         /* Process colClass as array if isArray true */
         if (Array.isArray(colClass) == true) {            
             for (iiii = 0; iiii < colClass.length; iiii++) {
-                elementCollection[i].classList.add(colClass[iiii]); //Add all elements of the colClass array as classes to the current element
+                elementCollection[i].classList.add(colClass[iiii]); //Add each value from the colClass array as a class to the current element
             }
         } else { /* Else process as string */
-            elementCollection[i].classList.add(colClass); //Add string as class to the parent element
+            elementCollection[i].classList.add(colClass); //Add the colClass string value as a class to the parent element
         }        
     }
 }
 
 /* Default dataGrid Display onclick function */
 /* Highlight the selected dataGridDisplay row/col */
+/* Requires: /*
+/*      object: Object that was clicked to call the function */
+/*      option: row or col, depending on what we wish to select */
+/* Limitation: */
+/*      Only one row or col can be selected at a time.  No multi-select */
 /* returns array:
 /*      option: col or row (what we are selecting) */
 /*      count: number of rows in selected column, or number of columns in selected row */
@@ -398,16 +405,18 @@ function dataGridDisplayClicked(object, option) {
         option = option.toLowerCase(); //If option argument is provided, switch it to lower case
     }
 
-    let dataGridDisplayId = object.closest(".datagrid-container").id; //Get the id of the closest ancestor element with a .datagrid-container class
+    let dataGridDisplayId = object.closest(".datagrid-container").id; //Get the id of the closest ancestor element for this object that has a datagrid-container class
     
-    let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId); //Get row & col counts from the parent datagrid-container    
-    if (gridCounts == false) { //If we can't get the row & col counts, then fail
+    /* Get row & col counts from the parent datagrid-container */
+    let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId); 
+    if (gridCounts == false) { //If we can't get the row & col counts, then return false
         console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
         return false;
     }
 
-    let result = dataGridDisplayClearSelected(dataGridDisplayId, gridCounts[0], gridCounts[1]); //Clear any existing selected rows/cols
-    if (result == false) { //If unable to clear the selection, then fail
+    /* Clear any existing selected rows/cols */
+    let result = dataGridDisplayClearSelected(dataGridDisplayId, gridCounts[0], gridCounts[1]);
+    if (result == false) { //If unable to clear the selection, then return false
         console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplayClearSelected(${dataGridDisplayId}, ${gridCounts[0]}, ${gridCounts[1]}).`);
         return false;
     }
@@ -426,12 +435,13 @@ function dataGridDisplayClicked(object, option) {
             break;
     }    
     
-    result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[gcId], selId, option); //Set the selected row/col
-    if (result == false) { //If unable to set the selection, then fail
+    /* Set the selected row/col */
+    result = dataGridDisplaySetSelected(dataGridDisplayId, gridCounts[gcId], selId, option);
+    if (result == false) { //If unable to set the selection, then return false
         console.log(`function dataGridDisplayClicked failed.  Cascade failure originating with dataGridDisplaySetSelected(${dataGridDisplayId}, ${gridCounts[gcId]}, ${selId}, ${option}).`);
         return false;
     }
-    return result;
+    return result; //Otherwise return the result array
 }
 
 /* Get the column and row counts from a dataGridDisplay element id */
