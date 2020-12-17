@@ -574,8 +574,10 @@ function dataGridDisplaySetSelected(dataGridDisplayId, count, selId, option) {
 }
 
 /* Remove a dataGridDisplay */
+/* Requires: */
+/*      dataGridDisplayId: element id of the datagrid-container which holds the DataGrid output */
 function dataGridDisplayRemove(dataGridDisplayId) {
-    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then fail */
+    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then return false */
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayRemove failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;        
@@ -584,9 +586,9 @@ function dataGridDisplayRemove(dataGridDisplayId) {
     let classNames = [];
     let classSlice;
 
-    document.getElementById(dataGridDisplayId).innerHTML = "" //Clear the innerHTML of the dataGridDisplayId element, removing the grid from display
+    document.getElementById(dataGridDisplayId).innerHTML = "" //Clear the innerHTML of the datagrid container, removing the grid from display
 
-    /* Iterate through the classList of the dataGridDisplayId element, and add any instances of the datagrid-colCount-n/datagrid-rowCount-n classes to the local classNames array */
+    /* Iterate through the classList of the datagrid container, and add any instances of the datagrid-colCount-n/datagrid-rowCount-n classes to the local classNames array */
     for (i = 0; i < document.getElementById(dataGridDisplayId).classList.length; i++) {        
         classSlice = document.getElementById(dataGridDisplayId).classList.item(i).slice(0, 18)
         
@@ -595,7 +597,7 @@ function dataGridDisplayRemove(dataGridDisplayId) {
         }
     }
 
-    /* Iterate through the classNames array, removing each string from the dataGridDisplayId classList */
+    /* Iterate through the classNames array, removing each string from the datagrid container classList */
     for (i = 0; i < classNames.length; i++) {
         document.getElementById(dataGridDisplayId).classList.remove(classNames[i]);
     }
