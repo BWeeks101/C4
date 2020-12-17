@@ -1,4 +1,6 @@
-/* Global settings objects*/
+/* playerSettings Object class */
+/* Stores player names and token colours */
+/* Used as subclass of gameSettings */
 class playerSettings {
     constructor() {
         this.name;
@@ -6,6 +8,9 @@ class playerSettings {
     }
 }
 
+/* gameSettings Object class */
+/* stores various properties relating to the game, board state and playerSettings objects */
+/* Used as subclass of appGlobals */
 class gameSettings {
     constructor() {
         this.state;
@@ -28,10 +33,12 @@ class gameSettings {
         this.p1.tokenColor = "#EC4C4C";
         this.p2 = new playerSettings();
         this.p2.name = "Player 2";
-        this.p2.tokenColor = "#0000FF";
+        this.p2.tokenColor = "#4B4BEC";
     }
 }
 
+/* Parent global object class */
+/* Created on load, stores gameSettings object, sideNavState and logoGrid */
 class appGlobals {
     constructor() {
         this.game = new gameSettings();
