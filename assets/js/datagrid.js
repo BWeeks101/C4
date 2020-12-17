@@ -485,9 +485,13 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
 }
 
 /* Clear highlighted rows/cols on a dataGridDisplay */
-/* If either colCount or rowCount are ommitted, they will be calculated */
+/* Requires: */
+/*      dataGridDisplayId: Id of datagrid container element */
+/*      colCount: Number of columns in datagrid */
+/*      rowCount: Number of rows in datagrid */
+/*      NB If colCount or rowCount are ommitted, they will be gathered automatically */
 function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
-    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then fail */
+    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then return false */
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayClearSelected failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
@@ -498,7 +502,7 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
     /* if the colCount or rowCount arguments are undefined, then get the values by calling dataGridDisplayGetCounts() */
     if (colCount == undefined || rowCount == undefined) {        
         let gridCounts = dataGridDisplayGetCounts(dataGridDisplayId);
-        if (gridCounts == false) { //If dataGridDisplayGetCounts() returns false, then fail
+        if (gridCounts == false) { //If dataGridDisplayGetCounts() returns false, then return false
             console.log(`function dataGridDisplayClearSelected failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
             return false;
         }
@@ -512,7 +516,7 @@ function dataGridDisplayClearSelected(dataGridDisplayId, colCount, rowCount) {
         }
     }
 
-    /* Iterate through each cell of the grid and remove the datagrid-row-selected/datagrid-col-selected classes from each element */
+    /* Iterate through each cell of the grid and remove the datagrid-row-selected/datagrid-col-selected classes from each appropriate element */
     for (i = 0; i < colCount; i++) {
         for (ii = 0; ii < rowCount; ii++) {
             selectedId = `${dataGridDisplayId}Col${i}RowId${ii}`;
