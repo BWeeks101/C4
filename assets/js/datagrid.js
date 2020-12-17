@@ -2,7 +2,7 @@
 
 /* DataGrid object constructor */
 /* Expects: */
-/* header = array containing column headers */
+/* header = array containing column headers (in string format)*/
 /* content = array containing arrays for each column of data */
 /* Returns DataGrid object with the following Properties: */
 /* .headers = array containing column headers */
@@ -12,7 +12,7 @@
 /* .objectType = "datagrid".  read-only property.  returns a lower case string value.  Used for verifying that a provided object is a DataGrid */
 function DataGrid (headers, content) {
 
-    if (objectIsObject(headers, "Headers") == false || objectIsObject(content, "Content") == false) {
+    if (Array.isArray(headers) == false || Array.isArray(content) == false) {
         console.log("function DataGrid failed.  Invalid parameters supplied - array objects required for headers and content.");
         return false;
     }
@@ -571,20 +571,6 @@ function objectIsDataGrid(object) {
 
     if (valid != "datagrid") {
         console.log(`Error.  dataGrid object expected.  Object is not correct type.`);
-        return false;
-    }
-    return true;
-}
-
-/* Verify object is an Object */
-function objectIsObject(object, description) {
-    if (object == undefined || typeof object != "object") {
-        if (description == undefined) {
-            description = "A";
-        } else {
-            description = description + " a";
-        }
-        console.log(`Error. ${description}rray object expected.  Got ${object} (${typeof object})`);
         return false;
     }
     return true;
