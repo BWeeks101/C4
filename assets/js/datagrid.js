@@ -445,11 +445,13 @@ function dataGridDisplayClicked(object, option) {
 }
 
 /* Get the column and row counts from a dataGridDisplay element id */
+/* Requires: */
+/*      dataGridDisplayId: Id of datagrid container element */
 /* returns array: */
 /*      colCount (position 0) */
 /*      rowCount (position 1) */
 function dataGridDisplayGetCounts(dataGridDisplayId) {
-    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then fail */
+    /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then return false */
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplayGetCounts failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
@@ -458,7 +460,7 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
     let colCount;
     let rowCount;
     
-    /* Iterate through the classList on the provided element, and return the integer from end of the datagrid-colCount-n and datagrid-rowCount-n classes */
+    /* Iterate through the classList on the provided element, and return the integers from the datagrid-colCount-n and datagrid-rowCount-n classes */
     for (i = 0; i < document.getElementById(dataGridDisplayId).classList.length; i++) {
         if (document.getElementById(dataGridDisplayId).classList.item(i).slice(0, 18) == "datagrid-colCount-") {
             colCount = document.getElementById(dataGridDisplayId).classList.item(i).slice(18, document.getElementById(dataGridDisplayId).classList.item(i).length);
@@ -475,11 +477,11 @@ function dataGridDisplayGetCounts(dataGridDisplayId) {
         if (rowCount == undefined) { //No rowCount returned
             console.log(`dataGridDisplayId (${dataGridDisplayId}) has no defined rowCount.`);
         }
-        /* If we either the col/row counts are undefined, then we couldn't return them, so fail */
+        /* If either of the col or row counts are undefined, then we couldn't return them, so return false */
         console.log(`function dataGridDisplayGetCounts Failed.  dataGridDisplayId (${dataGridDisplayId}) missing class(es).`);
         return false;
     }
-    return [colCount, rowCount];
+    return [colCount, rowCount]; //Otherwise return the counts as an array
 }
 
 /* Clear highlighted rows/cols on a dataGridDisplay */
