@@ -3,7 +3,6 @@ class playerSettings {
     constructor() {
         this.name;
         this.tokenColor;
-        this.altTokenColor;
     }
 }
 
@@ -27,11 +26,9 @@ class gameSettings {
         this.p1 = new playerSettings();        
         this.p1.name = "Player 1";
         this.p1.tokenColor = "#EC4C4C";
-        this.p1.altTokenColor = "#0000FF";
         this.p2 = new playerSettings();
         this.p2.name = "Player 2";
         this.p2.tokenColor = "#0000FF";
-        this.p2.altTokenColor = "#EC4C4C";
     }
 }
 
