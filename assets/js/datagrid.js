@@ -611,14 +611,14 @@ function dataGridDisplayRemove(dataGridDisplayId) {
 function dataGridDisplayRefresh(dataGrid, dataGridDisplayId) {
     /* Remove dataGridDisplayId innerHTML */
     let result = dataGridDisplayRemove(dataGridDisplayId);
-    if (result == false) { //If the innerHTML cannot be removed, then fail
+    if (result == false) { //If the innerHTML cannot be removed, then return false
         console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with dataGridDisplayRemove(${dataGridDisplayId}).`);
         return false;
     }
 
     /* Create a new dataGridDisplay using the provided dataGrid object */
     result = displayDataGrid(dataGrid, dataGridDisplayId);
-    if (result == false) { //If the dataGridDisplay cannot be created, then fail
+    if (result == false) { //If the dataGridDisplay cannot be created, then return false
         console.log(`function dataGridDisplayRefresh failed.  Cascade failure originating with displayDataGrid(${dataGrid}, ${dataGridDisplayId}).`);
         return false;
     }
