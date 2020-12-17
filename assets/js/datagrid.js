@@ -263,7 +263,7 @@ function dataGridDisplayColClass(colCount) {
             break;
     }
 
-    return String(`col${colClass}`);
+    return String(`col${colClass}`); //Return the column classes as a space delimited string
 }
 
 /* Display of vertical ScrollBars on Content will push Content Columns out of alignment with Header Columns (content cols will shift left) */
@@ -280,6 +280,9 @@ function dataGridAdjustForScrollBars(dataGridDisplayId) {
 
 /* Replace default onclick function */
 /* Call to replace the default onclick function on dataGrid-click-overlay elements */
+/* Requires: */
+/*      dataGridDisplayId: Id of the datagrid-container element */
+/*      newFunction: String containing the replacement onClick attribute value */
 function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
     /* If provided dataGridDisplayId element does not have the .dataGrid-container class, then fail */
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
@@ -296,10 +299,12 @@ function dataGridDisplaySetOnClick(dataGridDisplayId, newFunction) {
 }
 
 /* Change default col width */
-/* cols = [number] : value representing the bootstrap column width */
-/*                   (provided decimal values will be rounded UP) */
-/* cols = [auto] : column size determined automatically (uses dataGridDisplayColClass())*/
-/* cols = [""] or [undefined] : .col class is used by default */
+/* Requires: */
+/*      dataGridDisplayId: Id of the datagrid-container element */
+/*      cols = [number] : value representing the bootstrap column width */
+/*                        (decimal values will be rounded UP) */
+/*      cols = [auto] : column size determined automatically (uses dataGridDisplayColClass()) */
+/*      cols = [""] or [undefined] : .col class is used by default */
 function dataGridDisplaySetCols(dataGridDisplayId, cols) {
     let colClass;
     let colCount;
@@ -310,26 +315,26 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
     } else if (cols == "auto") {
         /* if cols argument is "auto", use dataGridDisplayGetCounts() to return the colCount from the dataGridDisplayId element classList */
         colCount = dataGridDisplayGetCounts(dataGridDisplayId)[0]
-        if (colCount == false) { //dataGridDisplayGetCounts() returned false, so fail.
+        if (colCount == false) { //dataGridDisplayGetCounts() returned false, so return false
             console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
             return false;
         }
         /* Create an array of classes by splitting the string returned by dataGridDisplayColClass() */
         colClass = dataGridDisplayColClass(colCount).split(" ");
-        if (colClass == false) { //dataGridDisplayColClass returned false, so fail.
+        if (colClass == false) { //dataGridDisplayColClass returned false, so return false
             console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayColClass(${colCount}).split(" ").`);
             return false;
         }
     } else if (cols == undefined || cols == "") {
-        /* If cols argument is undefined or empty, utilise the .col class */
+        /* If cols argument is undefined or empty, utilise the .col class (default) */
         colClass = "col";
     } else {
-        /* Otherwise the cols argument is invalid, so fail */
+        /* Otherwise the cols argument is invalid, so return false */
         console.log(`function dataGridDisplaySetCols failed.  Supplied cols (${cols}) is not a number.`);
         return false;
     }
 
-    /* Verify that dataGridDisplayId element has the dataGrid-container class, and fail if not */
+    /* Verify that dataGridDisplayId element has the dataGrid-container class, and return false if not */
     if (elementIsDataGridContainer(dataGridDisplayId) == false) {
         console.log(`function dataGridDisplaySetCols failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
@@ -340,35 +345,35 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
     let bootstrapColClass;
     let datagridCustomClass;
     let removalList = [];
-    for (i = 0; i < elementCollection.length; i++) { //Work through the collection
-        for (ii = 0; ii < elementCollection[i].classList.length; ii++) { //Work through the classList of each element            
+    for (i = 0; i < elementCollection.length; i++) { //Iterate through the collection
+        for (ii = 0; ii < elementCollection[i].classList.length; ii++) { //Iterate through the classList of each element            
             if (elementCollection[i].classList.item(ii).slice(0, 3) == "col") {
                 if (elementCollection[i].classList.item(ii).length == 3) {                    
-                    removalList.push(`col`); //If class .col is found, add it to the removal list
+                    removalList.push(`col`); //If class .col is found, add it to the removal list array
                 } else if (elementCollection[i].classList.item(ii).slice(0, 4) == "col-") {
                     bootstrapColClass = elementCollection[i].classList.item(ii).slice(4, elementCollection[i].classList.item(ii).length);                    
                     if (isNaN(bootstrapColClass) == true) {
                         console.log(`${elementCollection[i].id} class="${elementCollection[i].classList.item(ii)}" not a valid Bootstrap Col Class.  Ignoring.`);
                     } else {
-                        removalList.push(`col-${bootstrapColClass}`); //If class .col-n is found, add it to the removal list
+                        removalList.push(`col-${bootstrapColClass}`); //If class .col-n is found, add it to the removal list array
                     }
                 } 
-            } else if (elementCollection[i].classList.item(ii).slice(0, 20) == "datagrid-col-custom-") {     
+            } else if (elementCollection[i].classList.item(ii).slice(0, 20) == "datagrid-col-custom-") {
                 datagridCustomClass = elementCollection[i].classList.item(ii).slice(20, elementCollection[i].classList.item(ii).length);
                 if (isNaN(datagridCustomClass) == true) {
                     console.log(`${elementCollection[i].id} class="${elementCollection[i].classList.item(ii)}" not a valid Datagrid Custom Col Class.  Ignoring.`);
                 } else {
-                    removalList.push(`datagrid-col-custom-${datagridCustomClass}`); //If class .datagrid-col-custom-n is found, add it to the removal list
+                    removalList.push(`datagrid-col-custom-${datagridCustomClass}`); //If class .datagrid-col-custom-n is found, add it to the removal list array
                 }
             }
         }
 
-        /* Remove all classes in the removal list from this element */
+        /* Remove all classes in the removal list array from this element */
         for (iii = 0; iii < removalList.length; iii++) {            
             elementCollection[i].classList.remove(removalList[iii]);
         }
 
-        /* Clear the removal list */
+        /* Clear the removal list array */
         removalList = [];
 
         /* Process colClass as array if isArray true */
