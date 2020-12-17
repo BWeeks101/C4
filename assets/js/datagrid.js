@@ -77,12 +77,12 @@ function DataGrid (headers, content) {
 function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefined) {
 
     /* Verify provided dataGrid, dataGridDisplayId arguments */
-    if (elementIsDataGridContainer(dataGridDisplayId) == false) {
+    if (elementIsDataGridContainer(dataGridDisplayId) == false) { //dataGridDisplayId does not relate to a valid datagrid-container, so return false
         console.log(`function displayDataGrid failed.  Target element (${dataGridDisplayId}) is not a .dataGrid-container.`)
         return false;
     }
 
-    if (objectIsDataGrid(dataGrid) == false) {
+    if (objectIsDataGrid(dataGrid) == false) { //dataGrid does not relate to a valid datagrid object, so return false
         console.log(`function displayDataGrid failed.  Object (${dataGrid}) is not a dataGrid object.`)
         return false;
     }
@@ -148,7 +148,7 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
         case "off": //no selection
             contentRowOverlaySelectType = "";
             break;
-        default: //select data by row or Undefined
+        default: //select data by row (default)
             contentRowOverlaySelectType = contentRowOverlaySelectRow;
             break;
     }
@@ -156,52 +156,53 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
     /* Step through each header and content value from the dataGrid object, and insert appropriate HTML elements with the correct classes and attributes */
     for (i = 0; i < colCount; i++) {
 
-        document.getElementById(headerRow).insertAdjacentHTML('beforeend', colStart + hColTag + i + headerColMid + dataGrid.headers[i] + headerColEnd);
-        document.getElementById(contentRow).insertAdjacentHTML('beforeend', colStart + cColTag + i + contentRowEnd);
+        document.getElementById(headerRow).insertAdjacentHTML('beforeend', colStart + hColTag + i + headerColMid + dataGrid.headers[i] + headerColEnd); //Insert the header column within the headerRow element
+        document.getElementById(contentRow).insertAdjacentHTML('beforeend', colStart + cColTag + i + contentRowEnd); //Insert the content column within the contentRow element
         
-        hColId = `${dataGridDisplayId}${hColTag}${i}`;
-        cColId = `${dataGridDisplayId}${cColTag}${i}`;        
+        hColId = `${dataGridDisplayId}${hColTag}${i}`; //Determine the id of the current header column
+        cColId = `${dataGridDisplayId}${cColTag}${i}`; //Determine the id of the current content column
         
-        document.getElementById(hColId).classList.add("datagrid-header-col");
-        document.getElementById(cColId).classList.add("datagrid-content-col");
+        document.getElementById(hColId).classList.add("datagrid-header-col"); //Add the datagrid-header-col class to the current header column
+        document.getElementById(cColId).classList.add("datagrid-content-col"); //Add the datagrid-content-col class to the content column
 
         if (i == 0) {
-            document.getElementById(hColId).classList.add("datagrid-header-col-first");
-            document.getElementById(cColId).classList.add("datagrid-content-col-first");
+            document.getElementById(hColId).classList.add("datagrid-header-col-first"); //If this is the first header column, add the datagrid-header-col-first class
+            document.getElementById(cColId).classList.add("datagrid-content-col-first"); //If this is the first content column, add the datagrid-content-col-first class
         } else if (i == colCount-1) {
-            document.getElementById(hColId).classList.add("datagrid-header-col-last");
-            document.getElementById(cColId).classList.add("datagrid-content-col-last");
+            document.getElementById(hColId).classList.add("datagrid-header-col-last"); //If this is the last header column, add the datagrid-header-col-last class
+            document.getElementById(cColId).classList.add("datagrid-content-col-last"); //If this is the last content column, add the datagrid-content-col-last class
         }
 
+        /* Step through each cell within the current content column and add the appropriate HTML elements with the correct classes and attributes */
         for (ii = 0; ii < rowCount; ii++) {
-            cRowId = `${dataGridDisplayId}Col${i}RowId${ii}`;
-            cOverlayId = `${dataGridDisplayId}OverlayCol${i}Row${ii}`
+            cRowId = `${dataGridDisplayId}Col${i}RowId${ii}`; //Determine the id of the current content cell
+            cOverlayId = `${dataGridDisplayId}OverlayCol${i}Row${ii}` //Determine the id of the current content cell overlay
             cHtml = contentColStart + ii + contentColId + cRowId + contentColMid + contentRowOverlayStart + contentRowOverlaySelectType + contentRowOverlayMid + cOverlayId + contentRowOverlayEnd;
             if (dataGrid.content[i][ii] == undefined) {
                 switch (ignoreUndefined) {
                     case false:
-                        cHtml = cHtml + contentColEnd;
+                        cHtml = cHtml + contentColEnd; //ignoreUndefined = false.  The content is undefined, therefore we determine not to process it into the html string.
                         break;
                     case true:
-                        cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd;
+                        cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd; //ignoreUndefined = true.  The content is undefined, therefore we determine that we will ignore this fact, and process it into the hmtl string.
                         break;
                     default:
                         if (typeof ignoreUndefined == "string") {
-                            cHtml = cHtml + ignoreUndefined + contentColEnd;
+                            cHtml = cHtml + ignoreUndefined + contentColEnd; //ignoreUndefined is a string value, so we will insert that string into the html in place of the undefined value.
                         } else {
-                            cHtml = cHtml + "No Data" + contentColEnd;
+                            cHtml = cHtml + "No Data" + contentColEnd; //ignoreUndefined is not defined, so we will insert the string "No Data" in place of the undefined value.
                         }
                         break;
                 }
             } else {
-                cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd;
+                cHtml = cHtml + dataGrid.content[i][ii] + contentColEnd; //The content is not undefined, so we process it into the HTML string
             }
-            document.getElementById(cColId).insertAdjacentHTML('beforeend', cHtml);
+            document.getElementById(cColId).insertAdjacentHTML('beforeend', cHtml); //The HTML string is processed into the column after the last existing child of the column
 
             if (ii == 0) {
-                document.getElementById(cRowId).classList.add("datagrid-content-row-first");            
+                document.getElementById(cRowId).classList.add("datagrid-content-row-first"); //If this is the first row, then give it the datagrid-content-row-first class
             } else if (ii == rowCount-1) {
-                document.getElementById(cRowId).classList.add("datagrid-content-row-last");
+                document.getElementById(cRowId).classList.add("datagrid-content-row-last"); //If this is the last row, then give it the datagrid-content-row-last class
             }            
         }
     }
