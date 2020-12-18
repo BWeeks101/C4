@@ -639,17 +639,8 @@ function setPlayerName(player, name) {
     }
     
     /* Add the new name value to the global settings object, localStorage, and the innerHTML of the relevant player info element */
-    setPlayerSetting(`p${player}Name`, name)
-    /*document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;*/
-    document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;    
-    /*switch (player) {
-        case 1:
-            show("options", "options");
-            break;
-        case 2:
-            createGameSetP2();
-            break;
-    }*/
+    setPlayerSetting(`p${player}Name`, name);
+    document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;
 }
 
 function setDefaultSettings(player) {
