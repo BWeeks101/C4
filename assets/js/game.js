@@ -627,10 +627,18 @@ function setPlayerSetting(setting, value) {
     }
 }
 
+/* Set a custom player name */
+/* Requires: */
+/*      player: integer.  Id of player.  1 or 2. */
+/*      name (OPTIONAL): value of custom name */
+/*                       If not supplied, name = Player 1 or Player 2 depending on supplied Id. */
 function setPlayerName(player, name) {
+    /* If no name is supplied, name = "Player 1" or "Player 2" depending on player Id */
     if (name == undefined || name == "" || name.length < 1) {
         name = `Player ${player}`;
     }
+    
+    /* Add the new name value to the global settings object, localStorage, and the innerHTML of the relevant player info element */
     setPlayerSetting(`p${player}Name`, name)
     /*document.getElementById(`soutMultP${player}Link`).innerHTML = `Sign Out (${name})`;*/
     document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;    
