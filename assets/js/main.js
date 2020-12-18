@@ -22,27 +22,30 @@ function mainOnResize() {
     menuBlockResize(); //Resize the menu block
 }
 
+/* Switch between light and dark themes */
+/* Requires: */
+/*      ihtml: "Dark Mode" or "Light Mode".  Usually provided as this.innerHTML from the clicked element*/
 function switchColorMode(ihtml) {
     let option;
     switch (ihtml) {
-        case "Dark Mode":
+        case "Dark Mode": //We are switching to Dark Mode, so change the text of the element to read "Light Mode" and set option = dark
             checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Light Mode";});
             option = "dark";
             break;
-        case "Light Mode":
+        case "Light Mode": //We are switching to Light Mode, so change the text of the element to read "Dark Mode" and set option = light
             checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Dark Mode";});
             option = "light";
             break;
     }
-    document.head.removeChild(document.getElementById("colorStyle"));
-    let colorModeStyle = document.createElement("link");
-    document.head.appendChild(colorModeStyle);
-    colorModeStyle.rel = "stylesheet";
+    document.head.removeChild(document.getElementById("colorStyle")); //The link to the light/dark css files has id=colorStyle.  Remove this element.
+    let colorModeStyle = document.createElement("link"); //Create a new link element
+    document.head.appendChild(colorModeStyle); //Apply the new link element to the document head
+    colorModeStyle.rel = "stylesheet"; //Apply standard attributes to the link element
     colorModeStyle.type = "text/css";
-    colorModeStyle.id = "colorStyle";
-    colorModeStyle.href = `assets/css/${option}.css`;
-    localStorage.removeItem("colorMode");
-    localStorage.setItem("colorMode", option);
+    colorModeStyle.id = "colorStyle"; //Ensure the link element has an id of colorStyle
+    colorModeStyle.href = `assets/css/${option}.css`; //Set the linked CSS file as appropriate
+    localStorage.removeItem("colorMode"); //Remove the colorMode kv pair from localStorage
+    localStorage.setItem("colorMode", option); //Add the colorMode kv pair to local Storage with the selected theme name.  This will be reapplied when the page is reloaded
 }
 
 function loadColorMode() {    
