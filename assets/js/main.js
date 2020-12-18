@@ -236,16 +236,20 @@ function calcBlockHeight() {
     return blockHeight;
 }
 
+/* Show/Hide/Toggle display of an element */
+/* Requires: */
+/*      action: toggle/show/hide */
+/*      elementId: Id of the element we wish to target */
 function elementDisplay(action, elementID) {
     switch (action) {
         case "toggle":
-            document.getElementById(elementID).classList.toggle("d-none");
+            document.getElementById(elementID).classList.toggle("d-none"); //toggle visibility
             break;
         case "show":
-            document.getElementById(elementID).classList.remove("d-none");
+            document.getElementById(elementID).classList.remove("d-none"); //display the element
             break;
         case "hide":
-            document.getElementById(elementID).classList.add("d-none");
+            document.getElementById(elementID).classList.add("d-none"); //do not display the element
             break;            
     }
 }
