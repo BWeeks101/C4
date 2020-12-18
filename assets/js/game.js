@@ -210,13 +210,12 @@ function selectRandCol() {
     /* Select a random value from the colArray.  This is our selected column. */
     let col = colArray[Math.floor((Math.random() * colArray.length))];
 
-    /* Iterate through the rows on this column, starting with the bottom row and working up until and empty cell is located.  Select that cell for the active player.*/
+    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
     for (i = 5; i > -1; i--) {
         if (c4.game.boardState[col][i] == undefined) { //If the cell is empty
             c4.game.boardState[col][i] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
             document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
             c4.game.completedTurns++; //Increment the completed turn count
-            //console.log(`Col: ${col}, Row: ${i}`);
             winner = checkWin(col, i); //Check for a winner
             return winner; //Return the result of the checkWin function call
         }
@@ -224,18 +223,20 @@ function selectRandCol() {
     return false; //Otherwise return false
 }
 
+/* Select the clicked column */
+/* Requires: */
+/*      object: the object that was clicked, passed to the argument as 'this' */
 function selectCol(object) {
-    let result = dataGridDisplayClicked(object, "col");
-    //console.log(result);
-    //console.log(object);
+    let result = dataGridDisplayClicked(object, "col"); //Get the id of the clicked column by passing the object to dataGridDisplayClicked()
 
+    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
     for (i = result[1]; i > 0; i--) {
         if (c4.game.boardState[result[2]][i-1] == undefined) {
-            c4.game.boardState[result[2]][i-1] = c4.game.activePlayer;
-            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`);
-            c4.game.completedTurns++;
-            winner = checkWin(result[2], i-1);
-            return winner;
+            c4.game.boardState[result[2]][i-1] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
+            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            c4.game.completedTurns++; //Increment the completed turn count
+            winner = checkWin(result[2], i-1); //Check for a winner
+            return winner; //Return the result of the checkWin function call
         }
     }
 }
