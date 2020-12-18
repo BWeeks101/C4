@@ -234,6 +234,7 @@ function menuBackButton(refreshLogo) {
     
 }
 
+/* Remove the turnTimeLimit kv pair from localStorage, and replace it with the current value from the turnTime drop down list element */
 function saveTurnTimeLimit() {
     localStorage.removeItem("turnTimeLimit");
     localStorage.setItem("turnTimeLimit", document.getElementById("turnTime").value);
