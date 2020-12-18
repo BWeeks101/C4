@@ -1,15 +1,18 @@
+/* Initialise global settings object */
 let c4 = new appGlobals();
 
+/* When the document is ready, call the onLoad function */
 $(document).ready(mainOnLoad);
 
-function mainOnLoad() {
-    c4.game.state = "default";
-    loadColorMode();
-    sideNavOnLoad();
-    drawLogoGrid();
-    elementDisplay("toggle","menuBlockContainer");
-    loadPlayerSettings();
-    mainOnResize();
+/* on Load */
+function mainOnLoad() {    
+    c4.game.state = "default"; //Set the default state
+    loadColorMode(); //Apply the appropriate theme (light or dark(default))
+    sideNavOnLoad(); //Initialise the sideNav
+    drawLogoGrid(); //draw the logo
+    elementDisplay("toggle","menuBlockContainer"); //Show the menu block
+    loadPlayerSettings(); //Initialise player settings
+    mainOnResize(); //Call the onResize function to ensure our content fits within a single page
 }
 
 function mainOnResize() {
