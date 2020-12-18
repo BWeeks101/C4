@@ -297,10 +297,11 @@ function resumeGame() {
     }
 }
 
+/* Clear the board and reset the Game */
 function resetGame() {
     switch (c4.game.state) {
         case "createhotseat":
-            checkSideNavState(function(){refreshGameBoard()});
+            checkSideNavState(function(){refreshGameBoard()}); //Check the state of the sideNav, then refresh the game board
             break;
     }
 }
