@@ -213,14 +213,10 @@ function sideNavShow(option) {
     }        
 }
 
+/* Show the pause Link, hide the Resume Link */
 function showGameSideNavMenu() {
     sideNavLinkDisplay("show", "sn-pause-reset");
     elementDisplay("hide", "ctrlResumeLink");            
-}
-
-function cancelJoinGame() {    
-    dataGridDisplayRemove("gameList");
-    show("options", "options");
 }
 
 function menuBackButton(refreshLogo) {
