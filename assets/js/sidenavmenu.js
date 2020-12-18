@@ -219,12 +219,15 @@ function showGameSideNavMenu() {
     elementDisplay("hide", "ctrlResumeLink");            
 }
 
+/* Determine which pane is shown, apply the appropriate action, then show the main pane */
+/* Requires: */
+/*      refreshLogo: true/false */
 function menuBackButton(refreshLogo) {
-    if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) {
+    if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) { //If refreshLogo is false, then we're on the turn time limit pane.  Save the turn time limit value, then load the main pane
         saveTurnTimeLimit();
         show("options", "options");
     } else {
-        saveSettings();
+        saveSettings(); //Otherwise we are on the player settings menu, so save settings, show the main pane then refresh the logo
         show("options", "options");
         refreshLogoGrid();
     }
