@@ -239,6 +239,7 @@ function selectCol(object) {
             return winner; //Return the result of the checkWin function call
         }
     }
+    return false; //Otherwise return false
 }
 
 function parseColSelection(result) {
