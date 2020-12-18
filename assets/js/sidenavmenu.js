@@ -343,27 +343,6 @@ function setTurnTimeLimit() {
     c4.game.turnTimeLimit = document.getElementById("turnTime").value;
 }
 
-function createGameNextButton(value) {
-    switch (value) {
-        case "single":
-            show("createsingle", "createsingle");
-            break;
-        case "hotseat":
-            show("createhotseat", "createhotseat");
-            break;
-        case "multiplayer":
-            show("createsetturntime", "createmultiplayer");
-            break;
-        case "easy":
-        case "normal":
-        case "hard":
-            show("createsetturntime", c4.game.state);
-            break;
-        case "setp2":
-            show("createp2settings", c4.game.state);
-    }
-}
-
 function createSetTurnTimeBackButton() {
     switch (c4.game.state) {
         case "createsingle":
