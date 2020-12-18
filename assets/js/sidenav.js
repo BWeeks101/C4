@@ -12,14 +12,14 @@ function sideNavOnLoad() {
 
 /* Set width and negative offset for sideNav on screen resize*/
 function sideNavResize() {
-    let navArray = getNavWidth();
+    let navArray = getNavWidth(); //Get sideNav width and offset values
     let navWidth = navArray[0];
     let navOffset = navArray[1];
 
-    if (sideNavState() == "closed") {
+    if (sideNavState() == "closed") { //If the sideNav is closed, apply the calculated width and offset
         document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNav").style.left = navOffset;
-    } else {
+    } else { //Otherwise, apply the width value to the sideNav element width and sideNavDocOverlay element left properties
         document.getElementById("sideNav").style.width = navWidth;
         document.getElementById("sideNavDocOverlay").style.left = navWidth;
     }
