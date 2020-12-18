@@ -67,6 +67,8 @@ function sideNavDisplayToggle() {
 }
 
 /* Toggle sideNavDocOverlay disabled status */
+/* Called when opening/closing sideNav to prevent click through during transition, potentially disrupting the position of sideNav elements */
+/* sideNavDocOverlay onClick functionality is restored once the sideNav has finished opening */
 function sideNavDocOverlayClickDisabled() {
     if (document.getElementById("sideNavDocOverlay").hasAttribute("onClick")) {
         document.getElementById("sideNavDocOverlay").removeAttribute("onClick");
