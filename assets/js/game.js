@@ -333,7 +333,11 @@ function checkWin(x, y) {
     }    
 }
 
+/* Add the highlightPn class to each winning cell to allow them to 'flash' via keyframes animation */
+/* Requires: */
+/*      results: array containing the coordinates of each cell in the winning pattern, returned by checkWin() */
 function highlightWinningCells(results) {
+    /* Iterate through the results array, applying the highlightPn class of the active player to the relevant child elements within the game board */
     for (i = 1; i < 5; i++) {
         document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstElementChild.lastElementChild.classList.add(`highlightP${c4.game.activePlayer}`);
     }
