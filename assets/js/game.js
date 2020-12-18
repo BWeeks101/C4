@@ -575,6 +575,7 @@ function saveSettings() {
     setPlayerSetting(`p2TokenColor`, document.getElementById(`p2TokenColor`).value);    
 }
 
+/* Read Player names and token colors from local storage, and apply non-null values to the global settings object */
 function loadPlayerSettings() {
     let p1Name = localStorage.getItem("p1Name");
     if (p1Name != null) {
