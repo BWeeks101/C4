@@ -251,9 +251,6 @@ function loadTurnTimeLimit() {
 /* Quit an active game and return to the main pane */
 function quitGame() {
     switch (c4.game.state) {
-        case "joingame": //Deprecated
-            dataGridDisplayRemove("gameList");
-            break;
         case "createhotseat":
             stopStartDelay(); //If the game start delay is running, stop it
             dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
