@@ -80,10 +80,10 @@ function sideNavDocOverlayClickDisabled() {
 
 /* Toggle sideNavDocOverlay left transition duration */
 function sideNavDocOverlayLeftTransitionDuration() {
-    if (document.getElementById("sideNavDocOverlay").style.transition == "left 0.5s ease 0s, background-color 0.5s ease 0s") {
-        document.getElementById("sideNavDocOverlay").style.transition = "left 0s ease 0s, background-color 0.5s ease 0s";
+    if (document.getElementById("sideNavDocOverlay").style.transition == "left 0.5s ease 0s, background-color 0.5s ease 0s") { 
+        document.getElementById("sideNavDocOverlay").style.transition = "left 0s ease 0s, background-color 0.5s ease 0s"; //when sideNav is open
     } else {
-        document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s";
+        document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s"; //when sideNav is closed (initial value)
     }
 }
 
