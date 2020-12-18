@@ -61,6 +61,7 @@ function feedbackStartDelay() {
     }, 1000);    
 }
 
+/* Stop the game start countdown */
 function stopStartDelay() {
     clearInterval(startDelay);
 }
