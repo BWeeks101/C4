@@ -650,24 +650,3 @@ function setDefaultSettings(player) {
     document.getElementById(`p${player}UserName`).value = `Player ${player}`; //Set value of name input to Player 1/2
     document.getElementById(`p${player}TokenColor`).value = getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim(); //Set value of color selector to default token color for player 1/2
 }
-
-function getPlayerColor(player, option) {
-    switch (player) {
-        case 1:
-            switch (option) {
-                case "token":
-                    return c4.game.p1.tokenColor;
-                case "altToken":
-                    return c4.game.p1.altTokenColor;
-            }
-            break;
-        case 2:
-            switch (option) {
-                case "token":
-                    return c4.game.p2.tokenColor;
-                case "altToken":
-                    return c4.game.p2.altTokenColor;
-            }
-            break;
-    }
-}
