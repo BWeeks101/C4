@@ -13,24 +13,29 @@
     <link rel="stylesheet" href="assets/css/index.css" type="text/css">
     <link rel="stylesheet" href="assets/css/logo.css" type="text/css">
     <link rel="stylesheet" href="assets/css/game.css" type="text/css">
-    <link id="colorStyle" rel="stylesheet" href="assets/css/dark.css" type="text/css">
-
-    
+    <link id="colorStyle" rel="stylesheet" href="assets/css/dark.css" type="text/css">    
 </head>
 
 <body onresize="mainOnResize()">
     <!--Nav-->
     <header id="header">
         <nav class="navbar header-nav justify-content-md-between align-items-top navbar-dark">
-            
+            <!--Navbar Toggler-->            
             <button class="navbar-toggler" type="button" id="navBarToggler" onclick="openNav()" aria-controls="navbarToggleMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!--sideNav document overlay-->
             <div class="sidenav-doc-overlay d-none" id="sideNavDocOverlay"></div>
+
+            <!--sideNav-->
             <div class="sidenav d-none" id="sideNav">
+                <!--sideNav close button-->
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <!--sideNav colorMode link and divider-->
                 <a id="colorMode" class="colorMode" onclick="switchColorMode(this.innerHTML)" href="#">Light Mode</a>
                 <hr id="colorModeDivider" class="colorMode sidenav-divider">
+                <!--sideNav dynamic links-->
                 <a id="optionsLink" class="sn-options d-none" onclick="show('options', 'options')" href="#">Back</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
                 <a id="settingsLink" class="sn-settings default" onclick="show('settings', 'settings')" href="#">User Settings</a>
@@ -47,23 +52,30 @@
                     <a id="quitLink" class="sn-ctrlgroup sn-quit" href="#" onclick="quitGame()">Quit</a>
                     <hr id="quitDivider" class="sn-ctrlgroup sn-quit sidenav-divider">
                 </div>
-            </div>            
+            </div>
+            
+            <!--navbar Brand-->            
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logo-red.png" alt="K4 Logo">                        
             </a>            
         </nav>
+
+        <!--header divider-->
         <div class="header-divider"><hr></div>    
     </header>
 
     <!--Main Div-->
     <main id="main">
         <div class="container-fluid text-center default" id="mainBlockContainer">
+            <!--Logo container-->
             <div id="imgContainer" class="default">
                 <!--<img src="assets/images/logo-red.png" alt="C4 Logo">-->
                 <div class="datagrid-container" id="logoGrid">
                     <!--Logo Grid Here-->
                 </div>
             </div>
+
+            <!--Rules container-->
             <div class="d-none" id="rulesContainer">
                 <div class="main-content" id="rulesMainContent">
                     <h1 class="mainTitle" id="rulesTitle">Rules</h1>
@@ -81,6 +93,8 @@
 
                 </div>
             </div>
+
+            <!--Game board container-->
             <div class="d-none" id="gameBoardContainer">
                 <div class="row" id="playerInfoContainer">
                     <div class="col-5" id="player1Info">
@@ -97,8 +111,7 @@
                     <div class="datagrid-container" id="gBoard">
                         <!--Create GameBoard Here-->
                     </div>
-                    <div class="feedback-container" id="feedbackContainer">
-                        
+                    <div class="feedback-container" id="feedbackContainer">                        
                         <div class="feedback-message" id="feedbackMessage">
                             <!--Winner Message Here-->
                         </div>
@@ -113,12 +126,14 @@
                     </div>
                 </div>
             </div>
+
         </div>
         
         <div class="container-fluid d-none default" id="menuBlockContainer">
             <div id="menuBlock">
                 <div id="menuContent">
                     <div id="menuContentContainer">
+                        <!--Main Pane-->
                         <div id="menuOptions" class="menu-content default">
                             <!--<h3 class="menuTitle">Options</h3>-->
                             <form>
@@ -126,6 +141,8 @@
                                 <button type="button" class="c4-control c4-button-large c4-control-full-width" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
+
+                        <!--Settings Pane-->
                         <div id="menuSettings" class="menu-content d-none">
                             <h3 class="menuTitle">User Settings</h3>
                             <div class="control-container">
@@ -175,6 +192,8 @@
                                 <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="menuBackButton(true)">Back</button>
                             </div>
                         </div>
+
+                        <!--Turn Time Limit Pane-->
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
@@ -197,6 +216,7 @@
                                 </div>
                             </form>                        
                         </div>
+                        
                     </div>
                 </div>
             </div>                    
@@ -206,7 +226,10 @@
     <!--Footer-->
     <footer id="footer">
         <div class="container-fluid footer-container">
+            <!--Footer divider-->
             <div class="footer-divider"><hr></div>
+
+            <!--Social Media Links-->
             <div class="row no-gutters justify-content-center justify-content-md-end align-items-center">                
                 <div class="col">
                     <div class="container-fluid justify-content-center align-items-center">
@@ -249,6 +272,6 @@
     <script src="assets/js/main.js" crossorigin="anonymous"></script>
     <script src="assets/js/game.js" crossorigin="anonymous"></script>
     <script src="assets/js/logo.js" crossorigin="anonymous"></script>
-    
+
 </body>
 </html>
