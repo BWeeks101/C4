@@ -1,10 +1,11 @@
+/* When the game board is clicked, if the feedback container is not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {
         if (document.getElementById("feedbackContainer").classList.contains("d-none") == false || document.getElementById("ctrlPauseLink").classList.contains("d-none") == true) {
-            return;
+            return; //If we have a win/draw, the game start countdown is active, or the game is paused, do nothing
         } else {
-            parseColSelection(selectCol(object));
+            parseColSelection(selectCol(object)); //Otherwise place a token for the active player in the selected column
         }
     }    
 }
