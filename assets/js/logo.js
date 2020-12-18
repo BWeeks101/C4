@@ -1,14 +1,18 @@
+/* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
     displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
     dataGridDisplaySetCols("logoGrid", "auto");
     animateLogo();
 }
 
+/* Refresh the logo dataGridDisplay */
 function refreshLogoGrid() {
     dataGridDisplayRemove("logoGrid");
     drawLogoGrid();
 }
 
+/* Animate the logo */
+/* After 1s, call the queue() function sequentially for each column in the logo dataGridDisplay */
 function animateLogo() {
     setTimeout(function() {
         for (i = 0; i < 8; i++) {
@@ -17,6 +21,8 @@ function animateLogo() {
     }, 1000);
 }
 
+/* Set a delay of (250 + (125 * i)) miliseconds, then call dropChar() for the relevant column */
+/* This causes each letter to drop 125ms later than the previous letter in the logo, giving the staggered fall effect */
 function queue(i) {
     let delay = 250 + (125 * i);
     setTimeout(function() {
@@ -24,6 +30,9 @@ function queue(i) {
     }, delay);
 }
 
+/* Increase the TOP style value of the selected column until it sits within the circle below it (47 pixels below the starting point) */
+/* At this point, set the zIndex style property to 2 to ensure it displays over the circle, then change the circle background color style property*/
+/* If the column id is even, then the background is changed to the default p1TokenColor, otherwise it changes to the default p2TokenColor */
 function dropChar(colId) {
     let pos = 0;
     let id = setInterval(frame, 5);
