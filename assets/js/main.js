@@ -129,6 +129,16 @@ function menuBlockResize() {
 }
 
 /* Get Computed Property of element */
+/* Requires: */
+/*      elementId: id of the element whose property value we wish to get */
+/*      propertyName: name of the property */
+/*      resFormat (OPTIONAL): Result format. */
+/*              default: as returned by window.getComputedStyle().getPropertyValue() */
+/*              int: parseInt the result before returning */
+/*              float: parseFloat the result before returning */
+/* Returns: */
+/*      result of window.getComputedStyle().getPropertyValue() */
+/*      NB: Format of returned value depends on resFormat argument */
 function getElementPropertyVal(elementId, propertyName, resFormat) {
     let propertyVal = window.getComputedStyle(document.getElementById(elementId), null).getPropertyValue(propertyName);
     switch (resFormat) {
