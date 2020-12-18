@@ -138,6 +138,8 @@ function clearGameState() {
     //console.log(c4.game.gBoardDG);
 }
 
+/* Set the number of completed turns to 0 */
+/* Used to track potential wins (unable to win in less than 7 turns) and draws (42 turns is the max until the board state is full) */
 function resetTurnCount() {
     c4.game.completedTurns = 0;
 }
