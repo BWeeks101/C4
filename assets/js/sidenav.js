@@ -38,19 +38,17 @@ function sideNavState() {
 
 /* Return width and negative offset for sideNav */
 function getNavWidth() {    
-    let navWidth = calcNavWidth();
-    
+    let navWidth = calcNavWidth(); //Calculate the width, with a minimum value of 310px    
     if (navWidth < 310) {
         navWidth = "310px";
     } else {
         navWidth = `${navWidth}px`;
     }
 
-    let navOffset = `-${navWidth}`
+    let navOffset = `-${navWidth}` //Offset = negative width
     
-    let navArray = [navWidth, navOffset];
-    
-    return navArray;
+    let navArray = [navWidth, navOffset];    
+    return navArray; //Return array of width, offset values
 }
 
 /* Calculate width of sideNav */
