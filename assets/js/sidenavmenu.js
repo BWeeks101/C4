@@ -240,6 +240,7 @@ function saveTurnTimeLimit() {
     localStorage.setItem("turnTimeLimit", document.getElementById("turnTime").value);
 };
 
+/* Get the value of the turnTimeLimit kv pair from localStorage.  If it is not null, then assign that value to the value attribute of the turnTime drop down list element */
 function loadTurnTimeLimit() {
     let turnTimeLimit = localStorage.getItem("turnTimeLimit");
     if (turnTimeLimit != null) {
