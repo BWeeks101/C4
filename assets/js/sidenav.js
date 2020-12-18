@@ -117,7 +117,7 @@ function showNav() {
     let navWidth = getNavWidth()[0]; //Get the sideNav Width
     document.getElementById("sideNav").style.left = "0px"; //Set the sideNav left style property to 0 - this will transition the sideNav from it's offset position onto the screen
     document.getElementById("sideNavDocOverlay").style.zIndex = "999"; //Side the sideNavDocOverlay zIndex to 999.  This will ensure that it appears over all content except the sideNav
-    document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.7)"; //Set the sideNavDocOverlay backgroundColor style property to 70% translucent black 
+    document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.7)"; //Set the sideNavDocOverlay backgroundColor style property to 70% translucent black (from 100% default)
     document.getElementById("sideNavDocOverlay").style.left = navWidth; //Set the sideNavDocOverlay left style property to match the navWidth.  This will transition the overlay from the left in line with the sideNav transition
 }
 
