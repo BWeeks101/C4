@@ -343,21 +343,34 @@ function highlightWinningCells(results) {
     }
 }
 
+/* Scan through rows and cols looking for matching columns */
+/* Utilised by checkWin() to determine winning patterns */
+/* Requires: */
+/*      scanDir: The direction to scan.  l/r/d/rd/lu/ld/ru */
+/*      startX: starting row coordinate */
+/*      startY: starting col coordinate */
+/*      results array (OPTIONAL): number of matching tokens and cell coordinates found on the previous scan */
+/*                                Except for vertical d(own) scans, use scans in pairs. */
+/*                                Pair r(ight) scans with l(eft) to create a complete horizontal scan */
+/*                                Pair r(ight)d(own) scans with l(eft)u(p), and l(eft)d(own) scans with r(ight)u(p) to create complete diagonal scans */
+/*                                Pass the results value of the first paired scan to the second to complete the count for that direction */
 function scanDir(scanDir, startX, startY, results) {
     x = parseInt(startX);
     y = parseInt(startY);
     
-    if (results == undefined || results[0] == undefined) {
+    if (results == undefined || results[0] == undefined) { //If no results array has been passed then initialise the array and set the token count to 1 (our starting position)
         results = [1];
         tokenCount = 1;
     } else {
-        tokenCount = parseInt(results[0]);
+        tokenCount = parseInt(results[0]); //Otherwise set the token count to match the current count from the results array
     }
 
+    /* results array */
     /* results[0] = tokenCount */
-    /* results[1] through results[4] = array, containing x and y for each valid token */
-    results[1] = [x,y];
+    /* results[1] through [4] = array, containing x and y for each valid token */
+    results[1] = [x,y]; //First position matches our startX and startY coordinates
 
+    /* Initialise variables */
     let i;
     let ii;
     let brk;
@@ -366,54 +379,55 @@ function scanDir(scanDir, startX, startY, results) {
     let dMod;
     let inc = 1;
     let dec = -1;
-    let scanDesc;
+    //let scanDesc;
     let val;
 
-    //console.log(`Prepping Scan Values`)
+    /* Preparation Switch Statement */
+    /* Set variables for use during the scan based on the scanDir argument value */
     switch (scanDir) {
-        case "r":
-            if (x < 6) {
-                scanDesc = "Right";
-                i = x+1;
-                brk = 7;
-                mod = inc;
-            } else {
+        case "r": //Right scan
+            if (x < 6) { //Col is 0-5
+                //scanDesc = "Right";
+                i = x+1; //right scan begins one col to the right of the current col
+                brk = 7; //break when we hit the final column
+                mod = inc; //Scan coords are incremental
+            } else { //Otherwise Col is 6, can't right scan from rightmost column, so return results.
                 //console.log(`Right Scan Aborted.  Rightmost Col Selected (${x})`);
                 return results;
             }
             break;
-        case "l":
-            if (x > 0) {
-                scanDesc = "Left";
-                i = x-1;
-                brk = -1;
-                mod = dec;
-            } else {
+        case "l": //Left scan
+            if (x > 0) { //Col is 1-6
+                //scanDesc = "Left";
+                i = x-1; //left scan begins one col to the left of the current col
+                brk = -1; //break when we hit the first column 
+                mod = dec; //Scan coords are decremental
+            } else { //Otherwise Col is 0, can't left scan from leftmost column, so return results.
                 //console.log(`Left Scan Aborted.  Leftmost Col Selected (${x})`);
                 return results;
             }
             break;
-        case "d":
-            if (y < 5) {
-                scanDesc = "Down";
-                i = y+1;
-                brk = 6;
-                mod = inc;
-            } else {
+        case "d": //Down scan
+            if (y < 5) { //Row is 0-4
+                //scanDesc = "Down";
+                i = y+1; //down scan begins one row below the current row
+                brk = 6; //break when we hit the bottom row
+                mod = inc; //Scan coords are incremental
+            } else { //Otherwise Row is 5, can't down scan from bottom column, so return results.
                 //console.log(`Down Scan Aborted.  Token in Bottom Row (${y})`);
                 return results;
             }
             break;
-        case "rd":
-            if (x < 6 && y < 5) {
-                scanDesc = "Right/Down";
-                i = x+1;
-                ii = y+1;
-                brk = 7;
-                dBrk = 6;
-                mod = inc;
-                dMod = inc;
-            } else {
+        case "rd": //Right/Down scan
+            if (x < 6 && y < 5) { //Col is 0-5, Row is 0-4
+                //scanDesc = "Right/Down";
+                i = x+1; //right scan begins one col to the right of the current col
+                ii = y+1; //down scan begins one row below the current row
+                brk = 7; //Break if we hit the final column
+                dBrk = 6; //Or Break if we hit the bottom row
+                mod = inc; //Horizontal scan coords are incremental
+                dMod = inc; //Vertical scan coords are incremental
+            } else { //Otherwise Col is 6 or Row is 5, can't scan right from rightmost column or down from bottom row, so return results
                 /*
                 if (x > 5) {
                     console.log(`Right/Down Scan Aborted.  Rightmost Col Selected (${x})`);
@@ -425,16 +439,16 @@ function scanDir(scanDir, startX, startY, results) {
                 return results;
             }
             break;
-        case "lu":
-            if (x > 0 && y > 0) {
-                scanDesc = "Left/Up";
-                i = x-1;
-                ii = y-1;
-                brk = -1;
-                dBrk = -1;
-                mod = dec;
-                dMod = dec;
-            } else {
+        case "lu": //Left/Up scan
+            if (x > 0 && y > 0) { //Col is 1-6, Row is 1-5
+                //scanDesc = "Left/Up";
+                i = x-1; //Left scan begins one col to the left of the current col
+                ii = y-1; //Up scan begins one row above the current row
+                brk = -1; //Break if we hit the first column
+                dBrk = -1; //or Break if we hit the top row
+                mod = dec; //Horizontal scan coords are decremental
+                dMod = dec; //Vertical scan coords are decremental
+            } else { //Otherwise Col is 0 or Row is 0, can't scan left from leftmost column or up from top row, so return results
                 /*
                 if (x < 1) {
                     console.log(`Left/Up Scan Aborted.  Leftmost Col Selected (${x})`);
@@ -446,16 +460,16 @@ function scanDir(scanDir, startX, startY, results) {
                 return results;
             }
             break;
-        case "ld":
-            if (x > 0 && y < 5) {
-                scanDesc = "Left/Down";
-                i = x-1;
-                ii = y+1;
-                brk = -1;
-                dBrk = 6;
-                mod = dec;
-                dMod = inc;
-            } else {
+        case "ld": //Left/Down scan
+            if (x > 0 && y < 5) { //Col is 1-5, Row is 0-4
+                //scanDesc = "Left/Down";
+                i = x-1; //Left scan begins one col to the left of the current col
+                ii = y+1; //Down scan begins one row below the current row
+                brk = -1; //Break if we hit the first column
+                dBrk = 6; //or Break if we hit the bottom row
+                mod = dec; //Horizontal scan coords are decremental
+                dMod = inc; //Vertical scan coords are incremental
+            } else { //Otherwise Col is 0 or Row is 5, can't scan left from leftmost column or down from bottom row, so return results
                 /*
                 if (x < 1) {
                     console.log(`Left/Down Scan Aborted.  Leftmost Col Selected (${x})`);
@@ -467,16 +481,16 @@ function scanDir(scanDir, startX, startY, results) {
                 return results;
             }
             break;
-        case "ru":
-            if (x < 6 && y > 0) {
-                scanDesc = "Right/Up";
-                i = x+1;
-                ii = y-1;
-                brk = 7;
-                dBrk = -1;
-                mod = inc;
-                dMod = dec;
-            } else {
+        case "ru": //Right/up scan
+            if (x < 6 && y > 0) { //Col is 0-5, Row is 1-5
+                //scanDesc = "Right/Up";
+                i = x+1; //Right scan begins one col to the right of the current col
+                ii = y-1; //Up scan begins one row above the current row
+                brk = 7; //Break if we hit the final column
+                dBrk = -1; //or Break if we hit the top row
+                mod = inc; //Horizontal scan coords are incremental
+                dMod = dec; //Vertical scan coords are decremental
+            } else { //Otherwise Col is 6 or Row is 0, can't scan right from rightmost column or up from top row, so return results
                 /*
                 if (x > 5) {
                     console.log(`Right/Up Scan Aborted.  Rightmost Col Selected (${x})`);
@@ -490,69 +504,66 @@ function scanDir(scanDir, startX, startY, results) {
             break;
     }
 
-    //console.log(`Starting For Loop`);
-    //console.log(`${i}, ${ii}, ${brk}, ${dBrk}, ${mod}, ${dMod}`);
+    /* Create for loop */
+    /* Variable values are set in the preparation switch statement */
     for (i;;i = i+mod) {
-        if (i == brk) {
-            //console.log (`i(${i}) == brk(${brk})`);
+        if (i == brk) { //If i matches our break value, then break
             break;
-        } else if (ii != undefined && ii == dBrk) {
-            //console.log (`ii(${ii}) == dBrk(${dBrk})`);
+        } else if (ii != undefined && ii == dBrk) { //Otherwise if ii is not undefined (we are scanning diagonally) and matches our diagonal break value, then break
             break;
         }
 
         switch (scanDir) {
             case "r":
             case "l":
-                val = c4.game.boardState[i][y];
+                val = c4.game.boardState[i][y]; //Horizontal Scan
                 break;
             case "d":
-                val = c4.game.boardState[x][i];
+                val = c4.game.boardState[x][i]; //Vertical Scan
                 break;
             case "rd":
             case "lu":
             case "ld":
             case "ru":
-                val = c4.game.boardState[i][ii];
+                val = c4.game.boardState[i][ii]; //Diagonal Scan
                 break;                
         }
-        //console.log(`value: ${val}`);
-        if (val == c4.game.activePlayer) {            
-            tokenCount++;
-            results[0] = tokenCount;
+        if (val == c4.game.activePlayer) { //The Cell value is a match for the active player
+            tokenCount++; //Increment the tokenCount
+            results[0] = tokenCount; //Update the tokenCount within the results array
             switch (scanDir) {
                 case "r":
                 case "l":
-                    results[tokenCount] = [i,y];
+                    results[tokenCount] = [i,y]; //Apply the coords of this horizontal scan match to the results array
                     //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${y}.  Count: ${tokenCount}.`);
                     break;
                 case "d":
-                    results[tokenCount] = [x,i];
+                    results[tokenCount] = [x,i]; //Apply the coords of this vertical scan match to the results array
                     //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${x} on Row: ${i}.  Count: ${tokenCount}.`);
                     break;
                 case "rd":
                 case "lu":
                 case "ld":
                 case "ru":
-                    results[tokenCount] = [i,ii];
+                    results[tokenCount] = [i,ii]; //Apply the coords of this diagonal scan match to the results array
                     //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${ii}.  Count: ${tokenCount}.`);
                     break;
             }
-            if (tokenCount == 4) {
+            if (tokenCount == 4) { //If we have found 4 matches within the same scan (or scan pair) then return results
                 //console.log(`${scanDesc} Scan from Col: ${x} on Row: ${y}`);
                 //console.log(`TokenCount: ${tokenCount}`);
                 //console.log(results);
                 return results;
             }
-        } else {            
+        } else { //The Cell value is not a match for the active player, so break           
             break;            
         }
 
-        if (ii != undefined) {
+        if (ii != undefined) { //If ii is not undefined then we are performing a diagonal scan, so adjust ii by the dMod value
             ii = ii+dMod;
         }
     }
-    return results;
+    return results; //Scan finished, but we have not found a matching pattern, so return the existing results
 }
 
 function saveSettings(player) {
