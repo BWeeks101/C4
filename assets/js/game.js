@@ -242,16 +242,20 @@ function selectCol(object) {
     return false; //Otherwise return false
 }
 
+/* Parse the column selection to determine game result */
+/* Requires: */
+/*      result: The result of the previous column selection */
 function parseColSelection(result) {
-    if (result != false) {
+    if (result != false) { //The result was not false, therefore we have a winner, so call feedbackWinner()
         //console.log(`P${c4.game.activePlayer} Wins!`);
         feedbackWinner();
         return true;
-    } else if (c4.game.completedTurns == 42) {
+    } else if (c4.game.completedTurns == 42) { //The result was false, but 42 turns have been completed, therefore the game is a draw, so call feedbackWinner("draw")
         //console.log("draw");
         feedbackWinner("draw");
         return true;
     }
+    /* We have no win/draw result yet, so switch the player and restart the turn timer */
     switchPlayer();  
     restartTurnTimer();
     return false;
