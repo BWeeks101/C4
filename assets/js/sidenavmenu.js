@@ -42,18 +42,27 @@ function sideNavLinkDisplay(action, className) {
     }
 }
 
-/* options are 'sideNav', 'mainBlockContainer', or 'menuContentContainer' */
+/* Hide all children of the provided element */
+/* Requires: */
+/*      option: sideNav/mainBlockContainer/menuContentContainer */
 function hideAll(option) {
+    /* Build a collection of all child elements for the provided option (actually an element Id) */
     let elementCollection = document.getElementById(option).children;
+
+    /* If option = sideNav, skip the first three elements (do not hide the close button, color mode link or its divider) */
     let i;
     if (option == "sideNav") {
         i = 3;
     } else {
         i = 0;
     }
+
+    /* Iterate through the collection, hiding all elements */
     for (i; i < elementCollection.length; i++) {
         elementDisplay("hide", elementCollection[i].id);        
-    }    
+    }
+
+    /* If option = mainBlockContainer then also hide the menuBlockContainer element and children */
     if (option == "mainBlockContainer") {
         elementDisplay("hide", "menuBlockContainer");
         hideAll("menuContentContainer");
