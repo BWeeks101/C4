@@ -27,8 +27,15 @@ function checkSideNavState(func) {
     };
 }
 
+/* Hide/Show a sideNav Link in conjunction with its divider element */
+/* Requires: */
+/*      action: show/hide/toggle */
+/*      className: Class appropriate to the link and divider */
 function sideNavLinkDisplay(action, className) {
+    /* Build a collection of all elements with the appropriate class */
     let elementCollection = document.getElementsByClassName(className)
+
+    /* Iterate through the collection, calling elementDisplay() with the provided action argument for the appropriate elementId */
     let i;
     for (i = 0; i < elementCollection.length; i++) {
        elementDisplay(action, elementCollection[i].id);
