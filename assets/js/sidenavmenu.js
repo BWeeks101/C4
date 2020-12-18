@@ -262,6 +262,7 @@ function quitGame() {
     refreshLogoGrid(); //Refresh the logo
 }
 
+/* Refresh the game board */
 function refreshGameBoard() {
     switch (c4.game.state) {
         case "createhotseat":
