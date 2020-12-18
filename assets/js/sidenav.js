@@ -3,7 +3,9 @@
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
 
+/* Initialise the sideNav */
 function sideNavOnLoad() {
+    /* calculate the offset value for the sideNav and apply it */
     let navOffset = getNavWidth()[1];
     document.getElementById("sideNav").style.left = navOffset;
     document.getElementById("sideNavDocOverlay").style.transition = "left 0.5s ease 0s, background-color 0.5s ease 0s";
