@@ -57,17 +57,23 @@ function loadColorMode() {
     }    
 }
 
+/* Resize the main block */
+/* This block is used to display the logo, rules and game board */
 function mainBlockResize() {
+    /* Remove any existing height or padding-bottom style properties from the main block container */
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
+
+    /* If the menu block container is not visible, then calculate and apply the correct height and padding-bottom styles to the main block */
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
         mainBlockContainerHeight = calcBlockHeight();
         document.getElementById("mainBlockContainer").style.height = `${mainBlockContainerHeight}px`;
         mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
         document.getElementById("mainBlockContainer").style.paddingBottom = `${mainBlockContainerPadBottom}px`;
 
+        /* If the game board container is visible, then calculate and apply height and width properties for it and it's children to ensure we do not scroll the page */
         if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
-
+            /* Remove any existing height, max-height, or max-width style properties from the game board container and appropriate children */
             document.getElementById("gameBoardContainer").style.removeProperty("height");
             document.getElementById("gameBoardContainer").style.removeProperty("max-width");
             document.getElementById("gameContainer").style.removeProperty("height");
@@ -75,31 +81,39 @@ function mainBlockResize() {
             document.getElementById("gBoardContentContainer").style.removeProperty("max-height");
             document.getElementById("gBoard").style.removeProperty("height");
 
+            /* Get the total padding value of the mainBlock (parent of the game board container) */
             mainBlockContainerPadTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
             mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
             mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
 
+            /* Set the game board container height to equal the height of the parent - padding */
             gameBoardContainerHeight = mainBlockContainerHeight - (mainBlockContainerPadTotal);
             document.getElementById("gameBoardContainer").style.height = `${gameBoardContainerHeight}px`;
 
-            playerInfoContainerHeight = getElementPos("playerInfoContainer").height;
-            gameContainerHeight = gameBoardContainerHeight - playerInfoContainerHeight;
+            /* Set the height of the game container element */
+            playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the height of the player info container
+            gameContainerHeight = gameBoardContainerHeight - playerInfoContainerHeight; //The game container height = game board container height - player info container height
             document.getElementById("gameContainer").style.height = `${gameContainerHeight}px`;
 
-            feedbackMessageHeight = getElementPos("feedbackMessage").height;
-            feedbackControlRowHeight = getElementPos("feedbackControlRow").height;
-            feedbackContainerHeight = feedbackMessageHeight + feedbackControlRowHeight;
+            /* Set the height of the feedback container, message and control rows */
+            feedbackMessageHeight = getElementPos("feedbackMessage").height; //Get the height of the feedback message
+            feedbackControlRowHeight = getElementPos("feedbackControlRow").height; //Get the height of the control row
+            feedbackContainerHeight = feedbackMessageHeight + feedbackControlRowHeight; //the container height = message height + control row height, with a minimum of 87px.
             if (feedbackContainerHeight < 87) {
                 feedbackContainerHeight = 87;
             }
             document.getElementById("feedbackContainer").style.height = `${feedbackContainerHeight}px`;
 
-            gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight;
+            /* Set the max height of the gboard content container */
+            gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight; //gboard content container max height = game container height - feedback container height
             document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
-            gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;
+            
+            /* Set the max width of the game board container */
+            gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;  //game board container max width =  116.55% of the game board container max height
             document.getElementById("gameBoardContainer").style.maxWidth = `${gameBoardContainerMaxWidth}px`;
-
-            gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;            
+            
+            /* Set the height of the gboard to equal the height of the gboard content container */
+            gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
             gBoardHeight = gBoardContentContainerHeight;
             document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
         }
