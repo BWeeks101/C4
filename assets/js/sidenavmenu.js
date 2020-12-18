@@ -342,17 +342,3 @@ function createDynamicGameStyle() {
 function setTurnTimeLimit() {
     c4.game.turnTimeLimit = document.getElementById("turnTime").value;
 }
-
-function createSetTurnTimeBackButton() {
-    switch (c4.game.state) {
-        case "createsingle":
-            show("createsingle", c4.game.state);
-            break;
-        case "createhotseat":
-            show("createp2settings", c4.game.state);
-            break;
-        case "createmultiplayer":
-            show("creategame", c4.game.state);
-            break;
-    }
-}
