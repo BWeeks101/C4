@@ -144,7 +144,7 @@ function resetTurnCount() {
     c4.game.completedTurns = 0;
 }
 
-/* get the numerical id of the active player */
+/* Get the numerical id of the active player */
 function getActivePlayer() {
     switch (c4.game.activePlayer) {
         case 1:
@@ -163,7 +163,7 @@ function getActivePlayer() {
     }
 }
 
-/* switch the active player, and update the color styles for the player info elements */
+/* Switch the active player, and update the color styles for the player info elements */
 function switchPlayer() {
     switchActivePlayer(); //Switch the active player
     switch (c4.game.activePlayer) {
@@ -180,17 +180,19 @@ function switchPlayer() {
     }
 }
 
+/* Switch the active player */
+/* If no player is active, set player 1 as active */
 function switchActivePlayer() {
     switch (c4.game.activePlayer) {
-    case 1:
-        c4.game.activePlayer = 2;
-        break;
-    case 2:
-        c4.game.activePlayer = 1;
-        break;
-    default:
-        c4.game.activePlayer = 1;
-        break;
+        case 1:
+            c4.game.activePlayer = 2; //Player 1 is active, so set Player 2 as active
+            break;
+        case 2:
+            c4.game.activePlayer = 1; //Player 2 is active, so set Player 1 as active
+            break;
+        default:
+            c4.game.activePlayer = 1; //No player is active, so set Player 1 as active
+            break;
     }
 }
 
