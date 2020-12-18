@@ -22,21 +22,6 @@ function mainOnResize() {
     menuBlockResize(); //Resize the menu block
 }
 
-
-/*function toggleColorMode() {
-    let mode = document.getElementById("colorMode").innerHTML;
-    switch (mode) {
-        case "Dark Mode":
-            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Light Mode";});
-            switchColorMode("dark");            
-            break;
-        case "Light Mode":
-            checkSideNavState(function(){document.getElementById("colorMode").innerHTML = "Dark Mode";});
-            switchColorMode("light");
-            break;
-    }
-}*/
-
 function switchColorMode(ihtml) {
     let option;
     switch (ihtml) {
@@ -77,38 +62,7 @@ function mainBlockResize() {
         mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
         document.getElementById("mainBlockContainer").style.paddingBottom = `${mainBlockContainerPadBottom}px`;
 
-        /*if (document.getElementById("leaderboardContainer").classList.contains("d-none") == false) {
-
-            document.getElementById("leaderboardContainer").style.removeProperty("height");
-            document.getElementById("lBoard").style.removeProperty("height");
-            document.getElementById("lBoardContentContainer").style.removeProperty("height");
-
-            if (getElementPos("leaderboardMainContent").height < mainBlockContainerHeight - (mainBlockContainerPadBottom * 2)) {
-                dataGridAdjustForScrollBars("lBoard");
-                return;
-            }
-
-            mainBlockContainerPadTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
-            mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
-            mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
-            
-            leaderboardContainerHeight = mainBlockContainerHeight - (mainBlockContainerPadTotal);
-            document.getElementById("leaderboardContainer").style.height = `${leaderboardContainerHeight}px`;
-
-            leaderboardMainContentPadTop = getElementPropertyVal("leaderboardMainContent", "padding-top", "int");
-            leaderboardMainContentPadBottom = getElementPropertyVal("leaderboardMainContent", "padding-bottom", "int");            
-            leaderboardMainContentPadTotal = leaderboardMainContentPadTop + leaderboardMainContentPadBottom;
-
-            lBoardTitleHeight = getElementPos("leaderboardTitle").height;
-            lBoardHeight = leaderboardContainerHeight - (lBoardTitleHeight + leaderboardMainContentPadTotal);
-            document.getElementById("lBoard").style.height = `${lBoardHeight}px`;            
-            
-            lBoardHeaderRowHeight = getElementPos("lBoardHeaderRow").height;
-            lBoardContentContainerHeight = lBoardHeight - lBoardHeaderRowHeight;            
-            document.getElementById("lBoardContentContainer").style.height = `${lBoardContentContainerHeight}px`;
-
-            dataGridAdjustForScrollBars("lBoard");
-        } else*/ if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
+        if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
 
             document.getElementById("gameBoardContainer").style.removeProperty("height");
             document.getElementById("gameBoardContainer").style.removeProperty("max-width");
@@ -150,45 +104,7 @@ function mainBlockResize() {
 
 function menuBlockResize() {
     menuBlockHeight = calcBlockHeight();
-    document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;
-
-    /*if (document.getElementById("menuJoinGame").classList.contains("d-none") == false) {
-        
-        document.getElementById("menuJoinGame").style.removeProperty("height")
-        document.getElementById("menuJoinControlContainer").style.removeProperty("height")
-        document.getElementById("gameList").style.removeProperty("height")
-        document.getElementById("gameListContentContainer").style.removeProperty("height")
-        
-        if (getElementPos("menuJoinGame").height < menuBlockHeight) {
-            dataGridAdjustForScrollBars("gameList");
-            return;
-        }
-
-        document.getElementById("menuJoinGame").style.height = `${menuBlockHeight}px`;
-        
-        menuJoinGameTitleHeight = getElementPos("menuJoinGameTitle").height
-
-        menuJoinGamePadTop = getElementPropertyVal("menuJoinGame", "padding-top", "int");        
-        menuJoinGamePadBottom = getElementPropertyVal("menuJoinGame", "padding-bottom", "int");
-        menuJoinGamePadTotal = menuJoinGamePadTop + menuJoinGamePadBottom;
-
-        menuJoinControlContainerHeight = menuBlockHeight - (menuJoinGameTitleHeight + menuJoinGamePadTotal);
-        document.getElementById("menuJoinControlContainer").style.height = `${menuJoinControlContainerHeight}px`;
-        
-        menuJoinControlRowHeight = getElementPos("menuJoinControlRow").height;
-        gameListHeight = menuJoinControlContainerHeight - menuJoinControlRowHeight;
-        document.getElementById("gameList").style.height = `${gameListHeight}px`;
-
-        gameListPadTop = getElementPropertyVal("gameList", "padding-top", "int");
-        gameListPadBottom = getElementPropertyVal("gameList", "padding-bottom", "int");
-        gameListPadTotal = gameListPadTop + gameListPadBottom;
-
-        gameListHeaderRowHeight = getElementPos("gameListHeaderRow").height;
-        gameListContentContainerHeight = gameListHeight - (gameListHeaderRowHeight + gameListPadTotal);
-        document.getElementById("gameListContentContainer").style.height = `${gameListContentContainerHeight}px`;
-
-        dataGridAdjustForScrollBars("gameList");
-    }*/
+    document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;    
 }
 
 /* Get Computed Property of element */
