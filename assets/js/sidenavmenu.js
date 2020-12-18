@@ -44,14 +44,21 @@ function sideNavLinkDisplay(action, className) {
 
 /* Hide all children of the provided element */
 /* Requires: */
-/*      option: sideNav/mainBlockContainer/menuContentContainer */
-function hideAll(option) {
-    /* Build a collection of all child elements for the provided option (actually an element Id) */
-    let elementCollection = document.getElementById(option).children;
+/*      elementId: sideNav/mainBlockContainer/menuContentContainer */
+function hideAll(elementId) {
+    /* Verify that the elementId argument refers to a valid HTML element */
+    let valid = document.getElementById(elementId);
+    if (valid == null) { //If not, return false
+        console.log(`Error.  Target element (${elementId}) does not exist.`);
+        return false;
+    }
+    
+    /* Build a collection of all child elements for the provided element Id */
+    let elementCollection = document.getElementById(elementId).children;
 
-    /* If option = sideNav, skip the first three elements (do not hide the close button, color mode link or its divider) */
+    /* If elementId = sideNav, skip the first three elements (do not hide the close button, color mode link or its divider) */
     let i;
-    if (option == "sideNav") {
+    if (elementId == "sideNav") {
         i = 3;
     } else {
         i = 0;
@@ -62,8 +69,8 @@ function hideAll(option) {
         elementDisplay("hide", elementCollection[i].id);        
     }
 
-    /* If option = mainBlockContainer then also hide the menuBlockContainer element and children */
-    if (option == "mainBlockContainer") {
+    /* If elementId = mainBlockContainer then also hide the menuBlockContainer element and children */
+    if (elementId == "mainBlockContainer") {
         elementDisplay("hide", "menuBlockContainer");
         hideAll("menuContentContainer");
     }
