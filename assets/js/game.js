@@ -651,15 +651,6 @@ function setDefaultSettings(player) {
     document.getElementById(`p${player}TokenColor`).value = getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim(); //Set value of color selector to default token color for player 1/2
 }
 
-/*function setPlayerColor(player, option, elementId) {
-    setPlayerSetting(`p${player}.${option}Color`, document.getElementById(elementId).value);
-}*/
-
-/*function setPlayerColors(player) {
-    setPlayerColor(player, "token", `p${player}TokenColor`);
-    setPlayerColor(player, "altToken", `p${player}AltTokenColor`);
-}*/
-
 function getPlayerColor(player, option) {
     switch (player) {
         case 1:
