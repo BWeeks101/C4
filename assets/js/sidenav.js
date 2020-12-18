@@ -25,6 +25,9 @@ function sideNavResize() {
     }
 }
 
+/* Get the sideNav state. */
+/* States can be: Opening/Open/Closing/Closed depending on the transition state/display property of the sideNav element */
+/* Return open by default, or closed if the state is closed or closing. */
 function sideNavState() {
     if (c4.sideNavState == "closed" || c4.sideNavState == "closing") {
         return "closed";
