@@ -598,6 +598,10 @@ function loadPlayerSettings() {
     }
 }
 
+/* Update global settings object and local storage with custom name or token color */
+/* Requires: */
+/*      setting: p1Name/p1TokenColor/p2Name/p2TokenColor */
+/*      value: value to the assigned to the specified setting */
 function setPlayerSetting(setting, value) {
     switch (setting) {
         case "p1Name":
