@@ -87,17 +87,23 @@ function sideNavDocOverlayLeftTransitionDuration() {
     }
 }
 
-/* Set the width of the side navigation to 250px */
+/* Open the sideNav */
 function openNav() {
+    /* If the sideNav is already open/opening, do nothing */
     if (c4.sideNavState == "open" || c4.sideNavState == "opening") {
         console.log(`sideNav already ${c4.sideNavState}.`);
         return;
     }
+    
+    /* Set the sideNavState to opening, display the sideNav and the sideNavDocOverlay elements, disable the navBarToggler element */
     c4.sideNavState = "opening";
     sideNavDisplayToggle();
     document.getElementById("navBarToggler").disabled = true;
+
+    /* Delay for 50ms, then call ShowNav() */
     setTimeout(function() {
         showNav();
+        /* Delay for 600ms and toggle the sideNavDocOverlay left transition duration and onclick attribute values, then set the sideNavState to open */
         setTimeout(function() {
             sideNavDocOverlayLeftTransitionDuration();
             sideNavDocOverlayClickDisabled();
