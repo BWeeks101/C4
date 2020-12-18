@@ -544,7 +544,7 @@ function dataGridDisplaySetSelected(dataGridDisplayId, count, selId, option) {
         return false;
     }
 
-    if (option != invalid) {
+    if (option != undefined) {
         option = option.toLowerCase(); //If option is not undefined, then set it to lower case.
     }
     if (option != "row" && option != "col") { //If option is not row or col, then it is invalid so return false
