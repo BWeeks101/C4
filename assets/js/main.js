@@ -176,14 +176,14 @@ function getElementPos(elementId) {
 }
 
 /* Calculate Desired Height of mainBlock or menuBlock */
-/* If: 
-/* mainBlockContainer is Hidden, and menuBlockContainer is visible
-/* Or:
-/* mainBlockContainer and menuBlockContainer are both visible
-/* Then:
-/* Output is suitable for menuBlockContainer
-/* Else:
-/* Output is suitable for mainBlockContainer */
+/* If: */
+/*      mainBlockContainer is Hidden, and menuBlockContainer is visible */
+/* Or: */
+/*      mainBlockContainer and menuBlockContainer are both visible */
+/* Then: */
+/*      Output is suitable for menuBlockContainer */
+/* Else: */
+/*      Output is suitable for mainBlockContainer */
 function calcBlockHeight() {
     /* Browser Viewport Height */
     let wHeight = window.innerHeight;
@@ -205,7 +205,6 @@ function calcBlockHeight() {
 
     /* mainBlockContainer Height */
     let mainBlockContainerHeight;
-
     if (mainBlockContainerHidden == false) {        
         mainBlockContainerHeight = getElementPos("mainBlockContainer").height;
     }
@@ -229,8 +228,7 @@ function calcBlockHeight() {
     }    
 
     /* If Calculated Full Content Height is Greater than Browser Viewport */
-    /* Reduce Block Height by the difference to prevent vertical scroll */
-    /* Will need revising for mobile views in portrait - probably add a minheight */
+    /* Reduce Block Height by the difference to prevent vertical scroll, respecting minimum height */
     if (contentHeight > wHeight) {
         blockHeight = blockHeight - (contentHeight - wHeight);
     }
