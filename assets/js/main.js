@@ -154,6 +154,18 @@ function getElementPropertyVal(elementId, propertyName, resFormat) {
 }
 
 /* Get position and size of element */
+/* Requires: */
+/*      elementId: id of the element whose positional/size data we wish to return */
+/* Returns object with the following properties: */
+/*      x */
+/*      y */
+/*      width */
+/*      height */
+/*      top */
+/*      right */
+/*      bottom */
+/*      left */
+/*      NB: top/right/bottom/left are adjusted to take into account scroll position by utilising window.page[X/Y]Offset */
 function getElementPos(elementId) {
     let elementPos = document.getElementById(elementId).getBoundingClientRect();
     elementPos.top = elementPos.top + window.pageYOffset;
