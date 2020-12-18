@@ -1,23 +1,3 @@
-/* Dummy Data for Join Game List */
-let gameListheaders = ["Turn Time Limit", "Host", "Leaderboard Position"];
-let gameListfirstcol = ["25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s","25s", "10s", "5s"];
-let gameListsecondcol = ["AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD","AAAAA", "CCCCC", "BBBBB", "DDDDD"];
-let gameListthirdcol = ["3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5","3", "1", "2", "4", "5"];
-let gameListgridtestarray = [gameListfirstcol, gameListsecondcol, gameListthirdcol];
-
-let gameListDG = new DataGrid(gameListheaders, gameListgridtestarray);
-/* End Dummy Data for Join Game List */
-
-/* Dummy Data for Leaderboard */
-let lBoardHeaders = ["Pos.","User","W-L-D-P"];
-let lBoardfirstcol = ["1","2","3","4","5","6","7","8","9","10","1","2","3","4","5","6","7","8","9","10","1","2","3","4","5","6","7","8","9","10","1","2","3","4","5","6","7","8","9","10","1","2","3","4","5","6","7","8","9","10"];
-let lBoardsecondcol = ["AAAAA","BBBBB","CCCCC","DDDDD","EEEEE","FFFFF","GGGGG","HHHHH","IIIII","JJJJJ"];
-let lBoardthirdcol = ["10-0-0-10","9-0-1-10","8-0-2-10","7-0-3-10","6-0-4-10","5-1-4-10","4-2-4-10","3-3-4-10","2-4-4-10","0-6-4-10"];
-let lBoardgridtestarray = [lBoardfirstcol, lBoardsecondcol, lBoardthirdcol];
-
-let lBoardDG = new DataGrid(lBoardHeaders, lBoardgridtestarray);
-/* End Dummy Data for Leaderboard */
-
 let c4 = new appGlobals();
 
 $(document).ready(mainOnLoad);
