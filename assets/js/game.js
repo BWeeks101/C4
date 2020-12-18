@@ -196,29 +196,32 @@ function switchActivePlayer() {
     }
 }
 
+/* Automatically select a random column */
+/* Called when a player does not respond within their turn by the time that the turn time limit expires */
 function selectRandCol() {
+    /* Build an array of column id's that relate to columns which have at least 1 empty cell */
     let colArray = [];
     for (i = 0; i < 7; i++) {
-        if (c4.game.boardState[i][0] == undefined) {
+        if (c4.game.boardState[i][0] == undefined) { //If col[i]row[0] is undefined, then the top row does not have a value, which means that this column is not full
             colArray.push(i);
         }
     }
     
-    //console.log(colArray);
+    /* Select a random value from the colArray.  This is our selected column. */
     let col = colArray[Math.floor((Math.random() * colArray.length))];
-    //console.log(col);
 
+    /* Iterate through the rows on this column, starting with the bottom row and working up until and empty cell is located.  Select that cell for the active player.*/
     for (i = 5; i > -1; i--) {
-        if (c4.game.boardState[col][i] == undefined) {
-            c4.game.boardState[col][i] = c4.game.activePlayer;
-            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`);
-            c4.game.completedTurns++;
+        if (c4.game.boardState[col][i] == undefined) { //If the cell is empty
+            c4.game.boardState[col][i] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            c4.game.completedTurns++; //Increment the completed turn count
             //console.log(`Col: ${col}, Row: ${i}`);
-            winner = checkWin(col, i);
-            return winner;
+            winner = checkWin(col, i); //Check for a winner
+            return winner; //Return the result of the checkWin function call
         }
     }
-    return false;
+    return false; //Otherwise return false
 }
 
 function selectCol(object) {
