@@ -48,6 +48,7 @@ function switchColorMode(ihtml) {
     localStorage.setItem("colorMode", option); //Add the colorMode kv pair to local Storage with the selected theme name.  This will be reapplied when the page is reloaded
 }
 
+/* Load the appropriate theme per localStorage colorMode kv pair */
 function loadColorMode() {    
     if (localStorage.getItem("colorMode") == "light") {        
         switchColorMode("Light Mode");
