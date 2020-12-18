@@ -109,11 +109,6 @@ function mainShow(option) {
             /* Display the rules container */
             elementDisplay("show", "rulesContainer");
             break;
-        case "leaderboard": //Deprecated
-            dataGridDisplayRemove("lBoard");
-            displayDataGrid(lBoardDG, "lBoard", "off");
-            elementDisplay("show", "leaderboardContainer");
-            break;
         case "options":
             /* Show the options pane */
             elementDisplay("show", "menuOptions");            
@@ -126,15 +121,6 @@ function mainShow(option) {
             document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
             elementDisplay("show", "menuSettings");            
             break;
-        case "creategame": //Deprecated
-            elementDisplay("show", "menuCreateGame"); 
-            break;
-        case "createsingle": //Deprecated
-            elementDisplay("show", "menuCreateSingle");
-            break;
-        case "createhotseat": //Deprecated
-            elementDisplay("show", "menuCreateHotseat");
-            break;
         case "starthotseat":
             /* Initialise a hotseat game */
             refreshHotseat(); //Refresh the game board values
@@ -144,22 +130,11 @@ function mainShow(option) {
             elementDisplay("show", "gameBoardContainer"); //Show the game board container
             feedbackStartDelay(); //Begin the game start countdown
             break;
-        case "createp2settings": //Deprecated
-            document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
-            elementDisplay("show", "menuCreateP2Settings");
-            break;
-        case "createmultiplayer": //Deprecated
-            elementDisplay("show", "menuCreateMultiplayer");
-            break;
         case "createsetturntime":
             /* Show the Turn Time Limit pane */
             loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
             elementDisplay("show", "menuCreateSetTurnTime"); //Show the turn time limit pane
-            break;
-        case "joingame": //Deprecated
-            displayDataGrid(gameListDG, "gameList");
-            elementDisplay("show", "menuJoinGame");
-            break;
+            break;        
     }
 
     mainOnResize(); //Call the resize function to ensure all elements are drawn correctly
