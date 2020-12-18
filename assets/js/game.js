@@ -122,10 +122,12 @@ function restartTurnTimer() {
     startTurnTimer(); //Start the timer from scratch
 }
 
+/* Clear the game state */
 function clearGameState() {
     let i = c4.game.boardState.length;
     let ii;
 
+    /* Iterate through the boardState arrays, setting each value to undefined */
     for (i = 0; i < c4.game.boardState.length; i++) {
         for (ii = 0; ii < c4.game.boardState[i].length; ii++) {
             c4.game.boardState[i][ii] = undefined;
