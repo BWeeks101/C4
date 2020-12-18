@@ -44,7 +44,7 @@ function sideNavLinkDisplay(action, className) {
 
 /* Hide all children of the provided element */
 /* Requires: */
-/*      elementId: sideNav/mainBlockContainer/menuContentContainer */
+/*      elementId: Any valid element Id.  Intended use for sideNav/mainBlockContainer/menuContentContainer */
 function hideAll(elementId) {
     /* Verify that the elementId argument refers to a valid HTML element */
     let valid = document.getElementById(elementId);
@@ -52,7 +52,7 @@ function hideAll(elementId) {
         console.log(`Error.  Target element (${elementId}) does not exist.`);
         return false;
     }
-    
+
     /* Build a collection of all child elements for the provided element Id */
     let elementCollection = document.getElementById(elementId).children;
 
@@ -76,22 +76,28 @@ function hideAll(elementId) {
     }
 }
 
+/* Show the items appropriate to the provided Option argument */
+/* Requires: */
+/*      option: default/rules/starthotseat/settings/createsetturntime */
 function mainShow(option) {
-    hideAll("mainBlockContainer");
-    if (option != "rules" && option !="starthotseat") {
+    hideAll("mainBlockContainer"); //Hide all main and menu block child elements
+    if (option != "rules" && option !="starthotseat") { //If option is not rules or starthotseat then display the logo container, hide all children of the menu content container, and display the menu block conainer
         elementDisplay("show", "imgContainer");
         hideAll("menuContentContainer");
         elementDisplay("show", "menuBlockContainer");                
-    } 
-    if (option == "settings") {
+    }
+    if (option == "settings") { //If option = settings hide the main block container
         elementDisplay("hide", "mainBlockContainer");
-    } else {
+    } else { //Otherwise show the main block container
         elementDisplay("show", "mainBlockContainer");
     }
 
     switch (option) {
-        case "default":            
+        case "default":
+            /* Build a collection of elements with the 'default' class */
             let elementCollection = document.getElementsByClassName("default");
+
+            /* Iterate through the collection, looking for children of the main, mainBlockContainer and menuContentContainer elements, then displaying those children */
             let i;    
             for (i = 0; i < elementCollection.length; i++) {        
                 if (elementCollection[i].parentElement.id == "main" || elementCollection[i].parentElement.id == "mainBlockContainer" || elementCollection[i].parentElement.id == "menuContentContainer") {                        
@@ -100,58 +106,63 @@ function mainShow(option) {
             }             
             break;
         case "rules":
+            /* Display the rules container */
             elementDisplay("show", "rulesContainer");
             break;
-        case "leaderboard":
+        case "leaderboard": //Deprecated
             dataGridDisplayRemove("lBoard");
             displayDataGrid(lBoardDG, "lBoard", "off");
             elementDisplay("show", "leaderboardContainer");
             break;
         case "options":
+            /* Show the options pane */
             elementDisplay("show", "menuOptions");            
             break;
-        case "settings":            
+        case "settings":
+            /* Get the current properties of the player 1 and player 2 objects, and apply them to elements in the settings pane before showing it */
             document.getElementById("p1UserName").value = c4.game.p1.name;
             document.getElementById("p1TokenColor").value = c4.game.p1.tokenColor;
             document.getElementById("p2UserName").value = c4.game.p2.name;
             document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
             elementDisplay("show", "menuSettings");            
             break;
-        case "creategame":
+        case "creategame": //Deprecated
             elementDisplay("show", "menuCreateGame"); 
             break;
-        case "createsingle":
+        case "createsingle": //Deprecated
             elementDisplay("show", "menuCreateSingle");
             break;
-        case "createhotseat":
+        case "createhotseat": //Deprecated
             elementDisplay("show", "menuCreateHotseat");
             break;
         case "starthotseat":
-            refreshHotseat();
-            dataGridDisplayRemove("gBoard");
-            displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false);
-            dataGridDisplaySetOnClick("gBoard", "gameClicked(this)");
-            elementDisplay("show", "gameBoardContainer");
-            feedbackStartDelay();
+            /* Initialise a hotseat game */
+            refreshHotseat(); //Refresh the game board values
+            dataGridDisplayRemove("gBoard"); //Remove the game board from display
+            displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
+            dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board
+            elementDisplay("show", "gameBoardContainer"); //Show the game board container
+            feedbackStartDelay(); //Begin the game start countdown
             break;
-        case "createp2settings":
+        case "createp2settings": //Deprecated
             document.getElementById("p2TokenColor").value = getPlayerColor(2, "token");
             elementDisplay("show", "menuCreateP2Settings");
             break;
-        case "createmultiplayer":
+        case "createmultiplayer": //Deprecated
             elementDisplay("show", "menuCreateMultiplayer");
             break;
         case "createsetturntime":
-            loadTurnTimeLimit();
-            elementDisplay("show", "menuCreateSetTurnTime");
+            /* Show the Turn Time Limit pane */
+            loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
+            elementDisplay("show", "menuCreateSetTurnTime"); //Show the turn time limit pane
             break;
-        case "joingame":
+        case "joingame": //Deprecated
             displayDataGrid(gameListDG, "gameList");
             elementDisplay("show", "menuJoinGame");
             break;
     }
 
-    mainOnResize();
+    mainOnResize(); //Call the resize function to ensure all elements are drawn correctly
 }
 
 function sideNavShow(option) {
