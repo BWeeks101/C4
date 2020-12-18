@@ -79,7 +79,7 @@ function sideNavDocOverlayClickDisabled() {
 }
 
 /* Toggle sideNavDocOverlay left transition duration */
-function sideNavDocOverlayLTD() {
+function sideNavDocOverlayLeftTransitionDuration() {
     if (document.getElementById("sideNavDocOverlay").style.transition == "left 0.5s ease 0s, background-color 0.5s ease 0s") {
         document.getElementById("sideNavDocOverlay").style.transition = "left 0s ease 0s, background-color 0.5s ease 0s";
     } else {
@@ -99,7 +99,7 @@ function openNav() {
     setTimeout(function() {
         showNav();
         setTimeout(function() {
-            sideNavDocOverlayLTD();
+            sideNavDocOverlayLeftTransitionDuration();
             sideNavDocOverlayClickDisabled();
             c4.sideNavState = "open";
         }, 600);
@@ -122,7 +122,7 @@ function closeNav() {
         return;
     }
     c4.sideNavState = "closing";
-    sideNavDocOverlayLTD();
+    sideNavDocOverlayLeftTransitionDuration();
     sideNavDocOverlayClickDisabled();
     setTimeout(function() {
         hideNav();    
