@@ -15,10 +15,11 @@ function mainOnLoad() {
     mainOnResize(); //Call the onResize function to ensure our content fits within a single page
 }
 
+/* on Resize */
 function mainOnResize() {
-    sideNavResize();
-    mainBlockResize();
-    menuBlockResize();
+    sideNavResize(); //Resize the sideNav
+    mainBlockResize(); //Resize the main block
+    menuBlockResize(); //Resize the menu block
 }
 
 
