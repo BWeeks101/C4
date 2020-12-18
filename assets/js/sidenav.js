@@ -52,6 +52,7 @@ function getNavWidth() {
 }
 
 /* Calculate width of sideNav */
+/* Width = 1/3rd of the browser window content area */
 function calcNavWidth() {
     let cWidth = window.innerWidth;
     let percentage = 33;
