@@ -165,32 +165,37 @@ function mainShow(option) {
     mainOnResize(); //Call the resize function to ensure all elements are drawn correctly
 }
 
+/* Show the sideNav elements appropriate to the provided Option argument */
+/* Requires: */
+/*      option: default/rules/starthotseat/settings/createsetturntime */
 function sideNavShow(option) {
     hideAll("sideNav");
     switch (option) {
-        case "default":            
+        case "default":
+            /* Build a collection of elements with the 'default' class */
             let elementCollection = document.getElementsByClassName("default");
-                let i;    
-                for (i = 0; i < elementCollection.length; i++) {
-                    if (elementCollection[i].parentElement.id == "sideNav") {
+
+            /* Iterate through the collection, looking for children of the sideNav element, then displaying those children */
+            let i;
+            for (i = 0; i < elementCollection.length; i++) {
+                if (elementCollection[i].parentElement.id == "sideNav") {
                     elementDisplay("show", elementCollection[i].id);
-                }        
-            }                
+                }
+            }
             break;
         case "rules":
             switch (c4.game.state) {
-                case "default":
-                    break;
-                case "options":
-                    break;
+                case "default":  //Deprecated
+                case "options": //Deprecated
                 case "settings":
+                    /* Show the options and settings links on the sideNav */
                     sideNavLinkDisplay("show", "sn-options");
                     sideNavLinkDisplay("show", "sn-settings");
                     break;
             }        
-            sideNavLinkDisplay("show", "sn-leaderboard");
+            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
             break;
-        case "leaderboard":
+        case "leaderboard": //Deprecated
             switch (c4.game.state) {
                 case "default":
                     sideNavLinkDisplay("show", "sn-signin");
@@ -208,13 +213,15 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "options":
+            /* Show the settings and rules links on the sideNav */
             sideNavLinkDisplay("show", "sn-settings");
-            sideNavLinkDisplay("show", "sn-leaderboard");
+            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "settings":
+            /* Show the options and rules links on the sideNav */
             sideNavLinkDisplay("show", "sn-options");
-            sideNavLinkDisplay("show", "sn-leaderboard");
+            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "creategame":
@@ -223,13 +230,15 @@ function sideNavShow(option) {
         case "createmultiplayer":
         case "createp2settings":
         case "createsetturntime":
+            /* Show the Back link on the sideNav */
             sideNavLinkDisplay("show", "sn-back");
             break;
         case "starthotseat":
-            document.getElementById("ctrlResetLink").innerHTML = "Reset";
-            sideNavLinkDisplay("show", "sn-ctrlgroup");
-            sideNavLinkDisplay("hide", "sn-pause-reset")
-            sideNavLinkDisplay("hide", "sn-concede");
+            /* Show the appropriate game controls on the sideNav */
+            document.getElementById("ctrlResetLink").innerHTML = "Reset"; //Reset game link
+            sideNavLinkDisplay("show", "sn-ctrlgroup"); //Show the game controles group
+            sideNavLinkDisplay("hide", "sn-pause-reset") //Initially hide the pause/resume controls - they will be shown once the game start countdown completes
+            sideNavLinkDisplay("hide", "sn-concede"); //Deprecated
             break;
         default:
             break;
