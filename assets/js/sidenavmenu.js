@@ -1,9 +1,14 @@
-function show(option, newstate) {    
-    if (newstate != undefined) {        
+/* show/hide main block/menu block/sideNav elements */
+/* Requires: */
+/*      option: element 'group' to affect */
+/*      newstate (OPTIONAL): new value for global state property */
+function show(option, newstate) {
+    /* If newstate is provided, then change c4.game.state to newstate */
+    if (newstate != undefined) {
         c4.game.state = newstate;
     }
-    mainShow(option);
-    checkSideNavState(function(){sideNavShow(option)});
+    mainShow(option); //Run the mainShow() function against the value of the option argument
+    checkSideNavState(function(){sideNavShow(option)}); //Check the state of the sideNav (waiting for close if open), the run sideNavShow() against the value of the option argument
 }
 
 function checkSideNavState(func) {
