@@ -1,4 +1,6 @@
 /* When the game board is clicked, if the feedback container is not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
+/* Requires: */
+/*      object: the object that was clicked, passed to the argument as 'this' */
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail == 1) {
