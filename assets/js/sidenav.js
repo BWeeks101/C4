@@ -121,17 +121,21 @@ function showNav() {
     document.getElementById("sideNavDocOverlay").style.left = navWidth; //Set the sideNavDocOverlay left style property to match the navWidth.  This will transition the overlay from the left in line with the sideNav transition
 }
 
-/* Set the width of the side navigation to 0 */
+/* Close the sideNav */
 function closeNav() {
+    /* If the sideNav is already closing/closed, do nothing */
     if (c4.sideNavState == "closed" || c4.sideNavState == "closing") {
         console.log(`sideNav already ${c4.sideNavState}.`);
         return;
     }
+    /* Set the sideNav state to closing, and toggle the sideNavDocOverlay left transition duration and onclick attribute values */
     c4.sideNavState = "closing";
     sideNavDocOverlayLeftTransitionDuration();
     sideNavDocOverlayClickDisabled();
+    /* Delay for 50ms, then call hideNav() */
     setTimeout(function() {
-        hideNav();    
+        hideNav();
+        /* Delay for 600ms then hide the sideNav element, enable the navBarToggler, and set the sideNavState to closed */
         setTimeout(function() {
             sideNavDisplayToggle();
             document.getElementById("navBarToggler").disabled = false;
