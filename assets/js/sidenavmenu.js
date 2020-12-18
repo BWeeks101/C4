@@ -306,18 +306,19 @@ function resetGame() {
     }
 }
 
+/* Start the Game */
 function startGame() {
-    createDynamicGameStyle();
-    setTurnTimeLimit()
+    createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
+    setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
     switch (c4.game.state) {
         case "createhotseat":
-            saveTurnTimeLimit();
-            show("starthotseat");
+            saveTurnTimeLimit(); //Write the selected turn time limit to local storage
+            show("starthotseat"); //Display the hotseat game board and start the game
             break;
-        case "createmultiplayer":
+        case "createmultiplayer": //Deprecated
             show("createmultiplayer");
             break;
-        case "createsingle":
+        case "createsingle": //Deprecated
             show("startsingle");
             break;
     }
