@@ -110,6 +110,7 @@ function resumeTurnTimer() {
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
+/* Stop the turn time limit timer */
 function stopTurnTimer() {
     clearInterval(c4.game.activeTurnTimer);
     document.getElementById("turnTimeLimit").firstElementChild.innerHTML = ``;
