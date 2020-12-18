@@ -112,11 +112,11 @@ function openNav() {
     }, 50);
 }
 
-/* Calculate the sideNav width, then show the sideNav and sideNavDocOverlay elements */
+/* Calculate the sideNav width, then show the sideNav and sideNavDocOverlay elements with transition */
 function showNav() {
     let navWidth = getNavWidth()[0]; //Get the sideNav Width
-    document.getElementById("sideNav").style.left = "0px"; //Set the sideNav left style property to 0 - this will transition the sideNav from it's offset position onto the screen
-    document.getElementById("sideNavDocOverlay").style.zIndex = "999"; //Side the sideNavDocOverlay zIndex to 999.  This will ensure that it appears over all content except the sideNav
+    document.getElementById("sideNav").style.left = "0px"; //Set the sideNav left style property to 0 - this will transition the sideNav from it's offset position onto the window
+    document.getElementById("sideNavDocOverlay").style.zIndex = "999"; //Set the sideNavDocOverlay zIndex to 999.  This will ensure that it appears over all content except the sideNav
     document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.7)"; //Set the sideNavDocOverlay backgroundColor style property to 70% translucent black (from 100% default)
     document.getElementById("sideNavDocOverlay").style.left = navWidth; //Set the sideNavDocOverlay left style property to match the navWidth.  This will transition the overlay from the left in line with the sideNav transition
 }
@@ -144,11 +144,11 @@ function closeNav() {
     }, 50);    
 }
 
+/* Calculate the sideNav width, then hide the sideNav and sideNavDocOverlay elements with transition */
 function hideNav() {
-    let navOffset = getNavWidth()[1];
-
-    document.getElementById("sideNav").style.left = navOffset;
-    document.getElementById("sideNavDocOverlay").style.zIndex = "-1000";
-    document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.0)";
-    document.getElementById("sideNavDocOverlay").style.left = "0px"
+    let navOffset = getNavWidth()[1]; //Get the sideNav Width
+    document.getElementById("sideNav").style.left = navOffset; //Set the sideNav left style property to negative width - this will transition the sideNav fully off of the left side of the window
+    document.getElementById("sideNavDocOverlay").style.zIndex = "-1000"; //Set the sideNavDocOverlay zIndex to -1000, ensuring that it drops behind all other content
+    document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.0)"; //Set the sideNavDocOverlay backgroundColor style property to the default of 100% translucent
+    document.getElementById("sideNavDocOverlay").style.left = "0px" //Set the sideNavDocOverlay left style property to 0.  This will transition the overlay across the window in line with the sideNav transition
 }
