@@ -75,11 +75,12 @@ function refreshHotseat() {
     getActivePlayer(); //Get the active player
 }
 
+/* Stop the game */
 function stopHotseat() {
-    stopTurnTimer();
-    elementDisplay("hide", "feedbackContainer");
-    clearGameState();
-    resetTurnCount();
+    stopTurnTimer(); //Stop the turn timer
+    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+    clearGameState(); //Clear the game state
+    resetTurnCount(); //Reset the turn count to 0
 }
 
 function startTurnTimer() {
