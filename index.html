@@ -33,62 +33,20 @@
                 <hr id="colorModeDivider" class="colorMode sidenav-divider">
                 <a id="optionsLink" class="sn-options d-none" onclick="show('options', 'options')" href="#">Back</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
-                <!--<a id="signInLink" class="sn-signin d-none" onclick="show('default', 'default')" href="#">Back to Sign In</a>
-                <hr id="signInDivider" class="sn-signin sidenav-divider d-none">-->
                 <a id="settingsLink" class="sn-settings default" onclick="show('settings', 'settings')" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider default">
-                <!--<a id="leaderboardLink" class="sn-leaderboard default" onclick="show('leaderboard')" href="#">View Leaderboard</a>
-                <hr id="leaderboardDivider" class="sn-leaderboard sidenav-divider default">-->
                 <a id="rulesLink" class="sn-rules default" onclick="show('rules')" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
                 <a id="backLink" class="sn-back d-none" onclick="menuBackButton()" href="#">Back</a>
                 <hr id="backDivider" class="sn-back sidenav-divider d-none">
-                <!--<a id="cancelCreateLink" class="sn-cancelcreate d-none" onclick="show('options', 'options')" href="#">Cancel Game Creation</a>
-                <hr id="cancelCreateDivider" class="sn-cancelcreate sidenav-divider d-none">-->
-                <!--<a id="cancelJoinLink" class="sn-canceljoin d-none" onclick="cancelJoinGame()" href="#">Cancel Joining a Game</a>
-                <hr id="cancelJoinDivider" class="sn-canceljoin sidenav-divider d-none">-->
-                <!--<div id="typeGroup" class="sn-typegroup d-none">
-                    <h5>Game Type</h5>
-                    <a id="typeSPLink" class="sn-typegroup underheader" href="#">Single Player</a>
-                    <a id="typeHSLink" class="sn-typegroup underheader" href="#">Hotseat</a>
-                    <a id="typeOMLink" class="sn-typegroup underheader" href="#">Online Multiplayer</a>
-                    <hr id="typeGroupDivider" class="sn-typegroup sidenav-divider">
-                </div>-->
-                <!--<div id="diffGroup" class="sn-diffgroup d-none">
-                <h5>Difficulty</h5>
-                    <a id="diffEasyLink" class="sn-diffgroup underheader" href="#">Easy</a>
-                    <a id="diffMedLink" class="sn-diffgroup underheader" href="#">Normal</a>
-                    <a id="diffHardLink" class="sn-diffgroup underheader" href="#">Hard</a>
-                    <hr id="diffGroupDivider" class="sn-diffgroup sidenav-divider">
-                </div>-->
-                <!--<div id="turnGroup" class="sn-turngroup d-none">
-                <h5>Turn Time Limit</h5>
-                    <a id="turn5Link" class="sn-turngroup underheader" href="#">5s</a>
-                    <a id="turn10Link" class="sn-turngroup underheader" href="#">10s</a>
-                    <a id="turn15Link" class="sn-turngroup underheader" href="#">15s</a>
-                    <a id="turn20Link" class="sn-turngroup underheader" href="#">20s</a>
-                    <a id="turn25Link" class="sn-turngroup underheader" href="#">25s</a>
-                    <a id="turn30Link" class="sn-turngroup underheader" href="#">30s</a>
-                    <hr id="turnGroupDivider" class="sn-turngroup sidenav-divider">
-                </div>-->
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
                     <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" onclick="pauseGame()" href="#">Pause</a>
                     <a id="ctrlResumeLink" class="sn-ctrlgroup sn-pause-reset d-none" onclick="resumeGame()" href="#">Resume</a>
                     <a id="ctrlResetLink" class="sn-ctrlgroup sn-pause-reset" href="#" onclick="resetGame()">Reset</a>
                     <hr id="ctrlPauseResetDivider" class="sn-ctrlgroup sidenav-divider sn-pause-reset">
-                    <!--<a id="concedeLink" class="sn-ctrlgroup sn-concede" href="#">Concede</a>                
-                    <hr id="concedeDivider" class="sn-ctrlgroup sn-concede sidenav-divider">-->
                     <a id="quitLink" class="sn-ctrlgroup sn-quit" href="#" onclick="quitGame()">Quit</a>
                     <hr id="quitDivider" class="sn-ctrlgroup sn-quit sidenav-divider">
                 </div>
-                <!--<div id="soutGroup" class="sn-soutgroup d-none">
-                    <a id="soutLink" class="sn-soutgroup sn-sout" onclick="signOut()" href="#">Sign Out</a>
-                    <hr id="soutDivider" class="sn-soutgroup sidenav-divider sn-sout">
-                    <a id="soutMultP1Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P1)</a>
-                    <a id="soutMultP2Link" class="sn-soutgroup sn-sout-mult" href="#">Sign Out (P2)</a>
-                    <a id="soutMultBothLink" class="sn-soutgroup sn-sout-mult" onclick="signOut()" href="#">Sign Out (Both)</a>
-                    <hr id="soutMultDivider" class="sn-soutgroup sidenav-divider sn-sout-mult">
-                </div>-->
             </div>            
             <a href="index.html" class="d-inline-block navbar-brand">
                 <img class="logo" src="assets/images/logo-red.png" alt="K4 Logo">                        
@@ -123,14 +81,6 @@
 
                 </div>
             </div>
-            <!--<div class="d-none" id="leaderboardContainer">
-                <div class="main-content" id="leaderboardMainContent">
-                    <h2 class="mainTitle" id="leaderboardTitle">Leaderboard</h2>
-                    <div class="datagrid-container" id="lBoard">-->
-                        <!--Insert Leaderboard Datagrid Here-->
-                    <!--</div>
-                </div>
-            </div>-->
             <div class="d-none" id="gameBoardContainer">
                 <div class="row" id="playerInfoContainer">
                     <div class="col-5" id="player1Info">
@@ -169,21 +119,10 @@
             <div id="menuBlock">
                 <div id="menuContent">
                     <div id="menuContentContainer">
-                        <!--<div id="menuSignIn" class="menu-content default">
-                            <h3 class="menuTitle">Enter your Username</h3>
-                            <form>
-                                <input type="text" maxlength="10">
-                                <div class="control-buttons">
-                                    <button type="button" onclick="setPlayerName(1, this.parentNode.previousElementSibling.value)">Ok</button>
-                                </div>
-                            </form>
-                        </div>-->
                         <div id="menuOptions" class="menu-content default">
                             <!--<h3 class="menuTitle">Options</h3>-->
                             <form>
-                                <!--<button type="button" class="options-button options-button-margin btn btn-lg btn-danger" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>-->
                                 <button type="button" class="c4-control c4-button-large c4-control-full-width c4-control-margin-bottom" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>
-                                <!--<button type="button" onclick="show('joingame', 'joingame')">Join Game</button><br>-->
                                 <button type="button" class="c4-control c4-button-large c4-control-full-width" onclick="show('settings', 'settings')">User Settings</button>
                             </form>
                         </div>
@@ -200,10 +139,6 @@
                                         <div class="col-5"><label id="p1TokenColorLabel" for="p1TokenColor">Token Colour</label></div>
                                         <div class="col"><input id="p1TokenColor" class="c4-control c4-control-full-width" type="color"></div>
                                     </div>
-                                    <!--<label for="p1AltTokenColor">Alt Token Colour</label>
-                                    <input id="p1AltTokenColor" type="color"><br>
-                                    <button type="button">Upload Token Image</button><br>
-                                    <button type="button">Upload Profile Image</button><br>-->                                    
                                     <div class="row no-gutters">
                                         <div class="col-5"></div>
                                         <div class="col">
@@ -240,67 +175,6 @@
                                 <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="menuBackButton(true)">Back</button>
                             </div>
                         </div>
-                        <!--<div id="menuCreateGame" class="menu-content d-none">
-                            <h3 class="menuTitle">Create a Game</h3>
-                            <div class="control-container">
-                                <form>
-                                    <input type="radio" id="createSinglePlayer" name="creategame" value="single">
-                                    <label for="createSinglePlayer">Single Player</label><br>
-                                    <input type="radio" id="createHotseat" name="creategame" value="hotseat">
-                                    <label for="createHotseat">Hotseat</label><br>
-                                    <input type="radio" id="createOnlineMultiplayer" name="creategame" value="multiplayer">
-                                    <label for="createOnlineMultiplayer">Online Multiplayer</label><br>
-                                    <div class="control-buttons">
-                                        <button type="button" onclick="show('options', 'options')">Back</button><button type="button" onclick="beginCreateGame()">Next</button>
-                                    </div>                                   
-                                </form>                                    
-                            </div>
-                        </div>
-                        <div id="menuCreateSingle" class="menu-content d-none mc-creategame-single">
-                            <h3 class="menuTitle">Set Difficulty</h3>
-                            <div class="control-container">
-                                <form>
-                                    <input type="radio" id="diffEasy" name="diff" value="easy">
-                                    <label for="diffEasy">Easy</label><br>
-                                    <input type="radio" id="diffNormal" name="diff" value="normal">
-                                    <label for="diffNormal">Normal</label><br>
-                                    <input type="radio" id="diffHard" name="diff" value="hard">
-                                    <label for="diffHard">Hard</label><br>                                    
-                                    <div class="control-buttons">
-                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="createGameSetDifficulty()">Next</button>
-                                    </div>
-                                </form>                                    
-                            </div>
-                        </div>
-                        <div id="menuCreateHotseat" class="menu-content d-none mc-creategame-hotseat">
-                            <h3 class="menuTitle">Enter Player 2 Username</h3>
-                            <div class="control-container">
-                                <form>                                   
-                                    <input type="text" maxlength="10">                                    
-                                    <div class="control-buttons">
-                                        <button type="button" onclick="show('creategame', 'creategame')">Back</button><button type="button" onclick="setPlayerName(2, this.parentNode.previousElementSibling.value)">Next</button>
-                                    </div>
-                                </form>                                    
-                            </div>
-                        </div>
-                        <div id="menuCreateP2Settings" class="menu-content d-none mc-creategame-p2settings">
-                            <h3 class="menuTitle">Player 2 Settings</h3>
-                            <div class="control-container">
-                                <form>
-                                    <label for="p2UserName">User Name</label>
-                                    <input id="p2UserName" type="text" maxlength="10"><br>
-                                    <label for="p2TokenColor">Token Colour</label>
-                                    <input id="p2TokenColor" type="color"><br>
-                                    <label for="p2AltTokenColor">Alt Token Colour</label>
-                                    <input id="p2AltTokenColor" type="color"><br>
-                                    <button type="button">Upload Token Image</button><br>
-                                    <button type="button">Upload Profile Image</button><br>
-                                    <div class="control-buttons">
-                                        <button type="button" onclick="show('createhotseat', 'createhotseat')">Cancel</button><button type="button" onclick="createGameP2Settings()">Ok</button>
-                                    </div>
-                                </form>                                 
-                            </div>
-                        </div>-->
                         <div id="menuCreateSetTurnTime" class="menu-content d-none mc-creategame-setturntime">
                             <h3 class="menuTitle">Set Turn Time Limit</h3>
                             <form>
@@ -322,38 +196,7 @@
                                     
                                 </div>
                             </form>                        
-                        </div>                        
-                        <!--<div id="menuCreateMultiplayer" class="menu-content d-none mc-creategame-multiplayer">
-                            <h3 class="menuTitle">Waiting for other Player</h3>
-                            <div class="control-container">
-                                <form>                                   
-                                    <p>SPINNING WAIT IMAGE HERE</p>
-                                    <div class="control-buttons">
-                                        <button type="button" onclick="show('createsetturntime', 'createmultiplayer');">Back</button>
-                                    </div>
-                                </form>                                    
-                            </div>
                         </div>
-                        <div id="menuJoinGame" class="menu-content d-none mc-joingame">
-                            <h3 class="menuTitle" id="menuJoinGameTitle">Available Games</h3>
-                            <div class="control-container" id="menuJoinControlContainer">
-                                <div class="datagrid-container" id="gameList">-->
-                                    <!--Insert Game List Datagrid Here-->
-                                <!--</div>
-                                <div class="row no-gutters" id="menuJoinControlRow">
-                                    <div class="col">
-                                        <div class="refresh-button">
-                                            <button type="button" onclick="refreshJoinGame()">Refresh</button>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="control-buttons">
-                                            <button type="button" onclick="cancelJoinGame()">Cancel</button><button type="button">Join</button>
-                                        </div>    
-                                    </div>
-                                </div>                                
-                            </div>                        
-                        </div>-->                                                                     
                     </div>
                 </div>
             </div>                    
