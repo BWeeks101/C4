@@ -76,7 +76,7 @@ function hideAll(elementId) {
     }
 }
 
-/* Show the items appropriate to the provided Option argument */
+/* Show the main block/menu block elements appropriate to the provided Option argument */
 /* Requires: */
 /*      option: default/rules/starthotseat/settings/createsetturntime */
 function mainShow(option) {
