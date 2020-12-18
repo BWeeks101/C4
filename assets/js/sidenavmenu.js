@@ -184,51 +184,20 @@ function sideNavShow(option) {
             }
             break;
         case "rules":
-            switch (c4.game.state) {
-                case "default":  //Deprecated
-                case "options": //Deprecated
-                case "settings":
-                    /* Show the options and settings links on the sideNav */
-                    sideNavLinkDisplay("show", "sn-options");
-                    sideNavLinkDisplay("show", "sn-settings");
-                    break;
-            }        
-            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
-            break;
-        case "leaderboard": //Deprecated
-            switch (c4.game.state) {
-                case "default":
-                    sideNavLinkDisplay("show", "sn-signin");
-                    break;
-                case "options":
-                    sideNavLinkDisplay("show", "sn-options");
-                    sideNavSoutSelectShow("sout");
-                    break;
-                case "settings":
-                    sideNavLinkDisplay("show", "sn-options");
-                    sideNavLinkDisplay("show", "sn-settings");
-                    sideNavSoutSelectShow("sout");
-                    break;
-            }        
-            sideNavLinkDisplay("show", "sn-rules");
-            break;
+            /* Show the options and settings links on the sideNav */
+            sideNavLinkDisplay("show", "sn-options");
+            sideNavLinkDisplay("show", "sn-settings");    
+            break;        
         case "options":
             /* Show the settings and rules links on the sideNav */
             sideNavLinkDisplay("show", "sn-settings");
-            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "settings":
             /* Show the options and rules links on the sideNav */
-            sideNavLinkDisplay("show", "sn-options");
-            sideNavLinkDisplay("show", "sn-leaderboard"); //Deprecated
+            sideNavLinkDisplay("show", "sn-options");            
             sideNavLinkDisplay("show", "sn-rules");
             break;
-        case "creategame":
-        case "createsingle":
-        case "createhotseat":
-        case "createmultiplayer":
-        case "createp2settings":
         case "createsetturntime":
             /* Show the Back link on the sideNav */
             sideNavLinkDisplay("show", "sn-back");
@@ -238,7 +207,6 @@ function sideNavShow(option) {
             document.getElementById("ctrlResetLink").innerHTML = "Reset"; //Reset game link
             sideNavLinkDisplay("show", "sn-ctrlgroup"); //Show the game controles group
             sideNavLinkDisplay("hide", "sn-pause-reset") //Initially hide the pause/resume controls - they will be shown once the game start countdown completes
-            sideNavLinkDisplay("hide", "sn-concede"); //Deprecated
             break;
         default:
             break;
