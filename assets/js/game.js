@@ -643,9 +643,12 @@ function setPlayerName(player, name) {
     document.getElementById(`player${player}Info`).firstElementChild.innerHTML = `${name}`;
 }
 
+/* Apply default player name and token color to elements on the settings pane */
+/* Requires: */
+/*      player: Integer.  Id value of Player.  (1 or 2) */
 function setDefaultSettings(player) {
-    document.getElementById(`p${player}UserName`).value = `Player ${player}`;
-    document.getElementById(`p${player}TokenColor`).value = getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim();
+    document.getElementById(`p${player}UserName`).value = `Player ${player}`; //Set value of name input to Player 1/2
+    document.getElementById(`p${player}TokenColor`).value = getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim(); //Set value of color selector to default token color for player 1/2
 }
 
 /*function setPlayerColor(player, option, elementId) {
