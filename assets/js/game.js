@@ -163,14 +163,17 @@ function getActivePlayer() {
     }
 }
 
+/* switch the active player, and update the color styles for the player info elements */
 function switchPlayer() {
-    switchActivePlayer();
+    switchActivePlayer(); //Switch the active player
     switch (c4.game.activePlayer) {
         case 1:
+            /* set the color style property of the player1Info element to match the p1 tokenColor, and remove color styling from the player2Info element */
             document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
             document.getElementById("player2Info").style.removeProperty("color");
             break;
         case 2:
+            /* set the color style property of the player2Info element to match the p2 tokenColor, and remove color styling from the player1Info element */
             document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
             document.getElementById("player1Info").style.removeProperty("color");
             break;
