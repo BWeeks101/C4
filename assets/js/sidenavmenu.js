@@ -306,16 +306,6 @@ function resetGame() {
     }
 }
 
-function radioGroupGetValue(option) {
-    let elementCollection = document.getElementsByName(option);
-    let i;
-    for (i = 0; i < elementCollection.length; i++) {        
-        if (elementCollection[i].checked) {            
-            return elementCollection[i].value;
-        }
-    }     
-}
-
 function startGame() {
     createDynamicGameStyle();
     setTurnTimeLimit()
