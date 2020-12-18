@@ -262,6 +262,9 @@ function parseColSelection(result) {
 }
 
 /* Check For Win Condition */
+/* Requires: */
+/*      x: Row coordinate from which to start search */
+/*      y: Col coordinate from which to start search */
 function checkWin(x, y) {
     if (c4.game.completedTurns < 7) {
         //console.log("Game cannot be won in less than 7 turns.  Skipping");
@@ -271,63 +274,60 @@ function checkWin(x, y) {
     x = parseInt(x);
     y = parseInt(y);
 
-    //console.log(`Col x: ${x}`);
-    //console.log(`Row y: ${y}`);    
-
     /* Horizontal Scan */
     //console.log(`Start Scan Right`);
-    let results = scanDir("r", x, y);
-    let tokenCount = results[0];
+    let results = scanDir("r", x, y);  //Scan right from our starting position
+    let tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
     //console.log(`Scan Right Found ${tokenCount} tokens`);
-    if (tokenCount < 4) {
+    if (tokenCount < 4) { //If we do not yet have 4 tokens...
         //console.log(`Start Scan Left`);
-        results = scanDir("l", x, y, results);
-        tokenCount = results[0];
+        results = scanDir("l", x, y, results); //...Scan left from our starting position
+        tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
         //console.log(`Scan Left Found ${tokenCount} tokens`);
     }
 
     /* Vertical Scan */
-    if (tokenCount < 4) {
+    if (tokenCount < 4) { //No winning pattern found from the horizontal scan
         //console.log(`Start Scan Down`);
-        results = scanDir("d", x, y);
-        tokenCount = results[0];
+        results = scanDir("d", x, y); //Scan down from our starting position
+        tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
         //console.log(`Scan Down Found ${tokenCount} tokens`);
     }
 
     /* Diagonal Scan, Right/Down, Left/Up */
-    if (tokenCount < 4) {
+    if (tokenCount < 4) { //No winning pattern found from the horizontal or vertical scans
         //console.log(`Start Scan Right/Down`);
-        results = scanDir("rd", x, y);
-        tokenCount = results[0];
+        results = scanDir("rd", x, y); //Scan right and down from our starting position
+        tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
         //console.log(`Scan Right/Down Found ${tokenCount} tokens`);
-        if (tokenCount < 4) {
+        if (tokenCount < 4) { //If we do not yet have 4 tokens...
             //console.log(`Start Scan Left/Up`);
-            results = scanDir("lu", x, y, results);
-            tokenCount = results[0];
+            results = scanDir("lu", x, y, results); //...Scan left and up from our starting position
+            tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
             //console.log(`Scan Left/Up Found ${tokenCount} tokens`);
         }
     }
 
     /* Diagonal Scan, Left/Down, Right/Up */
-    if (tokenCount < 4) {
+    if (tokenCount < 4) { //No winning pattern found from the horizontal, vertical, or first diagonal scan
         //console.log(`Start Scan Left/Down`);
-        results = scanDir("ld", x, y);
-        tokenCount = results[0];
+        results = scanDir("ld", x, y); //Scan left and down from our starting position
+        tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
         //console.log(`Scan Left/Down Found ${tokenCount} tokens`);
-        if (tokenCount < 4) {
+        if (tokenCount < 4) { //If we do not yet have 4 tokens...
             //console.log(`Start Scan Right/Up`);
-            results = scanDir("ru", x, y, results);
-            tokenCount = results[0];
+            results = scanDir("ru", x, y, results); //...Scan right and up from our starting position
+            tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
             //console.log(`Scan Right/Up Found ${tokenCount} tokens`);
         }
     }
 
     //console.log(`Counted ${tokenCount} tokens`);
-    if (tokenCount == 4) {
+    if (tokenCount == 4) { //If we have located a winning pattern, then highlight the winning cells and return the id of the active player
         //console.log(`Win for P${c4.game.activePlayer}`);
         highlightWinningCells(results);
         return c4.game.activePlayer;
-    } else {
+    } else { //Otherwise return false, as we do not yet have a winner
         //console.log(`No Winner Yet`);
         return false;
     }    
