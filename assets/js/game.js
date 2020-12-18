@@ -83,9 +83,10 @@ function stopHotseat() {
     resetTurnCount(); //Reset the turn count to 0
 }
 
+/* Start the turn time limit timer */
 function startTurnTimer() {
-    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`;
-    c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`; //Set the turnTimeLimit elements innerHTML to the value of the turnTimeLimit global setting
+    c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000); //Update once a second
 }
 
 function updateTurnTimer() {
