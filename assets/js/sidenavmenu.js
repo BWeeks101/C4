@@ -11,6 +11,11 @@ function show(option, newstate) {
     checkSideNavState(function(){sideNavShow(option)}); //Check the state of the sideNav (waiting for close if open), the run sideNavShow() against the value of the option argument
 }
 
+/* Check the state of the sideNav.  If open, then close it before executing the provided function */
+/* Requires: */
+/*      func: callback function to be executed */
+/* Syntax: */
+/*      checkSideNavState(function(){function_here()}); */
 function checkSideNavState(func) {
     if (sideNavState() == "open") {
         closeNav();
