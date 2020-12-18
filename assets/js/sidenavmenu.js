@@ -338,6 +338,7 @@ function createDynamicGameStyle() {
     sheet.insertRule(`@keyframes highlightP2 { 0% {background-color: ${c4.game.p2.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p2.tokenColor};} }`);
 }
 
+/* Set the turn time limit based on the selected turn time limit value */
 function setTurnTimeLimit() {
     c4.game.turnTimeLimit = document.getElementById("turnTime").value;
 }
