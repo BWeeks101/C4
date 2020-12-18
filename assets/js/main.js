@@ -120,7 +120,10 @@ function mainBlockResize() {
     }    
 }
 
+/* Resize the menuBlock */
+/* This block contains the initial options pane, player settings pane, and turn time limit pane */
 function menuBlockResize() {
+    /* calculate the menu block height and set it */
     menuBlockHeight = calcBlockHeight();
     document.getElementById("menuBlock").style.height = `${menuBlockHeight}px`;    
 }
