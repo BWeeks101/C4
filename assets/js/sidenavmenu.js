@@ -271,6 +271,7 @@ function refreshGameBoard() {
     }
 }
 
+/* Toggle between the Pause and Resume links on the sideNav */
 function togglePauseLink() {
     elementDisplay("toggle", "ctrlPauseLink");
     elementDisplay("toggle", "ctrlResumeLink");
