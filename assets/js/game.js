@@ -12,13 +12,17 @@ function gameClicked(object) {
     }    
 }
 
+/* When a game is complete, show the result */
+/* Requires: */
+/*      result (OPTIONAL): undefined/draw */
 function feedbackWinner(result) {
-    stopTurnTimer();
-    if (result == "draw") {
-        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>";
-        document.getElementById("feedbackMessage").style.removeProperty("color");
+    stopTurnTimer(); //Stop the turn timer
+    if (result == "draw") { 
+        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
+        document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
     } else {
-        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`;
+        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
+        /* Set the feedback message text color to that of the tokenColor of the winning player */
         switch (c4.game.activePlayer) {
             case 1:                
                 document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
@@ -28,9 +32,9 @@ function feedbackWinner(result) {
                 break;
         }
     }
-    elementDisplay("hide", "ctrlPauseLink")
-    document.getElementById("ctrlResetLink").innerHTML = "Rematch";
-    elementDisplay("show", "feedbackContainer");
+    elementDisplay("hide", "ctrlPauseLink") //Hide the Pause link
+    document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
+    elementDisplay("show", "feedbackContainer"); //Show the feedback container
 }
 
 function feedbackStartDelay() {
