@@ -100,6 +100,7 @@ function updateTurnTimer() {
     }    
 }
 
+/* Pause the turn time limit timer */
 function pauseTurnTimer() {
     clearInterval(c4.game.activeTurnTimer);
 }
