@@ -89,13 +89,14 @@ function startTurnTimer() {
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000); //Update once a second
 }
 
+/* Update the turn time limit timer */
 function updateTurnTimer() {
-    timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML);
+    timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Get the current value of the timer
     if (timerVal > 0) {
-        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${timerVal-1}`;
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${timerVal-1}`; //If not 0, then reduce the value by 1
     } else {
         //console.log(`P${c4.game.activePlayer} Missed Turn - selecting random column`)
-        parseColSelection(selectRandCol());
+        parseColSelection(selectRandCol()); //Otherwise, the player missed their turn, so select a random column on their behalf!
     }    
 }
 
