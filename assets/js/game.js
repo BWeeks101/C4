@@ -566,13 +566,16 @@ function scanDir(scanDir, startX, startY, results) {
     return results; //Scan finished, but we have not found a matching pattern, so return the existing results
 }
 
+/* Save Custom Player names and token colours from the settings pane */
+/* Requires: */
+/*      player (OPTIONAL): Integer. id of player (1 or 2) */
 function saveSettings(player) {
-    if (player == undefined) {
-        setPlayerName(1, document.getElementById(`p1UserName`).value);
+    if (player == undefined) { //No Player Id specified, so commit values for both players to global settings object and localStorage
+        setPlayerName(1, document.getElementById(`p1UserName`).value); 
         setPlayerSetting(`p1TokenColor`, document.getElementById(`p1TokenColor`).value);
         setPlayerName(2, document.getElementById(`p2UserName`).value);
         setPlayerSetting(`p2TokenColor`, document.getElementById(`p2TokenColor`).value);
-    } else {
+    } else { //Commit values for specified player to global settings object and localStorage
         setPlayerName(player, document.getElementById(`p${player}UserName`).value);
         setPlayerSetting(`p${player}TokenColor`, document.getElementById(`p${player}TokenColor`).value);
     }    
