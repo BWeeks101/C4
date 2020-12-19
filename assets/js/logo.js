@@ -1,6 +1,10 @@
 /* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
-    displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
+    result = displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
+    if (result == false) {
+        console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logoGrid}, "logoGrid", "off", false);`);
+        return false;
+    }
     dataGridDisplaySetCols("logoGrid", "auto");
     animateLogo();
 }
