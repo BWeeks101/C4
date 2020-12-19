@@ -78,7 +78,7 @@ function hideAll(elementId) {
 
 /* Show the main block/menu block elements appropriate to the provided Option argument */
 /* Requires: */
-/*      option: default/rules/starthotseat/settings/createsetturntime */
+/*      option: default/rules/starthotseat/settings/turnTimeLimit */
 function mainShow(option) {
     hideAll("mainBlockContainer"); //Hide all main and menu block child elements
     if (option != "rules" && option !="starthotseat") { //If option is not rules or starthotseat then display the logo container, hide all children of the menu content container, and display the menu block conainer
@@ -135,7 +135,7 @@ function mainShow(option) {
             elementDisplay("show", "gameBoardContainer"); //Show the game board container
             feedbackStartDelay(); //Begin the game start countdown
             break;
-        case "createsetturntime":
+        case "turnTimeLimit":
             c4.uiState = "turnTimeLimit"
             /* Show the Turn Time Limit pane */
             loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
@@ -148,7 +148,7 @@ function mainShow(option) {
 
 /* Show the sideNav elements appropriate to the provided Option argument */
 /* Requires: */
-/*      option: default/rules/starthotseat/settings/createsetturntime */
+/*      option: default/rules/starthotseat/settings/turnTimeLimit */
 function sideNavShow(option) {
     hideAll("sideNav");
     switch (option) {
@@ -179,7 +179,7 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-default");            
             sideNavLinkDisplay("show", "sn-rules");
             break;
-        case "createsetturntime":
+        case "turnTimeLimit":
             /* Show the Back link on the sideNav */
             sideNavLinkDisplay("show", "sn-default");
             sideNavLinkDisplay("show", "sn-settings");
