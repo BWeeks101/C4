@@ -9,7 +9,7 @@ function mainOnLoad() {
     c4.game.state = "default"; //Set the default state
     loadColorMode(); //Apply the appropriate theme (light or dark(default))
     sideNavOnLoad(); //Initialise the sideNav
-    drawLogoGrid(); //draw the logo
+    displayLogo(); //draw the logo
     elementDisplay("toggle","menuBlockContainer"); //Show the menu block
     loadPlayerSettings(); //Initialise player settings
     mainOnResize(); //Call the onResize function to ensure our content fits within a single page
