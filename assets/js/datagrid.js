@@ -215,7 +215,7 @@ function dataGridDisplayColClass(colCount) {
 
     /* if colCount is not a number, fail */
     if (isNaN(colCount) == true) {
-        console.log(`Supplied Column Count (${colCount}) is not a valid integer`);
+        console.log(`function dataGridDisplayColClass failed.  Supplied Column Count (${colCount}) is not a valid integer`);
         return false;
     }
 
