@@ -2,12 +2,12 @@
 function drawLogoGrid() {
     result = displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
     if (result == false) {
-        console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logoGrid}, "logoGrid", "off", false);`);
+        console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logoGrid}, "logoGrid", "off", false).`);
         return false;
     }
     result = dataGridDisplaySetCols("logoGrid", "auto");
     if (result == false) {
-        console.log(`Function drawLogoGrid failed.  Cascade failure originating with dataGridDisplaySetCols("logoGrid", "auto");`);
+        console.log(`Function drawLogoGrid failed.  Cascade failure originating with dataGridDisplaySetCols("logoGrid", "auto").`);
         return false;
     }
     animateLogo();
@@ -22,8 +22,13 @@ function refreshLogoGrid() {
 /* Animate the logo */
 /* After 1s, call the queue() function sequentially for each column in the logo dataGridDisplay */
 function animateLogo() {
-    setTimeout(function() {
-        for (i = 0; i < 8; i++) {
+    gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
+    if (gridCounts == false) { //If false, then we could not return the values, so return false
+        console.log(`function animateLogo failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
+        return false;
+    }
+    setTimeout(function() { //Delay for 1s, then call the queue function sequentially for each column in the logo dataGridDisplay
+        for (i = 0; i < gridCounts[0]; i++) {
             queue(i);
         }
     }, 1000);
