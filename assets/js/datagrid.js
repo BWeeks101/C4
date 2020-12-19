@@ -321,11 +321,14 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
             console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayGetCounts(${dataGridDisplayId}).`);
             return false;
         }
+        
         /* Create an array of classes by splitting the string returned by dataGridDisplayColClass() */
-        colClass = dataGridDisplayColClass(colCount).split(" ");
+        colClass = dataGridDisplayColClass(colCount);
         if (colClass == false) { //dataGridDisplayColClass returned false, so return false
             console.log(`function dataGridDisplaySetCols failed.  Cascade failure originating with dataGridDisplayColClass(${colCount}).split(" ").`);
             return false;
+        } else {
+            colClass = colClass.split(" ");
         }
     } else if (cols == undefined || cols == "") {
         /* If cols argument is undefined or empty, utilise the .col class (default) */
