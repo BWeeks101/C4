@@ -166,7 +166,13 @@ function getElementPropertyVal(elementId, propertyName, resFormat) {
 /*      right */
 /*      bottom */
 /*      left */
+/*      center: */
+/*          x */
+/*          y */
+/*          absoluteX */
+/*          absoluteY */
 /*      NB: top/right/bottom/left are adjusted to take into account scroll position by utilising window.page[X/Y]Offset */
+/*          center.absoluteX and center.absoluteY are calculated based on adjusted top/left positions */
 function getElementPos(element) {
     let elementPos;
     if (typeof element == "string") {
@@ -177,7 +183,8 @@ function getElementPos(element) {
     elementPos.top = elementPos.top + window.pageYOffset;
     elementPos.right = elementPos.right + window.pageXOffset;
     elementPos.bottom = elementPos.bottom + window.pageYOffset;
-    elementPos.left = elementPos.left + window.pageXOffset;    
+    elementPos.left = elementPos.left + window.pageXOffset;
+    elementPos.center = {x:elementPos.width / 2, y:elementPos.height / 2, absoluteX:elementPos.left + (elementPos.width / 2), absoluteY:elementPos.top + (elementPos.height / 2)}
     return elementPos;
 }
 
