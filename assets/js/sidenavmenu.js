@@ -254,11 +254,7 @@ function quitGame() {
 
 /* Refresh the game board */
 function refreshGameBoard() {
-    switch (c4.uiState) {
-        case "createhotseat":
-            show("startGame");
-            break;
-    }
+    show("startGame");
 }
 
 /* Toggle between the Pause and Resume links on the sideNav */
