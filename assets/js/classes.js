@@ -42,6 +42,7 @@ class gameSettings {
 class appGlobals {
     constructor() {
         this.game = new gameSettings();
+        this.uiState = "default";
         this.sideNavState = "closed";
         this.logoGrid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
     }
