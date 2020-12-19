@@ -112,10 +112,6 @@ function mainShow(option) {
             c4.uiState = "rules";
             elementDisplay("show", "rulesContainer");
             break;
-        case "options":
-            /* Show the options pane */
-            elementDisplay("show", "menuDefault");            
-            break;
         case "settings":
             c4.uiState = "settings";
             /* Get the current properties of the player 1 and player 2 objects, and apply them to elements in the settings pane before showing it */
@@ -126,7 +122,7 @@ function mainShow(option) {
             elementDisplay("show", "menuSettings");            
             break;
         case "startGame":
-            c4.uiState = "createhotseat";
+            c4.uiState = "startGame";
             /* Initialise a hotseat game */
             refreshHotseat(); //Refresh the game board values
             dataGridDisplayRemove("gBoard"); //Remove the game board from display
