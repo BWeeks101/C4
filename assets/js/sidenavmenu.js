@@ -240,14 +240,9 @@ function loadTurnTimeLimit() {
 
 /* Quit an active game and return to the main pane */
 function quitGame() {
-    switch (c4.uiState) {
-        case "createhotseat":
-            stopStartDelay(); //If the game start delay is running, stop it
-            dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
-            stopHotseat(); //Stop the active hotseat game
-            break;
-    }
-
+    stopStartDelay(); //If the game start delay is running, stop it
+    dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
+    stopHotseat(); //Stop the active hotseat game
     show("default"); //Display the main pane
     refreshLogoGrid(); //Refresh the logo
 }
