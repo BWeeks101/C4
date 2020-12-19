@@ -6,7 +6,7 @@ $(document).ready(mainOnLoad);
 
 /* on Load */
 function mainOnLoad() {    
-    c4.game.state = "default"; //Set the default state
+    c4.uiState = "default"; //Set the default state
     loadColorMode(); //Apply the appropriate theme (light or dark(default))
     sideNavOnLoad(); //Initialise the sideNav
     displayLogo(); //draw the logo

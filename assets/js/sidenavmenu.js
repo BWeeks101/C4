@@ -3,9 +3,9 @@
 /*      option: element 'group' to affect */
 /*      newstate (OPTIONAL): new value for global state property */
 function show(option, newstate) {
-    /* If newstate is provided, then change c4.game.state to newstate */
+    /* If newstate is provided, then change c4.uiState to newstate */
     if (newstate != undefined) {
-        c4.game.state = newstate;
+        c4.uiState = newstate;
     }
     mainShow(option); //Run the mainShow() function against the value of the option argument
     checkSideNavState(function(){sideNavShow(option)}); //Check the state of the sideNav (waiting for close if open), the run sideNavShow() against the value of the option argument
@@ -197,16 +197,23 @@ function showGameSideNavMenu() {
 /* Determine which pane is shown, apply the appropriate action, then show the main pane */
 /* Requires: */
 /*      refreshLogo: true/false */
-function menuBackButton(refreshLogo) {
-    if (refreshLogo == undefined || refreshLogo == "" || refreshLogo == false) { //If refreshLogo is false, then we're on the turn time limit pane.  Save the turn time limit value, then load the main pane
-        saveTurnTimeLimit();
-        show("options", "options");
-    } else {
-        saveSettings(); //Otherwise we are on the player settings menu, so save settings, show the main pane then refresh the logo
-        show("options", "options");
-        refreshLogoGrid();
+function menuBackButton() {
+
+    switch (c4.uiState) {
+        case "setings":
+            saveSettings(); //player settings menu, so save settings, show the main pane then refresh the logo
+            show("options", "options");
+            refreshLogoGrid();
+            break;
+        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the main pain
+            saveTurnTimeLimit();
+            show("options", "options");
+            break;
+        case "rules": //rules pane.  Show the main pane then refresh the logo
+            show("options", "options");
+            refreshLogoGrid();
+            break;
     }
-    
 }
 
 /* Remove the turnTimeLimit kv pair from localStorage, and replace it with the current value from the turnTime drop down list element */
@@ -225,7 +232,7 @@ function loadTurnTimeLimit() {
 
 /* Quit an active game and return to the main pane */
 function quitGame() {
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             stopStartDelay(); //If the game start delay is running, stop it
             dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
@@ -239,7 +246,7 @@ function quitGame() {
 
 /* Refresh the game board */
 function refreshGameBoard() {
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             show("starthotseat");
             break;
@@ -254,7 +261,7 @@ function togglePauseLink() {
 
 /* Pause the game */
 function pauseGame() {
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
             pauseTurnTimer(); //Pause the turn time limit timer
@@ -264,7 +271,7 @@ function pauseGame() {
 
 /* Resume the game */
 function resumeGame() {
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause Link
             resumeTurnTimer(); //Resume the turn time limit timer
@@ -274,7 +281,7 @@ function resumeGame() {
 
 /* Clear the board and reset the Game */
 function resetGame() {
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             checkSideNavState(function(){refreshGameBoard()}); //Check the state of the sideNav, then refresh the game board
             break;
@@ -285,7 +292,7 @@ function resetGame() {
 function startGame() {
     createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
     setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
-    switch (c4.game.state) {
+    switch (c4.uiState) {
         case "createhotseat":
             saveTurnTimeLimit(); //Write the selected turn time limit to local storage
             show("starthotseat"); //Display the hotseat game board and start the game
