@@ -269,12 +269,8 @@ function togglePauseLink() {
 
 /* Pause the game */
 function pauseGame() {
-    switch (c4.uiState) {
-        case "createhotseat":
-            checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
-            pauseTurnTimer(); //Pause the turn time limit timer
-            break;
-    }
+    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
+    pauseTurnTimer(); //Pause the turn time limit timer
 }
 
 /* Resume the game */
