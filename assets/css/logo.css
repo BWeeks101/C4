@@ -61,6 +61,7 @@
     min-width: 40px;
     min-height: 40px;
     background: none;
+    z-index: 2;
 }
 
 #logoGridHeaderRow .datagrid-header-col h3 {
