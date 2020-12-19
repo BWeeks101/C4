@@ -36,14 +36,12 @@
                 <a id="colorMode" class="colorMode" onclick="switchColorMode(this.innerHTML)" href="#">Light Mode</a>
                 <hr id="colorModeDivider" class="colorMode sidenav-divider">
                 <!--sideNav dynamic links-->
-                <a id="optionsLink" class="sn-options d-none" onclick="menuBackButton()" href="#">Back</a>
-                <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
-                <a id="settingsLink" class="sn-settings default" onclick="show('settings', 'settings')" href="#">User Settings</a>
+                <a id="defaultLink" class="sn-default d-none" onclick="menuBackButton()" href="#">Back</a>
+                <hr id="defaultDivider" class="sn-default sidenav-divider d-none">
+                <a id="settingsLink" class="sn-settings default" onclick="show('settings')" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider default">
                 <a id="rulesLink" class="sn-rules default" onclick="show('rules')" href="#">Rules</a>
                 <hr id="rulesDivider" class="sn-rules sidenav-divider default">
-                <a id="backLink" class="sn-back d-none" onclick="menuBackButton()" href="#">Back</a>
-                <hr id="backDivider" class="sn-back sidenav-divider d-none">
                 <div id="ctrlGroup" class="sn-ctrlgroup d-none">
                     <a id="ctrlPauseLink" class="sn-ctrlgroup sn-pause-reset" onclick="pauseGame()" href="#">Pause</a>
                     <a id="ctrlResumeLink" class="sn-ctrlgroup sn-pause-reset d-none" onclick="resumeGame()" href="#">Resume</a>
@@ -138,7 +136,7 @@
                             <!--<h3 class="menuTitle">Options</h3>-->
                             <form>
                                 <button type="button" class="c4-control c4-button-large c4-control-full-width c4-control-margin-bottom" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>
-                                <button type="button" class="c4-control c4-button-large c4-control-full-width" onclick="show('settings', 'settings')">User Settings</button>
+                                <button type="button" class="c4-control c4-button-large c4-control-full-width" onclick="show('settings')">User Settings</button>
                             </form>
                         </div>
 

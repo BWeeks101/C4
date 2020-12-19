@@ -103,10 +103,13 @@ function mainShow(option) {
                 if (elementCollection[i].parentElement.id == "main" || elementCollection[i].parentElement.id == "mainBlockContainer" || elementCollection[i].parentElement.id == "menuContentContainer") {                        
                     elementDisplay("show", elementCollection[i].id);
                 }
-            }             
-            break;
+            }     
+            c4.uiState = "default";
+            elementDisplay("show", "menuDefault");        
+            break;            
         case "rules":
             /* Display the rules container */
+            c4.uiState = "rules";
             elementDisplay("show", "rulesContainer");
             break;
         case "options":
@@ -114,6 +117,7 @@ function mainShow(option) {
             elementDisplay("show", "menuDefault");            
             break;
         case "settings":
+            c4.uiState = "settings";
             /* Get the current properties of the player 1 and player 2 objects, and apply them to elements in the settings pane before showing it */
             document.getElementById("p1UserName").value = c4.game.p1.name;
             document.getElementById("p1TokenColor").value = c4.game.p1.tokenColor;
@@ -122,6 +126,7 @@ function mainShow(option) {
             elementDisplay("show", "menuSettings");            
             break;
         case "starthotseat":
+            c4.uiState = "createhotseat";
             /* Initialise a hotseat game */
             refreshHotseat(); //Refresh the game board values
             dataGridDisplayRemove("gBoard"); //Remove the game board from display
@@ -131,6 +136,7 @@ function mainShow(option) {
             feedbackStartDelay(); //Begin the game start countdown
             break;
         case "createsetturntime":
+            c4.uiState = "turnTimeLimit"
             /* Show the Turn Time Limit pane */
             loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
             elementDisplay("show", "menuCreateSetTurnTime"); //Show the turn time limit pane
@@ -160,7 +166,7 @@ function sideNavShow(option) {
             break;
         case "rules":
             /* Show the options and settings links on the sideNav */
-            sideNavLinkDisplay("show", "sn-options");
+            sideNavLinkDisplay("show", "sn-default");
             sideNavLinkDisplay("show", "sn-settings");    
             break;        
         case "options":
@@ -170,12 +176,12 @@ function sideNavShow(option) {
             break;
         case "settings":
             /* Show the options and rules links on the sideNav */
-            sideNavLinkDisplay("show", "sn-options");            
+            sideNavLinkDisplay("show", "sn-default");            
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "createsetturntime":
             /* Show the Back link on the sideNav */
-            sideNavLinkDisplay("show", "sn-back");
+            sideNavLinkDisplay("show", "sn-default");
             break;
         case "starthotseat":
             /* Show the appropriate game controls on the sideNav */
@@ -198,19 +204,19 @@ function showGameSideNavMenu() {
 /* Requires: */
 /*      refreshLogo: true/false */
 function menuBackButton() {
-
+    console.log(c4.uiState);
     switch (c4.uiState) {
-        case "setings":
-            saveSettings(); //player settings menu, so save settings, show the main pane then refresh the logo
-            show("options", "options");
+        case "settings":
+            saveSettings(); //player settings menu, so save settings, show the default pane then refresh the logo
+            show("default");
             refreshLogoGrid();
             break;
-        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the main pain
+        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the default pane
             saveTurnTimeLimit();
-            show("options", "options");
+            show("default");
             break;
-        case "rules": //rules pane.  Show the main pane then refresh the logo
-            show("options", "options");
+        case "rules": //rules pane.  Show the default pane then refresh the logo
+            show("default");
             refreshLogoGrid();
             break;
     }
@@ -240,7 +246,7 @@ function quitGame() {
             break;
     }
 
-    show("options", "default"); //Display the main pane
+    show("default"); //Display the main pane
     refreshLogoGrid(); //Refresh the logo
 }
 
