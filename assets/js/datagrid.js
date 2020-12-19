@@ -120,8 +120,8 @@ function displayDataGrid(dataGrid, dataGridDisplayId, selectOption, ignoreUndefi
     let colStart = `<div class="${colClass}" id="${dataGridDisplayId}`;
     let hColTag = "Hcol-";
     let cColTag = "Ccol-";    
-    let headerColMid = `"><h3>`;
-    let headerColEnd = `</h3></div>`;
+    let headerColMid = `"><div class="datagrid-header-inner-container"><h3>`;
+    let headerColEnd = `</h3></div></div>`;
     let contentRowEnd = `"></div>`
     let contentColStart = `<div class="row flex-nowrap datagrid-content-row rowid-`;
     let contentColId = `" id="`
