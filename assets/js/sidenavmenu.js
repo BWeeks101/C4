@@ -300,18 +300,8 @@ function resetGame() {
 function startGame() {
     createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
     setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
-    switch (c4.uiState) {
-        case "createhotseat":
-            saveTurnTimeLimit(); //Write the selected turn time limit to local storage
-            show("startGame"); //Display the hotseat game board and start the game
-            break;
-        case "createmultiplayer": //Deprecated
-            show("createmultiplayer");
-            break;
-        case "createsingle": //Deprecated
-            show("startsingle");
-            break;
-    }
+    saveTurnTimeLimit(); //Write the selected turn time limit to local storage
+    show("startGame"); //Display the hotseat game board and start the game
 }
 
 /* Build a new CSS style element, append it to the document head, and insert rules for p1 and p2 token colors */
