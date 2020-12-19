@@ -82,7 +82,7 @@ function hideAll(elementId) {
 function mainShow(option) {
     hideAll("mainBlockContainer"); //Hide all main and menu block child elements
     if (option != "rules" && option !="starthotseat") { //If option is not rules or starthotseat then display the logo container, hide all children of the menu content container, and display the menu block conainer
-        elementDisplay("show", "imgContainer");
+        elementDisplay("show", "logoContainer");
         hideAll("menuContentContainer");
         elementDisplay("show", "menuBlockContainer");                
     }
