@@ -36,7 +36,7 @@
                 <a id="colorMode" class="colorMode" onclick="switchColorMode(this.innerHTML)" href="#">Light Mode</a>
                 <hr id="colorModeDivider" class="colorMode sidenav-divider">
                 <!--sideNav dynamic links-->
-                <a id="optionsLink" class="sn-options d-none" onclick="show('options', 'options')" href="#">Back</a>
+                <a id="optionsLink" class="sn-options d-none" onclick="menuBackButton()" href="#">Back</a>
                 <hr id="optionsDivider" class="sn-options sidenav-divider d-none">
                 <a id="settingsLink" class="sn-settings default" onclick="show('settings', 'settings')" href="#">User Settings</a>
                 <hr id="settingsDivider" class="sn-settings sidenav-divider default">
@@ -134,7 +134,7 @@
                 <div id="menuContent">
                     <div id="menuContentContainer">
                         <!--Main Pane-->
-                        <div id="menuOptions" class="menu-content default">
+                        <div id="menuDefault" class="menu-content default">
                             <!--<h3 class="menuTitle">Options</h3>-->
                             <form>
                                 <button type="button" class="c4-control c4-button-large c4-control-full-width c4-control-margin-bottom" onclick="show('createsetturntime', 'createhotseat')">Start Game</button><br>

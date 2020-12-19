@@ -111,7 +111,7 @@ function mainShow(option) {
             break;
         case "options":
             /* Show the options pane */
-            elementDisplay("show", "menuOptions");            
+            elementDisplay("show", "menuDefault");            
             break;
         case "settings":
             /* Get the current properties of the player 1 and player 2 objects, and apply them to elements in the settings pane before showing it */
