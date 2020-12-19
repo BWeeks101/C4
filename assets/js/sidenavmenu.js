@@ -139,7 +139,7 @@ function mainShow(option) {
             c4.uiState = "turnTimeLimit"
             /* Show the Turn Time Limit pane */
             loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
-            elementDisplay("show", "menuCreateSetTurnTime"); //Show the turn time limit pane
+            elementDisplay("show", "menuTurnTimeLimit"); //Show the turn time limit pane
             break;        
     }
 
