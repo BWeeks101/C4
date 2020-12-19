@@ -1,19 +1,22 @@
+/* Draw the logoGrid.  If this fails, display a static logo instead */
 function displayLogo() {
-    displayLogoGrid()
+    displayLogoGrid() //Create, display and animate the logoGrid
     result = drawLogoGrid();    
     if (result == false) {
         console.log(`Unable to Display logoGrid.  Displaying Static Logo.`);
-        displayStaticLogo();
+        displayStaticLogo(); //Unable to display logoGrid, so show static logo instead
         return false;
     }
     return true;
 }
 
+/* Display a static logo instead of the logoGrid */
 function displayStaticLogo() {
     elementDisplay("hide", "logoGrid");
     elementDisplay("show", "staticLogo");
 }
 
+/* Display the logoGrid instead of a static logo */
 function displayLogoGrid() {
     elementDisplay("hide", "staticLogo");
     elementDisplay("show", "logoGrid");
