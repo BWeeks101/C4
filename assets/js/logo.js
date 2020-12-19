@@ -5,7 +5,11 @@ function drawLogoGrid() {
         console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logoGrid}, "logoGrid", "off", false);`);
         return false;
     }
-    dataGridDisplaySetCols("logoGrid", "auto");
+    result = dataGridDisplaySetCols("logoGrid", "auto");
+    if (result == false) {
+        console.log(`Function drawLogoGrid failed.  Cascade failure originating with dataGridDisplaySetCols("logoGrid", "auto");`);
+        return false;
+    }
     animateLogo();
 }
 
