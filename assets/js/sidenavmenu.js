@@ -182,6 +182,8 @@ function sideNavShow(option) {
         case "createsetturntime":
             /* Show the Back link on the sideNav */
             sideNavLinkDisplay("show", "sn-default");
+            sideNavLinkDisplay("show", "sn-settings");
+            sideNavLinkDisplay("show", "sn-rules");
             break;
         case "starthotseat":
             /* Show the appropriate game controls on the sideNav */
