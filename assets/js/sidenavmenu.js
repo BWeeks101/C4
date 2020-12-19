@@ -78,10 +78,10 @@ function hideAll(elementId) {
 
 /* Show the main block/menu block elements appropriate to the provided Option argument */
 /* Requires: */
-/*      option: default/rules/starthotseat/settings/turnTimeLimit */
+/*      option: default/rules/startGame/settings/turnTimeLimit */
 function mainShow(option) {
     hideAll("mainBlockContainer"); //Hide all main and menu block child elements
-    if (option != "rules" && option !="starthotseat") { //If option is not rules or starthotseat then display the logo container, hide all children of the menu content container, and display the menu block conainer
+    if (option != "rules" && option !="startGame") { //If option is not rules or startGame then display the logo container, hide all children of the menu content container, and display the menu block conainer
         elementDisplay("show", "logoContainer");
         hideAll("menuContentContainer");
         elementDisplay("show", "menuBlockContainer");                
@@ -125,7 +125,7 @@ function mainShow(option) {
             document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
             elementDisplay("show", "menuSettings");            
             break;
-        case "starthotseat":
+        case "startGame":
             c4.uiState = "createhotseat";
             /* Initialise a hotseat game */
             refreshHotseat(); //Refresh the game board values
@@ -148,7 +148,7 @@ function mainShow(option) {
 
 /* Show the sideNav elements appropriate to the provided Option argument */
 /* Requires: */
-/*      option: default/rules/starthotseat/settings/turnTimeLimit */
+/*      option: default/rules/startGame/settings/turnTimeLimit */
 function sideNavShow(option) {
     hideAll("sideNav");
     switch (option) {
@@ -185,7 +185,7 @@ function sideNavShow(option) {
             sideNavLinkDisplay("show", "sn-settings");
             sideNavLinkDisplay("show", "sn-rules");
             break;
-        case "starthotseat":
+        case "startGame":
             /* Show the appropriate game controls on the sideNav */
             document.getElementById("ctrlResetLink").innerHTML = "Reset"; //Reset game link
             sideNavLinkDisplay("show", "sn-ctrlgroup"); //Show the game controles group
@@ -256,7 +256,7 @@ function quitGame() {
 function refreshGameBoard() {
     switch (c4.uiState) {
         case "createhotseat":
-            show("starthotseat");
+            show("startGame");
             break;
     }
 }
@@ -303,7 +303,7 @@ function startGame() {
     switch (c4.uiState) {
         case "createhotseat":
             saveTurnTimeLimit(); //Write the selected turn time limit to local storage
-            show("starthotseat"); //Display the hotseat game board and start the game
+            show("startGame"); //Display the hotseat game board and start the game
             break;
         case "createmultiplayer": //Deprecated
             show("createmultiplayer");
