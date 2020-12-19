@@ -184,7 +184,7 @@ function getElementPos(element) {
     elementPos.right = elementPos.right + window.pageXOffset;
     elementPos.bottom = elementPos.bottom + window.pageYOffset;
     elementPos.left = elementPos.left + window.pageXOffset;
-    elementPos.center = {x:elementPos.width / 2, y:elementPos.height / 2, absoluteX:elementPos.left + (elementPos.width / 2), absoluteY:elementPos.top + (elementPos.height / 2)}
+    elementPos.center = {x:elementPos.width / 2, y:elementPos.height / 2, absoluteX:elementPos.left + (elementPos.width / 2), absoluteY:elementPos.top + (elementPos.height / 2)};
     return elementPos;
 }
 
