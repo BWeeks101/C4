@@ -124,21 +124,21 @@ function queue(i, targetPoint, delay) {
 /*      colId: Integer.  Id of the column header we are going to animate */
 /*      targetPoint: Number of pixels to adjust the header content by */
 function dropChar(colId, targetPoint) {
-    let pos = 0;
-    let id = setInterval(frame, 5);
+    let pos = 0; //Initialise position variable
+    let id = setInterval(frame, 5); //Call frame() once every 5ms
     function frame() {
-        if (pos == targetPoint) {
-            clearInterval(id);
-            if (colId % 2 == 0) {
+        if (pos == targetPoint) { //If we have hit the targetPoint
+            clearInterval(id); //Stop animating
+            if (colId % 2 == 0) { //If the column Id is even, apply the --p1TokenColor style value to the background of the content column
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p1TokenColor`).trim();
-            } else {
+            } else { //Otherwise the column Id is odd, so apply the --p2TokenColor style instead
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
             }
             return true;
-        } else if (pos == parseInt(Math.floor(targetPoint))) {
+        } else if (pos == parseInt(Math.floor(targetPoint))) { //If we haven't hit the targetPoint, but are less than 1px away
             pos = targetPoint;
-            document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.top = pos + `px`;
-        } else {
+            document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.top = pos + `px`; //Set the position to targetPoint (prevents 1px adjustment as normal, overshooting the target and creating an infinite anim)
+        } else { //Otherwise, adjust the position by 1px and continue
             pos++
             document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.top = pos + `px`;
         }
