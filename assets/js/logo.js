@@ -1,3 +1,24 @@
+function displayLogo() {
+    displayLogoGrid()
+    result = drawLogoGrid();    
+    if (result == false) {
+        console.log(`Unable to Display logoGrid.  Displaying Static Logo.`);
+        displayStaticLogo();
+        return false;
+    }
+    return true;
+}
+
+function displayStaticLogo() {
+    elementDisplay("hide", "logoGrid");
+    elementDisplay("show", "staticLogo");
+}
+
+function displayLogoGrid() {
+    elementDisplay("hide", "staticLogo");
+    elementDisplay("show", "logoGrid");
+}
+
 /* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
     result = displayDataGrid(c4.logoGrid, "logoGrid", "off", false);
