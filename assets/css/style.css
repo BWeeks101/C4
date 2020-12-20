@@ -134,6 +134,7 @@ a:hover, .header-nav-link-text:hover {
 }
 
 .navbar-toggler-icon {
+    -webkit-mask: var(--togglerIconMaskURL);
     mask: var(--togglerIconMaskURL);
     background: var(--togglerIconBackground);
     transition: 0.5s;
