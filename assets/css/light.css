@@ -31,9 +31,9 @@
 
     /* Main */
     --mainText: #262626;
-    --mainBorder: #262626;
-    --mainBackground: #eaeae8;
-    --mainAltBackground: #eaeae8;
+    --mainBorder: #262626;    
+    --mainBackground: #f7f9fa;
+    --mainAltBackground: #eaeae8;    
     --headerDivider: #8C8C8C;
     --footerDivider: #8C8C8C;
     --socialMediaLink: #262626;
