@@ -163,7 +163,8 @@ function menuBackButton() {
         case "startGame": //game board, rules pane or player settings menu. Show the default pane then refresh the logo
         case "rules":
         case "settings": 
-            show("default"); 
+            show("default");
+            mainOnResize(); 
             refreshLogoGrid();
             break;
         case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
