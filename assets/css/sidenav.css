@@ -14,12 +14,14 @@
   transition: left 0.5s, background-color 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
+/* sideNav overlay.  Displayed over content when the sideNav is open */
 .sidenav-doc-overlay {
     width: 100%;   
     z-index: -1000;
     background-color: rgba(0, 0, 0, 0);
 }
 
+/* primary sideNav class */
 .sidenav {
   min-width: 310px; /* 0 width - change this with JavaScript */
   width: 33%;
