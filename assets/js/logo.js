@@ -176,8 +176,10 @@ function dropChar(colId, targetPoint, final) {
             clearInterval(id); //Stop animating
             if (colId % 2 == 0) { //If the column Id is even, apply the --p1TokenColor style value to the background of the content column
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p1TokenColor`).trim();
+                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = getComputedStyle(document.documentElement).getPropertyValue(`--logoText`).trim();
             } else { //Otherwise the column Id is odd, so apply the --p2TokenColor style instead
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
+                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = getComputedStyle(document.documentElement).getPropertyValue(`--logoText`).trim();
             }
             /* If this is the last column to be animated, set the global logo.animState property value to false, and remove the min/max width inline styles to allow resize */
             if (final == true) {
