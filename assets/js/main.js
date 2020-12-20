@@ -13,6 +13,7 @@ function mainOnLoad() {
     displayLogo(); //draw the logo
     elementDisplay("toggle","menuBlockContainer"); //Show the menu block
     loadPlayerSettings(); //Initialise player settings
+    initC4Select();
     mainOnResize(); //Call the onResize function to ensure our content fits within a single page
 }
 
