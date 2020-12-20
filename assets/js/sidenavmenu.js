@@ -215,7 +215,6 @@ function showGameSideNavMenu() {
 /* Requires: */
 /*      refreshLogo: true/false */
 function menuBackButton() {
-    console.log(c4.uiState);
     switch (c4.uiState) {
         case "settings":
             saveSettings(); //player settings menu, so save settings, show the default pane then refresh the logo
