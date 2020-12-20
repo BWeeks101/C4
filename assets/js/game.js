@@ -91,6 +91,19 @@ function stopGame() {
     resetTurnCount(); //Reset the turn count to 0
 }
 
+/* Quit an active game and return to the main pane */
+function quitGame() {
+    stopStartDelay(); //If the game start delay is running, stop it
+    dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
+    stopGame(); //Stop the active hotseat game
+    menuBackButton(); //Display the main pane and refresh the logo
+}
+
+/* Refresh the game board */
+function refreshGameBoard() {
+    show("startGame");
+}
+
 /* Start the turn time limit timer */
 function startTurnTimer() {
     document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`; //Set the turnTimeLimit elements innerHTML to the value of the turnTimeLimit global setting

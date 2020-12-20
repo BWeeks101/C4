@@ -172,19 +172,6 @@ function menuBackButton() {
     }
 }
 
-/* Quit an active game and return to the main pane */
-function quitGame() {
-    stopStartDelay(); //If the game start delay is running, stop it
-    dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
-    stopGame(); //Stop the active hotseat game
-    menuBackButton(); //Display the main pane and refresh the logo
-}
-
-/* Refresh the game board */
-function refreshGameBoard() {
-    show("startGame");
-}
-
 /* Toggle between the Pause and Resume links on the sideNav */
 function togglePauseLink() {
     elementDisplay("toggle", "ctrlPauseLink");
