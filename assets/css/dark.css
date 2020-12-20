@@ -38,4 +38,7 @@
     --footerDivider: #CCCCCC;
     --socialMediaLink: #fafafa;
     --socialMediaLinkHover: #EC4C4C;
+
+    /* Logo Text */
+    --logoText: #fafafa;
 }
