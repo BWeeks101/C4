@@ -1,7 +1,3 @@
-body {
-    font-size: .75em;
-}
-
 #mainBlockContainer {
     display: flex;    
     justify-content: center;
