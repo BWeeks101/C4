@@ -108,6 +108,7 @@ function getLogoGridColCenter(colId) {
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
     setTimeout(function() { //Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay
+        c4.logo.animState = true;
         let numFrames;
         let percentComplete;
         let delay;    
@@ -121,7 +122,11 @@ function animateLogo(colCount, colCenter) {
             percentComplete = ((numFrames / 100) * 50) * 5; //50% of the frames, * 5 gives 50% of the animation length (1 frame / 5ms)
             delay = percentComplete * i //Multiply percentComplete by the id of the current column to create a staggered drop effect
             
-            queue(i, targetPoint, delay); //Queue up the animation start call
+            if (i == colCount - 1) {
+                queue(i, targetPoint, delay, true); //Queue up the animation start call for the final column    
+            } else {
+                queue(i, targetPoint, delay); //Queue up the animation start call
+            }            
         }
     }, 2000);
 }
@@ -131,9 +136,14 @@ function animateLogo(colCount, colCenter) {
 /*      i: Integer.  Id of header column to animate */
 /*      targetPoint: Number of pixels to adjust header content by */
 /*      delay: Number of miliseconds to delay starting the animation */
-function queue(i, targetPoint, delay) {
+/*      final (OPTIONAL): boolean.  True for the last item in the queue */
+function queue(i, targetPoint, delay, final) {
     setTimeout(function() {
-        dropChar(i, targetPoint);
+        if (final == true) {
+            dropChar(i, targetPoint, final);
+        } else {
+            dropChar(i, targetPoint);
+        }        
     }, delay);
 }
 
@@ -147,7 +157,8 @@ function queue(i, targetPoint, delay) {
 /* Requires: */
 /*      colId: Integer.  Id of the column header we are going to animate */
 /*      targetPoint: Number of pixels to adjust the header content by */
-function dropChar(colId, targetPoint) {
+/*      final (OPTIONAL): boolean.  True indicates that this is the last column to be animated, so we will update the global c4.logo.animState to false on completion */
+function dropChar(colId, targetPoint, final) {
     let pos = 0; //Initialise position variable
     let id = setInterval(frame, 5); //Call frame() once every 5ms
     function frame() {
@@ -157,6 +168,9 @@ function dropChar(colId, targetPoint) {
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p1TokenColor`).trim();
             } else { //Otherwise the column Id is odd, so apply the --p2TokenColor style instead
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
+            }
+            if (final == true) {
+                c4.logo.animState = false;
             }
             return true;
         } else if (pos == parseInt(Math.floor(targetPoint))) { //If we haven't hit the targetPoint, but are less than 1px away
