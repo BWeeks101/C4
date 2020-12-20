@@ -120,7 +120,7 @@ function mainShow(option) {
         case "startGame":
             c4.uiState = "startGame";
             /* Initialise a hotseat game */
-            refreshHotseat(); //Refresh the game board values
+            refreshGame(); //Refresh the game board values
             dataGridDisplayRemove("gBoard"); //Remove the game board from display
             displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
             dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board

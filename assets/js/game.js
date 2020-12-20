@@ -67,7 +67,7 @@ function stopStartDelay() {
 }
 
 /* Refresh the game state */
-function refreshHotseat() {
+function refreshGame() {
     stopTurnTimer(); //Stop the turn timer
     elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
     clearGameState(); //Clear the game state
