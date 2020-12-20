@@ -9,6 +9,7 @@ function mainOnLoad() {
     c4.uiState = "default"; //Set the default state
     loadColorMode(); //Apply the appropriate theme (light or dark(default))
     sideNavOnLoad(); //Initialise the sideNav
+    displayDataGrid(c4.logo.smGrid, "smLogoGrid", "off", false);
     displayLogo(); //draw the logo
     elementDisplay("toggle","menuBlockContainer"); //Show the menu block
     loadPlayerSettings(); //Initialise player settings
