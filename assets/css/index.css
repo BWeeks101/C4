@@ -139,3 +139,25 @@ label {
 .control-buttons .rcol {
     padding-left: 5px;
 }
+
+/* Datagrid Default Color Overrides */
+.datagrid-header-col {
+    border-left-color: var(--dataGridBorder);
+    border-bottom-color: var(--dataGridBorder);    
+}
+
+.datagrid-content-col {
+    border-left-color: var(--dataGridBorder);
+}
+
+.datagrid-content-inner-col {
+    border-bottom-color: var(--dataGridBorder);
+}
+
+.datagrid-row-selected {
+    background-color: var(--dataGridRowSelected);
+}
+
+.datagrid-col-selected {
+    background-color: var(--dataGridColSelected);
+}
