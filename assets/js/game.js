@@ -20,7 +20,7 @@ function feedbackWinner(result) {
     if (result == "draw") { 
         document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
         document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
-        document.getElementById("turnTimeLimit").firstElementChild.removeProperty("color"); //Set the turnTimeLimit text to the default color
+        document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color"); //Set the turnTimeLimit text to the default color
         document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!" //Display the draw message in the turnTimeLimit column
     } else {
         document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
