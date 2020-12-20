@@ -3,9 +3,9 @@
 
     /* navBar */
     --darkToggler: rgba(38,38,38,.4);
-    --togglerHoverBorder: rgba(236,76,76,.4);
-    --togglerBackground: #EC4C4C;
-    --togglerHoverIcon: #EC4C4C;
+    --togglerHoverBorder: rgba(75, 75, 236,.8);
+    --togglerBackground: #4B4BEC;
+    --togglerHoverIcon: #4B4BEC;
     --togglerIconMaskURL: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2838, 38, 38, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     --togglerIconBackground: #262626;
 
@@ -14,12 +14,12 @@
     --sideNavBackground: rgba(235,235,235,.95);
     --sideNavDivider: #262626;
     --sideNavLink: #262626;
-    --sideNavLinkHover: #EC4C4C;
+    --sideNavLinkHover: #4B4BEC;
 
     /* Datagrid */
     --dataGridBorder: #242423;
-    --dataGridRowSelected: #EC4C4C;
-    --dataGridColSelected: #EC4C4C;
+    --dataGridRowSelected: #4B4BEC;
+    --dataGridColSelected: #4B4BEC;
 
     /* Game */
     --gameBorder: #262626;
@@ -37,7 +37,7 @@
     --headerDivider: #8C8C8C;
     --footerDivider: #8C8C8C;
     --socialMediaLink: #262626;
-    --socialMediaLinkHover: #EC4C4C;
+    --socialMediaLinkHover: #4B4BEC;
 
     /* Logo Text */
     --logoText: #fafafa;
