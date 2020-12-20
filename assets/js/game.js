@@ -71,7 +71,7 @@ function startGame() {
     createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
     setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
     saveTurnTimeLimit(); //Write the selected turn time limit to local storage
-    refreshGameBoard(); //Display the hotseat game board and start the game
+    show("startGame"); //Display the hotseat game board and start the game
 }
 
 /* Refresh the game state */
@@ -101,12 +101,7 @@ function quitGame() {
 
 /* Refresh the game board */
 function refreshGameBoard() {
-    refreshGame(); //Refresh the game board values
-    dataGridDisplayRemove("gBoard"); //Remove the game board from display
-    displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
-    dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board
-    elementDisplay("show", "gameBoardContainer"); //Show the game board container
-    feedbackStartDelay(); //Begin the game start countdown
+    show("startGame");
 }
 
 /* Start the turn time limit timer */
