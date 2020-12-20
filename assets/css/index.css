@@ -1,3 +1,4 @@
+/* Main Block Container */
 #mainBlockContainer {
     display: flex;    
     justify-content: center;
@@ -6,11 +7,7 @@
     min-height: 220px;
 }
 
-#mainBlock img {
-    object-fit: cover;
-    overflow: hidden;
-}
-
+/* Menu Block and Content */
 #menuBlock {
     display: flex;
     align-items: center;
@@ -37,7 +34,20 @@
     font-size: 1rem;
 }
 
-#rulesContainer, #leaderboardContainer, #gameBoardContainer {
+/* Main/Menu Content and Titles */
+.main-content, .menu-content {
+    background-color: var(--mainBackground);
+    border: solid 1px var(--mainBorder);
+    padding: 10px;
+}
+
+.mainTitle, .menuTitle {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/* Rules and Game Board */
+#rulesContainer, #gameBoardContainer {
     width: calc(100% - 20px);
     max-width: 720px;
 }
@@ -58,17 +68,12 @@
     border-top: none;
 }
 
-.main-content, .menu-content {
-    background-color: var(--mainBackground);
-    border: solid 1px var(--mainBorder);
-    padding: 10px;
+/* Labels */
+label {
+    font-size: .9rem;    
 }
 
-.mainTitle, .menuTitle {
-    margin: 0;
-    padding-bottom: 10px;
-}
-
+/* C4 Control Classes */
 .c4-control-margin-bottom {
     margin-bottom: 5px;
 }
@@ -104,7 +109,13 @@
     background-color: var(--mainBackground);
 }
 
-/* Copied from dropbox btn-lg and tweaked */
+.c4-control:hover {
+    border-color: var(--togglerHoverBorder);
+}
+
+/* C4 Button Classes */
+
+/* Copied from bootstrap btn-lg and tweaked */
 .c4-button-large {
     padding: .5rem 1rem;
     font-size: 1.25rem;
@@ -112,29 +123,19 @@
     border-radius: .9rem;
 }
 
-.c4-control:hover {
-    border-color: var(--togglerHoverBorder);
-}
-
 .c4-button:hover, .c4-button-large:hover {
     color: var(--togglerHoverIcon);
 }
 
-label {
-    font-size: .9rem;    
-}
-
+/* C4 Control Container Classes */
 .control-container {
     text-align: left;
 }
+
 .control-buttons .lcol {
     padding-right: 5px;
 }
 
 .control-buttons .rcol {
     padding-left: 5px;
-}
-
-.refresh-button {
-    text-align: left;
 }
