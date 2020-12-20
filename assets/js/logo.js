@@ -24,9 +24,9 @@ function displayLogoGrid() {
 
 /* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
-    result = displayDataGrid(c4.logoGrid, "logoGrid", "off", false); //Create the dataGrid display
+    result = displayDataGrid(c4.logo.grid, "logoGrid", "off", false); //Create the dataGrid display
     if (result == false) { //If false, then we could not create the display, so return false
-        console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logoGrid}, "logoGrid", "off", false).`);
+        console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logo.grid}, "logoGrid", "off", false).`);
         return false;
     }
         
