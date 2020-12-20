@@ -66,6 +66,14 @@ function stopStartDelay() {
     clearInterval(startDelay);
 }
 
+/* Start the Game */
+function startGame() {
+    createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
+    setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
+    saveTurnTimeLimit(); //Write the selected turn time limit to local storage
+    show("startGame"); //Display the hotseat game board and start the game
+}
+
 /* Refresh the game state */
 function refreshGame() {
     stopTurnTimer(); //Stop the turn timer
