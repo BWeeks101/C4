@@ -13,6 +13,11 @@
     text-align: left;
 }
 
+#turnTimeLimit {
+    padding: 0 5px;
+    text-align: center;
+}
+
 #player2Info {
     padding: 0;
     text-align: right;
