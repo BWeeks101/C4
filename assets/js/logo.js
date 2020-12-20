@@ -70,22 +70,32 @@ function refreshLogoGrid() {
 }
 
 /* Get Center Point of each logoGrid Cell */
+/* Requires: */
+/*      ColId (OPTIONAL): Integer.  Id of the column we wish to get the positions for */
 /* Returns an object with the following properties: */
 /*      headerCenter: Array containing objects which hold the center and absolute center coords for each header cell */
 /*      contentCenter: Array containing objects which hold the center and absolute center coords for each content cell */
-function getLogoGridColCenter() {
+function getLogoGridColCenter(colId) {
     gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
     if (gridCounts == false) { //If false, then we could not return the values, so return false
         console.log(`function animateLogo failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
         return false;
     }
 
-    /* Call getElementPos() for each header and content column, and add the returned object.center properties to the relevant array. */
+    /* Initialise result arrays */
     let headerCoords = [];
     let contentCoords = [];
-    for (i = 0; i < gridCounts[0]; i++) {
-        headerCoords[i] = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild).center;
-        contentCoords[i] = getElementPos(document.getElementById(`logoGridCol${i}RowId0`).firstElementChild.lastElementChild).center;
+    
+    /* If the ColId argument is specified, is an integer, and is a valid column Id then get positions for this column ONLY */
+    if (colId != undefined && Number.isInteger(colId) == true && colId < gridCounts[0]) {
+        headerCoords[0] = getElementPos(document.getElementById(`logoGridHcol-${colId}`).firstElementChild.firstElementChild).center;
+        contentCoords[0] = getElementPos(document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild).center;
+    } else {
+        /* Otherwise call getElementPos() for each header and content column, and add the returned object.center properties to the relevant array. */
+        for (i = 0; i < gridCounts[0]; i++) {
+            headerCoords[i] = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild).center;
+            contentCoords[i] = getElementPos(document.getElementById(`logoGridCol${i}RowId0`).firstElementChild.lastElementChild).center;
+        }
     }
 
     return {headerCenter:headerCoords, contentCenter:contentCoords};
@@ -97,17 +107,19 @@ function getLogoGridColCenter() {
 /*      colCount: Integer.  Number of columns in header */
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
-    let delay;
     setTimeout(function() { //Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay
+        let numFrames;
+        let percentComplete;
+        let delay;    
         for (i = 0; i < colCount; i++) {
             
             /* Calculate the stop point for the animation.  This is the number of pixels between the vertical centers of the current header and content */
             targetPoint = colCenter.contentCenter[i].absoluteY - colCenter.headerCenter[i].absoluteY;
             
             /* Calculate the delay that the queue will utilise between each animation start call. */
-            let numFrames = Math.ceil(targetPoint); //Number of Frames (1px movement per frame)            
-            let percentComplete = ((numFrames / 100) * 50) * 5; //50% of the frames, * 5 gives 50% of the animation length (1 frame / 5ms)
-            let delay = percentComplete * i //Multiply percentComplete by the id of the current column to create a staggered drop effect
+            numFrames = Math.ceil(targetPoint); //Number of Frames (1px movement per frame)            
+            percentComplete = ((numFrames / 100) * 50) * 5; //50% of the frames, * 5 gives 50% of the animation length (1 frame / 5ms)
+            delay = percentComplete * i //Multiply percentComplete by the id of the current column to create a staggered drop effect
             
             queue(i, targetPoint, delay); //Queue up the animation start call
         }
