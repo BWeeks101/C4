@@ -152,3 +152,19 @@ function hideNav() {
     document.getElementById("sideNavDocOverlay").style.backgroundColor = "rgba(0,0,0,0.0)"; //Set the sideNavDocOverlay backgroundColor style property to the default of 100% translucent
     document.getElementById("sideNavDocOverlay").style.left = "0px" //Set the sideNavDocOverlay left style property to 0.  This will transition the overlay across the window in line with the sideNav transition
 }
+
+/* Check the state of the sideNav.  If open, then close it before executing the provided function */
+/* Requires: */
+/*      func: callback function to be executed */
+/* Syntax: */
+/*      checkSideNavState(function(){function_here()}); */
+function checkSideNavState(func) {
+    if (sideNavState() == "open") {
+        closeNav();
+        setTimeout(function() {
+            func();
+        }, 650);
+    } else {
+        func();
+    };
+}
