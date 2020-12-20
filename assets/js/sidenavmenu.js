@@ -86,12 +86,7 @@ function mainShow(option) {
         case "startGame":
             c4.uiState = "startGame";
             /* Initialise a hotseat game */
-            refreshGame(); //Refresh the game board values
-            dataGridDisplayRemove("gBoard"); //Remove the game board from display
-            displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
-            dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board
-            elementDisplay("show", "gameBoardContainer"); //Show the game board container
-            feedbackStartDelay(); //Begin the game start countdown
+            refreshGameBoard();
             break;
         case "turnTimeLimit":
             c4.uiState = "turnTimeLimit"
