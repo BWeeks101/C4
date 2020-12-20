@@ -171,20 +171,6 @@ function menuBackButton() {
     }
 }
 
-/* Remove the turnTimeLimit kv pair from localStorage, and replace it with the current value from the turnTime drop down list element */
-function saveTurnTimeLimit() {
-    localStorage.removeItem("turnTimeLimit");
-    localStorage.setItem("turnTimeLimit", document.getElementById("turnTime").value);
-};
-
-/* Get the value of the turnTimeLimit kv pair from localStorage.  If it is not null, then assign that value to the value attribute of the turnTime drop down list element */
-function loadTurnTimeLimit() {
-    let turnTimeLimit = localStorage.getItem("turnTimeLimit");
-    if (turnTimeLimit != null) {
-        document.getElementById("turnTime").value = turnTimeLimit;
-    }
-}
-
 /* Quit an active game and return to the main pane */
 function quitGame() {
     stopStartDelay(); //If the game start delay is running, stop it
