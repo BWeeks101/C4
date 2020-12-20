@@ -117,8 +117,7 @@ function mainShow(option) {
                     elementDisplay("show", elementCollection[i].id);
                 }
             }     
-            c4.uiState = "default";
-            elementDisplay("show", "menuDefault");        
+            c4.uiState = "default";            
             break;            
         case "rules":
             /* Display the rules container */
