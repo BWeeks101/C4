@@ -173,22 +173,19 @@ function sideNavShow(option) {
             }
             break;
         case "rules":
-            /* Show the options and settings links on the sideNav */
+            /* Show the home, start game and settings links on the sideNav */
             sideNavLinkDisplay("show", "sn-default");
+            sideNavLinkDisplay("show", "sn-startGame");
             sideNavLinkDisplay("show", "sn-settings");    
-            break;        
-        case "options":
-            /* Show the settings and rules links on the sideNav */
-            sideNavLinkDisplay("show", "sn-settings");
-            sideNavLinkDisplay("show", "sn-rules");
             break;
         case "settings":
-            /* Show the options and rules links on the sideNav */
-            sideNavLinkDisplay("show", "sn-default");            
+            /* Show the home, start game and rules links on the sideNav */
+            sideNavLinkDisplay("show", "sn-default");
+            sideNavLinkDisplay("show", "sn-startGame");
             sideNavLinkDisplay("show", "sn-rules");
             break;
         case "turnTimeLimit":
-            /* Show the Back link on the sideNav */
+            /* Show the home, settings and rules links on the sideNav */
             sideNavLinkDisplay("show", "sn-default");
             sideNavLinkDisplay("show", "sn-settings");
             sideNavLinkDisplay("show", "sn-rules");
