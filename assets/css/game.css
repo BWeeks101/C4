@@ -1,7 +1,7 @@
 /* Player Info Container */
 #playerInfoContainer {
     padding: 10px 0;
-    background-color: var(--feedbackBackground);
+    /*background-color: var(--feedbackBackground);*/
 }
 
 #playerInfoContainer h3 {
@@ -101,7 +101,15 @@
     width: 100%;
     min-height: 87px;
     padding: 5px 0;
-    background-color: var(--feedbackBackground);
+    /*background-color: var(--feedbackBackground);*/
+}
+
+#feedbackControlRow .lcol {
+    padding-left: 0;
+}
+
+#feedbackControlRow .rcol {
+    padding-right: 0;
 }
 
 .feedback-message {
