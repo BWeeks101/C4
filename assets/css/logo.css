@@ -1,62 +1,32 @@
+/* Logo Container */
 #logoContainer {
     width: calc(100% - 20px);
     max-width: 360px;
 }
 
+/* Static Logo img Element */
 #staticLogo {
     object-fit: cover;
     overflow: hidden;
 }
 
+/* logoGrid dataGridDisplay Elements */
 #logoGrid {
-    padding-bottom: 0;
+    padding-bottom: 0; /* Remove default padding-bottom from datagrid-container */
 }
 
+/* Remove the borders from the Header Container and child elements */
 #logoGridHeaderContainer, #logoGridHeaderRow, #logoGridHeaderRow .datagrid-header-col {
     border: none;
 }
 
-#logoGridContentContainer {
-    border: none;
-    overflow-y: initial;
-}
-
-#logoGridContentRow .datagrid-content-col, #logoGridContentRow .datagrid-content-row, #logoGridContentRow .datagrid-content-inner-col {
-    border: none;
-}
-
-#logoGridContentRow {
-    border: 1px solid var(--gameBorder);
-}
-
-#logoGridContentRow .datagrid-content-inner-col {
-    padding: 1px !important;
-}
-
-#logoGridContentRow .datagrid-col-selected {
-    background-color: initial !important;
-}
-
-#logoGridContentRow .datagrid-cell-value {
-    transition: background-color 0.5s;
-    border: 1px solid var(--gameBorder);
-    border-radius: 50%;
-    padding: 0;
-    min-width: 40px;
-    min-height: 40px;
-    width: 100%;
-    padding-top: calc(100% - 2px);
-}
-
-#logoGridCcol-2 {
-    width: 100px !important;
-}
-
+/* Specify a header col min-width and min-height to match that of the logoGrid content cells */
 #logoGridHeaderRow .datagrid.header-col {
     min-width: 40px;
     min-height: 40px;
 }
 
+/* Make the header inner container position absolute, center the content, set min sizes and ensure the z-index is higher than the content cells */
 #logoGridHeaderRow .datagrid-header-col .datagrid-header-inner-container {
     position: absolute;
     margin-left: auto;
@@ -69,11 +39,42 @@
     z-index: 2;
 }
 
+/* Remove bottom margins and letter spacing from logoGrid header row h3 elements */
 #logoGridHeaderRow .datagrid-header-col h3 {
     margin-bottom: 0;
     letter-spacing: 0;
 }
 
+/* Remove borders and overflow-y from the content container */
+#logoGridContentContainer {
+    border: none;
+    overflow-y: initial;
+}
+
+/* Add a top margin to offset the absolute header content, and apply a border */
 #logoGridContentRow {
     margin-top: 42px;
+    border: 1px solid var(--gameBorder);
+}
+
+/* Remove borders from the content columns, content rows and content inner columns */
+#logoGridContentRow .datagrid-content-col, #logoGridContentRow .datagrid-content-row, #logoGridContentRow .datagrid-content-inner-col {
+    border: none;
+}
+
+/* Force 1px padding around the content inner column */
+#logoGridContentRow .datagrid-content-inner-col {
+    padding: 1px !important;
+}
+
+/* Add styling to the logoGrid cell value elements. */
+#logoGridContentRow .datagrid-cell-value {
+    transition: background-color 0.5s;
+    border: 1px solid var(--gameBorder);
+    border-radius: 50%; /* Round Borders mimic the slots on a real Connect 4 game board. */
+    padding: 0;
+    min-width: 40px; /* equal min-width and min-height ensure the elements are square */
+    min-height: 40px;
+    width: 100%;
+    padding-top: calc(100% - 2px);
 }
