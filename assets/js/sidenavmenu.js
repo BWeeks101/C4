@@ -160,7 +160,8 @@ function showGameSideNavMenu() {
 /* Determine which pane is shown, apply the appropriate action, then show the main pane */
 function menuBackButton() {
     switch (c4.uiState) {
-        case "rules": //rules pane or player settings menu, show the default pane then refresh the logo
+        case "startGame": //game board, rules pane or player settings menu. Show the default pane then refresh the logo
+        case "rules":
         case "settings": 
             show("default"); 
             refreshLogoGrid();
@@ -176,8 +177,7 @@ function quitGame() {
     stopStartDelay(); //If the game start delay is running, stop it
     dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
     stopGame(); //Stop the active hotseat game
-    show("default"); //Display the main pane
-    refreshLogoGrid(); //Refresh the logo
+    menuBackButton(); //Display the main pane and refresh the logo
 }
 
 /* Refresh the game board */
