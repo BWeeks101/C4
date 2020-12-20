@@ -32,6 +32,8 @@
 /* Add a border to the Content Container, and disable overflow-y */
 #gBoardContentContainer {
     border: 1px solid var(--gameBorder);
+    border-radius: .9rem;
+    padding: 5px;
     overflow-y: initial;
 }
 
