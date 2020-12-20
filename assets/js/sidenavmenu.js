@@ -223,7 +223,7 @@ function loadTurnTimeLimit() {
 function quitGame() {
     stopStartDelay(); //If the game start delay is running, stop it
     dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
-    stopHotseat(); //Stop the active hotseat game
+    stopGame(); //Stop the active hotseat game
     show("default"); //Display the main pane
     refreshLogoGrid(); //Refresh the logo
 }
