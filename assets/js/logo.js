@@ -41,12 +41,12 @@ function drawLogoGrid() {
 
     /* Set Content Row margin-top to maintain distance from header divider */
     for (i = 0; i < gridCounts[0]; i++) {        
-        checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the header column
-        if (checkMarginTop > logoGridContentRowMarginTop) {
-            logoGridContentRowMarginTop = checkMarginTop
+        checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the current header column
+        if (checkMarginTop > logoGridContentRowMarginTop) { //Compare the height of the current column to the stored margintop value, and if larger, update the stored value
+            logoGridContentRowMarginTop = checkMarginTop;
         }     
     }
-    document.getElementById("logoGridContentRow").style.marginTop = `${logoGridContentRowMarginTop}px` //Set the height of the content row margin top to equal the height of the largest header column
+    document.getElementById("logoGridContentRow").style.marginTop = `${logoGridContentRowMarginTop}px` //Set the height of the content row margin-top to equal the height of the largest header column
     
     let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
     if (typeof colCenter != "object") { //If colCenter is not an object then we could not get the center points, so return false
