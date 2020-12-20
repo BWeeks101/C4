@@ -19,6 +19,7 @@ function mainOnLoad() {
 function mainOnResize() {
     sideNavResize(); //Resize the sideNav
     mainBlockResize(); //Resize the main block
+    logoResize(); //Resize the logo
     menuBlockResize(); //Resize the menu block
 }
 
@@ -57,13 +58,45 @@ function loadColorMode() {
     }    
 }
 
+function logoResize() {
+    if (document.getElementById("logoGrid").classList.contains("d-none") == false) {
+        if (c4.logo.animState == false) {
+            gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
+            if (gridCounts == false) { //If false, then we could not return the values, so return false
+                console.log(`function logoResize failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
+                return false;
+            }
+            
+            setlogoGridContentRowMarginTop();
+            
+            let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
+            if (typeof colCenter != "object") { //If colCenter is not an object then we could not get the center points, so return false
+                console.log(`function logoResize failed.  Unable to get center points.  Cascade failure originating with getLogoGridColCenter()`);
+                return false;
+            }
+
+            for (i = 0; i < gridCounts[0]; i++) {
+                if (document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.left != "") {
+                    colCenter.headerCenter[i].absoluteX = colCenter.headerCenter[i].absoluteX - parseFloat(document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.left);
+                }
+                document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.left = `${(colCenter.contentCenter[i].absoluteX - colCenter.headerCenter[i].absoluteX)}px`;
+
+                if (document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top != "") {
+                    colCenter.headerCenter[i].absoluteY = colCenter.headerCenter[i].absoluteY - parseFloat(document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top);
+                }                            
+                document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top = `${(colCenter.contentCenter[i].absoluteY - colCenter.headerCenter[i].absoluteY)}px`;
+            }          
+        }
+    }
+}
+
 /* Resize the main block */
 /* This block is used to display the logo, rules and game board */
 function mainBlockResize() {
     /* Remove any existing height or padding-bottom style properties from the main block container */
     document.getElementById("mainBlockContainer").style.removeProperty("height");
     document.getElementById("mainBlockContainer").style.removeProperty("padding-bottom");
-
+    
     /* If the menu block container is not visible, then calculate and apply the correct height and padding-bottom styles to the main block */
     if (document.getElementById("menuBlockContainer").classList.contains("d-none") == true) {
         mainBlockContainerHeight = calcBlockHeight();
