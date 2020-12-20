@@ -38,6 +38,7 @@
 .main-content, .menu-content {
     background-color: var(--mainBackground);
     border: solid 1px var(--mainBorder);
+    border-radius: .9rem;
     padding: 10px;
 }
 
@@ -59,12 +60,14 @@
 #rulesMainContent {
     overflow-y: auto;
     border: 1px solid var(--mainBorder);
+    border-radius: .9rem .9rem 0 0;
     border-bottom: none;
 }
 
 #rulesContainer .control-buttons {
     padding: 10px;
     border: 1px solid var(--mainBorder);
+    border-radius: 0 0 .9rem .9rem;
     border-top: none;
 }
 
