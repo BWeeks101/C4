@@ -266,3 +266,37 @@ function elementDisplay(action, elementID) {
             break;            
     }
 }
+
+/* Hide all children of the provided element */
+/* Requires: */
+/*      elementId: Any valid element Id.  Intended use for sideNav/mainBlockContainer/menuContentContainer */
+function hideAll(elementId) {
+    /* Verify that the elementId argument refers to a valid HTML element */
+    let valid = document.getElementById(elementId);
+    if (valid == null) { //If not, return false
+        console.log(`Error.  Target element (${elementId}) does not exist.`);
+        return false;
+    }
+
+    /* Build a collection of all child elements for the provided element Id */
+    let elementCollection = document.getElementById(elementId).children;
+
+    /* If elementId = sideNav, skip the first three elements (do not hide the close button, color mode link or its divider) */
+    let i;
+    if (elementId == "sideNav") {
+        i = 3;
+    } else {
+        i = 0;
+    }
+
+    /* Iterate through the collection, hiding all elements */
+    for (i; i < elementCollection.length; i++) {
+        elementDisplay("hide", elementCollection[i].id);        
+    }
+
+    /* If elementId = mainBlockContainer then also hide the menuBlockContainer element and children */
+    if (elementId == "mainBlockContainer") {
+        elementDisplay("hide", "menuBlockContainer");
+        hideAll("menuContentContainer");
+    }
+}
