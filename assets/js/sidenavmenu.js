@@ -32,9 +32,9 @@ function checkSideNavState(func) {
 function checkSave() {
     switch (c4.uiState) {
         case "settings":
-            saveSettings(); //player settings menu, so save settings, show the default pane then refresh the logo
+            saveSettings(); //player settings menu, so save settings
             break;
-        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the default pane
+        case "turnTimeLimit": //turn time limit pane,  so save the turn time limit value
             saveTurnTimeLimit();
             break;
     }
