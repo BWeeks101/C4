@@ -87,8 +87,49 @@ function logoResize() {
                     colCenter.headerCenter[i].absoluteY = colCenter.headerCenter[i].absoluteY - parseFloat(document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top);
                 }                            
                 document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top = `${(colCenter.contentCenter[i].absoluteY - colCenter.headerCenter[i].absoluteY)}px`;
-            }          
+            }
+
+            logoFontResize();
         }
+    }
+}
+
+/* Font Resize */
+function logoFontResize() {
+    let minScreenWidth = 360; //Min Supported Screen Width in px
+    let minFontSize = 28; //Min Supported Logo Font Size in px   
+    let minFontSizeVw = (minFontSize / minScreenWidth) * 100 //Min Font Size in vw
+    let minLogoContentSize = 40; //Min Logo Content Size in px    
+    let maxLogoContentSize = 124 //Max Logo Content Size in px
+    let fontLogoDiff = (minFontSize / minLogoContentSize) * 100 //Percentage difference betwen font and logo content
+
+    let maxFontSizeVw = (maxLogoContentSize / 100) * fontLogoDiff; //Max Logo Font Size in vw    
+
+    let gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
+    if (gridCounts == false) { //If false, then we could not return the values, so return false
+        console.log(`function logoResize failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
+        return false;
+    }
+
+    let contentWidth = getElementPos(document.getElementById(`logoGridCol0RowId0`).firstElementChild.lastElementChild).width;
+    let checkWidth;
+    for (i = 1; i < gridCounts[0]; i++) {
+        checkWidth = getElementPos(document.getElementById(`logoGridCol${i}RowId0`).firstElementChild.lastElementChild).width;
+        if (checkWidth < contentWidth) {
+            contentWidth = checkWidth;
+        }
+    }
+
+    maxFontSize = (contentWidth / 100) * fontLogoDiff;
+    if (maxFontSize > maxFontSizeVw) {
+        maxFontSize = maxFontSizeVw;
+    }
+    fontSize = (maxFontSize / window.outerWidth) * 100;
+    console.log(window.outerWidth);
+    console.log(contentWidth);
+
+    for (i = 0; i < gridCounts[0]; i++) {
+        document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild.style.fontSize = `${fontSize}vw`;
     }
 }
 
