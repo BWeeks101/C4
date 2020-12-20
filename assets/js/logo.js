@@ -71,7 +71,7 @@ function refreshLogoGrid() {
 
 /* Get Center Point of each logoGrid Cell */
 /* Requires: */
-/*      ColId (OPTIONAL): Integer.  Id of the column we wish to get the positions for */
+/*      colId (OPTIONAL): Integer.  Id of the column we wish to get the positions for */
 /* Returns an object with the following properties: */
 /*      headerCenter: Array containing objects which hold the center and absolute center coords for each header cell */
 /*      contentCenter: Array containing objects which hold the center and absolute center coords for each content cell */
@@ -86,7 +86,7 @@ function getLogoGridColCenter(colId) {
     let headerCoords = [];
     let contentCoords = [];
     
-    /* If the ColId argument is specified, is an integer, and is a valid column Id then get positions for this column ONLY */
+    /* If the colId argument is specified, is an integer and a valid column Id, then get object.center properties for this column ONLY, and add them to the relevant array. */
     if (colId != undefined && Number.isInteger(colId) == true && colId < gridCounts[0]) {
         headerCoords[0] = getElementPos(document.getElementById(`logoGridHcol-${colId}`).firstElementChild.firstElementChild).center;
         contentCoords[0] = getElementPos(document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild).center;
