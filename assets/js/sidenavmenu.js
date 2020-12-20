@@ -212,22 +212,15 @@ function showGameSideNavMenu() {
 }
 
 /* Determine which pane is shown, apply the appropriate action, then show the main pane */
-/* Requires: */
-/*      refreshLogo: true/false */
 function menuBackButton() {
     switch (c4.uiState) {
-        case "settings":
-            saveSettings(); //player settings menu, so save settings, show the default pane then refresh the logo
-            show("default");
+        case "rules": //rules pane or player settings menu, show the default pane then refresh the logo
+        case "settings": 
+            show("default"); 
             refreshLogoGrid();
             break;
-        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the default pane
-            saveTurnTimeLimit();
+        case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
             show("default");
-            break;
-        case "rules": //rules pane.  Show the default pane then refresh the logo
-            show("default");
-            refreshLogoGrid();
             break;
     }
 }
