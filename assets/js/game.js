@@ -104,6 +104,23 @@ function refreshGameBoard() {
     show("startGame");
 }
 
+/* Pause the game */
+function pauseGame() {
+    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
+    pauseTurnTimer(); //Pause the turn time limit timer
+}
+
+/* Resume the game */
+function resumeGame() {
+    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause Link
+    resumeTurnTimer(); //Resume the turn time limit timer
+}
+
+/* Clear the board and reset the Game */
+function resetGame() {
+    checkSideNavState(function(){refreshGameBoard()}); //Check the state of the sideNav, then refresh the game board
+}
+
 /* Start the turn time limit timer */
 function startTurnTimer() {
     document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`; //Set the turnTimeLimit elements innerHTML to the value of the turnTimeLimit global setting

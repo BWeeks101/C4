@@ -177,20 +177,3 @@ function togglePauseLink() {
     elementDisplay("toggle", "ctrlPauseLink");
     elementDisplay("toggle", "ctrlResumeLink");
 }
-
-/* Pause the game */
-function pauseGame() {
-    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
-    pauseTurnTimer(); //Pause the turn time limit timer
-}
-
-/* Resume the game */
-function resumeGame() {
-    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause Link
-    resumeTurnTimer(); //Resume the turn time limit timer
-}
-
-/* Clear the board and reset the Game */
-function resetGame() {
-    checkSideNavState(function(){refreshGameBoard()}); //Check the state of the sideNav, then refresh the game board
-}
