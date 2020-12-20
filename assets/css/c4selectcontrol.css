@@ -1,0 +1,65 @@
+/*
+* Custom Select Control taken from W3 Schools Example and modified
+* Class names changed throughout
+* Style changes to fit theme of C4 site
+* https://www.w3schools.com/howto/howto_custom_select.asp
+*/
+
+/*the container must be positioned relative:*/
+.c4-select {
+  position: relative;
+}
+
+.c4-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.c4-select-selected {
+  background-color: var(--mainBackground);
+}
+
+/*style the arrow inside the select element:*/
+.c4-select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: var(--mainBorder) transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.c4-select-selected.c4-select-arrow-active:after {
+  border-color: transparent transparent var(--mainBorder) transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.c4-select-items div,.c4-select-selected {
+  color: var(--mainText);
+  padding: 0;
+  border: 1px solid transparent;  
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.c4-select-items {
+  position: absolute;
+  background-color: var(--mainBackground);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.c4-select-hide {
+  display: none;
+}
+
+.c4-select-items div:hover, .c4-same-as-selected {
+  background-color: var(--togglerHoverBorder);
+}
