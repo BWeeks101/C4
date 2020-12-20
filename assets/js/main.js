@@ -71,6 +71,30 @@ function mainBlockResize() {
         mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
         document.getElementById("mainBlockContainer").style.paddingBottom = `${mainBlockContainerPadBottom}px`;
 
+        /* If the rules container is visible, then calculate and apply height and width properties for it and it's children to ensure we do not scroll the page */
+        if (document.getElementById("rulesContainer").classList.contains("d-none") == false) {
+
+            /* Remove any existing height style properties from the rules container and any appropriate children */
+            document.getElementById("rulesContainer").style.removeProperty("height")
+            document.getElementById("rulesMainContent").style.removeProperty("height")
+
+            /* Get the total padding value of the mainBlock (parent of the rules container) */
+            mainBlockContainerPadTop = getElementPropertyVal("mainBlockContainer", "padding-top", "int");
+            mainBlockContainerPadBottom = getElementPropertyVal("mainBlockContainer", "padding-bottom", "int");
+            mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
+
+            /* Set the rules container height to equal the height of the parent - padding */
+            rulesContainerHeight = mainBlockContainerHeight - mainBlockContainerPadTotal;
+            document.getElementById("rulesContainer").style.height = `${rulesContainerHeight}px`;
+
+            /* Set the height of the rules main container element */
+            rulesControlButtonsHeight = getElementPos(document.getElementById("rulesContainer").lastElementChild).height;
+            rulesMainContentHeight = rulesContainerHeight - rulesControlButtonsHeight;
+            document.getElementById("rulesMainContent").style.height = `${rulesMainContentHeight}px`;
+            
+            return;
+        }
+        
         /* If the game board container is visible, then calculate and apply height and width properties for it and it's children to ensure we do not scroll the page */
         if (document.getElementById("gameBoardContainer").classList.contains("d-none") == false) {
             /* Remove any existing height, max-height, or max-width style properties from the game board container and appropriate children */
@@ -87,7 +111,7 @@ function mainBlockResize() {
             mainBlockContainerPadTotal = mainBlockContainerPadTop + mainBlockContainerPadBottom;
 
             /* Set the game board container height to equal the height of the parent - padding */
-            gameBoardContainerHeight = mainBlockContainerHeight - (mainBlockContainerPadTotal);
+            gameBoardContainerHeight = mainBlockContainerHeight - mainBlockContainerPadTotal;
             document.getElementById("gameBoardContainer").style.height = `${gameBoardContainerHeight}px`;
 
             /* Set the height of the game container element */
@@ -116,6 +140,8 @@ function mainBlockResize() {
             gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
             gBoardHeight = gBoardContentContainerHeight;
             document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
+
+            return;
         }
     }    
 }
