@@ -22,8 +22,22 @@ function displayLogoGrid() {
     elementDisplay("show", "logoGrid");
 }
 
+/* Set Content Row margin-top to maintain distance from header divider */
+function setlogoGridContentRowMarginTop() {
+    let logoGridContentRowMarginTop = 0;
+    let checkMarginTop = 0;
+    
+    for (i = 0; i < gridCounts[0]; i++) {        
+        checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the current header column
+        if (checkMarginTop > logoGridContentRowMarginTop) { //Compare the height of the current column to the stored margintop value, and if larger, update the stored value
+            logoGridContentRowMarginTop = checkMarginTop;
+        }     
+    }
+    document.getElementById("logoGridContentRow").style.marginTop = `${logoGridContentRowMarginTop}px` //Set the height of the content row margin-top to equal the height of the largest header column
+}
+
 /* Create the logo dataGridDisplay then begin the logo animation */
-function drawLogoGrid() {
+function drawLogoGrid() {    
     result = displayDataGrid(c4.logo.grid, "logoGrid", "off", false); //Create the dataGrid display
     if (result == false) { //If false, then we could not create the display, so return false
         console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logo.grid}, "logoGrid", "off", false).`);
@@ -34,19 +48,10 @@ function drawLogoGrid() {
     if (gridCounts == false) { //If false, then we could not return the values, so return false
         console.log(`function drawLogoGrid failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
         return false;
-    }
-
-    let logoGridContentRowMarginTop = 0;
-    let checkMarginTop = 0;
+    }    
 
     /* Set Content Row margin-top to maintain distance from header divider */
-    for (i = 0; i < gridCounts[0]; i++) {        
-        checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the current header column
-        if (checkMarginTop > logoGridContentRowMarginTop) { //Compare the height of the current column to the stored margintop value, and if larger, update the stored value
-            logoGridContentRowMarginTop = checkMarginTop;
-        }     
-    }
-    document.getElementById("logoGridContentRow").style.marginTop = `${logoGridContentRowMarginTop}px` //Set the height of the content row margin-top to equal the height of the largest header column
+    setlogoGridContentRowMarginTop();
     
     let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
     if (typeof colCenter != "object") { //If colCenter is not an object then we could not get the center points, so return false
@@ -107,8 +112,13 @@ function getLogoGridColCenter(colId) {
 /*      colCount: Integer.  Number of columns in header */
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
-    setTimeout(function() { //Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay
-        c4.logo.animState = true;
+    /* Set the global log.animState property value to true, set min and max widths to current width to lock resize */
+    c4.logo.animState = true;
+    document.getElementById("logoContainer").style.maxWidth = `${getElementPos("logoContainer").width}px`;
+    document.getElementById("logoContainer").style.minWidth = `${getElementPos("logoContainer").width}px`;
+
+    /* Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay */
+    setTimeout(function() { 
         let numFrames;
         let percentComplete;
         let delay;    
@@ -169,8 +179,17 @@ function dropChar(colId, targetPoint, final) {
             } else { //Otherwise the column Id is odd, so apply the --p2TokenColor style instead
                 document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
             }
+            /* If this is the last column to be animated, set the global logo.animState property value to false, and remove the min/max width inline styles to allow resize */
             if (final == true) {
-                c4.logo.animState = false;
+                /* Wait until the background-color transition has finished on the content column */
+                /* Get the transition duration (in s), convert the value to a float, then multiply by 1000 to get a millisecond value for setTimeout() */
+                let delay = parseFloat(getComputedStyle(document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild, null).getPropertyValue(`transition-duration`)) * 1000
+                setTimeout(function() {
+                    c4.logo.animState = false; //Change the global logo.animState to false
+                    document.getElementById("logoContainer").style.removeProperty("max-width"); //Remove max/min width styling to allow resize
+                    document.getElementById("logoContainer").style.removeProperty("min-width");
+                    logoResize(); //Call resize in case the window size has adjusted
+                }, delay);
             }
             return true;
         } else if (pos == parseInt(Math.floor(targetPoint))) { //If we haven't hit the targetPoint, but are less than 1px away
