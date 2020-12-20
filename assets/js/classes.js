@@ -37,13 +37,22 @@ class gameSettings {
     }
 }
 
+/* logo object class */
+/* stores logo datagrid object and animation states */
+class logoSettings {
+    constructor() {
+        this.animState;
+        this.grid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
+    }
+}
+
 /* Parent global object class */
 /* Created on load, stores gameSettings object, sideNavState and logoGrid */
 class appGlobals {
     constructor() {
         this.game = new gameSettings();
+        this.logo = new logoSettings();
         this.uiState = "default";
-        this.sideNavState = "closed";
-        this.logoGrid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
+        this.sideNavState = "closed";        
     }
 }
