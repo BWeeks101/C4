@@ -3,6 +3,11 @@
     max-width: 360px;
 }
 
+#staticLogo {
+    object-fit: cover;
+    overflow: hidden;
+}
+
 #logoGrid {
     padding-bottom: 0;
 }
