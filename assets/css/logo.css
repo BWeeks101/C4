@@ -53,7 +53,7 @@
 
 /* Add a top margin to offset the absolute header content, and apply a border */
 #logoGridContentRow {
-    margin-top: 42px;
+    /*margin-top: 42px;*/
     border: 1px solid var(--gameBorder);
 }
 

@@ -36,14 +36,26 @@ function drawLogoGrid() {
         return false;
     }
 
+    let logoGridContentRowMarginTop = 0;
+    let checkMarginTop = 0;
+
+    /* Set Content Row margin-top to maintain distance from header divider */
+    for (i = 0; i < gridCounts[0]; i++) {        
+        checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the header column
+        if (checkMarginTop > logoGridContentRowMarginTop) {
+            logoGridContentRowMarginTop = checkMarginTop
+        }     
+    }
+    document.getElementById("logoGridContentRow").style.marginTop = `${logoGridContentRowMarginTop}px` //Set the height of the content row margin top to equal the height of the largest header column
+    
     let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
     if (typeof colCenter != "object") { //If colCenter is not an object then we could not get the center points, so return false
         console.log(`function drawLogoGrid failed.  Unable to get center points.  Cascade failure originating with getLogoGridColCenter()`);
         return false;
-    }
-
+    }    
+    
     /* Ensure Header and Content cells are horizontally aligned before beginning animation */
-    for (i = 0; i < gridCounts[0]; i++) {
+    for (i = 0; i < gridCounts[0]; i++) {        
         document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.left = `${colCenter.contentCenter[i].absoluteX - colCenter.headerCenter[i].absoluteX}px`;
     }
 
