@@ -96,3 +96,22 @@ function loadTurnTimeLimit() {
         document.getElementById("turnTime").value = turnTimeLimit;
     }
 }
+
+/* Set the turn time limit based on the selected turn time limit value */
+function setTurnTimeLimit() {
+    c4.game.turnTimeLimit = document.getElementById("turnTime").value;
+}
+
+/* Build a new CSS style element, append it to the document head, and insert rules for p1 and p2 token colors */
+function createDynamicGameStyle() {
+    let gameStyle = document.createElement("style"); //Create new style element
+    document.head.appendChild(gameStyle); //Append this to the document head
+    let sheet = gameStyle.sheet;
+    sheet.type = "text/css"; //Set the type to CSS
+    /* Add rules for the gbP1 and gbP2 classes, overriding the default background-colors with the currently selected values */
+    sheet.insertRule(`.gbP1 { background-color: ${c4.game.p1.tokenColor}; }`);
+    sheet.insertRule(`.gbP2 { background-color: ${c4.game.p2.tokenColor}; }`);
+    /* Add rules for the highlightP1 and highlightP2 keyframes, overriding the default 0% and 100% background-colors with the currently selected values */
+    sheet.insertRule(`@keyframes highlightP1 { 0% {background-color: ${c4.game.p1.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p1.tokenColor};} }`);
+    sheet.insertRule(`@keyframes highlightP2 { 0% {background-color: ${c4.game.p2.tokenColor};} 50% {background-color: #fafafa;} 100% {background-color: ${c4.game.p2.tokenColor};} }`);
+}
