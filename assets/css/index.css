@@ -58,12 +58,6 @@
     border-top: none;
 }
 
-/*
-#lBoard {
-    padding-bottom: 0;
-}
-*/
-
 .main-content, .menu-content {
     background-color: var(--mainBackground);
     border: solid 1px var(--mainBorder);
@@ -133,11 +127,6 @@ label {
 .control-container {
     text-align: left;
 }
-
-/*.control-buttons {
-    text-align: right;
-}*/
-
 .control-buttons .lcol {
     padding-right: 5px;
 }
