@@ -20,37 +20,43 @@
 
 /* gBoard dataGridDisplay Elements */
 #gBoard {
-    padding-bottom: 0;
+    padding-bottom: 0; /* Remove default padding-bottom from datagrid-container */
 }
 
+/* Remove the border from the Header Container, and do not display it */
 #gBoardHeaderContainer {
     border: none;
     display: none;
 }
 
+/* Add a border to the Content Container, and disable overflow-y */
 #gBoardContentContainer {
     border: 1px solid var(--gameBorder);
     overflow-y: initial;
 }
 
+/* Remove most borders */
 #gBoardContentRow, #gBoardContentRow .datagrid-content-col, #gBoardContentRow .datagrid-content-row, #gBoardContentRow .datagrid-content-inner-col {
     border: none;
 }
 
+/* Force 1px padding around the content inner column */
 #gBoardContentRow .datagrid-content-inner-col {
     padding: 1px !important;
 }
 
+/* Prevent a background color being added to a row on click */
 #gBoardContentRow .datagrid-col-selected {
     background-color: initial !important;
 }
 
+/* Add Styling to the gBoardContentRow cell value elements. */ 
 #gBoardContentRow .datagrid-cell-value {
     transition: background-color 0.5s;
     border: 1px solid var(--gameBorder);
-    border-radius: 50%;
+    border-radius: 50%; /* Round Borders mimic the slots on a real Connect 4 game board. */
     padding: 0;
-    min-width: 45px;
+    min-width: 45px; /* equal min-width and min-height ensure the elements are square */
     min-height: 45px;
     width: 100%;
     padding-top: calc(100% - 2px);
