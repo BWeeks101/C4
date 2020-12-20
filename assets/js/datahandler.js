@@ -94,12 +94,13 @@ function loadTurnTimeLimit() {
     let turnTimeLimit = localStorage.getItem("turnTimeLimit");
     if (turnTimeLimit != null) {
         document.getElementById("turnTime").value = turnTimeLimit;
+        document.getElementById("c4TurnTime").children[1].innerHTML = `${turnTimeLimit} Seconds`;
     }
 }
 
 /* Set the turn time limit based on the selected turn time limit value */
 function setTurnTimeLimit() {
-    c4.game.turnTimeLimit = document.getElementById("turnTime").value;
+    c4.game.turnTimeLimit = document.getElementById("turnTime").value;    
 }
 
 /* Build a new CSS style element, append it to the document head, and insert rules for p1 and p2 token colors */
