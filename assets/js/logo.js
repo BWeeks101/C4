@@ -50,6 +50,9 @@ function drawLogoGrid() {
         return false;
     }    
 
+    /* Resize the logo Fonts before calculating margins, sizes and positions */
+    logoFontResize();
+    
     /* Set Content Row margin-top to maintain distance from header divider */
     setlogoGridContentRowMarginTop();
     
@@ -62,7 +65,7 @@ function drawLogoGrid() {
     /* Ensure Header and Content cells are horizontally aligned before beginning animation */
     for (i = 0; i < gridCounts[0]; i++) {        
         document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.left = `${colCenter.contentCenter[i].absoluteX - colCenter.headerCenter[i].absoluteX}px`;
-    }
+    }    
 
     /* Begin animation */
     animateLogo(gridCounts[0], colCenter);
