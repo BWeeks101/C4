@@ -1,7 +1,7 @@
 /* Logo Container */
 #logoContainer {
     width: calc(100% - 20px);
-    max-width: 360px;
+    max-width: 900px;
 }
 
 /* Static Logo img Element */
@@ -49,11 +49,6 @@
 #logoGridContentContainer {
     border: none;
     overflow-y: initial;
-}
-
-/* Add a top margin to offset the absolute header content, and apply a border */
-#logoGridContentRow {
-    border: 1px solid var(--gameBorder);
 }
 
 /* Remove borders from the content columns, content rows and content inner columns */
