@@ -20,15 +20,19 @@ function feedbackWinner(result) {
     if (result == "draw") { 
         document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
         document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!"
     } else {
         document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Winner!"
         /* Set the feedback message text color to that of the tokenColor of the winning player */
         switch (c4.game.activePlayer) {
             case 1:                
                 document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
+                document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p1.tokenColor;
                 break;
             case 2:
                 document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
+                document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p2.tokenColor;
                 break;
         }
     }
