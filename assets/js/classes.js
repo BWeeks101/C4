@@ -41,7 +41,7 @@ class gameSettings {
 /* stores logo datagrid object and animation states */
 class logoSettings {
     constructor() {
-        this.animState = false;
+        this.animState;
         this.grid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
     }
 }
