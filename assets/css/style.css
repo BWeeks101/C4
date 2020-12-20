@@ -1,20 +1,4 @@
 /*.................................................................................................................................................
-Colour Palette:
-#fafafa; Text Colour
-#26,26,26; Background Colour
-#45,45,45; Nav Dropdown/Menu Note/Tooltip Background
-
-#17a2b8; Bootstrap .btn-info Background Colour/Border Colour, .btn-outline-info Border Colour
-#6c757d; Bootstrap .btn-secondary Background Colour/Border Colour
-
-Heading Fonts:
-font-family: 'Roboto Slab', serif;
-
-Content Fonts:
-font-family: 'Roboto Mono', monospace;
-.................................................................................................................................................*/
-
-/*.................................................................................................................................................
 The Flex based 'Sticky Footer' method Utilised in this CSS is modified from https://css-tricks.com/couple-takes-sticky-footer/ 
                                                                         and https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
 
