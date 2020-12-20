@@ -3,10 +3,11 @@
 /*      option: element 'group' to affect */
 /*      newstate (OPTIONAL): new value for global state property */
 function show(option, newstate) {
+    checkSave(); //Check whether data should be saved (and do so if appropriate) before changing the UI
     /* If newstate is provided, then change c4.uiState to newstate */
     if (newstate != undefined) {
         c4.uiState = newstate;
-    }
+    }    
     mainShow(option); //Run the mainShow() function against the value of the option argument
     checkSideNavState(function(){sideNavShow(option)}); //Check the state of the sideNav (waiting for close if open), the run sideNavShow() against the value of the option argument
 }
@@ -25,6 +26,18 @@ function checkSideNavState(func) {
     } else {
         func();
     };
+}
+
+/* Determine if data should be saved (and do so if appropriate) before changing the ui */
+function checkSave() {
+    switch (c4.uiState) {
+        case "settings":
+            saveSettings(); //player settings menu, so save settings, show the default pane then refresh the logo
+            break;
+        case "turnTimeLimit": //turn time limit pane.  Save the turn time limit value, then load the default pane
+            saveTurnTimeLimit();
+            break;
+    }
 }
 
 /* Hide/Show a sideNav Link in conjunction with its divider element */
