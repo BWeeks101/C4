@@ -5,8 +5,6 @@
 * Browsers: last 4 version
 */
 
-/* autoprefixer found nothing to change, but included for completeness */
-
 /* CSS Dark Mode Vars */
 :root {
 
@@ -54,4 +52,10 @@
     --alertText: #fafafa;
     --alertBorder: #fafafa;
     --alertBackground: #630A0A;
+}
+
+/* Darken alert button background colour in dark mode */
+#closeAlertBtn {
+    -webkit-filter: brightness(90%);
+            filter: brightness(90%);
 }

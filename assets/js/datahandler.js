@@ -29,7 +29,7 @@ function validateSaveData() {
 
     if (errMessage != undefined) { //If the error message value is not undefined, then we have validation errors
         errMessage = errMessage + "."
-        document.getElementById("saveValidationAlert").lastElementChild.lastElementChild.innerHTML = errMessage; //Set the error message
+        document.getElementById("alertMessage").innerHTML = errMessage; //Set the error message
 
         /* Disable All Controls and Links */
         checkSideNavState(function(){ //If the Navbar is open, close it

@@ -224,7 +224,7 @@ footer {
     top: 0;
     bottom: 0;
     width: 75%;
-    max-height: 134px;   
+    max-height: 148px;   
 }
 
 .alert-container a {
@@ -238,5 +238,11 @@ footer {
     text-decoration: none;
     color: var(--alertText);
     text-shadow: none;
+}
+
+#closeAlertBtn {
+    border: 1px solid var(--alertBorder);
+    background-color: var(--alertBackground);
+    color: var(--alertText);    
 }
 /*........../.alert*/

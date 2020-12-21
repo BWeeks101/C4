@@ -215,5 +215,5 @@ function closeAlert() {
 
     /* Hide the Validation Alert */    
     elementDisplay("hide", "saveValidationAlert");
-    document.getElementById("saveValidationAlert").lastElementChild.lastElementChild.innerHTML = ""; //Clear the error message from the alert p element
+    document.getElementById("alertMessage").innerHTML = ""; //Clear the error message from the alert p element
 }

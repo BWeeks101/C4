@@ -23,7 +23,7 @@
     --sideNavLinkHover: #4B4BEC;
 
     /* Datagrid */
-    --dataGridBorder: #242423;
+    --dataGridBorder: #262626;
     --dataGridRowSelected: #4B4BEC;
     --dataGridColSelected: #4B4BEC;
 
@@ -52,11 +52,11 @@
     --alertText: #630A0A;
     --alertBorder: #262626;
     --alertBackground: #f7f9fa;
-    --alertShadow: #888888;
+    --alertShadow: rgba(26, 26, 26, 0.5);
 }
 
 /* Add Drop Shadow to Alert in Light Mode */
 .alert-container {
-    -webkit-box-shadow: 5px 8px 5px 8px var(--alertShadow);
-            box-shadow: 5px 8px 5px 8px var(--alertShadow);
+    -webkit-box-shadow: 4px 6px 4px 6px var(--alertShadow);
+            box-shadow: 4px 6px 4px 6px var(--alertShadow);
 }
