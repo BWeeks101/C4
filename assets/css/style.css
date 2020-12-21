@@ -96,7 +96,7 @@ a:hover, .header-nav-link-text:hover {
     left: 0;
     height: 65px;
     width: 100%;
-    padding: 5px 5px;
+    padding: 5px 1px;
     align-items: flex-start;
 }
 
@@ -105,7 +105,7 @@ a:hover, .header-nav-link-text:hover {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 .header-divider hr {
@@ -154,7 +154,7 @@ footer {
 
 .footer-container {
     margin-bottom: 10px;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 .footer-divider {
