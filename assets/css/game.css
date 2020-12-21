@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* Player Info Container */
 #playerInfoContainer {
     padding: 10px 0;
@@ -59,6 +66,8 @@
 
 /* Add Styling to the gBoardContentRow cell value elements. */ 
 #gBoardContentRow .datagrid-cell-value {
+    -webkit-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
     transition: background-color 0.5s;
     border: 1px solid var(--gameBorder);
     border-radius: 50%; /* Round Borders mimic the slots on a real Connect 4 game board. */
@@ -79,10 +88,21 @@
 }
 
 /* Winning Pattern Highlight Keyframes and Classes */
+@-webkit-keyframes highlightP1 {
+    0% {background-color: var(--p1TokenColor);}
+    50% {background-color: var(--pulseBackground);}
+    100% {background-color: var(--p1TokenColor);}
+}
 @keyframes highlightP1 {
     0% {background-color: var(--p1TokenColor);}
     50% {background-color: var(--pulseBackground);}
     100% {background-color: var(--p1TokenColor);}
+}
+
+@-webkit-keyframes highlightP2 {
+    0% {background-color: var(--p2TokenColor);}
+    50% {background-color: var(--pulseBackground);}
+    100% {background-color: var(--p2TokenColor);}
 }
 
 @keyframes highlightP2 {
@@ -92,15 +112,21 @@
 }
 
 .highlightP1 {
-    animation-name: highlightP1;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
+    -webkit-animation-name: highlightP1;
+            animation-name: highlightP1;
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
 }
 
 .highlightP2 {
-    animation-name: highlightP2;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
+    -webkit-animation-name: highlightP2;
+            animation-name: highlightP2;
+    -webkit-animation-duration: 3s;
+            animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
 }
 
 /* Feedback Elements */
