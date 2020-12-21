@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* Logo Container */
 #logoContainer {
     width: calc(100% - 20px);
@@ -63,6 +70,8 @@
 
 /* Add styling to the logoGrid cell value elements. */
 #logoGridContentRow .datagrid-cell-value {
+    -webkit-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
     transition: background-color 0.5s;
     border: 1px solid var(--gameBorder);
     border-radius: 50%; /* Round Borders mimic the slots on a real Connect 4 game board. */
