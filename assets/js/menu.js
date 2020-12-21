@@ -185,7 +185,6 @@ function menuBackButton() {
             }            
             break;
         case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
-            console.log(c4.uiState);
             show("default");
             break;
     }
