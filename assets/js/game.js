@@ -138,8 +138,7 @@ function updateTurnTimer() {
     timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Get the current value of the timer
     if (timerVal > 0) {
         document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${timerVal-1}`; //If not 0, then reduce the value by 1
-    } else {
-        //console.log(`P${c4.game.activePlayer} Missed Turn - selecting random column`)
+    } else {        
         parseColSelection(selectRandCol()); //Otherwise, the player missed their turn, so select a random column on their behalf!
     }    
 }
@@ -177,9 +176,6 @@ function clearGameState() {
             c4.game.boardState[i][ii] = undefined;
         }
     }
-
-    //console.log(c4.game.boardState);
-    //console.log(c4.game.gBoardDG);
 }
 
 /* Set the number of completed turns to 0 */
@@ -299,11 +295,9 @@ function selectCol(object) {
 /*      result: The result of the previous column selection */
 function parseColSelection(result) {
     if (result != false) { //The result was not false, therefore we have a winner, so call feedbackWinner()
-        //console.log(`P${c4.game.activePlayer} Wins!`);
         feedbackWinner();
         return true;
     } else if (c4.game.completedTurns == 42) { //The result was false, but 42 turns have been completed, therefore the game is a draw, so call feedbackWinner("draw")
-        //console.log("draw");
         feedbackWinner("draw");
         return true;
     }
@@ -319,7 +313,6 @@ function parseColSelection(result) {
 /*      y: Col coordinate from which to start search */
 function checkWin(x, y) {
     if (c4.game.completedTurns < 7) {
-        //console.log("Game cannot be won in less than 7 turns.  Skipping");
         return false; //Game cannot be won in less than 7 turns
     }
 
@@ -327,60 +320,43 @@ function checkWin(x, y) {
     y = parseInt(y);
 
     /* Horizontal Scan */
-    //console.log(`Start Scan Right`);
     let results = scanDir("r", x, y);  //Scan right from our starting position
     let tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
-    //console.log(`Scan Right Found ${tokenCount} tokens`);
     if (tokenCount < 4) { //If we do not yet have 4 tokens...
-        //console.log(`Start Scan Left`);
         results = scanDir("l", x, y, results); //...Scan left from our starting position
         tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
-        //console.log(`Scan Left Found ${tokenCount} tokens`);
     }
 
     /* Vertical Scan */
     if (tokenCount < 4) { //No winning pattern found from the horizontal scan
-        //console.log(`Start Scan Down`);
         results = scanDir("d", x, y); //Scan down from our starting position
         tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
-        //console.log(`Scan Down Found ${tokenCount} tokens`);
     }
 
     /* Diagonal Scan, Right/Down, Left/Up */
     if (tokenCount < 4) { //No winning pattern found from the horizontal or vertical scans
-        //console.log(`Start Scan Right/Down`);
         results = scanDir("rd", x, y); //Scan right and down from our starting position
         tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
-        //console.log(`Scan Right/Down Found ${tokenCount} tokens`);
         if (tokenCount < 4) { //If we do not yet have 4 tokens...
-            //console.log(`Start Scan Left/Up`);
             results = scanDir("lu", x, y, results); //...Scan left and up from our starting position
             tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
-            //console.log(`Scan Left/Up Found ${tokenCount} tokens`);
         }
     }
 
     /* Diagonal Scan, Left/Down, Right/Up */
     if (tokenCount < 4) { //No winning pattern found from the horizontal, vertical, or first diagonal scan
-        //console.log(`Start Scan Left/Down`);
         results = scanDir("ld", x, y); //Scan left and down from our starting position
         tokenCount = results[0]; //Set the number of sequentially located matching tokens from this direction
-        //console.log(`Scan Left/Down Found ${tokenCount} tokens`);
         if (tokenCount < 4) { //If we do not yet have 4 tokens...
-            //console.log(`Start Scan Right/Up`);
             results = scanDir("ru", x, y, results); //...Scan right and up from our starting position
             tokenCount = results[0]; //Update the number of sequentially located matching tokens from this direction
-            //console.log(`Scan Right/Up Found ${tokenCount} tokens`);
         }
     }
 
-    //console.log(`Counted ${tokenCount} tokens`);
     if (tokenCount == 4) { //If we have located a winning pattern, then highlight the winning cells and return the id of the active player
-        //console.log(`Win for P${c4.game.activePlayer}`);
         highlightWinningCells(results);
         return c4.game.activePlayer;
     } else { //Otherwise return false, as we do not yet have a winner
-        //console.log(`No Winner Yet`);
         return false;
     }    
 }
@@ -431,7 +407,6 @@ function scanDir(scanDir, startX, startY, results) {
     let dMod;
     let inc = 1;
     let dec = -1;
-    //let scanDesc;
     let val;
 
     /* Preparation Switch Statement */
@@ -439,40 +414,33 @@ function scanDir(scanDir, startX, startY, results) {
     switch (scanDir) {
         case "r": //Right scan
             if (x < 6) { //Col is 0-5
-                //scanDesc = "Right";
                 i = x+1; //right scan begins one col to the right of the current col
                 brk = 7; //break when we hit the final column
                 mod = inc; //Scan coords are incremental
             } else { //Otherwise Col is 6, can't right scan from rightmost column, so return results.
-                //console.log(`Right Scan Aborted.  Rightmost Col Selected (${x})`);
                 return results;
             }
             break;
         case "l": //Left scan
             if (x > 0) { //Col is 1-6
-                //scanDesc = "Left";
                 i = x-1; //left scan begins one col to the left of the current col
                 brk = -1; //break when we hit the first column 
                 mod = dec; //Scan coords are decremental
             } else { //Otherwise Col is 0, can't left scan from leftmost column, so return results.
-                //console.log(`Left Scan Aborted.  Leftmost Col Selected (${x})`);
                 return results;
             }
             break;
         case "d": //Down scan
             if (y < 5) { //Row is 0-4
-                //scanDesc = "Down";
                 i = y+1; //down scan begins one row below the current row
                 brk = 6; //break when we hit the bottom row
                 mod = inc; //Scan coords are incremental
             } else { //Otherwise Row is 5, can't down scan from bottom column, so return results.
-                //console.log(`Down Scan Aborted.  Token in Bottom Row (${y})`);
                 return results;
             }
             break;
         case "rd": //Right/Down scan
             if (x < 6 && y < 5) { //Col is 0-5, Row is 0-4
-                //scanDesc = "Right/Down";
                 i = x+1; //right scan begins one col to the right of the current col
                 ii = y+1; //down scan begins one row below the current row
                 brk = 7; //Break if we hit the final column
@@ -480,20 +448,11 @@ function scanDir(scanDir, startX, startY, results) {
                 mod = inc; //Horizontal scan coords are incremental
                 dMod = inc; //Vertical scan coords are incremental
             } else { //Otherwise Col is 6 or Row is 5, can't scan right from rightmost column or down from bottom row, so return results
-                /*
-                if (x > 5) {
-                    console.log(`Right/Down Scan Aborted.  Rightmost Col Selected (${x})`);
-                }
-                if (y > 4) {
-                    console.log(`Right/Down Scan Aborted.  Token in Bottom Row (${y})`);
-                }
-                */
                 return results;
             }
             break;
         case "lu": //Left/Up scan
             if (x > 0 && y > 0) { //Col is 1-6, Row is 1-5
-                //scanDesc = "Left/Up";
                 i = x-1; //Left scan begins one col to the left of the current col
                 ii = y-1; //Up scan begins one row above the current row
                 brk = -1; //Break if we hit the first column
@@ -501,20 +460,11 @@ function scanDir(scanDir, startX, startY, results) {
                 mod = dec; //Horizontal scan coords are decremental
                 dMod = dec; //Vertical scan coords are decremental
             } else { //Otherwise Col is 0 or Row is 0, can't scan left from leftmost column or up from top row, so return results
-                /*
-                if (x < 1) {
-                    console.log(`Left/Up Scan Aborted.  Leftmost Col Selected (${x})`);
-                }
-                if (y < 1) {
-                    console.log(`Left/Up Scan Aborted.  Token in Top Row (${y})`);
-                }
-                */
                 return results;
             }
             break;
         case "ld": //Left/Down scan
             if (x > 0 && y < 5) { //Col is 1-5, Row is 0-4
-                //scanDesc = "Left/Down";
                 i = x-1; //Left scan begins one col to the left of the current col
                 ii = y+1; //Down scan begins one row below the current row
                 brk = -1; //Break if we hit the first column
@@ -522,20 +472,11 @@ function scanDir(scanDir, startX, startY, results) {
                 mod = dec; //Horizontal scan coords are decremental
                 dMod = inc; //Vertical scan coords are incremental
             } else { //Otherwise Col is 0 or Row is 5, can't scan left from leftmost column or down from bottom row, so return results
-                /*
-                if (x < 1) {
-                    console.log(`Left/Down Scan Aborted.  Leftmost Col Selected (${x})`);
-                }
-                if (y > 4) {
-                    console.log(`Left/Down Scan Aborted.  Token in Bottom Row (${y})`);
-                }
-                */
                 return results;
             }
             break;
         case "ru": //Right/up scan
             if (x < 6 && y > 0) { //Col is 0-5, Row is 1-5
-                //scanDesc = "Right/Up";
                 i = x+1; //Right scan begins one col to the right of the current col
                 ii = y-1; //Up scan begins one row above the current row
                 brk = 7; //Break if we hit the final column
@@ -543,14 +484,6 @@ function scanDir(scanDir, startX, startY, results) {
                 mod = inc; //Horizontal scan coords are incremental
                 dMod = dec; //Vertical scan coords are decremental
             } else { //Otherwise Col is 6 or Row is 0, can't scan right from rightmost column or up from top row, so return results
-                /*
-                if (x > 5) {
-                    console.log(`Right/Up Scan Aborted.  Rightmost Col Selected (${x})`);
-                }
-                if (y < 1) {
-                    console.log(`Right/Up Scan Aborted.  Token in Top Row (${y})`);
-                }
-                */
                 return results;
             }
             break;
@@ -587,24 +520,18 @@ function scanDir(scanDir, startX, startY, results) {
                 case "r":
                 case "l":
                     results[tokenCount] = [i,y]; //Apply the coords of this horizontal scan match to the results array
-                    //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${y}.  Count: ${tokenCount}.`);
                     break;
                 case "d":
                     results[tokenCount] = [x,i]; //Apply the coords of this vertical scan match to the results array
-                    //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${x} on Row: ${i}.  Count: ${tokenCount}.`);
                     break;
                 case "rd":
                 case "lu":
                 case "ld":
                 case "ru":
                     results[tokenCount] = [i,ii]; //Apply the coords of this diagonal scan match to the results array
-                    //console.log(`MATCH on Player ${c4.game.activePlayer}.  ${scanDesc} Scan starting at Col: ${x} on Row: ${y}.  Match at Col ${i} on Row ${ii}.  Count: ${tokenCount}.`);
                     break;
             }
             if (tokenCount == 4) { //If we have found 4 matches within the same scan (or scan pair) then return results
-                //console.log(`${scanDesc} Scan from Col: ${x} on Row: ${y}`);
-                //console.log(`TokenCount: ${tokenCount}`);
-                //console.log(results);
                 return results;
             }
         } else { //The Cell value is not a match for the active player, so break           
