@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /*.................................................................................................................................................
 The Flex based 'Sticky Footer' method Utilised in this CSS is modified from https://css-tricks.com/couple-takes-sticky-footer/ 
                                                                         and https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
@@ -43,10 +50,15 @@ html, body {
 }
 
 body {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     min-width: 280px;
     min-height: 568px;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     margin: 0;
     padding: 0;
     background-color: var(--mainBackground);
@@ -56,7 +68,9 @@ body {
 }
 
 main {
-    flex: 1 0 auto;    
+    -webkit-box-flex: 1;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;    
 }
 
 div, hr, .row, nav {
@@ -91,7 +105,9 @@ a:hover, .header-nav-link-text:hover {
     height: 65px;
     width: 100%;
     padding: 5px 10px;
-    align-items: flex-start;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
 }
 
 .header-divider {
@@ -116,6 +132,8 @@ a:hover, .header-nav-link-text:hover {
 
 .navbar-dark .navbar-toggler {
     border-color: var(--darkToggler);
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transition: 0.5s;
 }
 
@@ -131,6 +149,8 @@ a:hover, .header-nav-link-text:hover {
     -webkit-mask: var(--togglerIconMaskURL);
     mask: var(--togglerIconMaskURL);
     background: var(--togglerIconBackground);
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transition: 0.5s;
 }
 
@@ -142,7 +162,8 @@ a:hover, .header-nav-link-text:hover {
 
 /*..........Footer*/
 footer {
-    flex-shrink: 0;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
     height: 50px;
 }
 
@@ -171,6 +192,8 @@ footer {
 
 .social-media-row .col-auto i:hover {
     color: var(--socialMediaLinkHover);
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transition: 0.5s;
 }
 
