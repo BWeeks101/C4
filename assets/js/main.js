@@ -73,6 +73,8 @@ function logoResize() {
                 return false;
             }
             
+            logoFontResize();
+            
             setlogoGridContentRowMarginTop();
             
             let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
@@ -91,16 +93,13 @@ function logoResize() {
                     colCenter.headerCenter[i].absoluteY = colCenter.headerCenter[i].absoluteY - parseFloat(document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top);
                 }                            
                 document.getElementById(`logoGridHcol-${i}`).firstElementChild.style.top = `${(colCenter.contentCenter[i].absoluteY - colCenter.headerCenter[i].absoluteY)}px`;
-            }
-
-            logoFontResize();
+            }            
         }
     }
 }
 
 /* Font Resize */
-function logoFontResize() {
-    //let minScreenWidth = parseFloat(getComputedStyle(document.getElementsByTagName("body")[0]).getPropertyValue(`min-width`).trim());; //Min Supported Screen Width in px        
+function logoFontResize() {    
     let minFontSizePx = parseFloat(getComputedStyle(document.getElementById("logoGridHcol-0").firstElementChild).getPropertyValue(`font-size`).trim());; //Min Supported Logo Font Size in px    
     let minLogoContentSize = parseFloat(getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`min-width`).trim()); //Min Logo Content Size in px
     let maxLogoContentSize = parseFloat(getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`max-width`).trim()); //Max Logo Content Size in px
@@ -122,16 +121,15 @@ function logoFontResize() {
         }
     }
 
-    calcFontSize = (contentWidth / 100) * fontLogoScale; //Calculate font size based on current content col width, and the fontLogoScale value
-    if (calcFontSize > maxFontSizePx) {
-        calcFontSize = maxFontSizePx; //Do not exceed max font size in px
-    } else if (calcFontSize < minFontSizePx) {
-        calcFontSize = minFontSizePx; //Do not exceed min font size in px
-    }
-    fontSize = (calcFontSize / window.outerWidth) * 100;  //convert calculated font size from px to vw
+    fontSize = (contentWidth / 100) * fontLogoScale; //Calculate font size based on current content col width, and the fontLogoScale value
+    if (fontSize > maxFontSizePx) {
+        fontSize = maxFontSizePx; //Do not exceed max font size in px
+    } else if (fontSize < minFontSizePx) {
+        fontSize = minFontSizePx; //Do not exceed min font size in px
+    }    
 
     for (i = 0; i < gridCounts[0]; i++) {
-        document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild.style.fontSize = `${fontSize}vw`;
+        document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild.style.fontSize = `${fontSize}px`;
     }
 }
 
