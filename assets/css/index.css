@@ -1,25 +1,48 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* Main Block Container */
 #mainBlockContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;    
-    justify-content: center;
+    -webkit-box-pack: center;    
+        -ms-flex-pack: center;    
+            justify-content: center;
     padding-top: 10px;
     min-height: 220px;
 }
 
 /* Menu Block and Content */
 #menuBlock {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     text-align: center;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 #menuContent {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;    
-    align-items: center;
-    justify-content: center;
+    -webkit-box-align: center;    
+        -ms-flex-align: center;    
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     width: 100%;
     font-size: 1rem;    
 }
@@ -72,8 +95,12 @@
 
 /* Labels */
 .label-col {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 label {
@@ -111,6 +138,8 @@ label {
     min-width: 46px;
     border-width: 1px;
     border-style: solid;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
     transition: 0.5s;
     color: var(--togglerIconBackground);
     border-color: var(--darkToggler);
