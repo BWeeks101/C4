@@ -18,7 +18,7 @@
 .sidenav-doc-overlay {
     width: 100%;   
     z-index: -1000;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--sideNavDocOverlayBackground);
 }
 
 /* primary sideNav class */
@@ -34,7 +34,6 @@
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  /*font-size: 1em;*/
   font-size: 1.25rem;
   color: var(--sideNavLink);
   display: block;

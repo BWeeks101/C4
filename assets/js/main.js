@@ -125,8 +125,6 @@ function logoFontResize() {
         maxFontSize = maxFontSizeVw;
     }
     fontSize = (maxFontSize / window.outerWidth) * 100;
-    console.log(window.outerWidth);
-    console.log(contentWidth);
 
     for (i = 0; i < gridCounts[0]; i++) {
         document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild.style.fontSize = `${fontSize}vw`;

@@ -15,7 +15,7 @@
 
 #turnTimeLimit {
     padding: 0 5px;
-    text-align: center;
+    color: var(--feedbackText);
 }
 
 #player2Info {
@@ -108,7 +108,7 @@
     width: 100%;
     min-height: 87px;
     padding: 5px 0;
-    /*background-color: var(--feedbackBackground);*/
+    color: var(--feedbackText);
 }
 
 #feedbackControlRow .lcol {
