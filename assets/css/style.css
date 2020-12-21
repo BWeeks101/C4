@@ -182,3 +182,31 @@ footer {
     padding: 5px 0;
 }
 /*........../.footer*/
+
+/*..........Alert*/
+.alert-container {
+    position: absolute;
+    padding: 5px;
+    z-index: 10;
+    border: 1px solid var(--alertBorder);
+    border-radius: .9rem;
+    background-color: var(--alertBackground);
+    color: var(--alertText);
+    margin-left: auto;
+    margin-right: auto;
+    width: 340px;    
+}
+
+.alert-container a {
+    color: var(--alertText);
+    text-decoration: none;
+    margin-right: 5px;
+    text-shadow: none;
+}
+
+.alert-container a:hover {
+    text-decoration: none;
+    color: var(--alertText);
+    text-shadow: none;
+}
+/*........../.alert*/

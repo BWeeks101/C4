@@ -40,4 +40,9 @@
 
     /* Logo Text */
     --logoText: #fafafa;
+
+    /* Alert */
+    --alertText: #fafafa;
+    --alertBorder: #fafafa;
+    --alertBackground: #630A0A;
 }

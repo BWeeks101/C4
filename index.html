@@ -152,6 +152,19 @@
                         <!--Settings Pane-->
                         <div id="menuSettings" class="menu-content d-none">
                             <h3 class="menuTitle">User Settings</h3>
+
+                            
+                            <!--Save Validation Alert-->
+                            <div id="saveValidationAlert" class="alert-container d-none">                                
+                                <div class="close text-right">
+                                    <a href="javascript:void(0)" class="closebtn" onclick="closeAlert()">&times;</a><br>
+                                </div>
+                                <div class="alert-content text-left">
+                                    <h3 class="menuTitle">Error</h3>
+                                    <p class="alertText">This alert box could indicate a warning that might need attention.</p>
+                                </div>                                    
+                            </div>
+                            
                             <div class="control-container">
                                 <h3 class="menuTitle">Player 1</h3>
                                 <form>
@@ -167,7 +180,7 @@
                                         <div class="col-5"></div>
                                         <div class="col">
                                             <div class="control-buttons">
-                                                <button type="button" class="c4-control c4-button c4-control-full-width" onclick="setDefaultSettings(1)">Default</button>
+                                                <button type="button" id="p1DefaultButton" class="c4-control c4-button c4-control-full-width" onclick="setDefaultSettings(1)">Default</button>
                                             </div>
                                         </div>
                                     </div>                                    
@@ -188,7 +201,7 @@
                                         <div class="col-5"></div>
                                         <div class="col">
                                             <div class="control-buttons">
-                                                <button type="button" class="c4-control c4-button c4-control-full-width" onclick="setDefaultSettings(2)">Default</button>
+                                                <button type="button" id="p2DefaultButton" class="c4-control c4-button c4-control-full-width" onclick="setDefaultSettings(2)">Default</button>
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +209,7 @@
                                 </form>
                             </div>
                             <div class="control-buttons">
-                                <button type="button" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="menuBackButton(true)">Back</button>
+                                <button type="button" id="settingsBackButton" class="c4-control c4-button c4-control-full-width c4-control-margin-top" onclick="menuBackButton(true)">Back</button>
                             </div>
                         </div>
 
@@ -244,17 +257,17 @@
                     <div class="container-fluid justify-content-center align-items-center">
                         <div class="row justify-content-center align-items-center social-media-row">
                             <div class="col-auto">
-                                <a href="https://www.facebook.com" target="_blank">
+                                <a id="facebook" href="https://www.facebook.com" target="_blank">
                                     <i class="fab fa-facebook"></i>
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="https://www.instagram.com" target="_blank">
+                                <a id="instagram" href="https://www.instagram.com" target="_blank">
                                     <i class="fab fa-instagram"></i>
                                 </a>
                             </div>
                             <div class="col-auto">
-                                <a href="https://www.twitter.com" target="_blank">
+                                <a id="twitter" href="https://www.twitter.com" target="_blank">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </div>

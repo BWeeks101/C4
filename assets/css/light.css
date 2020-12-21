@@ -40,4 +40,15 @@
 
     /* Logo Text */
     --logoText: #fafafa;
+    
+    /* Alert */
+    --alertText: #630A0A;
+    --alertBorder: #262626;
+    --alertBackground: #f7f9fa;
+    --alertShadow: #888888;
+}
+
+/* Add Drop Shadow to Alert in Light Mode */
+.alert-container {
+    box-shadow: 5px 8px 5px 8px var(--alertShadow);
 }

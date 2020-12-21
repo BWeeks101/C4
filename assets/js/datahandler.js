@@ -1,10 +1,64 @@
 /* Save Custom Player names and token colours from the settings pane */
 function saveSettings() {
+    /* Check if the input values are valid */
+    let validated = validateSaveData();
+    if (validated == false) {
+        return false; //If not, return false
+    }
     /* Commit values for both players to global settings object and localStorage */
     setPlayerName(1, document.getElementById(`p1UserName`).value); 
     setPlayerSetting(`p1TokenColor`, document.getElementById(`p1TokenColor`).value);
     setPlayerName(2, document.getElementById(`p2UserName`).value);
     setPlayerSetting(`p2TokenColor`, document.getElementById(`p2TokenColor`).value);    
+}
+
+/* Validate data before saving */
+function validateSaveData() {
+    let errMessage;
+    if (document.getElementById(`p1UserName`).value.trim() == document.getElementById(`p2UserName`).value.trim()) { //player names are not unique
+        errMessage = "Please ensure players have selected unique names"
+    }
+
+    if (document.getElementById(`p1TokenColor`).value == document.getElementById(`p2TokenColor`).value) { //player colours are not unique
+        if (errMessage != undefined) {
+            errMessage = errMessage + " and colours"
+        } else {
+            errMessage = "Please ensure players have selected unique colors"
+        }        
+    }
+
+    if (errMessage != undefined) { //If the error message value is not undefined, then we have validation errors
+        errMessage = errMessage + "."
+        document.getElementById("saveValidationAlert").lastElementChild.lastElementChild.innerHTML = errMessage; //Set the error message
+
+        /* Disable All Controls and Links */
+        checkSideNavState(function(){ //If the Navbar is open, close it
+            let id = setInterval(checkNavBarTogglerDisabled, 25)
+            function checkNavBarTogglerDisabled() { 
+                if (document.getElementById("navBarToggler").disabled == false) { //Check every 25ms if the navBarToggler is enabled, when it is, stop checking and disable it again.
+                    clearInterval(id);
+                    document.getElementById("navBarToggler").disabled = true;
+                }
+            }
+        });            
+        document.getElementById("smLogoURL").removeAttribute("onclick")
+        document.getElementById("p1UserName").disabled = true;
+        document.getElementById("p1TokenColor").disabled = true;
+        document.getElementById("p1DefaultButton").disabled = true;
+        document.getElementById("p2UserName").disabled = true;
+        document.getElementById("p2TokenColor").disabled = true;
+        document.getElementById("p2DefaultButton").disabled = true;
+        document.getElementById("settingsBackButton").disabled = true;
+        document.getElementById("facebook").removeAttribute("href");
+        document.getElementById("instagram").removeAttribute("href");
+        document.getElementById("twitter").removeAttribute("href");
+
+        /* Show the Validation Alert and return false */
+        elementDisplay("show", "saveValidationAlert");
+        return false;
+    } else {
+        return true; //Otherwise, everything is ok, so return true
+    }    
 }
 
 /* Read Player names and token colors from local storage, and apply non-null values to the global settings object */

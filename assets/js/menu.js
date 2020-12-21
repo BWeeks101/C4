@@ -3,7 +3,10 @@
 /*      option: element 'group' to affect */
 /*      newstate (OPTIONAL): new value for global state property */
 function show(option, newstate) {
-    checkSave(); //Check whether data should be saved (and do so if appropriate) before changing the UI
+    let validated = checkSave(); //Check whether data should be saved (and do so if appropriate) before changing the UI
+    if (validated == false) { //data did not pass the validation check, so return false
+        return false;
+    }
     /* If newstate is provided, then change c4.uiState to newstate */
     if (newstate != undefined) {
         c4.uiState = newstate;
@@ -14,13 +17,18 @@ function show(option, newstate) {
 
 /* Determine if data should be saved (and do so if appropriate) before changing the ui */
 function checkSave() {
+    let validated;
     switch (c4.uiState) {
         case "settings":
-            saveSettings(); //player settings menu, so save settings
+            validated = saveSettings(); //player settings menu, so save settings
             break;
         case "turnTimeLimit": //turn time limit pane,  so save the turn time limit value
             saveTurnTimeLimit();
             break;
+    }
+
+    if (validated != undefined) { //If saveSettings() was called, return the result
+        return validated;
     }
 }
 
@@ -162,13 +170,16 @@ function showGameSideNavMenu() {
 
 /* Determine which pane is shown, apply the appropriate action, then show the main pane */
 function menuBackButton() {
+    let validated;
     switch (c4.uiState) {
         case "startGame": //game board, rules pane or player settings menu. Show the default pane then refresh the logo
         case "rules":
         case "settings": 
-            show("default");
-            mainOnResize(); 
-            refreshLogoGrid();
+            validated = show("default");
+            if (validated != false) { //If show("default") did not return false, then continue.
+                mainOnResize(); 
+                refreshLogoGrid();
+            }            
             break;
         case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
             show("default");
@@ -180,4 +191,25 @@ function menuBackButton() {
 function togglePauseLink() {
     elementDisplay("toggle", "ctrlPauseLink");
     elementDisplay("toggle", "ctrlResumeLink");
+}
+
+/* Close Alert */
+function closeAlert() {
+    /* Enable all controls and links */
+    document.getElementById("navBarToggler").disabled = false;
+    document.getElementById("smLogoURL").setAttribute("onclick","window.location.assign('index.html')");
+    document.getElementById("p1UserName").disabled = false;
+    document.getElementById("p1TokenColor").disabled = false;
+    document.getElementById("p1DefaultButton").disabled = false;
+    document.getElementById("p2UserName").disabled = false;
+    document.getElementById("p2TokenColor").disabled = false;
+    document.getElementById("p2DefaultButton").disabled = false;
+    document.getElementById("settingsBackButton").disabled = false;
+    document.getElementById("facebook").setAttribute("href", "https://www.facebook.com");
+    document.getElementById("instagram").setAttribute("href", "https://www.instagram.com");
+    document.getElementById("twitter").setAttribute("href", "https://www.twitter.com");
+
+    /* Hide the Validation Alert */    
+    elementDisplay("hide", "saveValidationAlert");
+    document.getElementById("saveValidationAlert").lastElementChild.lastElementChild.innerHTML = ""; //Clear the error message from the alert p element
 }
