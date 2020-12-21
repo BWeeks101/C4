@@ -40,8 +40,9 @@ function sideNavState() {
 /* Return width and negative offset for sideNav */
 function getNavWidth() {    
     let navWidth = calcNavWidth(); //Calculate the width, with a minimum value of 310px    
-    if (navWidth < 310) {
-        navWidth = "310px";
+    let navMinWidth = parseFloat(getComputedStyle(document.getElementById("sideNav")).getPropertyValue(`min-width`).trim());
+    if (navWidth < navMinWidth) {
+        navWidth = `${navMinWidth}px`;
     } else {
         navWidth = `${navWidth}px`;
     }
