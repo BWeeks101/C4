@@ -209,7 +209,7 @@ footer {
 /*..........Alert*/
 .alert-container {
     position: absolute;
-    padding: 5px;
+    padding: 10px;
     z-index: 10;
     border: 1px solid var(--alertBorder);
     border-radius: .9rem;
@@ -224,7 +224,9 @@ footer {
     top: 0;
     bottom: 0;
     width: 75%;
-    max-height: 148px;   
+    min-width: 215px;
+    max-height: 168px;
+    max-width: 380px;   
 }
 
 .alert-container a {
@@ -243,6 +245,10 @@ footer {
 #closeAlertBtn {
     border: 1px solid var(--alertBorder);
     background-color: var(--alertBackground);
-    color: var(--alertText);    
+    color: var(--alertText);
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: calc(100% - 20px);
 }
 /*........../.alert*/
