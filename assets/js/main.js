@@ -61,6 +61,10 @@ function loadColorMode() {
 }
 
 function logoResize() {
+    if (document.getElementById("logoGrid").firstElementChild == null) { //If the logoGrid is removed during resize
+        return; //Do not continue
+    }
+
     if (document.getElementById("logoGrid").classList.contains("d-none") == false) {
         if (c4.logo.animState == false) {
             gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element

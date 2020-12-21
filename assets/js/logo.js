@@ -59,9 +59,9 @@ function drawLogoGrid() {
 }
 
 /* Refresh the logo dataGridDisplay */
-function refreshLogoGrid() {
-    dataGridDisplayRemove("logoGrid");
-    drawLogoGrid();
+function refreshLogoGrid() {    
+    dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
+    drawLogoGrid(); //Redraw the logoGrid
 }
 
 /* Get Center Point of each logoGrid Cell */
@@ -114,6 +114,10 @@ function animateLogo(colCount, colCenter) {
         let delay;    
         for (i = 0; i < colCount; i++) {
             
+            if (document.getElementById("logoGrid").firstElementChild == null) { //If the logoGrid is removed during queue preparation
+                return; //Do not continue
+            }        
+            
             /* Calculate the stop point for the animation.  This is the number of pixels between the vertical centers of the current header and content */
             targetPoint = colCenter.contentCenter[i].absoluteY - colCenter.headerCenter[i].absoluteY;
             
@@ -138,6 +142,10 @@ function animateLogo(colCount, colCenter) {
 /*      delay: Number of miliseconds to delay starting the animation */
 /*      final (OPTIONAL): boolean.  True for the last item in the queue */
 function queue(i, targetPoint, delay, final) {
+    if (document.getElementById("logoGrid").firstElementChild == null) { //If the logoGrid is removed during queue generation
+        return; //Do not start another animation
+    }
+
     setTimeout(function() {
         if (final == true) {
             dropChar(i, targetPoint, final);
@@ -162,6 +170,10 @@ function dropChar(colId, targetPoint, final) {
     let pos = 0; //Initialise position variable
     let id = setInterval(frame, 5); //Call frame() once every 5ms
     function frame() {
+        if (document.getElementById("logoGrid").firstElementChild == null) { //If the logoGrid is removed mid animation
+            clearInterval(id); //Stop animating
+            return;
+        }
         if (pos == targetPoint) { //If we have hit the targetPoint
             clearInterval(id); //Stop animating
             if (colId % 2 == 0) { //If the column Id is even, apply the --p1TokenColor style value to the background of the content column
