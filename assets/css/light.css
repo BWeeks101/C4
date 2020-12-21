@@ -4,7 +4,6 @@
     /* navBar */
     --darkToggler: rgba(38,38,38,.4);
     --togglerHoverBorder: rgba(75, 75, 236,.8);
-    --togglerBackground: #4B4BEC;
     --togglerHoverIcon: #4B4BEC;
     --togglerIconMaskURL: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2838, 38, 38, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
     --togglerIconBackground: #262626;
@@ -25,6 +24,7 @@
     --gameBorder: #262626;
     --p1TokenColor: #EC4C4C;
     --p2TokenColor: #4B4BEC;
+    --inactivePlayer: #8C8C8C;
     --feedbackBackground: #EbEbEb;
     --feedbackText: #262626;
     --pulseBackground: #fafafa;
@@ -33,7 +33,6 @@
     --mainText: #262626;
     --mainBorder: #262626;    
     --mainBackground: #f7f9fa;
-    --mainAltBackground: #eaeae8;    
     --headerDivider: #8C8C8C;
     --footerDivider: #8C8C8C;
     --socialMediaLink: #262626;
