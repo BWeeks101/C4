@@ -1,7 +1,7 @@
 /* Logo Container */
 #logoContainer {
     width: calc(100% - 20px);
-    min-width: 340px;
+    min-width: 260px;
     max-width: 1024px;
 }
 
@@ -17,8 +17,10 @@
 
 /* Specify a header col min-width and min-height to match that of the logoGrid content cells */
 #logoGridHeaderRow .datagrid.header-col {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 124px;
+    max-height: 124px;
 }
 
 /* Make the header inner container position absolute, center the content, set min sizes and ensure the z-index is higher than the content cells */
@@ -28,10 +30,13 @@
     margin-right: auto;
     left: 0;
     right: 0;
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 124px;
+    max-height: 124px;
     background: none;
     z-index: 2;
+    font-size: 21px; /* Used as a min font-size by logoFontResize(); */
 }
 
 /* Remove bottom margins and letter spacing from logoGrid header row h3 elements */
@@ -62,8 +67,10 @@
     border: 1px solid var(--gameBorder);
     border-radius: 50%; /* Round Borders mimic the slots on a real Connect 4 game board. */
     padding: 0;
-    min-width: 40px; /* equal min-width and min-height ensure the elements are square */
-    min-height: 40px;
+    min-width: 30px; /* equal width and height ensure the elements are square */
+    min-height: 30px;
+    max-width: 124px;
+    max-height: 124px;
     width: 100%;
     padding-top: calc(100% - 2px);
 }

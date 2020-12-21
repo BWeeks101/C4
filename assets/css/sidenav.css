@@ -23,7 +23,7 @@
 
 /* primary sideNav class */
 .sidenav {
-  min-width: 310px; /* 0 width - change this with JavaScript */
+  min-width: 230px; /* 0 width - change this with JavaScript */
   width: 33%;
   z-index: 1000; /* Stay on top */
   background-color: var(--sideNavBackground); /* Black*/

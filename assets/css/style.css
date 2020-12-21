@@ -44,8 +44,8 @@ html, body {
 
 body {
     display: flex;
-    min-width: 360px;
-    min-height: 620px;
+    min-width: 280px;
+    min-height: 568px;
     flex-direction: column;
     margin: 0;
     padding: 0;
