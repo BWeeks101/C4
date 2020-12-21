@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* CSS Light Mode Vars */
 :root {
 
@@ -50,5 +57,6 @@
 
 /* Add Drop Shadow to Alert in Light Mode */
 .alert-container {
-    box-shadow: 5px 8px 5px 8px var(--alertShadow);
+    -webkit-box-shadow: 5px 8px 5px 8px var(--alertShadow);
+            box-shadow: 5px 8px 5px 8px var(--alertShadow);
 }
