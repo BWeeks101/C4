@@ -100,14 +100,12 @@ function logoResize() {
 
 /* Font Resize */
 function logoFontResize() {
-    let minScreenWidth = 360; //Min Supported Screen Width in px
-    let minFontSize = 28; //Min Supported Logo Font Size in px   
-    let minFontSizeVw = (minFontSize / minScreenWidth) * 100 //Min Font Size in vw
-    let minLogoContentSize = 40; //Min Logo Content Size in px    
-    let maxLogoContentSize = 124 //Max Logo Content Size in px
-    let fontLogoDiff = (minFontSize / minLogoContentSize) * 100 //Percentage difference betwen font and logo content
-
-    let maxFontSizeVw = (maxLogoContentSize / 100) * fontLogoDiff; //Max Logo Font Size in vw    
+    //let minScreenWidth = parseFloat(getComputedStyle(document.getElementsByTagName("body")[0]).getPropertyValue(`min-width`).trim());; //Min Supported Screen Width in px        
+    let minFontSizePx = parseFloat(getComputedStyle(document.getElementById("logoGridHcol-0").firstElementChild).getPropertyValue(`font-size`).trim());; //Min Supported Logo Font Size in px    
+    let minLogoContentSize = parseFloat(getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`min-width`).trim()); //Min Logo Content Size in px
+    let maxLogoContentSize = parseFloat(getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`max-width`).trim()); //Max Logo Content Size in px
+    let fontLogoScale = (minFontSizePx / minLogoContentSize) * 100 //Percentage difference betwen font and logo content    
+    let maxFontSizePx = (maxLogoContentSize / 100) * fontLogoScale; //Max Logo Font Size in px    
 
     let gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
     if (gridCounts == false) { //If false, then we could not return the values, so return false
@@ -120,15 +118,17 @@ function logoFontResize() {
     for (i = 1; i < gridCounts[0]; i++) {
         checkWidth = getElementPos(document.getElementById(`logoGridCol${i}RowId0`).firstElementChild.lastElementChild).width;
         if (checkWidth < contentWidth) {
-            contentWidth = checkWidth;
+            contentWidth = checkWidth; //Use the smallest contentWidth to ensure text fits all
         }
     }
 
-    maxFontSize = (contentWidth / 100) * fontLogoDiff;
-    if (maxFontSize > maxFontSizeVw) {
-        maxFontSize = maxFontSizeVw;
+    calcFontSize = (contentWidth / 100) * fontLogoScale; //Calculate font size based on current content col width, and the fontLogoScale value
+    if (calcFontSize > maxFontSizePx) {
+        calcFontSize = maxFontSizePx; //Do not exceed max font size in px
+    } else if (calcFontSize < minFontSizePx) {
+        calcFontSize = minFontSizePx; //Do not exceed min font size in px
     }
-    fontSize = (maxFontSize / window.outerWidth) * 100;
+    fontSize = (calcFontSize / window.outerWidth) * 100;  //convert calculated font size from px to vw
 
     for (i = 0; i < gridCounts[0]; i++) {
         document.getElementById(`logoGridHcol-${i}`).firstElementChild.firstElementChild.style.fontSize = `${fontSize}vw`;
@@ -306,8 +306,9 @@ function calcBlockHeight() {
     let wHeight = window.innerHeight;
 
     /* Min Supported Browser Height */
-    if (wHeight < 620) {
-        wHeight = 620;
+    let minWHeight = parseFloat(getComputedStyle(document.getElementsByTagName("body")[0]).getPropertyValue(`min-height`).trim())
+    if (wHeight < minWHeight) {
+        wHeight = minWHeight;
     }
 
     /* Fixed Header and Footer Heights */
