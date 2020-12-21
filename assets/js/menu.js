@@ -94,6 +94,9 @@ function mainShow(option) {
             feedbackStartDelay(); //Begin the game start countdown
             break;
         case "turnTimeLimit":
+            if (c4.uiState == "rules" || c4.uiState == "settings") {
+                refreshLogoGrid();
+            }
             c4.uiState = "turnTimeLimit"
             /* Show the Turn Time Limit pane */
             loadTurnTimeLimit(); //Get the last turn time limit value and apply it to to the drop down list
