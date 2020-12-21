@@ -5,12 +5,6 @@
     max-width: 1024px;
 }
 
-/* Static Logo img Element */
-#staticLogo {
-    object-fit: cover;
-    overflow: hidden;
-}
-
 /* logoGrid dataGridDisplay Elements */
 #logoGrid {
     padding-bottom: 0; /* Remove default padding-bottom from datagrid-container */

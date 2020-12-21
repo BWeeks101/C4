@@ -1,25 +1,12 @@
-/* Draw the logoGrid.  If this fails, display a static logo instead */
+/* Draw the logoGrid. */
 function displayLogo() {
-    displayLogoGrid() //Create, display and animate the logoGrid
-    result = drawLogoGrid();    
+    elementDisplay("show", "logoGrid");
+    result = drawLogoGrid(); //Create, display and animate the logoGrid
     if (result == false) {
-        console.log(`Unable to Display logoGrid.  Displaying Static Logo.`);
-        displayStaticLogo(); //Unable to display logoGrid, so show static logo instead
+        console.log(`function displayLogo() failed.  Unable to Display logoGrid.  Cascade failure originating in displayLogoGrid()`);
         return false;
     }
     return true;
-}
-
-/* Display a static logo instead of the logoGrid */
-function displayStaticLogo() {
-    elementDisplay("hide", "logoGrid");
-    elementDisplay("show", "staticLogo");
-}
-
-/* Display the logoGrid instead of a static logo */
-function displayLogoGrid() {
-    elementDisplay("hide", "staticLogo");
-    elementDisplay("show", "logoGrid");
 }
 
 /* Set Content Row margin-top to maintain distance from header divider */
