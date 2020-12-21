@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* DataGrid Default Stylesheet */
 
 /* dataGrid Container */
@@ -27,6 +34,8 @@
 }
 
 .datagrid-content-row {
+    -webkit-transition: background-color 0.5s;
+    -o-transition: background-color 0.5s;
     transition: background-color 0.5s;
 }
 
