@@ -1,4 +1,11 @@
 /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+/*
 * SideNav taken from W3 Schools Example and modified
 * https://www.w3schools.com/howto/howto_js_sidenav.asp
 */
@@ -11,6 +18,8 @@
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 60px; /* Place content 60px from the top */
+  -webkit-transition: left 0.5s, background-color 0.5s;
+  -o-transition: left 0.5s, background-color 0.5s;
   transition: left 0.5s, background-color 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
@@ -37,6 +46,8 @@
   font-size: 1.25rem;
   color: var(--sideNavLink);
   display: block;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
   transition: 0.3s;
 }
 
@@ -56,6 +67,8 @@
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
   color: var(--sideNavLinkHover);
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
   transition: 0.5s;
 }
 
