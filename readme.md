@@ -118,39 +118,42 @@ Devices physically tested include:
 
 1. Logo Animation
     - Load the page.
-    - Within 2 seconds, the logo will animated.
-    - All letters will drop into the circle below them, and the background colour will change.
-    - The background colours will alternate red then blue, starting with red and ending with blue.
-    - The text colour will be white when within a circle.
+    - After 2 seconds, the logo will animate:
+        - All letters will drop into the circle below them in a staggered pattern.
+        - The background colours will alternate over the circles in red then blue.
+    - The text colour will be white when within a circle regardless of colour mode.
 
 
 2. Rules
     - Load the page and click on the Rules button.
-    - The rules pane will be displayed above a Back button.
-    - At smaller vertical resolutions, the rules text will vertically scroll.  The button will remain in place.
+        - The rules pane will be displayed above a Back button.
+        - At smaller vertical resolutions, the rules text will vertically scroll.  The button will remain in place.
     - Click the Nav button on the header to open the sideNav.
-    - Observe that the side Nav has the following options:
-		* X button
-		* Color Mode
-		* Home
-		* Start Game
-		* User Settings
+        - Observe that the side Nav has the following options:
+		    * X button
+		    * Color Mode
+		    * Home
+		    * Start Game
+		    * User Settings
+    - Close the side Nav using either the X button, or by clicking off of the side Nav element
     - Click the Back button to return to the default pane.
-    - Observe that the logo animates when returning to the default pane from the Rules pane.
+        - Observe that the logo animates when returning to the default pane from the Rules pane.
 	
 
 3. User Settings
     - Load the page and click the User Settings button.
-    - The user settings pane will be displayed above a Back button.
+        - The user settings pane will be displayed above a Back button.
     - Enter text into the username boxes for both players. They will accept a maximum of 8 characters.
-    - Select token colurs for both players.  The button element will change to show the selected colour.
-    - Click the Back button to return to the default pane, then click the User Settings button again.
-    - Observe that the previously entered user names and selected colours are still set.  These values are written to local storage.
-        - Reload the page and open the User Settings again.
-        - Observe that the values are still set.
+    - Select token colours for both players.
+        - The button element will change to show the selected colour.
+    - Click the Back button to return to the default pane
+        - Observe that the logo animates when returning to the default pane from the Rules pane.
+    - Click the User Settings button again.
+        - Observe that the previously entered user names and selected colours are still set.  These values are written to local storage.
+            - Reload the page and open the User Settings again.
+            - Observe that the values are still set.
     - Click the Default button for each player to reset their names and colours.
-    - SideNav
-		- Open the side Nav using the Nav button on the header
+	- Open the side Nav using the Nav button on the header
 		- Observe that the side Nav has the following options:
             * X button
 		    * Color Mode
@@ -160,93 +163,145 @@ Devices physically tested include:
     - Close the side Nav using either the X button, or by clicking off of the side Nav element
     - Validation Alert
 		- Set both players with the same user name, and either click the back button, or open the sideNav and choose Home/Start Game/Rules.
-		- Observe that an alert box is displayed, detailing that players must have unique names.
-		- Observe that no links or buttons will function whilst the alert is displayed.
+		    - Observe that an alert box is displayed, detailing that players must have unique names.
+		    - Observe that no links or buttons will function whilst the alert is displayed.
 		- Close the alert using either the Ok button or the X button.
 		- Ignore the user names, and change the colours so that they also match.
-		- Click the Back button again and observe that the Alert text has changed to detail that token colours must also be unique.
+		- Click the Back button,  or open the side Nav and choose Home/Start Game/Rules once again.
+		    - Observe that the Alert text has changed to detail that token colours must also be unique.
 		- Close the alert.
-		- Ignore the token colours.  Change the usernames so that they are unique.  Click the back button again.
-		- Observe that the Alert text has changed again to detail that token colours must be unique (with no mention of user names).
-		- Close the Alert, and alter the colours to be unique (or click the button(s) to set Default values for one or both players).
-		- Click the back button, or choose an option from the sideNav to load a different pane.  Observe that the data validates and the pane changes as expected.
-    - Observe that the logo animates when returning to the default pane from the Rules pane.
+		- Ignore the token colours.  Change the usernames so that they are unique.
+		- Click the Back button,  or open the side Nav and choose Home/Start Game/Rules once again.
+		    - Observe that the Alert text has changed again to detail that token colours must be unique (with no mention of user names).
+		- Close the Alert, and alter the colours to be unique (or click the Default button(s) to set default values for one or both players).
+		- Click the Back button,  or open the side Nav and choose Home/Start Game/Rules to load a different pane.
+		    - Observe that the data validates and the pane changes as expected.
 
 
 4. SideNav:
-    - Load the page and click on the Nav button on the title bar to open the menu.
-    - Observe that the menu slides on from the left
-    - Observe that the menu does not fill the full width of the screen
+    - Load the page and click the Nav button on the title bar to open the side Nav.
+        - Observe that the menu slides on from the left
+        - Observe that the menu does not fill the full width of the screen
+        - Observe that visible page content is darkened, and that no links/buttons on background page are accessible whilst the sideNav is open
     - Click anywhere to the right of the open menu
-        - Observe that the background content is darkened, and that no links/buttons on background page are accessible whilst the sideNav is open
         - Observe that clicking anywhere to the right of the open sideNav will cause it to close (sliding off to the left).
     - Open the side Nav again.  
-    - Observe that the side Nav has the following options:
-        * X button
-        * Color Mode
-        * Start Game
-        * User Settings
-        * Rules
-    - Selecting the X button will close the Nav.
-    - Selecting the Color Mode link will switch the site between light and dark (default) mode.  This value is saved to local storage.
-        - Refresh the page and observe that your previously selected colour mode is applied automatically.
-    - Selecting Start Game will open the Turn Time Limit pane, from which the user can start a game.
-    - Selecting User Settings opens the User Settings pane.
-    - Selecting Rules opens the Rules pane. 
+        - Observe that the side Nav has the following options:
+            * X button
+                -- Closes the side Nav, causing it to slide off to the left.
+            * Color Mode
+                -- Toggles between light and dark (default) colour modes.  This selection is saved to local storage.
+                * Refresh the page and observe that your previously selected colour mode is applied automatically.
+            * Start Game
+                -- Opens the Turn Time Limit pane, from which the user can start a game.
+            * User Settings
+                -- Opens the User Settings pane.
+            * Rules
+                -- Opens the Rules pane.
 
 
 5. Start a Game
     - Load the page and click the Start Game button
-    - Observe that the Turn Time Limit pane is displayed.
-    - The drop down box will allow selection of any turn time limit from 5-30s, in increments of 5.
+        - Observe that the Turn Time Limit pane is displayed.
+        - The drop down box will allow selection of any turn time limit from 5-30s, in increments of 5.
     - Select a value other than the default, then click the Back button to return to the default pane.
-    - Click the Start Game button again, and observe that your selection was maintained.
-    - Refresh the page, and click the Start Game button once again.  Observe that your selection still persists.
+        - Observe that the logo does *not* animate when returning to the default pane from the Turn Time Limit pane. 
+    - Click the Start Game button again
+        - Observe that your selection was maintained.
+    - Refresh the page, and click the Start Game button once again.
+        - Observe that your selection still persists.  This value is written to local storage and loaded automatically.
     - Click Ok to Start a Game.
-        - The Game Board will be displayed.  Above the game board is the player info bar.  This contains the name of Player 1 on the left in their respective color, and the name of Player 2 is 'greyed out' on the right.  Below the game board is the feedback container.  This will display a 5 second counter before the game begins.
-        - Side Nav
-            - Opening the Side Nav during the 5 second starting count down will show the following:
-                * X button
-                * Color Mode
-                * Quit
-            - The close button will close the side Nav.
-            - The Color Mode link will toggle between light and dark modes.
-            - The Quit link will close the game board and display the default pane.
-            - Once the game begins, the side Nav content will alter to also show
-                * Pause/Resume
-                * Reset
-            - Clicking Pause will pause the turn timer and prevent the user from clicking on the board.
-                - Whilse paused, the turn timer in the player info bar will not decrease
-                - The Pause link will be replaced with a Resume link
-                    * Clicking the resume link will restart the turn timer and activate the onclick function of the game board.
-                    * The resume link will then be replaced with the Pause Link
-            - The reset link will clear the game board and restart from the 5 second count down.
-            - Once the game begins, a countdown timer will appear between the player names in the player info bar.  The initial value (in seconds) will match that chosen on the Turn Time Limit pane.  The timer will decrease until a column is selected on the game board.
-            - When a column is selected, if that column is not full, the lowest empty space will change to match the colour of the active player.  If the column is full, the timer will continue until another column is selected.
-            - Play will then pass to the next player. Within the player info bar, the current players name will 'grey out' and lose it's underline.  The next players name will underline and change to their selected token colour.  The turn time counter will reset.
-            - If a player does not select a column during their turn, when the timer expires a column with at least one empty space will be randomly selected and a token inserted.
-            - Play continues until one player is determined to have placed their 4th token in a line (horizontally, vertically or diagonally).  The game determines this each time a token is placed by:
-                - Searching right, one column at a time, from the current position until either the edge of the board or a token belonging to another player is detected.
-                - Then searching left, one column at a time from the current position until either the edge of the board or a token belonging to another player is detected.
-                - If the total number of consecutive player tokens is not 4, then we reset the count to 0 and search down from the current position until either the bottom row or a token belonging to another player is detected.
-                - If we still do not have win condition, then we search right and down diagonally, then left and up diagonally
-                - If we still do not have a win condition, then we search left and down diagonally, then right and up diagonally
-                - The only exception is if the number of completed turns is less than 7.  It is not possible to complete a game in less than 7 turns, so until the 7th turn no scan takes place.
-                - If a win is not detected by the 42nd turn, then the board is full and we have a draw
-            - If a win is detected
-                - The winning tokens will pulse between their selected colour and white to visually identify the win on the board.
-                - 'Winner!' is displayed between the player names in the player info bar in place of the timer.  This will be in the chosen colour of the winner.
-                - A similarly styled (but larger) message will be displayed in the feedback container, along with a Rematch button, and a Quit button.
-                - The Pause/Resume/Reset links are removed from the side Nav and replaced with a Rematch link
-                - Clicking the Quit button or side Nav link will clear the board and return the user to the default pane.
-                - Clicking the Rematch button or side Nav link will clear the board state and start a new round, with the winner of the previous round taking the first turn.
-            - If a draw is detected
-                - 'Draw!' is displayed between the player names in the player info bar in place of the timer in the default font colour.
-                - A similarly styled (but larger) message will be displayed in the feedback container, along with a Rematch button, and a Quit button.
-                - The Pause/Resume/Reset links are removed from the side Nav and replaced with a Rematch link
-                - Clicking the Quit button or side Nav link will clear the board and return the user to the default pane.
-                - Clicking the Rematch button or side Nav link will clear the board state and start a new round, with the last player of the previous round taking the first turn.
-            - Observe that the logo animates when returning to the default pane from the Rules pane.
+    - The Game Board will be displayed.
+        - Above the game board is the player info bar.  This containes:
+            - The name of Player 1 on the left in their respective token color
+            - The name of Player 2 is 'greyed out' on the right.
+        - Below the game board is the feedback container.  This will display a 5 second counter before the game begins.
+        - Opening the Side Nav during the 5 second starting count down will show the following:
+            * X button
+                -- Closes the side Nav, causing it to slide off to the left.
+            * Color Mode
+                -- Toggles between light and dark (default) colour modes.
+            * Quit
+                - Clears the game board and displays the default pane.
+        - Once the game begins, the side Nav content will alter to also show
+            * Pause/Resume
+                -- Pause the turn timer and prevent the user from clicking on the board.
+                * While paused, the turn timer in the player info bar (displayed during play) will not decrease
+                * While paused, the Pause option will be replaced with Resume
+                    - Resume will restart the turn timer and activate the onclick function of the board
+                    - The Resume option will be replaced with Pause
+            * Reset
+                - Clears the game board and restarts he 5 second pre-game count down.
+        - Once the game begins, a countdown timer will appear between the player names in the player info bar.
+            - The initial value (in seconds) will match that chosen on the Turn Time Limit pane.
+            - The timer will decrease until a column is selected on the game board.
+        - When a column is selected:
+            - If that column is not full:
+                - The lowest empty space will change to match the colour of the active player.
+            - If the column is full:
+                - The timer will continue to decrease until another column is selected.
+        - If a column is not selected before the turn timer expires:
+            - A column with at least one empty space will be randomly selected for the active player.
+        - When a column is successfully selected:
+            - The turn is complete, and a background turn counter (c4.game.completedTurns) is incremented
+            - If at least 7 turns have been completed the game logic will:
+                - Get the active player
+                - Get the coordinates of the current 'token' on the game board assigned to that player
+                - Set a token count to 1
+                - Scan to the right across the row until it encounters:
+                    - A 'token' owned by the other player
+                    - An empty cell
+                    - The edge of the game board
+                    - 3 more 'tokens' for the active player
+                        - Each time we find another 'token' for the active player, the token count is increased by 1
+                - If the token count does not reach 4
+                    - Scan to the left across the row utilising the same logic
+                - If the token count does not reach 4
+                    - Set the token count to 1
+                    - Scan down the column utilising the same logic
+                - If the token count does not reach 4
+                    - Set the token count to 1
+                    - Scan diagonally down to the right utilising the same logic
+                - If the token count does not reach 4
+                    - Scan diagonally up to the left utilising the same logic
+                - If the token count does not reach 4
+                    - Set the token count to 1
+                    - Scan diagonally down to the left utilising the same logic
+                - If the token count does not reach 4
+                    - Scan diagonally up to the right utilising the same logic
+                - If the token count does reach 4
+                    - We have found a winning pattern
+                    - The winning 'tokens' will pulse between their selected token colour and white to visually identify the win on the game board.
+                    - The turn time countdown text is replaced with 'Winner!' in the appropriate token colour.
+                    - A larger win message will be displayed in the feedback container.
+                        - The feedback message text will be displayed in the appropriate token colour.
+                        - Below the text will be:
+                            - Rematch button.
+                            - Quit button.
+                    - The Pause/Resume and Reset options are removed from the side Nav.
+                    - A Rematch option is added to the side Nav.
+                    - Selecting either Quit element will clear the board and return the user to the default pane.
+                        - Observe that the logo animates when returning to the default pane from the game board.
+                    - Selecting either Rematch element will reset the board and start a new game, with the winner of the previous game taking the first turn.
+               - If the token count does not reach 4
+                    - We have not found a winning pattern
+                    - If the turn counter is 42 then the board is full, and we return a draw result
+                        - The turn time countdown text is replaced with 'Draw!' in the default text colour.
+                        - A larger draw message will be displayed in the feedback container.
+                            - The feedback message text will be displayed in the default text colour.
+                            - Below the text will be:
+                                - Rematch button.
+                                - Quit button.
+                        - The Pause/Resume and Reset options are removed from the side Nav.
+                        - A Rematch option is added to the side Nav.
+                        - Selecting either Quit element will clear the board and return the user to the default pane.
+                            - Observe that the logo animates when returning to the default pane from the game board.
+                        - Selecting either Rematch element will reset the board and start a new game, with the last player of the previous game taking the first turn.
+                    - If the turn counter is less than 42 then play passes to the next player.
+                        - Within the player info bar:
+                            - The current players name will 'grey out' and lose it's underline.
+                            - The next players name will underline and change to their selected token colour.
+                            - The turn time counter will reset.
 
 ### Notable Challenge - datagrid.js
 The original UX design of the site necessitated multiple user selectable datagrids.  The original concept involved pulling data from databases into objects, which would display as a fairly traditional datagrid, with fixed headers, content scroll and options to select entires columns or rows with a single click.  eg:
@@ -279,15 +334,21 @@ Although I wanted to keep the site as lean as possible with very few images and 
 The site is supported on devices with a minimum width of 280px (based on the Galaxy Fold in dev tools), and a minimum height of 568px (based on the iPhone5 in dev tools).  Dynamic scaling is achieved by utilising JavaScript functions attached to the onresize attribute of the body element.
 
 ## Deployment
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
-
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
-
-In addition, if it is not obvious, you should also describe how to run your code locally.
-
+The project was deployed to GitHub Pages using the following method:
+1. Open the [Code Institute Gitpod Template](https://github.com/Code-Institute-Org/gitpod-full-template/)
+2. Click [Use this template](https://github.com/Code-Institute-Org/gitpod-full-template/generate/)
+3. Provide a Name
+4. Provide a Description
+5. Choose Public
+6. Click 'Create Repository from template'.  GitHub will create the repository and open it.
+7. Click 'Settings'
+8. Scroll down to 'GitHub Pages'
+9. Change Source from 'none' to 'master' and click 'Save'
+	
+The project was then developed using [Gitpod](https://gitpod.io/).  There are no differences between the developed and deployed versions, and no additional code branches.  Changes saved in gitpod were commited and pushed to github frequently throughout the development process.
+	
+Running the code locally would involve installing a webhost, downloading the latest [commit](https://github.com/BWeeks101/C4/archive/master.zip), then extracting that zip to an appropriate folder to be hosted by the local webhost.
+There are far too many potential applications and configurations to list them here in detail.  The site contains HTML, CSS, and JavaScript so should not be complex to host, however I would recommend sticking to the hosted site on [Github Pages](https://bweeks101.github.io/C4/).
 
 ## Credits
 Connect 4 board game from [Hasbro](https://products.hasbro.com/en-gb/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4)
@@ -306,10 +367,9 @@ Change colour of svg on hover (mask method) from [CSS-Tricks.com](https://css-tr
 - All text content written by myself.
 
 ### Acknowledgements
-- I received inspiration for this project from my mentor Adegbenga Adeye (@gbenga_mentor), and the Hasbro board game 'Connect 4'.
+- I received inspiration for this project from my mentor, Adegbenga Adeye (@gbenga_mentor), and the Hasbro board game 'Connect 4'.
 
 ### Research:
-
 * CI Course Material and example projects
 * W3C Schools [CSS](https://www.w3schools.com/css/default.asp/), [HTML](https://www.w3schools.com/html/default.asp/) and [JavaScript](https://www.w3schools.com/js/DEFAULT.asp) Documentation
 * [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) Documentation
