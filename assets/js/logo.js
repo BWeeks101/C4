@@ -10,11 +10,23 @@ function displayLogo() {
 }
 
 /* Set Content Row margin-top to maintain distance from header divider */
-function setlogoGridContentRowMarginTop() {
+/* Requires: */
+/*      colCount (OPTIONAL): Integer.  Number of columns in logoGrid */
+/*                           If colCount is not provided, dataGridDisplayGetCounts() will be called */
+function setlogoGridContentRowMarginTop(colCount) {
+    if (isNaN(colCount) == true) { //If colCount is not a number
+        let gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
+        if (gridCounts == false) { //If false, then we could not return the values, so return false
+            console.log(`function setlogoGridContentRowMarginTop failed.  Cascade failure originating with dataGridDisplayGetCounts("logoGrid").`)
+            return false;
+        }
+        colCount = gridCounts[0]; //Set colCount to the number of columns returned by dataGridDisplayGetCounts()
+    }
+
     let logoGridContentRowMarginTop = 0;
     let checkMarginTop = 0;
     
-    for (i = 0; i < gridCounts[0]; i++) {        
+    for (i = 0; i < colCount; i++) {
         checkMarginTop = getElementPos(document.getElementById(`logoGridHcol-${i}`).firstElementChild).height //Get the height of the current header column
         if (checkMarginTop > logoGridContentRowMarginTop) { //Compare the height of the current column to the stored margintop value, and if larger, update the stored value
             logoGridContentRowMarginTop = checkMarginTop;
@@ -41,7 +53,7 @@ function drawLogoGrid() {
     logoFontResize();
     
     /* Set Content Row margin-top to maintain distance from header divider */
-    setlogoGridContentRowMarginTop();
+    setlogoGridContentRowMarginTop(gridCounts[0]);
     
     let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
     if (typeof colCenter != "object") { //If colCenter is not an object then we could not get the center points, so return false

@@ -168,7 +168,7 @@ function logoResize() {
 
             logoFontResize();
 
-            setlogoGridContentRowMarginTop();
+            setlogoGridContentRowMarginTop(gridCounts[0]);
 
             let colCenter = getLogoGridColCenter(); //Get the center point of each header and column cell
             if (typeof colCenter !== "object") { //If colCenter is not an object then we could not get the center points, so return false
