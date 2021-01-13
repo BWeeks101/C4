@@ -1,18 +1,63 @@
 /*
 * Custom Select Control taken from W3 Schools Example
 * Minor modifications.
-* Main code block and document click even listener wrapped in initC4Select() function.
+* Main code block and document click event listener wrapped in initC4Select() function.
 * Class names prefixed with c4-
+* Variable declarations moved out of loops
+* var replaced with let
 * https://www.w3schools.com/howto/howto_custom_select.asp
 */
 
+/* Processed with JSHint */
+/* Default Settings */
+
+/* JSHint warns about functions declared within loops referencing outer scoped variables leading to semantic confusion. */
+/* Resolving this may require an extensive rewrite, which is out of scope for this project at this stage */
+
+/* JSHint warns that initC4Select is unused.  This is called externally from this file. */
+
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  let x = document.getElementsByClassName("c4-select-items");
+  let y = document.getElementsByClassName("c4-select-selected");
+  let xl = x.length;
+  let yl = y.length;
+  let i;
+  let arrNo = [];
+  for (i = 0; i < yl; i += 1) {
+    if (elmnt === y[i]) {
+      arrNo.push(i);
+    } else {
+      y[i].classList.remove("c4-select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i += 1) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("c4-select-hide");
+    }
+  }
+}
+
 /* Initialise Custom Select Control */
 function initC4Select() {
-    var x, i, j, l, ll, selElmnt, a, b, c;
     /*look for any elements with the class "custom-select":*/
-    x = document.getElementsByClassName("c4-select");
-    l = x.length;
-    for (i = 0; i < l; i++) {
+    let x = document.getElementsByClassName("c4-select");
+    let l = x.length;
+    let i;
+    let selElmnt;
+    let ll;
+    let a;
+    let b;
+    let j;
+    let c;
+    let s;
+    let sl;
+    let h;
+    let y;
+    let yl;
+    let k;
+    for (i = 0; i < l; i += 1) {
         selElmnt = x[i].getElementsByTagName("select")[0];
         ll = selElmnt.length;
         /*for each element, create a new DIV that will act as the selected item:*/
@@ -23,7 +68,7 @@ function initC4Select() {
         /*for each element, create a new DIV that will contain the option list:*/
         b = document.createElement("DIV");
         b.setAttribute("class", "c4-select-items c4-select-hide");
-        for (j = 0; j < ll; j++) {
+        for (j = 0; j < ll; j += 1) {
             /*for each option in the original select element,
             create a new DIV that will act as an option item:*/
             c = document.createElement("DIV");
@@ -31,17 +76,16 @@ function initC4Select() {
             c.addEventListener("click", function(e) {
                 /*when an item is clicked, update the original select box,
                 and the selected item:*/
-                var y, i, k, s, h, sl, yl;
                 s = this.parentNode.parentNode.getElementsByTagName("select")[0];
                 sl = s.length;
                 h = this.parentNode.previousSibling;
-                for (i = 0; i < sl; i++) {
-                    if (s.options[i].innerHTML == this.innerHTML) {
+                for (i = 0; i < sl; i += 1) {
+                    if (s.options[i].innerHTML === this.innerHTML) {
                         s.selectedIndex = i;
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("c4-same-as-selected");
                         yl = y.length;
-                        for (k = 0; k < yl; k++) {
+                        for (k = 0; k < yl; k += 1) {
                         y[k].removeAttribute("class");
                         }
                         this.setAttribute("class", "c4-same-as-selected");
@@ -66,26 +110,4 @@ function initC4Select() {
     /*if the user clicks anywhere outside the select box,
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
-}
-
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("c4-select-items");
-  y = document.getElementsByClassName("c4-select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("c4-select-arrow-active");
-    }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("c4-select-hide");
-    }
-  }
 }
