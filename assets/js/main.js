@@ -1,3 +1,18 @@
+/* Processed with JSLint */
+/* Assume: in Development, a Browser */
+/* Tolerate: for statement, long lines */
+
+/* Processed with JSHint */
+/* Default Settings */
+
+/*global appGlobals, checkSideNavState, dataGridDisplayGetCounts,
+setlogoGridContentRowMarginTop, getLogoGridColCenter, sideNavResize,
+sideNavOnLoad, displayDataGrid, displayLogo, loadPlayerSettings,
+initC4Select, $ */
+
+/* JSLint Warns about the use of 'new' on line 17, but this code is correctly creating a new instance of the appGlobals class */
+/* JSHint Warns that the hideAll() function is unusued.  The function is called externally from this file */
+
 /* Initialise global settings object */
 let c4 = new appGlobals();
 
