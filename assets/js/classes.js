@@ -1,10 +1,17 @@
+/* Processed with JSHint */
+/* Default Settings */
+
+/*global DataGrid */
+
+/* JSHint Warns that the appGlobals class is unusued.  This class is utilised externally from this file */
+
 /* playerSettings Object class */
 /* Stores player names and token colours */
 /* Used as subclass of gameSettings */
 class playerSettings {
     constructor() {
-        this.name;
-        this.tokenColor;
+        this.name = "";
+        this.tokenColor = "";
     }
 }
 
@@ -13,11 +20,11 @@ class playerSettings {
 /* Used as subclass of appGlobals */
 class gameSettings {
     constructor() {
-        this.state;
-        this.activePlayer;
+        this.state = "default";
+        this.activePlayer = 1;
         this.completedTurns = 0;
         this.turnTimeLimit = 30;
-        this.activeTurnTimer;
+        this.activeTurnTimer = 5;
         this.boardState = [
             [undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined],
@@ -27,8 +34,8 @@ class gameSettings {
             [undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined]
         ];
-        this.gBoardDG = new DataGrid(["","","","","","",""], this.boardState);        
-        this.p1 = new playerSettings();        
+        this.gBoardDG = new DataGrid(["","","","","","",""], this.boardState);
+        this.p1 = new playerSettings();
         this.p1.name = "Player 1";
         this.p1.tokenColor = "#EC4C4C";
         this.p2 = new playerSettings();
@@ -41,7 +48,7 @@ class gameSettings {
 /* stores logo datagrid object and animation states */
 class logoSettings {
     constructor() {
-        this.animState;
+        this.animState = false;
         this.grid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
         this.smGrid = new DataGrid(["C", "4"], [[undefined], [undefined]]);
     }
@@ -54,6 +61,6 @@ class appGlobals {
         this.game = new gameSettings();
         this.logo = new logoSettings();
         this.uiState = "default";
-        this.sideNavState = "closed";        
+        this.sideNavState = "closed";
     }
 }
