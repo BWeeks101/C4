@@ -52,7 +52,7 @@ function feedbackStartDelay() {
     elementDisplay("show", "feedbackContainer");
 
     /* Execute once a second, reducing the countdown text each time until we hit 0, then start the game */
-    startDelay = setInterval(function() {
+    c4.game.startDelay = setInterval(function() {        
         timerVal = parseInt(document.getElementById("startDelay").innerHTML); //Get the current integer
         if (timerVal > 0) {
             document.getElementById("startDelay").innerHTML = `${timerVal-1}`; //If we're not at 0, then reduce the timer by 1
@@ -69,7 +69,7 @@ function feedbackStartDelay() {
 
 /* Stop the game start countdown */
 function stopStartDelay() {
-    clearInterval(startDelay);
+    clearInterval(c4.game.startDelay);
 }
 
 /* Start the Game */
