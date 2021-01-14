@@ -1,310 +1,210 @@
-/* When the game board is clicked, if the feedback container is not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
-/* Requires: */
-/*      object: the object that was clicked, passed to the argument as 'this' */
-function gameClicked(object) {
-    //Only Fire on Single Click!
-    if (event.detail == 1) {
-        if (document.getElementById("feedbackContainer").classList.contains("d-none") == false || document.getElementById("ctrlPauseLink").classList.contains("d-none") == true) {
-            return; //If we have a win/draw, the game start countdown is active, or the game is paused, do nothing
-        } else {
-            parseColSelection(selectCol(object)); //Otherwise place a token for the active player in the selected column
-        }
-    }    
-}
+/* Processed with JSLint */
+/* Assume: in Development, a Browser */
+/* Tolerate: for statement, long lines */
 
-/* When a game is complete, show the result */
+/* Processed with JSHint */
+/* Default Settings */
+
+/*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
+createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
+dataGridDisplayRemove, menuBackButton, checkSideNavState, togglePauseLink, pauseTurnTimer,
+resumeTurnTimer */
+
+/* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally /*
+/* from this file */
+
+/* Scan through rows and cols looking for matching columns */
+/* Utilised by checkWin() to determine winning patterns */
 /* Requires: */
-/*      result (OPTIONAL): undefined/draw */
-function feedbackWinner(result) {
-    stopTurnTimer(); //Stop the turn timer
-    if (result == "draw") { 
-        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
-        document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
-        document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color"); //Set the turnTimeLimit text to the default color
-        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!" //Display the draw message in the turnTimeLimit column
+/*      scanDir: The direction to scan.  l/r/d/rd/lu/ld/ru */
+/*      startX: starting row coordinate */
+/*      startY: starting col coordinate */
+/*      results array (OPTIONAL): number of matching tokens and cell coordinates found on the previous scan */
+/*                                Except for vertical d(own) scans, use scans in pairs. */
+/*                                Pair r(ight) scans with l(eft) to create a complete horizontal scan */
+/*                                Pair r(ight)d(own) scans with l(eft)u(p), and l(eft)d(own) scans with r(ight)u(p) to create complete diagonal scans */
+/*                                Pass the results value of the first paired scan to the second to complete the count for that direction */
+function scanDir(scanDir, startX, startY, results) {
+    let x = parseInt(startX);
+    let y = parseInt(startY);
+
+    let tokenCount = 1;
+    if (results === undefined || results[0] === undefined) { //If no results array has been passed then initialise the array and leave the token count set to 1 (our starting position)
+        results = [1];
     } else {
-        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
-        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Winner!" //Displayer the winner text in the turnTimeLimit column
-        /* Set the feedback message text color and turnTimeLimit text color to that of the tokenColor of the winning player */
-        switch (c4.game.activePlayer) {
-            case 1:                
-                document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
-                document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p1.tokenColor;
-                break;
-            case 2:
-                document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
-                document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p2.tokenColor;
-                break;
-        }
+        tokenCount = parseInt(results[0]); //Otherwise set the token count to match the current count from the results array
     }
-    elementDisplay("hide", "ctrlPauseLink") //Hide the Pause link
-    document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
-    elementDisplay("show", "feedbackContainer"); //Show the feedback container
-}
 
-/* Before a game starts, use the feedback message element do display a 5 second countdown timer, then start the game */
-function feedbackStartDelay() {
-    /* Remove any color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback container */
-    document.getElementById("feedbackMessage").style.removeProperty("color");
-    document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color");
-    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
-    elementDisplay("hide", "feedbackControlRow");
-    elementDisplay("show", "feedbackContainer");
+    /* results array */
+    /* results[0] = tokenCount */
+    /* results[1] through [4] = array, containing x and y for each valid token */
+    results[1] = [x, y]; //First position matches our startX and startY coordinates
 
-    /* Execute once a second, reducing the countdown text each time until we hit 0, then start the game */
-    c4.game.startDelay = setInterval(function() {        
-        timerVal = parseInt(document.getElementById("startDelay").innerHTML); //Get the current integer
-        if (timerVal > 0) {
-            document.getElementById("startDelay").innerHTML = `${timerVal-1}`; //If we're not at 0, then reduce the timer by 1
-        } else {
-            stopStartDelay(); //We're at 0, so stop the timer
-            elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-            elementDisplay("show", "feedbackControlRow"); //Show the feedback button (they will not be displayed until the feedback container is shown)
-            document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
-            startTurnTimer(); //Start the turn timer (and therefore the game)
-            showGameSideNavMenu(); //Show the relevant links on the sideNav
-        }
-    }, 1000);    
-}
-
-/* Stop the game start countdown */
-function stopStartDelay() {
-    clearInterval(c4.game.startDelay);
-}
-
-/* Start the Game */
-function startGame() {
-    createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
-    setTurnTimeLimit() //Set the turn time limit based on the selected turn time limit value
-    saveTurnTimeLimit(); //Write the selected turn time limit to local storage
-    show("startGame"); //Display the hotseat game board and start the game
-}
-
-/* Refresh the game state */
-function refreshGame() {
-    stopTurnTimer(); //Stop the turn timer
-    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-    clearGameState(); //Clear the game state
-    resetTurnCount(); //Reset the turn count to 0
-    getActivePlayer(); //Get the active player
-}
-
-/* Stop the game */
-function stopGame() {
-    stopTurnTimer(); //Stop the turn timer
-    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-    clearGameState(); //Clear the game state
-    resetTurnCount(); //Reset the turn count to 0
-}
-
-/* Quit an active game and return to the main pane */
-function quitGame() {
-    stopStartDelay(); //If the game start delay is running, stop it
-    dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
-    stopGame(); //Stop the active hotseat game
-    menuBackButton(); //Display the main pane and refresh the logo
-}
-
-/* Refresh the game board */
-function refreshGameBoard() {
-    show("startGame");
-}
-
-/* Pause the game */
-function pauseGame() {
-    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause link
-    pauseTurnTimer(); //Pause the turn time limit timer
-}
-
-/* Resume the game */
-function resumeGame() {
-    checkSideNavState(function(){togglePauseLink()}); //Check the state of the sideNav, then toggle the Pause Link
-    resumeTurnTimer(); //Resume the turn time limit timer
-}
-
-/* Clear the board and reset the Game */
-function resetGame() {
-    checkSideNavState(function(){refreshGameBoard()}); //Check the state of the sideNav, then refresh the game board
-}
-
-/* Start the turn time limit timer */
-function startTurnTimer() {
-    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.turnTimeLimit}`; //Set the turnTimeLimit elements innerHTML to the value of the turnTimeLimit global setting
-    c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000); //Update once a second
-}
-
-/* Update the turn time limit timer */
-function updateTurnTimer() {
-    timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Get the current value of the timer
-    if (timerVal > 0) {
-        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${timerVal-1}`; //If not 0, then reduce the value by 1
-    } else {        
-        parseColSelection(selectRandCol()); //Otherwise, the player missed their turn, so select a random column on their behalf!
-    }    
-}
-
-/* Pause the turn time limit timer */
-function pauseTurnTimer() {
-    clearInterval(c4.game.activeTurnTimer);
-}
-
-/* Resume the turn time limit timer */
-function resumeTurnTimer() {
-    c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
-}
-
-/* Stop the turn time limit timer and clear the current value */
-function stopTurnTimer() {
-    clearInterval(c4.game.activeTurnTimer);
-    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = ``;
-}
-
-/* Clear and restart the turn time limit timer */
-function restartTurnTimer() {
-    stopTurnTimer(); //Stop the timer, clearing the current value
-    startTurnTimer(); //Start the timer from scratch
-}
-
-/* Clear the game state */
-function clearGameState() {
-    let i = c4.game.boardState.length;
+    /* Initialise variables */
+    let i;
     let ii;
+    let brk;
+    let dBrk;
+    let mod;
+    let dMod;
+    let inc = 1;
+    let dec = -1;
+    let val;
 
-    /* Iterate through the boardState arrays, setting each value to undefined */
-    for (i = 0; i < c4.game.boardState.length; i++) {
-        for (ii = 0; ii < c4.game.boardState[i].length; ii++) {
-            c4.game.boardState[i][ii] = undefined;
+    /* Preparation Switch Statement */
+    /* Set variables for use during the scan based on the scanDir argument value */
+    switch (scanDir) {
+    case "r": //Right scan
+        if (x < 6) { //Col is 0-5
+            i = x + 1; //right scan begins one col to the right of the current col
+            brk = 7; //break when we hit the final column
+            mod = inc; //Scan coords are incremental
+        } else { //Otherwise Col is 6, can't right scan from rightmost column, so return results.
+            return results;
         }
-    }
-}
-
-/* Set the number of completed turns to 0 */
-/* Used to track potential wins (unable to win in less than 7 turns) and draws (42 turns is the max until the board state is full) */
-function resetTurnCount() {
-    c4.game.completedTurns = 0;
-}
-
-/* Get the numerical id of the active player */
-function getActivePlayer() {
-    switch (c4.game.activePlayer) {
-        case 1:
-            /* set the color style property of the player1Info element to match the p1 tokenColor and underline, remove underline from the player2Info element and set the color style property to match the --inactivePlayer css variable */
-            document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
-            document.getElementById("player1Info").style.textDecoration = "underline";
-            document.getElementById("player2Info").style.removeProperty("text-decoration");
-            document.getElementById("player2Info").style.color = getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
-            break;
-        case 2:
-            /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
-            document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
-            document.getElementById("player2Info").style.textDecoration = "underline";
-            document.getElementById("player1Info").style.removeProperty("text-decoration");
-            document.getElementById("player1Info").style.color = getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
-            break;
-        default:
-            switchPlayer();  //No player is set as active, so switchPlayer() to set one
-            break;
-    }
-}
-
-/* Switch the active player, and update the color styles for the player info elements */
-function switchPlayer() {
-    switchActivePlayer(); //Switch the active player
-    switch (c4.game.activePlayer) {
-        case 1:
-            /* set the color style property of the player1Info element to match the p1 tokenColor and underline, remove underline from the player2Info element and set the color style property to match the --inactivePlayer css variable */
-            document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
-            document.getElementById("player1Info").style.textDecoration = "underline";
-            document.getElementById("player2Info").style.removeProperty("text-decoration");
-            document.getElementById("player2Info").style.color = getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
-            break;
-        case 2:
-            /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
-             document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
-            document.getElementById("player2Info").style.textDecoration = "underline";
-            document.getElementById("player1Info").style.removeProperty("text-decoration");
-            document.getElementById("player1Info").style.color = getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
-            break;
-    }
-}
-
-/* Switch the active player */
-/* If no player is active, set player 1 as active */
-function switchActivePlayer() {
-    switch (c4.game.activePlayer) {
-        case 1:
-            c4.game.activePlayer = 2; //Player 1 is active, so set Player 2 as active
-            break;
-        case 2:
-            c4.game.activePlayer = 1; //Player 2 is active, so set Player 1 as active
-            break;
-        default:
-            c4.game.activePlayer = 1; //No player is active, so set Player 1 as active
-            break;
-    }
-}
-
-/* Automatically select a random column */
-/* Called when a player does not respond within their turn by the time that the turn time limit expires */
-function selectRandCol() {
-    /* Build an array of column id's that relate to columns which have at least 1 empty cell */
-    let colArray = [];
-    for (i = 0; i < 7; i++) {
-        if (c4.game.boardState[i][0] == undefined) { //If col[i]row[0] is undefined, then the top row does not have a value, which means that this column is not full
-            colArray.push(i);
+        break;
+    case "l": //Left scan
+        if (x > 0) { //Col is 1-6
+            i = x - 1; //left scan begins one col to the left of the current col
+            brk = -1; //break when we hit the first column
+            mod = dec; //Scan coords are decremental
+        } else { //Otherwise Col is 0, can't left scan from leftmost column, so return results.
+            return results;
         }
-    }
-    
-    /* Select a random value from the colArray.  This is our selected column. */
-    let col = colArray[Math.floor((Math.random() * colArray.length))];
-
-    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
-    for (i = 5; i > -1; i--) {
-        if (c4.game.boardState[col][i] == undefined) { //If the cell is empty
-            c4.game.boardState[col][i] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
-            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
-            c4.game.completedTurns++; //Increment the completed turn count
-            winner = checkWin(col, i); //Check for a winner
-            return winner; //Return the result of the checkWin function call
+        break;
+    case "d": //Down scan
+        if (y < 5) { //Row is 0-4
+            i = y + 1; //down scan begins one row below the current row
+            brk = 6; //break when we hit the bottom row
+            mod = inc; //Scan coords are incremental
+        } else { //Otherwise Row is 5, can't down scan from bottom column, so return results.
+            return results;
         }
-    }
-    return false; //Otherwise return false
-}
-
-/* Select the clicked column */
-/* Requires: */
-/*      object: the object that was clicked, passed to the argument as 'this' */
-function selectCol(object) {
-    let result = dataGridDisplayClicked(object, "col"); //Get the id of the clicked column by passing the object to dataGridDisplayClicked()
-
-    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
-    for (i = result[1]; i > 0; i--) {
-        if (c4.game.boardState[result[2]][i-1] == undefined) {
-            c4.game.boardState[result[2]][i-1] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
-            document.getElementById(`gBoardCol${result[2]}RowId${i-1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
-            c4.game.completedTurns++; //Increment the completed turn count
-            winner = checkWin(result[2], i-1); //Check for a winner
-            return winner; //Return the result of the checkWin function call
+        break;
+    case "rd": //Right/Down scan
+        if (x < 6 && y < 5) { //Col is 0-5, Row is 0-4
+            i = x + 1; //right scan begins one col to the right of the current col
+            ii = y + 1; //down scan begins one row below the current row
+            brk = 7; //Break if we hit the final column
+            dBrk = 6; //Or Break if we hit the bottom row
+            mod = inc; //Horizontal scan coords are incremental
+            dMod = inc; //Vertical scan coords are incremental
+        } else { //Otherwise Col is 6 or Row is 5, can't scan right from rightmost column or down from bottom row, so return results
+            return results;
         }
+        break;
+    case "lu": //Left/Up scan
+        if (x > 0 && y > 0) { //Col is 1-6, Row is 1-5
+            i = x - 1; //Left scan begins one col to the left of the current col
+            ii = y - 1; //Up scan begins one row above the current row
+            brk = -1; //Break if we hit the first column
+            dBrk = -1; //or Break if we hit the top row
+            mod = dec; //Horizontal scan coords are decremental
+            dMod = dec; //Vertical scan coords are decremental
+        } else { //Otherwise Col is 0 or Row is 0, can't scan left from leftmost column or up from top row, so return results
+            return results;
+        }
+        break;
+    case "ld": //Left/Down scan
+        if (x > 0 && y < 5) { //Col is 1-5, Row is 0-4
+            i = x - 1; //Left scan begins one col to the left of the current col
+            ii = y + 1; //Down scan begins one row below the current row
+            brk = -1; //Break if we hit the first column
+            dBrk = 6; //or Break if we hit the bottom row
+            mod = dec; //Horizontal scan coords are decremental
+            dMod = inc; //Vertical scan coords are incremental
+        } else { //Otherwise Col is 0 or Row is 5, can't scan left from leftmost column or down from bottom row, so return results
+            return results;
+        }
+        break;
+    case "ru": //Right/up scan
+        if (x < 6 && y > 0) { //Col is 0-5, Row is 1-5
+            i = x + 1; //Right scan begins one col to the right of the current col
+            ii = y - 1; //Up scan begins one row above the current row
+            brk = 7; //Break if we hit the final column
+            dBrk = -1; //or Break if we hit the top row
+            mod = inc; //Horizontal scan coords are incremental
+            dMod = dec; //Vertical scan coords are decremental
+        } else { //Otherwise Col is 6 or Row is 0, can't scan right from rightmost column or up from top row, so return results
+            return results;
+        }
+        break;
     }
-    return false; //Otherwise return false
-}
 
-/* Parse the column selection to determine game result */
-/* Requires: */
-/*      result: The result of the previous column selection */
-function parseColSelection(result) {
-    if (result != false) { //The result was not false, therefore we have a winner, so call feedbackWinner()
-        feedbackWinner();
-        return true;
-    } else if (c4.game.completedTurns == 42) { //The result was false, but 42 turns have been completed, therefore the game is a draw, so call feedbackWinner("draw")
-        feedbackWinner("draw");
+    /* Called by for loop below */
+    /* Compare current i/ii values against brk/dBrk values */
+    /* Return false on a match to break the for loop */
+    function brkCheck(i, ii) {
+        if (i === brk) { //If i matches our break value, then break
+            return false;
+        }
+
+        if (ii !== undefined && ii === dBrk) { //Otherwise if ii is not undefined (we are scanning diagonally) and matches our diagonal break value, then break
+            return false;
+        }
+
         return true;
     }
-    /* We have no win/draw result yet, so switch the player and restart the turn timer */
-    switchPlayer();  
-    restartTurnTimer();
-    return false;
+
+    /* Create for loop */
+    /* Variable values are set in the preparation switch statement */
+    for (i = i; brkCheck(i, ii); i += mod) {
+        switch (scanDir) {
+        case "r":
+        case "l":
+            val = c4.game.boardState[i][y]; //Horizontal Scan
+            break;
+        case "d":
+            val = c4.game.boardState[x][i]; //Vertical Scan
+            break;
+        case "rd":
+        case "lu":
+        case "ld":
+        case "ru":
+            val = c4.game.boardState[i][ii]; //Diagonal Scan
+            break;
+        }
+        if (val === c4.game.activePlayer) { //The Cell value is a match for the active player
+            tokenCount += 1; //Increment the tokenCount
+            results[0] = tokenCount; //Update the tokenCount within the results array
+            switch (scanDir) {
+            case "r":
+            case "l":
+                results[tokenCount] = [i, y]; //Apply the coords of this horizontal scan match to the results array
+                break;
+            case "d":
+                results[tokenCount] = [x, i]; //Apply the coords of this vertical scan match to the results array
+                break;
+            case "rd":
+            case "lu":
+            case "ld":
+            case "ru":
+                results[tokenCount] = [i, ii]; //Apply the coords of this diagonal scan match to the results array
+                break;
+            }
+            if (tokenCount === 4) { //If we have found 4 matches within the same scan (or scan pair) then return results
+                return results;
+            }
+        } else { //The Cell value is not a match for the active player, so break
+            break;
+        }
+
+        if (ii !== undefined) { //If ii is not undefined then we are performing a diagonal scan, so adjust ii by the dMod value
+            ii += dMod;
+        }
+    }
+    return results; //Scan finished, but we have not found a matching pattern, so return the existing results
+}
+
+/* Add the highlightPn class to each winning cell to allow them to 'flash' via keyframes animation */
+/* Requires: */
+/*      results: array containing the coordinates of each cell in the winning pattern, returned by checkWin() */
+function highlightWinningCells(results) {
+    /* Iterate through the results array, applying the highlightPn class of the active player to the relevant child elements within the game board */
+    let i;
+    for (i = 1; i < 5; i += 1) {
+        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstElementChild.lastElementChild.classList.add(`highlightP${c4.game.activePlayer}`);
+    }
 }
 
 /* Check For Win Condition */
@@ -353,194 +253,260 @@ function checkWin(x, y) {
         }
     }
 
-    if (tokenCount == 4) { //If we have located a winning pattern, then highlight the winning cells and return the id of the active player
+    if (tokenCount === 4) { //If we have located a winning pattern, then highlight the winning cells and return the id of the active player
         highlightWinningCells(results);
         return c4.game.activePlayer;
     } else { //Otherwise return false, as we do not yet have a winner
         return false;
-    }    
-}
-
-/* Add the highlightPn class to each winning cell to allow them to 'flash' via keyframes animation */
-/* Requires: */
-/*      results: array containing the coordinates of each cell in the winning pattern, returned by checkWin() */
-function highlightWinningCells(results) {
-    /* Iterate through the results array, applying the highlightPn class of the active player to the relevant child elements within the game board */
-    for (i = 1; i < 5; i++) {
-        document.getElementById(`gBoardCol${results[i][0]}RowId${results[i][1]}`).firstElementChild.lastElementChild.classList.add(`highlightP${c4.game.activePlayer}`);
     }
 }
 
-/* Scan through rows and cols looking for matching columns */
-/* Utilised by checkWin() to determine winning patterns */
+/* Select the clicked column */
 /* Requires: */
-/*      scanDir: The direction to scan.  l/r/d/rd/lu/ld/ru */
-/*      startX: starting row coordinate */
-/*      startY: starting col coordinate */
-/*      results array (OPTIONAL): number of matching tokens and cell coordinates found on the previous scan */
-/*                                Except for vertical d(own) scans, use scans in pairs. */
-/*                                Pair r(ight) scans with l(eft) to create a complete horizontal scan */
-/*                                Pair r(ight)d(own) scans with l(eft)u(p), and l(eft)d(own) scans with r(ight)u(p) to create complete diagonal scans */
-/*                                Pass the results value of the first paired scan to the second to complete the count for that direction */
-function scanDir(scanDir, startX, startY, results) {
-    x = parseInt(startX);
-    y = parseInt(startY);
-    
-    if (results == undefined || results[0] == undefined) { //If no results array has been passed then initialise the array and set the token count to 1 (our starting position)
-        results = [1];
-        tokenCount = 1;
-    } else {
-        tokenCount = parseInt(results[0]); //Otherwise set the token count to match the current count from the results array
-    }
+/*      object: the object that was clicked, passed to the argument as 'this' */
+function selectCol(object) {
+    let result = dataGridDisplayClicked(object, "col"); //Get the id of the clicked column by passing the object to dataGridDisplayClicked()
 
-    /* results array */
-    /* results[0] = tokenCount */
-    /* results[1] through [4] = array, containing x and y for each valid token */
-    results[1] = [x,y]; //First position matches our startX and startY coordinates
-
-    /* Initialise variables */
+    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
     let i;
+    for (i = result[1]; i > 0; i -= 1) {
+        if (c4.game.boardState[result[2]][i - 1] === undefined) {
+            c4.game.boardState[result[2]][i - 1] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
+            document.getElementById(`gBoardCol${result[2]}RowId${i - 1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            c4.game.completedTurns += 1; //Increment the completed turn count
+            let winner = checkWin(result[2], i - 1); //Check for a winner
+            return winner; //Return the result of the checkWin function call
+        }
+    }
+    return false; //Otherwise return false
+}
+
+/* Automatically select a random column */
+/* Called when a player does not respond within their turn by the time that the turn time limit expires */
+function selectRandCol() {
+    /* Build an array of column id's that relate to columns which have at least 1 empty cell */
+    let colArray = [];
+    let i;
+    for (i = 0; i < 7; i += 1) {
+        if (c4.game.boardState[i][0] === undefined) { //If col[i]row[0] is undefined, then the top row does not have a value, which means that this column is not full
+            colArray.push(i);
+        }
+    }
+
+    /* Select a random value from the colArray.  This is our selected column. */
+    let col = colArray[Math.floor(Math.random() * colArray.length)];
+
+    /* Iterate through the rows on this column, starting with the bottom row and working up until an empty cell is located.  Select that cell for the active player.*/
+    let winner;
+    for (i = 5; i > -1; i -= 1) {
+        if (c4.game.boardState[col][i] === undefined) { //If the cell is empty
+            c4.game.boardState[col][i] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            c4.game.completedTurns += 1; //Increment the completed turn count
+            winner = checkWin(col, i); //Check for a winner
+            return winner; //Return the result of the checkWin function call
+        }
+    }
+    return false; //Otherwise return false
+}
+
+/* When a game is complete, show the result */
+/* Requires: */
+/*      result (OPTIONAL): undefined/draw */
+function feedbackWinner(result) {
+    stopTurnTimer(); //Stop the turn timer
+    if (result === "draw") {
+        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
+        document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
+        document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color"); //Set the turnTimeLimit text to the default color
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!"; //Display the draw message in the turnTimeLimit column
+    } else {
+        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Winner!"; //Displayer the winner text in the turnTimeLimit column
+        /* Set the feedback message text color and turnTimeLimit text color to that of the tokenColor of the winning player */
+        switch (c4.game.activePlayer) {
+        case 1:
+            document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
+            document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p1.tokenColor;
+            break;
+        case 2:
+            document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
+            document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p2.tokenColor;
+            break;
+        }
+    }
+    elementDisplay("hide", "ctrlPauseLink"); //Hide the Pause link
+    document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
+    elementDisplay("show", "feedbackContainer"); //Show the feedback container
+}
+
+/* Switch the active player */
+/* If no player is active, set player 1 as active */
+function switchActivePlayer() {
+    switch (c4.game.activePlayer) {
+    case 1:
+        c4.game.activePlayer = 2; //Player 1 is active, so set Player 2 as active
+        break;
+    case 2:
+        c4.game.activePlayer = 1; //Player 2 is active, so set Player 1 as active
+        break;
+    default:
+        c4.game.activePlayer = 1; //No player is active, so set Player 1 as active
+    }
+}
+
+/* Switch the active player, and update the color styles for the player info elements */
+function switchPlayer() {
+    switchActivePlayer(); //Switch the active player
+    switch (c4.game.activePlayer) {
+    case 1:
+        /* set the color style property of the player1Info element to match the p1 tokenColor and underline, remove underline from the player2Info element and set the color style property to match the --inactivePlayer css variable */
+        document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
+        document.getElementById("player1Info").style.textDecoration = "underline";
+        document.getElementById("player2Info").style.removeProperty("text-decoration");
+        document.getElementById("player2Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        break;
+    case 2:
+        /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
+        document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
+        document.getElementById("player2Info").style.textDecoration = "underline";
+        document.getElementById("player1Info").style.removeProperty("text-decoration");
+        document.getElementById("player1Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        break;
+    }
+}
+
+/* Parse the column selection to determine game result */
+/* Requires: */
+/*      result: The result of the previous column selection */
+function parseColSelection(result) {
+    if (result !== false) { //The result was not false, therefore we have a winner, so call feedbackWinner()
+        feedbackWinner();
+        return true;
+    }
+
+    if (c4.game.completedTurns === 42) { //The result was false, but 42 turns have been completed, therefore the game is a draw, so call feedbackWinner("draw")
+        feedbackWinner("draw");
+        return true;
+    }
+
+    /* We have no win/draw result yet, so switch the player and restart the turn timer */
+    switchPlayer();
+    restartTurnTimer();
+    return false;
+}
+
+/* When the game board is clicked, if the feedback container is not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
+/* Requires: */
+/*      object: the object that was clicked, passed to the argument as 'this' */
+function gameClicked(object) {
+    //Only Fire on Single Click!
+    if (event.detail === 1) {
+        if (document.getElementById("feedbackContainer").classList.contains("d-none") === false || document.getElementById("ctrlPauseLink").classList.contains("d-none") === true) {
+            return; //If we have a win/draw, the game start countdown is active, or the game is paused, do nothing
+        }
+        parseColSelection(selectCol(object)); //Otherwise place a token for the active player in the selected column
+    }
+}
+
+/* Clear the game state */
+function clearGameState() {
+    let i = c4.game.boardState.length;
     let ii;
-    let brk;
-    let dBrk;
-    let mod;
-    let dMod;
-    let inc = 1;
-    let dec = -1;
-    let val;
 
-    /* Preparation Switch Statement */
-    /* Set variables for use during the scan based on the scanDir argument value */
-    switch (scanDir) {
-        case "r": //Right scan
-            if (x < 6) { //Col is 0-5
-                i = x+1; //right scan begins one col to the right of the current col
-                brk = 7; //break when we hit the final column
-                mod = inc; //Scan coords are incremental
-            } else { //Otherwise Col is 6, can't right scan from rightmost column, so return results.
-                return results;
-            }
-            break;
-        case "l": //Left scan
-            if (x > 0) { //Col is 1-6
-                i = x-1; //left scan begins one col to the left of the current col
-                brk = -1; //break when we hit the first column 
-                mod = dec; //Scan coords are decremental
-            } else { //Otherwise Col is 0, can't left scan from leftmost column, so return results.
-                return results;
-            }
-            break;
-        case "d": //Down scan
-            if (y < 5) { //Row is 0-4
-                i = y+1; //down scan begins one row below the current row
-                brk = 6; //break when we hit the bottom row
-                mod = inc; //Scan coords are incremental
-            } else { //Otherwise Row is 5, can't down scan from bottom column, so return results.
-                return results;
-            }
-            break;
-        case "rd": //Right/Down scan
-            if (x < 6 && y < 5) { //Col is 0-5, Row is 0-4
-                i = x+1; //right scan begins one col to the right of the current col
-                ii = y+1; //down scan begins one row below the current row
-                brk = 7; //Break if we hit the final column
-                dBrk = 6; //Or Break if we hit the bottom row
-                mod = inc; //Horizontal scan coords are incremental
-                dMod = inc; //Vertical scan coords are incremental
-            } else { //Otherwise Col is 6 or Row is 5, can't scan right from rightmost column or down from bottom row, so return results
-                return results;
-            }
-            break;
-        case "lu": //Left/Up scan
-            if (x > 0 && y > 0) { //Col is 1-6, Row is 1-5
-                i = x-1; //Left scan begins one col to the left of the current col
-                ii = y-1; //Up scan begins one row above the current row
-                brk = -1; //Break if we hit the first column
-                dBrk = -1; //or Break if we hit the top row
-                mod = dec; //Horizontal scan coords are decremental
-                dMod = dec; //Vertical scan coords are decremental
-            } else { //Otherwise Col is 0 or Row is 0, can't scan left from leftmost column or up from top row, so return results
-                return results;
-            }
-            break;
-        case "ld": //Left/Down scan
-            if (x > 0 && y < 5) { //Col is 1-5, Row is 0-4
-                i = x-1; //Left scan begins one col to the left of the current col
-                ii = y+1; //Down scan begins one row below the current row
-                brk = -1; //Break if we hit the first column
-                dBrk = 6; //or Break if we hit the bottom row
-                mod = dec; //Horizontal scan coords are decremental
-                dMod = inc; //Vertical scan coords are incremental
-            } else { //Otherwise Col is 0 or Row is 5, can't scan left from leftmost column or down from bottom row, so return results
-                return results;
-            }
-            break;
-        case "ru": //Right/up scan
-            if (x < 6 && y > 0) { //Col is 0-5, Row is 1-5
-                i = x+1; //Right scan begins one col to the right of the current col
-                ii = y-1; //Up scan begins one row above the current row
-                brk = 7; //Break if we hit the final column
-                dBrk = -1; //or Break if we hit the top row
-                mod = inc; //Horizontal scan coords are incremental
-                dMod = dec; //Vertical scan coords are decremental
-            } else { //Otherwise Col is 6 or Row is 0, can't scan right from rightmost column or up from top row, so return results
-                return results;
-            }
-            break;
-    }
-
-    /* Create for loop */
-    /* Variable values are set in the preparation switch statement */
-    for (i;;i = i+mod) {
-        if (i == brk) { //If i matches our break value, then break
-            break;
-        } else if (ii != undefined && ii == dBrk) { //Otherwise if ii is not undefined (we are scanning diagonally) and matches our diagonal break value, then break
-            break;
-        }
-
-        switch (scanDir) {
-            case "r":
-            case "l":
-                val = c4.game.boardState[i][y]; //Horizontal Scan
-                break;
-            case "d":
-                val = c4.game.boardState[x][i]; //Vertical Scan
-                break;
-            case "rd":
-            case "lu":
-            case "ld":
-            case "ru":
-                val = c4.game.boardState[i][ii]; //Diagonal Scan
-                break;                
-        }
-        if (val == c4.game.activePlayer) { //The Cell value is a match for the active player
-            tokenCount++; //Increment the tokenCount
-            results[0] = tokenCount; //Update the tokenCount within the results array
-            switch (scanDir) {
-                case "r":
-                case "l":
-                    results[tokenCount] = [i,y]; //Apply the coords of this horizontal scan match to the results array
-                    break;
-                case "d":
-                    results[tokenCount] = [x,i]; //Apply the coords of this vertical scan match to the results array
-                    break;
-                case "rd":
-                case "lu":
-                case "ld":
-                case "ru":
-                    results[tokenCount] = [i,ii]; //Apply the coords of this diagonal scan match to the results array
-                    break;
-            }
-            if (tokenCount == 4) { //If we have found 4 matches within the same scan (or scan pair) then return results
-                return results;
-            }
-        } else { //The Cell value is not a match for the active player, so break           
-            break;            
-        }
-
-        if (ii != undefined) { //If ii is not undefined then we are performing a diagonal scan, so adjust ii by the dMod value
-            ii = ii+dMod;
+    /* Iterate through the boardState arrays, setting each value to undefined */
+    for (i = 0; i < c4.game.boardState.length; i += 1) {
+        for (ii = 0; ii < c4.game.boardState[i].length; ii += 1) {
+            c4.game.boardState[i][ii] = undefined;
         }
     }
-    return results; //Scan finished, but we have not found a matching pattern, so return the existing results
+}
+
+/* Set the number of completed turns to 0 */
+/* Used to track potential wins (unable to win in less than 7 turns) and draws (42 turns is the max until the board state is full) */
+function resetTurnCount() {
+    c4.game.completedTurns = 0;
+}
+
+/* Get the numerical id of the active player */
+function getActivePlayer() {
+    switch (c4.game.activePlayer) {
+    case 1:
+        /* set the color style property of the player1Info element to match the p1 tokenColor and underline, remove underline from the player2Info element and set the color style property to match the --inactivePlayer css variable */
+        document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
+        document.getElementById("player1Info").style.textDecoration = "underline";
+        document.getElementById("player2Info").style.removeProperty("text-decoration");
+        document.getElementById("player2Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        break;
+    case 2:
+        /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
+        document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
+        document.getElementById("player2Info").style.textDecoration = "underline";
+        document.getElementById("player1Info").style.removeProperty("text-decoration");
+        document.getElementById("player1Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        break;
+    default:
+        switchPlayer();  //No player is set as active, so switchPlayer() to set one
+    }
+}
+
+/* Start the Game */
+function startGame() {
+    createDynamicGameStyle(); //Read p1 and p2 token color values from the global settings object, and write them to a dynamic css file.  Append this to the document head.
+    setTurnTimeLimit(); //Set the turn time limit based on the selected turn time limit value
+    saveTurnTimeLimit(); //Write the selected turn time limit to local storage
+    show("startGame"); //Display the hotseat game board and start the game
+}
+
+/* Refresh the game state */
+function refreshGame() {
+    stopTurnTimer(); //Stop the turn timer
+    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+    clearGameState(); //Clear the game state
+    resetTurnCount(); //Reset the turn count to 0
+    getActivePlayer(); //Get the active player
+}
+
+/* Stop the game */
+function stopGame() {
+    stopTurnTimer(); //Stop the turn timer
+    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+    clearGameState(); //Clear the game state
+    resetTurnCount(); //Reset the turn count to 0
+}
+
+/* Quit an active game and return to the main pane */
+function quitGame() {
+    stopStartDelay(); //If the game start delay is running, stop it
+    dataGridDisplayRemove("gBoard"); //Remove the game board data grid display
+    stopGame(); //Stop the active hotseat game
+    menuBackButton(); //Display the main pane and refresh the logo
+}
+
+/* Refresh the game board */
+function refreshGameBoard() {
+    show("startGame");
+}
+
+/* Pause the game */
+function pauseGame() {
+    checkSideNavState(function () {
+        togglePauseLink();
+    }); //Check the state of the sideNav, then toggle the Pause link
+    pauseTurnTimer(); //Pause the turn time limit timer
+}
+
+/* Resume the game */
+function resumeGame() {
+    checkSideNavState(function () {
+        togglePauseLink();
+    }); //Check the state of the sideNav, then toggle the Pause Link
+    resumeTurnTimer(); //Resume the turn time limit timer
+}
+
+/* Clear the board and reset the Game */
+function resetGame() {
+    checkSideNavState(function () {
+        refreshGameBoard();
+    }); //Check the state of the sideNav, then refresh the game board
 }
