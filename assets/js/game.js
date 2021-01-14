@@ -4,6 +4,9 @@
 
 /* Processed with JSHint */
 /* Default Settings */
+/* Max Line Length: 250 characters */
+
+/*jshint maxlen: 250 */
 
 /*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
 createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
@@ -272,7 +275,7 @@ function selectCol(object) {
     for (i = result[1]; i > 0; i -= 1) {
         if (c4.game.boardState[result[2]][i - 1] === undefined) {
             c4.game.boardState[result[2]][i - 1] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
-            document.getElementById(`gBoardCol${result[2]}RowId${i - 1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            document.getElementById(`gBoardCol${result[2]}RowId${i - 1}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the gbPn class on the cell within the dataGrid display.
             c4.game.completedTurns += 1; //Increment the completed turn count
             let winner = checkWin(result[2], i - 1); //Check for a winner
             return winner; //Return the result of the checkWin function call
@@ -301,7 +304,7 @@ function selectRandCol() {
     for (i = 5; i > -1; i -= 1) {
         if (c4.game.boardState[col][i] === undefined) { //If the cell is empty
             c4.game.boardState[col][i] = c4.game.activePlayer; //Set the cell value to match the active player in the boardState array
-            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the appropriate gbPn class on the cell within the dataGrid display.  This will set the background color appropriately.
+            document.getElementById(`gBoardCol${col}RowId${i}`).firstElementChild.lastElementChild.classList.add(`gbP${c4.game.activePlayer}`); //utilise the same co-ords to set the gbPn class on the cell within the dataGrid display.
             c4.game.completedTurns += 1; //Increment the completed turn count
             winner = checkWin(col, i); //Check for a winner
             return winner; //Return the result of the checkWin function call

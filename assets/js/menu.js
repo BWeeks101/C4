@@ -4,6 +4,9 @@
 
 /* Processed with JSHint */
 /* Default Settings */
+/* Max Line Length: 250 characters */
+
+/*jshint maxlen: 250 */
 
 /*global c4, checkSideNavState, saveSettings, saveTurnTimeLimit, elementDisplay, hideAll,
 dataGridDisplayRemove, refreshGame, displayDataGrid, dataGridDisplaySetOnClick,

@@ -10,6 +10,9 @@
 
 /* Processed with JSHint */
 /* Default Settings */
+/* Max Line Length: 250 characters */
+
+/*jshint maxlen: 250 */
 
 /* JSHint warns about functions declared within loops referencing outer scoped variables leading to semantic confusion. */
 /* Resolving this may require an extensive rewrite, which is out of scope for this project at this stage */
