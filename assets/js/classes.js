@@ -25,6 +25,7 @@ class gameSettings {
         this.completedTurns = 0;
         this.turnTimeLimit = 30;
         this.activeTurnTimer = 5;
+        this.startDelay = 0;
         this.boardState = [
             [undefined, undefined, undefined, undefined, undefined, undefined],
             [undefined, undefined, undefined, undefined, undefined, undefined],
