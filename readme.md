@@ -119,17 +119,17 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 
 ## Technologies Used
 
-[HTML5](https://en.wikipedia.org/wiki/HTML5/)
-[CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets/)
-[JavaScript](https://javascript.com)
-[Bootstrap](https://getbootstrap.com)
+* [HTML5](https://en.wikipedia.org/wiki/HTML5/)
+* [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets/)
+* [JavaScript](https://javascript.com)
+* [Bootstrap](https://getbootstrap.com)
 	- The project uses **Bootstrap** to simplify flex layout, and assist with DOM manipulation via useful pre-built classes.
-[Font Awesome](https://fontawesome.com/)
+* [Font Awesome](https://fontawesome.com/)
 	- The project uses **Font Awesome** for social media icons.
-[Git](https://git-scm.com/)
-[GitHub](https://github.com)
-[Gitpod](https://gitpod.io)
-[StackEdit](https://stackedit.io/)
+* [Git](https://git-scm.com/)
+* [GitHub](https://github.com)
+* [Gitpod](https://gitpod.io)
+* [StackEdit](https://stackedit.io/)
 
 ## Testing
 
