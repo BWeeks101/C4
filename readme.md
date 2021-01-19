@@ -2,7 +2,7 @@
 
 ### Interactive Front-End Development Milestone Project
 
-C4 is a javascript version of the classic 'Connect 4' board game, from Hasbro.
+C4 is a JavaScript version of the classic 'Connect 4' board game, from Hasbro.
 
 Unlike the traditional game, C4's twist limits each players turn to 5s by default (this can be adjusted up to 30s if the player is finding things too challenging).
 
@@ -10,29 +10,40 @@ Unlike the traditional game, C4's twist limits each players turn to 5s by defaul
 
 ## UX
 
-C4 has a light, minimalist design - it is a single responsive page with no images beyond social media icons. The site is functional on desktops, laptops and mobile devices, with a minimum supported resolution of 280px x 568px.  
+<img src="/wireframes/c4mobile.png">
+<img src="/wireframes/c4tablet.png">
+
+C4 has a light, minimalist design - it is a single responsive page with no images beyond social media icons. The site is functional on desktops, laptops and mobile devices, with a minimum supported horizontal resolution of 280px, and minimum supported vertical resolution of 568px.
+
+*NB: The site will function on lower horizontal/vertical resolutions, but the page will scroll as required.  This may interfere with gameplay.*
 
 C4, (based on the classic 'Connect 4' game from Hasbro), is quick and easy to play, yet difficult to master. Using the default setting of 5s per player turn, a single game will be completed in under 4 minutes. This makes it ideal for play with a friend during short work/education breaks, or whilst waiting for the kettle to boil!
 
 ### User Stories
 
-1. As a User, I want to be able to play C4 with a real opponent in 'couch co-op' so that I can involve my immediate family and friends.
+#### New User Goals
 
-2. As a User, I want to be able to play C4 with a real opponent online so that I can play when a local opponent is not available.
+1. Be able to play C4 with a real opponent in 'couch co-op' so that I can involve my immediate family and friends.
 
-3. As a User, I want to be able to play C4 against an AI opponent so that I can practice on my own.
+2. Be able to play C4 with a real opponent online so that I can play when a local opponent is not available.
 
-4. As a User, I want to be able to review my results vs those of other players so that I can monitor my performance.
+3. Be able to play C4 against an AI opponent so that I can practice on my own.
 
-5. As a User, I want to be able to customise my profile and playing pieces so that my experience is more unique.
+4. Be able to customise my profile and playing pieces so that my experience is more unique.
 
-6. As a User, I want to be able to alter the difficulty of the AI in single player games to provide a challenge regardless of my skill level.
+5. Be able to alter the difficulty of the AI in single player games to provide a challenge regardless of my skill level.
 
-7. As a User, I want to be able to adjust the challenge of the game by altering time limits for each turn to further refine challenge and the game experience.
+6. Be able to adjust the challenge of the game by altering time limits for each turn to further refine challenge and the game experience.
 
-8. As a User, I want to be able to use the site effectively on mobile devices, tablets, laptops, and desktops so that I am not limited to playing in a single location or with a single device.
+7. As a User, I want to be able to use the site effectively on mobile devices, tablets, laptops, and desktops so that I am not limited to playing in a single location or with a single device.
 
-9. As a User, I want to be able to review the rules of the game so that I can learn how to play.
+8. As a User, I want to be able to review the rules of the game so that I can learn how to play.
+
+#### Returning User Goals
+
+1. Be able to review my results vs those of other players so that I can monitor my performance.
+
+2. Be able to store my profile customisations so that they are retained for future sessions.
 
 ### Wireframes
 
@@ -40,13 +51,13 @@ Wireframes created in Balsamiq, and exported to /wireframes/c4-wireframes.pdf
 
 ### Differences between the Wireframes and Final Design
 
-Whilst the site follows the same basic structure as the design wireframes, significant compromises had to be made due to time restrictions. The site currently features a main page, where the user can see an animated logo, review the rules, customise player names and token colours, or start a local 'hotseat' multiplayer game. The side navigation menu also features the option to switch between light and dark modes (with dark being the default).
+Whilst the site follows the same basic structure as the design wireframes, significant compromises had to be made due to time restrictions and technology availability. The site currently features a main page, where the user can see an animated logo, review the rules, customise player names and token colours, or start a local 'hotseat' multiplayer game. The side navigation menu also features the option to switch between light and dark modes (with dark being the default).  The player can also specify the turn time length for games.  These preferences are all written to local storage.
 
-It was not possible to implement online multiplayer, leaderboards/stat tracking, player accounts, or the uploading of profile images without a more comprehensive backend and database structure that are not currently available. A single player AI was desired, but unfortunately was not achievable within the givin timeframe.
+It was not possible to implement online multiplayer, leaderboards/stat tracking, player accounts, or the uploading of profile images without a more comprehensive backend and database structure that are currently unavailable. A single player AI was desired, but unfortunately was not achievable within the given timeframe.
 
 ## Desired Features based on User Stories
 
-1. Fully responsive mobile first design allows for a functional site on mobile, tablet, laptop and desktop, with a minimum resolution of 280px x 568px.
+1. Fully responsive mobile first design allows for a functional site on mobile, tablet, laptop and desktop, with a minimum. resolution of 280px x 568px.
 2. Minimalist design allows users to quickly setup a game and get straight to the fun!
 3. User stat tracking allows users to monitor their progress, and find opponents of a similar skill level.
 4. Functional single player UI with multiple difficulty levels allows for a solo experience.
@@ -60,8 +71,8 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 
 ### Existing Features
 
-1. Fully responsive mobile first design allows for a functional site on mobile, tablet, laptop and desktop, with a minimum width of 360px.
-	- The site was designed mobile-first, and dynamically scales up to higher resolutions. The game renders and plays perfectly on mobile devices, which is the ideal way to play
+1. Fully responsive mobile first design allows for a functional site on mobile, tablet, laptop and desktop, with a minimum width of 280px, and minimum height of 568px.
+	- The site was designed mobile-first, and dynamically scales up to higher resolutions. The game renders and plays perfectly on modern mobile devices, which is the ideal way to play.
 
 2. Minimalist design allows users to quickly setup a game and get straight to the fun!
 	- Using the default settings, a player can get into a game with just 2 clicks.
@@ -72,13 +83,13 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 4. User preferences allow selection of colours used for both players tokens.
 	- Users settings are available to customise both player names, and their chosen token colours.
 
-5. User settings (player names, token colours), the turn time limit and the selected color mode are saved to local storage and restored automatically on load.
+5. User settings (player names, token colours), the turn time limit and the selected colour mode are saved to local storage and restored automatically on load.
 	- Users do not have to continually update their settings when refreshing the page. The only restrictions are that both players must have unique names and token colours. Player names have an 8 character max length.
 
 6. Hotseat multiplayer allows for local play on a single device
 	- This feature is fully functional. In just 2 clicks, players can be in game.
-	- A game can be paused/resumed/Reset at any time.
-	- If left to run without user interaction, each time a player fails to take an action during their turn the game will automatically insert a token for that player into a random column.
+	- A game can be paused/resumed/reset at any time.
+	- If left to run without user interaction, each time a player fails to take an action during their turn, the game will automatically insert a token for that player into a random column.
 	- Once a win/draw has been determined, a rematch can be started (using the same turn time limit) directly from the game screen.
 
 7. Rules available to read online for players unfamiliar with the game.
@@ -101,7 +112,7 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 ### Outstanding Issues
 
 1. When viewing the site through browser dev tools, changing the device can lead to rendering inconsistencies.
-	- My previous project made extensive use of media queries. For this project I wanted to heavily focus on Javascript, so instead of media queries I have made extensive use of the onresize attribute. Changing the device within dev tools does not seem to trigger onresize. Any rendering inconsistencies can be resolved by refreshing the page, or manually resizing the device display to trigger the onresize function.
+	- My previous project made extensive use of media queries. For this project I wanted to heavily focus on JavaScript, so instead of media queries I have made extensive use of the onresize attribute. Changing the device within dev tools does not seem to trigger onresize. Any rendering inconsistencies can be resolved by refreshing the page, or manually resizing the device display to trigger the onresize function.
 
 2. If the user quickly clicks backwards and forwards between the main page and the User Settings or Rules panes, and ends on the main page, the logo animation will be triggered multiple times.
 	- The only effect of this bug is to repeatedly play the logo animation. There is no impact to the structure or functionality of the page. The caveat being that whilst the log is animating it will not resize, so if the window is resized during the animation loop then the logo will not resize until the animation(s) complete - at which point it will adjust itself dynamically.
@@ -114,11 +125,15 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 [Bootstrap](https://getbootstrap.com)
 	- The project uses **Bootstrap** to simplify flex layout, and assist with DOM manipulation via useful pre-built classes.
 [Font Awesome](https://fontawesome.com/)
-	- The project uses **Fontawesome** for social media link icons.
+	- The project uses **Font Awesome** for social media icons.
+[Git](https://git-scm.com/)
+[GitHub](https://github.com)
+[Gitpod](https://gitpod.io)
+[StackEdit](https://stackedit.io/)
 
 ## Testing
 
-All testing was conducted manually.
+All testing was conducted manually, making extensive use of Dev Tools within Mozilla Firefox, Google Chrome and Microsoft Edge browsers.
 
 Devices tested in browser dev tools include:
 - Galaxy Fold
@@ -158,7 +173,7 @@ Devices physically tested include:
 	- Click the Nav button on the header to open the sideNav.
 	- Observe that the side Nav has the following options:
 		* X button
-		* Color Mode
+		* Colour Mode
 		* Home
 		* Start Game
 		* User Settings
@@ -182,7 +197,7 @@ Devices physically tested include:
 	- Open the side Nav using the Nav button on the header
 	- Observe that the side Nav has the following options:
 		* X button
-		* Color Mode
+		* Colour Mode
 		* Home
 		* Start Game
 		* Rules
@@ -214,7 +229,7 @@ Devices physically tested include:
 	- Observe that the side Nav has the following options:
 		* X button
 			- Closes the side Nav, causing it to slide off to the left.
-		* Color Mode
+		* Colour Mode
 			- Toggles between light and dark (default) colour modes. This selection is saved to local storage.
 			- Refresh the page and observe that your previously selected colour mode is applied automatically.
 		* Start Game
@@ -243,7 +258,7 @@ Devices physically tested include:
 		- Opening the Side Nav during the 5 second starting count down will show the following:
 		* X button
 			- Closes the side Nav, causing it to slide off to the left.
-		* Color Mode
+		* Colour Mode
 			- Toggles between light and dark (default) colour modes.
 		* Quit
 			- Clears the game board and displays the default pane.
@@ -327,15 +342,15 @@ Devices physically tested include:
 
 ### Notable Challenge - datagrid.js
 
-The original UX design of the site necessitated multiple user selectable datagrids. The original concept involved pulling data from databases into objects, which would display as a fairly traditional datagrid, with fixed headers, content scroll and options to select entires columns or rows with a single click. eg:
+The original UX design of the site necessitated multiple user selectable datagrids. The original concept involved pulling data from databases into objects, which would display as a fairly traditional datagrid, with fixed headers, content scroll and options to select entire columns or rows with a single click. eg:
 
 - The leaderboard display had multiple column headings, and then users with their win/loss record
 - Joining a multiplayer game would require selecting an open slot from a list of available games, displayed as a list
 - The game board itself would be a datagrid without headers
 
-However, neither HTML nor Javascript have a default datagrid control. This meant that I would either have to:
+However, neither HTML nor JavaScript have a default datagrid control. This meant that I would either have to:
 
-- Build a custom layout for each grid by hand, and then very carefully programatically populate and refresh the date,
+- Build a custom layout for each grid by hand, and then very carefully programmatically populate and refresh the date,
 - Look for a control that had already been created, learn how to use it, avoid any pitfalls (and potentially any bloat) that could be caused by another framework.
 - Write my own
 
@@ -373,11 +388,11 @@ The project was deployed to GitHub Pages using the following method:
 8. Scroll down to 'GitHub Pages'
 9. Change Source from 'none' to 'master' and click 'Save'
 10. 
-The project was then developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in gitpod were commited and pushed to github frequently throughout the development process.
+The project was then developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in Gitpod were committed and pushed to GitHub frequently throughout the development process.
 
 Running the code locally would involve installing a webhost, downloading the latest [commit](https://github.com/BWeeks101/C4/archive/master.zip), then extracting that zip to an appropriate folder to be hosted by the local webhost.
 
-There are far too many potential applications and configurations to list them here in detail. The site contains HTML, CSS, and JavaScript so should not be complex to host, however I would recommend sticking to the hosted site on [Github Pages](https://bweeks101.github.io/C4/).
+There are far too many potential applications and configurations to list them here in detail. The site contains HTML, CSS, and JavaScript so should not be complex to host, however I would recommend sticking to the hosted site on [GitHub Pages](https://bweeks101.github.io/C4/).
 
 ## Credits
 
