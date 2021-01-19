@@ -387,7 +387,7 @@ The project was deployed to GitHub Pages using the following method:
 7. Click 'Settings'
 8. Scroll down to 'GitHub Pages'
 9. Change Source from 'none' to 'master' and click 'Save'
-10. 
+ 
 The project was then developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in Gitpod were committed and pushed to GitHub frequently throughout the development process.
 
 Running the code locally would involve installing a webhost, downloading the latest [commit](https://github.com/BWeeks101/C4/archive/master.zip), then extracting that zip to an appropriate folder to be hosted by the local webhost.
