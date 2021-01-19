@@ -387,7 +387,7 @@ The project was deployed to GitHub Pages using the following method:
 7. Click 'Settings'
 8. Scroll down to 'GitHub Pages'
 9. Change Source from 'none' to 'master' and click 'Save'
- 
+
 The project was then developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in Gitpod were committed and pushed to GitHub frequently throughout the development process.
 
 Running the code locally would involve installing a webhost, downloading the latest [commit](https://github.com/BWeeks101/C4/archive/master.zip), then extracting that zip to an appropriate folder to be hosted by the local webhost.
@@ -396,12 +396,12 @@ There are far too many potential applications and configurations to list them he
 
 ## Credits
 
-Connect 4 board game from [Hasbro](https://products.hasbro.com/en-gb/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4)
-Flex based 'Sticky Footer from [CSS-Tricks](https://css-tricks.com/couple-takes-sticky-footer/) and [Philip Walton](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
-SideNav from [W3 Schools Example](https://www.w3schools.com/howto/howto_js_sidenav.asp)
-Customised Select Control from [W3 Schools Example](https://www.w3schools.com/howto/howto_custom_select.asp)
-Animation Function Structure from [W3 Schools Example](https://www.w3schools.com/howto/howto_js_animate.asp)
-Change colour of svg on hover (mask method) from [CSS-Tricks.com](https://css-tricks.com/change-color-of-svg-on-hover/#use-a-mask-instead-of-a-background-image)
+* Connect 4 board game from [Hasbro](https://products.hasbro.com/en-gb/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4)
+* Flex based 'Sticky Footer from [CSS-Tricks](https://css-tricks.com/couple-takes-sticky-footer/) and [Philip Walton](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
+* SideNav from [W3 Schools Example](https://www.w3schools.com/howto/howto_js_sidenav.asp)
+* Customised Select Control from [W3 Schools Example](https://www.w3schools.com/howto/howto_custom_select.asp)
+* Animation Function Structure from [W3 Schools Example](https://www.w3schools.com/howto/howto_js_animate.asp)
+* Change colour of svg on hover (mask method) from [CSS-Tricks.com](https://css-tricks.com/change-color-of-svg-on-hover/#use-a-mask-instead-of-a-background-image)
 
 ### Content
 
