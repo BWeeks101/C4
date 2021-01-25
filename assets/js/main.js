@@ -321,6 +321,7 @@ function mainBlockResize() {
             /* Remove any existing height, max-height, or max-width style properties from the game board container and appropriate children */
             document.getElementById("gameBoardContainer").style.removeProperty("height");
             document.getElementById("gameBoardContainer").style.removeProperty("max-width");
+            document.getElementById("playerInfoContainer").style.removeProperty("margin-top");
             document.getElementById("gameContainer").style.removeProperty("height");
             document.getElementById("feedbackContainer").style.removeProperty("height");
             document.getElementById("gBoardContentContainer").style.removeProperty("max-height");
@@ -369,6 +370,10 @@ function mainBlockResize() {
             document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
 
             playerInfoFontResize();
+            playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the height of the player info container
+
+            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) /2
+            document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
 
             return;
         }
