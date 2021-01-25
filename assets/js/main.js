@@ -338,9 +338,9 @@ function mainBlockResize() {
 
             /* Set the height of the feedback container, message and control rows */
             let feedbackMessageHeight = getElementPos("feedbackMessage").height; //Get the height of the feedback message
-            let feedbackControlRowHeight = getElementPos("feedbackControlRow").height; //Get the height of the control row
+            let feedbackControlContainerHeight = getElementPos("feedbackControlContainer").height; //Get the height of the control row
             let feedbackContainerMinHeight = parseFloat(window.getComputedStyle(document.getElementById("feedbackContainer")).getPropertyValue(`min-height`).trim());
-            let feedbackContainerHeight = feedbackMessageHeight + feedbackControlRowHeight; //the container height = message height + control row height, respecting the min-height set in game.css
+            let feedbackContainerHeight = feedbackMessageHeight + feedbackControlContainerHeight; //the container height = message height + control row height, respecting the min-height set in game.css
             if (feedbackContainerHeight < feedbackContainerMinHeight) {
                 feedbackContainerHeight = feedbackContainerMinHeight;
             }
