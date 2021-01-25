@@ -125,8 +125,9 @@ function saveSettings() {
 function loadPlayerSettings() {
     let p1Name = localStorage.getItem("p1Name");
     if (p1Name !== null) {
-        c4.game.p1.name = p1Name;
+        c4.game.p1.name = p1Name;        
     }
+    document.getElementById("player1Info").firstElementChild.innerHTML = `${c4.game.p1.name}`;
 
     let p1TokenColor = localStorage.getItem("p1TokenColor");
     if (p1TokenColor !== null) {
@@ -137,6 +138,7 @@ function loadPlayerSettings() {
     if (p2Name !== null) {
         c4.game.p2.name = p2Name;
     }
+    document.getElementById("player2Info").firstElementChild.innerHTML = `${c4.game.p2.name}`;
 
     let p2TokenColor = localStorage.getItem("p2TokenColor");
     if (p2TokenColor !== null) {
