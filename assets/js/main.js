@@ -120,7 +120,7 @@ function getElementPos(element) {
     return elementPos;
 }
 
-/* Font Resize */
+/* Logo Font Resize */
 function logoFontResize() {
     let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("logoGridHcol-0").firstElementChild).getPropertyValue(`font-size`).trim()); //Min Supported Logo Font Size in px
     let minLogoContentSize = parseFloat(window.getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`min-width`).trim()); //Min Logo Content Size in px
@@ -156,6 +156,7 @@ function logoFontResize() {
     }
 }
 
+/* Player Info Font Resize */
 function playerInfoFontResize() {
     let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('font-size').trim()); //Min Supported Player Info Font Size in px    
     let minPlayerInfoWidth = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('min-width').trim()); //Width of a Player Info Col-4 element in px
