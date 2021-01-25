@@ -16,14 +16,10 @@
 function feedbackPauseMessage(action) {
     if (action === "show") {
         document.getElementById("feedbackMessage").innerHTML = "<h2>PAUSED</h2>"; //Set the feedback message text
-        elementDisplay("hide", "feedbackControlRow"); //Ensure we do not show the feedback buttons
-        elementDisplay("show", "feedbackContainer"); //Show the feedback container to display the paused message
         return;
     }
 
     if (action === "hide") {
-        elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-        elementDisplay("show", "feedbackControlRow"); //Reset the display value of the feedbackControlRow to default (visible)
         document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
         return;
     }
@@ -82,8 +78,8 @@ function feedbackStartDelay() {
     /* Remove any color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback container */
     document.getElementById("feedbackMessage").style.removeProperty("color");
     document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color");
-    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
-    elementDisplay("hide", "feedbackControlRow");
+    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;    
+    elementDisplay("hide", "pauseControls");
     elementDisplay("show", "feedbackContainer");
 
     /* Execute once a second, reducing the countdown text each time until we hit 0, then start the game */
@@ -93,8 +89,8 @@ function feedbackStartDelay() {
             document.getElementById("startDelay").innerHTML = `${timerVal - 1}`; //If we're not at 0, then reduce the timer by 1
         } else {
             stopStartDelay(); //We're at 0, so stop the timer
-            elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-            elementDisplay("show", "feedbackControlRow"); //Reset the display value of the feedbackControlRow to default (visible).  They will not be displayed until the feedback container is shown.
+            elementDisplay("show", "pauseControls"); //Display the Pause Button
+            document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause button = height of the first line of the feedback message
             document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
             startTurnTimer(); //Start the turn timer (and therefore the game)
             showGameSideNavMenu(); //Show the relevant links on the sideNav

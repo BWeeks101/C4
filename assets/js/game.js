@@ -339,8 +339,9 @@ function feedbackWinner(result) {
         }
     }
     elementDisplay("hide", "ctrlPauseLink"); //Hide the Pause link
+    elementDisplay("hide", "pauseControls"); //Hide the Pause Controls
+    elementDisplay("show", "gameOverControls"); //Show the Rematch & Quit buttons
     document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
-    elementDisplay("show", "feedbackContainer"); //Show the feedback container
 }
 
 /* Switch the active player */
@@ -399,14 +400,15 @@ function parseColSelection(result) {
     return false;
 }
 
-/* When the game board is clicked, if the feedback container is not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
+/* When the game board is clicked, if the Rematch & Quit buttons are not visible (we do not have a win/draw) and the game is not paused, select a row and place a token */
 /* Requires: */
 /*      object: the object that was clicked, passed to the argument as 'this' */
 function gameClicked(object) {
     //Only Fire on Single Click!
     if (event.detail === 1) {
-        if (document.getElementById("feedbackContainer").classList.contains("d-none") === false || document.getElementById("ctrlPauseLink").classList.contains("d-none") === true) {
-            return; //If we have a win/draw, the game start countdown is active, or the game is paused, do nothing
+        if (document.getElementById("gameOverControls").classList.contains("d-none") === false || document.getElementById("resumeButton").classList.contains("d-none") === false
+            || (document.getElementById("pauseControls").classList.contains("d-none") === true && document.getElementById("gameOverControls").classList.contains("d-none") === true)) {
+            return; //If we have a win/draw, the game is paused, or the game start countdown is active, do nothing
         }
         parseColSelection(selectCol(object)); //Otherwise place a token for the active player in the selected column
     }
@@ -463,8 +465,11 @@ function startGame() {
 
 /* Refresh the game state */
 function refreshGame() {
-    stopTurnTimer(); //Stop the turn timer
-    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+    stopTurnTimer(); //Stop the turn timer    
+    elementDisplay("hide", "gameOverControls"); //Hide the Rematch & Quit buttons
+    elementDisplay("hide", "resumeButton"); //Hide the Resume button
+    elementDisplay("show", "pauseButton"); //Show the Pause button
+    elementDisplay("show", "pauseControls"); //Show the Pause Controls
     clearGameState(); //Clear the game state
     resetTurnCount(); //Reset the turn count to 0
     getActivePlayer(); //Get the active player
@@ -472,8 +477,7 @@ function refreshGame() {
 
 /* Stop the game */
 function stopGame() {
-    stopTurnTimer(); //Stop the turn timer
-    elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+    stopTurnTimer(); //Stop the turn timer    
     clearGameState(); //Clear the game state
     resetTurnCount(); //Reset the turn count to 0
 }
@@ -496,6 +500,8 @@ function pauseGame() {
     checkSideNavState(function () {
         togglePauseLink();
     }); //Check the state of the sideNav, then toggle the Pause link
+    togglePauseButton(); //Toggle the Pause Button
+    document.getElementById("pauseControls").style.removeProperty("margin-top"); //Clear the margin top from the pause controls to maintain vertical position when the feedback text is visible
     pauseTurnTimer(); //Pause the turn time limit timer
 }
 
@@ -504,6 +510,8 @@ function resumeGame() {
     checkSideNavState(function () {
         togglePauseLink();
     }); //Check the state of the sideNav, then toggle the Pause Link
+    togglePauseButton(); //Toggle the Pause Button
+    document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause controls = height of the first line of the feedback message
     resumeTurnTimer(); //Resume the turn time limit timer
 }
 
