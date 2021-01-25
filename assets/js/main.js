@@ -372,7 +372,7 @@ function mainBlockResize() {
             playerInfoFontResize();
             playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the height of the player info container
 
-            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2;            
+            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2;
             document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
 
             gameContainerHeight = gBoardHeight + feedbackContainerHeight; //Reduce the height of the game container element to fit the height of the game board and feedback container elements
