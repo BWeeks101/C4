@@ -8,7 +8,7 @@
 
 /*jshint maxlen: 250 */
 
-/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu */
+/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu, getElementPos */
 
 /* JSHint warns that pauseTurnTimer, resumeTurnTimer, restartTurnTimer, feedbackStartDelay are unusued.  These are called externally from this file */
 
@@ -78,7 +78,7 @@ function feedbackStartDelay() {
     /* Remove any color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback container */
     document.getElementById("feedbackMessage").style.removeProperty("color");
     document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color");
-    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;    
+    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
     elementDisplay("hide", "pauseControls");
     elementDisplay("show", "feedbackContainer");
 
