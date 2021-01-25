@@ -349,8 +349,18 @@ function mainBlockResize() {
             let gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight; //gboard content container max height = game container height - feedback container height
             document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
 
-            /* Set the max width of the game board container */
+            /* Calculate the max width of the game board container */
             let gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;  //game board container max width =  116.55% of the game board container max height
+            
+            /* Get the default max width of the game board container per index.css */            
+            /* Utilise the value for the rules container as this will never change, so we will always get the default value */
+            /* (rulesContainer and gameBoardContainer share width and max-width style rules) */
+            let gameBoardContainerMaxWidthPerStyle = parseFloat(window.getComputedStyle(document.getElementById("rulesContainer")).getPropertyValue(`max-width`).trim());
+            if (gameBoardContainerMaxWidth > gameBoardContainerMaxWidthPerStyle) {
+                gameBoardContainerMaxWidth = gameBoardContainerMaxWidthPerStyle; //Do not exceed the max-width value set in index.css
+            }
+
+            /* Set the max width of the game board container */
             document.getElementById("gameBoardContainer").style.maxWidth = `${gameBoardContainerMaxWidth}px`;
 
             /* Set the height of the gboard to equal the height of the gboard content container */
