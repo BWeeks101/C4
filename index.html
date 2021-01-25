@@ -119,14 +119,22 @@
                     </div>
                     <div class="feedback-container" id="feedbackContainer">                        
                         <div class="feedback-message" id="feedbackMessage">
-                            <!--Winner Message Here-->
+                            <!--Feedback Message Here-->
                         </div>
-                        <div class="row feedback-control-row" id="feedbackControlRow">
-                            <div class="col-6 lcol">
-                                <button class="c4-control c4-button c4-control-full-width" onclick="refreshGameBoard()">Rematch</button>
+                        <div class="feedback-control-container" id="feedbackControlContainer">
+                            <div class="row feedback-control-row game-over-controls d-none" id="gameOverControls">
+                                <div class="col-6 lcol">
+                                    <button class="c4-control c4-button c4-control-full-width" onclick="refreshGameBoard()">Rematch</button>
+                                </div>
+                                <div class="col-6 rcol">
+                                    <button class="c4-control c4-button c4-control-full-width" onclick="quitGame()">Quit</button>
+                                </div>
                             </div>
-                            <div class="col-6 rcol">
-                                <button class="c4-control c4-button c4-control-full-width" onclick="quitGame()">Quit</button>
+                            <div class="row feedback-control-row pause-controls" id="pauseControls">
+                                <div class="col-12">
+                                    <button class="c4-control c4-button c4-control-full-width" id="pauseButton" onclick="pauseGame()">Pause</button>
+                                    <button class="c4-control c4-button c4-control-full-width d-none" id="resumeButton" onclick="resumeGame()">Resume</button>
+                                </div>
                             </div>
                         </div>
                     </div>
