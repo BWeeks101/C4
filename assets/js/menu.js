@@ -199,8 +199,8 @@ function menuBackButton() {
     case "settings":
         validated = show("default");
         if (validated !== false) { //If show("default") did not return false, then continue.
-            mainOnResize();
             refreshLogoGrid();
+            mainOnResize();
         }
         break;
     case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
