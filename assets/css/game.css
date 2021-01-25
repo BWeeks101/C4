@@ -138,11 +138,11 @@
     color: var(--feedbackText);
 }
 
-#feedbackControlRow .lcol {
+.feedback-control-container .lcol {
     padding-left: 0;
 }
 
-#feedbackControlRow .rcol {
+.feedback-control-container .rcol {
     padding-right: 0;
 }
 
