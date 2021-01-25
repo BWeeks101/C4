@@ -25,10 +25,13 @@ function updateTurnTimer() {
 /* Pause the turn time limit timer */
 function pauseTurnTimer() {
     clearInterval(c4.game.activeTurnTimer);
+    c4.game.activeTurnTimer = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Store the current value of the timer
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = 'PAUSED'; //Alter the timer text to show that the game is paused
 }
 
 /* Resume the turn time limit timer */
 function resumeTurnTimer() {
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.activeTurnTimer}`; //Alter the timer text to show the current stored value of the timer
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
