@@ -156,6 +156,27 @@ function logoFontResize() {
     }
 }
 
+function playerInfoFontResize() {
+    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('font-size').trim()); //Min Supported Player Info Font Size in px    
+    let minPlayerInfoWidth = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('min-width').trim()); //Width of a Player Info Col-4 element in px
+    let maxPlayerInfoWidth = 240;
+    let fontPlayerInfoScale = (minFontSizePx / minPlayerInfoWidth) * 100;
+    let maxFontSizePx = (maxPlayerInfoWidth / 100) * fontPlayerInfoScale;
+
+    let playerInfoWidth = getElementPos(document.getElementById("player1Info")).width;
+
+    let fontSize = (playerInfoWidth / 100) * fontPlayerInfoScale; //Calculate font size based on the current width of the player info container columns, and the fontPlayerInfoScale value
+    if (fontSize > maxFontSizePx) {
+        fontSize = maxFontSizePx; //Do not exceed max font size in px
+    } else if (fontSize < minFontSizePx) {
+        fontSize = minFontSizePx; //Do Not exceed min font size in px
+    }
+
+    document.getElementById(`player1Info`).firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById(`turnTimeLimit`).firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById(`player2Info`).firstElementChild.style.fontSize = `${fontSize}px`;
+}
+
 function logoResize() {
     if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed during resize
         return; //Do not continue
@@ -334,6 +355,8 @@ function mainBlockResize() {
             let gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
             let gBoardHeight = gBoardContentContainerHeight;
             document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
+
+            playerInfoFontResize();
 
             return;
         }
