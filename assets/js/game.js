@@ -11,9 +11,9 @@
 /*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
 createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
 dataGridDisplayRemove, menuBackButton, checkSideNavState, togglePauseLink, pauseTurnTimer,
-resumeTurnTimer */
+resumeTurnTimer, togglePauseButton, getElementPos */
 
-/* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally /*
+/* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally */
 /* from this file */
 
 /* Scan through rows and cols looking for matching columns */
@@ -404,10 +404,18 @@ function parseColSelection(result) {
 /* Requires: */
 /*      object: the object that was clicked, passed to the argument as 'this' */
 function gameClicked(object) {
+    let gameInProgress = true;
+    let gameIsActive = true;
+    let gameIsStarting = false;
+
     //Only Fire on Single Click!
     if (event.detail === 1) {
-        if (document.getElementById("gameOverControls").classList.contains("d-none") === false || document.getElementById("resumeButton").classList.contains("d-none") === false
-            || (document.getElementById("pauseControls").classList.contains("d-none") === true && document.getElementById("gameOverControls").classList.contains("d-none") === true)) {
+        gameInProgress = document.getElementById("gameOverControls").classList.contains("d-none"); //Game is not over
+        gameIsActive = document.getElementById("resumeButton").classList.contains("d-none"); //Game is not Paused
+        if (document.getElementById("pauseControls").classList.contains("d-none") === true && document.getElementById("gameOverControls").classList.contains("d-none") === true) {
+            gameIsStarting = true; //Game start countdown is active
+        }
+        if (gameInProgress === false || gameIsActive === false || gameIsStarting === true) {
             return; //If we have a win/draw, the game is paused, or the game start countdown is active, do nothing
         }
         parseColSelection(selectCol(object)); //Otherwise place a token for the active player in the selected column
@@ -465,7 +473,7 @@ function startGame() {
 
 /* Refresh the game state */
 function refreshGame() {
-    stopTurnTimer(); //Stop the turn timer    
+    stopTurnTimer(); //Stop the turn timer
     elementDisplay("hide", "gameOverControls"); //Hide the Rematch & Quit buttons
     elementDisplay("hide", "resumeButton"); //Hide the Resume button
     elementDisplay("show", "pauseButton"); //Show the Pause button
@@ -477,7 +485,7 @@ function refreshGame() {
 
 /* Stop the game */
 function stopGame() {
-    stopTurnTimer(); //Stop the turn timer    
+    stopTurnTimer(); //Stop the turn timer
     clearGameState(); //Clear the game state
     resetTurnCount(); //Reset the turn count to 0
 }
