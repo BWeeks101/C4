@@ -12,6 +12,23 @@
 
 /* JSHint warns that pauseTurnTimer, resumeTurnTimer, restartTurnTimer, feedbackStartDelay are unusued.  These are called externally from this file */
 
+/* Use the feedback message element to display a message when the game is paused */
+function feedbackPauseMessage(action) {
+    if (action === "show") {
+        document.getElementById("feedbackMessage").innerHTML = "<h2>PAUSED</h2>"; //Set the feedback message text
+        elementDisplay("hide", "feedbackControlRow"); //Ensure we do not show the feedback buttons
+        elementDisplay("show", "feedbackContainer"); //Show the feedback container to display the paused message
+        return;
+    }
+
+    if (action === "hide") {
+        elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
+        elementDisplay("show", "feedbackControlRow"); //Reset the display value of the feedbackControlRow to default (visible)
+        document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
+        return;
+    }
+}
+
 /* Update the turn time limit timer */
 function updateTurnTimer() {
     let timerVal = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Get the current value of the timer
@@ -26,12 +43,14 @@ function updateTurnTimer() {
 function pauseTurnTimer() {
     clearInterval(c4.game.activeTurnTimer);
     c4.game.activeTurnTimer = parseInt(document.getElementById("turnTimeLimit").firstElementChild.innerHTML); //Store the current value of the timer
-    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = 'PAUSED'; //Alter the timer text to show that the game is paused
+    document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "PAUSED"; //Alter the timer text to show that the game is paused
+    feedbackPauseMessage("show");
 }
 
 /* Resume the turn time limit timer */
 function resumeTurnTimer() {
     document.getElementById("turnTimeLimit").firstElementChild.innerHTML = `${c4.game.activeTurnTimer}`; //Alter the timer text to show the current stored value of the timer
+    feedbackPauseMessage("hide");
     c4.game.activeTurnTimer = setInterval(updateTurnTimer, 1000);
 }
 
@@ -58,7 +77,7 @@ function stopStartDelay() {
     clearInterval(c4.game.startDelay);
 }
 
-/* Before a game starts, use the feedback message element do display a 5 second countdown timer, then start the game */
+/* Before a game starts, use the feedback message element to display a 5 second countdown timer, then start the game */
 function feedbackStartDelay() {
     /* Remove any color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback container */
     document.getElementById("feedbackMessage").style.removeProperty("color");
@@ -75,7 +94,7 @@ function feedbackStartDelay() {
         } else {
             stopStartDelay(); //We're at 0, so stop the timer
             elementDisplay("hide", "feedbackContainer"); //Hide the feedback container
-            elementDisplay("show", "feedbackControlRow"); //Show the feedback button (they will not be displayed until the feedback container is shown)
+            elementDisplay("show", "feedbackControlRow"); //Reset the display value of the feedbackControlRow to default (visible).  They will not be displayed until the feedback container is shown.
             document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
             startTurnTimer(); //Start the turn timer (and therefore the game)
             showGameSideNavMenu(); //Show the relevant links on the sideNav
