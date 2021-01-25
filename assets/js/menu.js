@@ -215,6 +215,12 @@ function togglePauseLink() {
     elementDisplay("toggle", "ctrlResumeLink");
 }
 
+/* Toggle between the Pause and Resume buttons in the feedback container */
+function togglePauseButton() {
+    elementDisplay("toggle", "pauseButton");
+    elementDisplay("toggle", "resumeButton");
+}
+
 /* Close Alert */
 function closeAlert() {
     /* Enable all controls and links */
