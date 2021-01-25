@@ -158,8 +158,8 @@ function logoFontResize() {
 
 /* Player Info Font Resize */
 function playerInfoFontResize() {
-    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('font-size').trim()); //Min Supported Player Info Font Size in px    
-    let minPlayerInfoWidth = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue('min-width').trim()); //Width of a Player Info Col-4 element in px
+    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue("font-size").trim()); //Min Supported Player Info Font Size in px
+    let minPlayerInfoWidth = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue("min-width").trim()); //Width of a Player Info Col-4 element in px
     let maxPlayerInfoWidth = 240;
     let fontPlayerInfoScale = (minFontSizePx / minPlayerInfoWidth) * 100;
     let maxFontSizePx = (maxPlayerInfoWidth / 100) * fontPlayerInfoScale;
@@ -173,9 +173,9 @@ function playerInfoFontResize() {
         fontSize = minFontSizePx; //Do Not exceed min font size in px
     }
 
-    document.getElementById(`player1Info`).firstElementChild.style.fontSize = `${fontSize}px`;
-    document.getElementById(`turnTimeLimit`).firstElementChild.style.fontSize = `${fontSize}px`;
-    document.getElementById(`player2Info`).firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById("player1Info").firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById("turnTimeLimit").firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById("player2Info").firstElementChild.style.fontSize = `${fontSize}px`;
 }
 
 function logoResize() {
@@ -352,8 +352,8 @@ function mainBlockResize() {
 
             /* Calculate the max width of the game board container */
             let gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;  //game board container max width =  116.55% of the game board container max height
-            
-            /* Get the default max width of the game board container per index.css */            
+
+            /* Get the default max width of the game board container per index.css */
             /* Utilise the value for the rules container as this will never change, so we will always get the default value */
             /* (rulesContainer and gameBoardContainer share width and max-width style rules) */
             let gameBoardContainerMaxWidthPerStyle = parseFloat(window.getComputedStyle(document.getElementById("rulesContainer")).getPropertyValue(`max-width`).trim());
@@ -372,7 +372,7 @@ function mainBlockResize() {
             playerInfoFontResize();
             playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the height of the player info container
 
-            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) /2
+            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2;
             document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
 
             return;
