@@ -11,8 +11,9 @@
     /*background-color: var(--feedbackBackground);*/
 }
 
-#playerInfoContainer h3 {
-    font-size: 1.18rem;
+#playerInfoContainer .col-4 {
+    font-size: 11.52px; /* Used as a min font-size by playerInfoFontResize(); */
+    min-width: 86.6562px;
 }
 
 #player1Info {
