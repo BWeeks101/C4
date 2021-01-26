@@ -63,7 +63,7 @@ function loadColorMode() {
 /*      element: element id (string) or object whose property value we wish to get */
 /*      propertyName: name of the property */
 /*      resFormat (OPTIONAL): Result format. */
-/*              default: as returned by window.getComputedStyle().getPropertyValue() */
+/*              default: trimmed, but otherwise as returned by window.getComputedStyle().getPropertyValue() */
 /*              int: parseInt the result before returning */
 /*              float: parseFloat the result before returning */
 /* Returns: */
