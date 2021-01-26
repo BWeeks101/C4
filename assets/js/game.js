@@ -319,7 +319,7 @@ function selectRandCol() {
 function feedbackWinner(result) {
     stopTurnTimer(); //Stop the turn timer
     if (result === "draw") {
-        document.getElementById("feedbackMessage").innerHTML = "<h2>Draw!</h2>"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
+        document.getElementById("feedbackMessage").firstElementChild.innerHTML = "Draw!"; //If result = draw, then set the feedback message innerHTML value to the "Draw!" message
         document.getElementById("feedbackMessage").style.removeProperty("color"); //Set the text to the default color by removing any inline color styling
         document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color"); //Set the turnTimeLimit text to the default color
         document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!"; //Display the draw message in the turnTimeLimit column
@@ -328,12 +328,12 @@ function feedbackWinner(result) {
         /* Set the feedback message text. Set the feedback message text color and turnTimeLimit text color to that of the tokenColor of the winning player */
         switch (c4.game.activePlayer) {
         case 1:
-            document.getElementById("feedbackMessage").innerHTML = `<h2>${c4.game.p1.name} Wins!</h2>`;
+            document.getElementById("feedbackMessage").firstElementChild.innerHTML = `${c4.game.p1.name} Wins!`;
             document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
             document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p1.tokenColor;
             break;
         case 2:
-            document.getElementById("feedbackMessage").innerHTML = `<h2>${c4.game.p2.name} Wins!</h2>`;
+            document.getElementById("feedbackMessage").firstElementChild.innerHTML = `${c4.game.p2.name} Wins!`;
             document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
             document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p2.tokenColor;
             break;
