@@ -340,7 +340,10 @@ function mainBlockResize() {
             let feedbackMessageHeight = getElementPos("feedbackMessage").height; //Get the height of the feedback message
             let feedbackControlContainerHeight = getElementPos("feedbackControlContainer").height; //Get the height of the control row
             let feedbackContainerMinHeight = parseFloat(window.getComputedStyle(document.getElementById("feedbackContainer")).getPropertyValue(`min-height`).trim());
-            let feedbackContainerHeight = feedbackMessageHeight + feedbackControlContainerHeight; //the container height = message height + control row height, respecting the min-height set in game.css
+            let feedbackContainerPadTop = getElementPropertyVal("feedbackContainer", "padding-top", "int");
+            let feedbackContainerPadBottom = getElementPropertyVal("feedbackContainer", "padding-top", "int");
+            let feedbackContainerPadding = feedbackContainerPadTop + feedbackContainerPadBottom;
+            let feedbackContainerHeight = feedbackMessageHeight + feedbackControlContainerHeight + feedbackContainerPadding; //the container height = message height + control row height, respecting the min-height set in game.css
             if (feedbackContainerHeight < feedbackContainerMinHeight) {
                 feedbackContainerHeight = feedbackContainerMinHeight;
             }
