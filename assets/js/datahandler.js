@@ -151,7 +151,7 @@ function loadPlayerSettings() {
 /*      player: Integer.  Id value of Player.  (1 or 2) */
 function setDefaultSettings(player) {
     document.getElementById(`p${player}UserName`).value = `Player ${player}`; //Set value of name input to Player 1/2
-    document.getElementById(`p${player}TokenColor`).value = window.getComputedStyle(document.documentElement).getPropertyValue(`--p${player}TokenColor`).trim(); //Set value of color selector to default token color for player 1/2
+    document.getElementById(`p${player}TokenColor`).value = getElementPropertyVal(document.documentElement, `--p${player}TokenColor`); //Set value of color selector to default token color for player 1/2
 }
 
 /* Remove the turnTimeLimit kv pair from localStorage, and replace it with the current value from the turnTime drop down list element */
