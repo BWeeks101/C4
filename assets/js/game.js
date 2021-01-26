@@ -506,22 +506,24 @@ function refreshGameBoard() {
     show("startGame");
 }
 
-/* Pause the game */
-function pauseGame() {
+/* Pause Game Toggle */
+function pauseGameToggle() {
     checkSideNavState(function () {
         togglePauseLink();
     }); //Check the state of the sideNav, then toggle the Pause link
     togglePauseButton(); //Toggle the Pause Button
+}
+
+/* Pause the game */
+function pauseGame() {
+    pauseGameToggle();
     document.getElementById("pauseControls").style.removeProperty("margin-top"); //Clear the margin top from the pause controls to maintain vertical position when the feedback text is visible
     pauseTurnTimer(); //Pause the turn time limit timer
 }
 
 /* Resume the game */
 function resumeGame() {
-    checkSideNavState(function () {
-        togglePauseLink();
-    }); //Check the state of the sideNav, then toggle the Pause Link
-    togglePauseButton(); //Toggle the Pause Button
+    pauseGameToggle();
     document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause controls = height of the first line of the feedback message
     resumeTurnTimer(); //Resume the turn time limit timer
 }
