@@ -60,7 +60,7 @@ function loadColorMode() {
 
 /* Get Computed Property of element */
 /* Requires: */
-/*      elementId: id of the element whose property value we wish to get */
+/*      element: element id (string) or object whose property value we wish to get */
 /*      propertyName: name of the property */
 /*      resFormat (OPTIONAL): Result format. */
 /*              default: as returned by window.getComputedStyle().getPropertyValue() */
@@ -69,8 +69,13 @@ function loadColorMode() {
 /* Returns: */
 /*      result of window.getComputedStyle().getPropertyValue() */
 /*      NB: Format of returned value depends on resFormat argument */
-function getElementPropertyVal(elementId, propertyName, resFormat) {
-    let propertyVal = window.getComputedStyle(document.getElementById(elementId), null).getPropertyValue(propertyName);
+function getElementPropertyVal(element, propertyName, resFormat) {
+    let propertyVal;
+    if (typeof element === "string") {
+        propertyVal = window.getComputedStyle(document.getElementById(element), null).getPropertyValue(propertyName);
+    } else if (typeof element === "object") {
+        propertyVal = window.getComputedStyle(element, null).getPropertyValue(propertyName);
+    }    
     let propertyNum;
     let propertyFloat;
     switch (resFormat) {
