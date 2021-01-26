@@ -86,6 +86,7 @@ function getElementPropertyVal(element, propertyName, resFormat) {
         propertyFloat = parseFloat(propertyVal);
         return propertyFloat;
     default:
+        propertyVal = propertyVal.trim();
         return propertyVal;
     }
 }
