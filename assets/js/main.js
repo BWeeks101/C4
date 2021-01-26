@@ -185,8 +185,8 @@ function playerInfoFontResize() {
 
 /* Feedback Message Font Resize */
 function feedbackMessageFontResize() {
-    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("feedbackMessage")).getPropertyValue("font-size").trim()); //Min Supported Feedback Message Font Size in px
-    let minFeedbackMessageWidth = parseFloat(window.getComputedStyle(document.getElementById("feedbackMessage")).getPropertyValue("min-width").trim()); //Width of the Feedback Message element in px
+    let minFontSizePx = getElementPropertyVal("feedbackMessage", "font-size", "float"); //Min Supported Feedback Message Font Size in px
+    let minFeedbackMessageWidth = getElementPropertyVal("feedbackMessage", "min-width", "float"); //Width of the Feedback Message element in px
     let maxFeedbackMessageWidth = 720;
     let fontFeedbackMessageScale = (minFontSizePx / minFeedbackMessageWidth) * 100;
     let maxFontSizePx = (maxFeedbackMessageWidth / 100) * fontFeedbackMessageScale;
