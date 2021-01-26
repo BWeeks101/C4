@@ -11,7 +11,7 @@
 /*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
 createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
 dataGridDisplayRemove, menuBackButton, checkSideNavState, togglePauseLink, pauseTurnTimer,
-resumeTurnTimer, togglePauseButton, getElementPos, mainOnResize */
+resumeTurnTimer, togglePauseButton, getElementPos, mainOnResize, getElementPropertyVal */
 
 /* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally */
 /* from this file */
@@ -450,7 +450,7 @@ function getActivePlayer() {
         document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
         document.getElementById("player1Info").style.textDecoration = "underline";
         document.getElementById("player2Info").style.removeProperty("text-decoration");
-        document.getElementById("player2Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");        
+        document.getElementById("player2Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");
         break;
     case 2:
         /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */

@@ -8,7 +8,7 @@
 
 /*jshint maxlen: 250 */
 
-/*global c4, elementDisplay */
+/*global c4, elementDisplay, getElementPropertyVal */
 
 /* JSHint warns that sideNavOnLoad, sideNavResize, openNav, checkSideNavState are unusued.  These functions are all called externally from this file */
 

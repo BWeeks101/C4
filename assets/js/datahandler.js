@@ -8,7 +8,7 @@
 
 /*jshint maxlen: 250 */
 
-/*global checkSideNavState, elementDisplay, c4 */
+/*global checkSideNavState, elementDisplay, c4, getElementPropertyVal */
 
 /* JSHint warns that saveSettings, loadPlayerSettings, setDefaultSettings, saveTurnTimeLimit, loadTurnTimeLimit, setTurnTimeLimit, createDynamicGameStyle are */
 /* unusued.  These are called externally from this file */
@@ -125,7 +125,7 @@ function saveSettings() {
 function loadPlayerSettings() {
     let p1Name = localStorage.getItem("p1Name");
     if (p1Name !== null) {
-        c4.game.p1.name = p1Name;        
+        c4.game.p1.name = p1Name;
     }
     document.getElementById("player1Info").firstElementChild.innerHTML = `${c4.game.p1.name}`;
 

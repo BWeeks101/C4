@@ -9,7 +9,7 @@
 /*jshint maxlen: 250 */
 
 /*global elementDisplay, dataGridDisplayGetCounts, getElementPos, displayDataGrid, c4,
-logoFontResize, dataGridDisplayRemove, logoResize */
+logoFontResize, dataGridDisplayRemove, logoResize, getElementPropertyVal */
 
 /* JSHint warns that displayLogo, refreshLogoGrid are unusued.  These are called externally from this file */
 
