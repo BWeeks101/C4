@@ -15,12 +15,14 @@
 /* Use the feedback message element to display a message when the game is paused */
 function feedbackPauseMessage(action) {
     if (action === "show") {
-        document.getElementById("feedbackMessage").innerHTML = "<h2>PAUSED</h2>"; //Set the feedback message text
+        document.getElementById("feedbackMessage").firstElementChild.innerHTML = "PAUSED"; //Set the feedback message text
+        mainOnResize();
         return;
     }
 
     if (action === "hide") {
-        document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
+        document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML
+        mainOnResize();
         return;
     }
 }
@@ -75,10 +77,18 @@ function stopStartDelay() {
 
 /* Before a game starts, use the feedback message element to display a 5 second countdown timer, then start the game */
 function feedbackStartDelay() {
-    /* Remove any color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback container */
-    document.getElementById("feedbackMessage").style.removeProperty("color");
+    /* Remove any in-line color styling from the feedback message, display the countdown text, hide the feedback buttons and show the feedback message */
     document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color");
-    document.getElementById("feedbackMessage").innerHTML = `<h2>Game Start In:</h2><h2 id="startDelay">5</h2>`;
+    document.getElementById("feedbackMessage").style.removeProperty("color");
+    document.getElementById("feedbackMessage").firstElementChild.innerHTML = "Game Start In:";
+    mainOnResize(); //Call a resize to ensure the feedbackMessage text is scaled correctly
+    let feedbackControlContainerHeight = getElementPos(document.getElementById("feedbackControlContainer")).height; //Get the height of the feedbackControlContainer
+    elementDisplay("show", "startDelay"); //Show the startDelay element so that we can get it's height
+    let startDelayHeight = getElementPos(document.getElementById("startDelay")).height;  //Get the height of the startDelay element
+    /* Calculate the difference in height between the startDelay and feedbackContainer elements, and apply a margin-top to the startDelay to compensate */
+    let startDelayMarginTop = feedbackControlContainerHeight - startDelayHeight;
+    document.getElementById("startDelay").style.marginTop = `${startDelayMarginTop}px`;
+
     elementDisplay("hide", "pauseControls");
     elementDisplay("show", "feedbackContainer");
 
@@ -88,10 +98,12 @@ function feedbackStartDelay() {
         if (timerVal > 0) {
             document.getElementById("startDelay").innerHTML = `${timerVal - 1}`; //If we're not at 0, then reduce the timer by 1
         } else {
-            stopStartDelay(); //We're at 0, so stop the timer
-            elementDisplay("show", "pauseControls"); //Display the Pause Button
+            stopStartDelay(); //We're at 0, so stop the timer            
+            elementDisplay("hide", "startDelay"); //Hide the startDelay element
+            document.getElementById("startDelay").innerHTML = "5"; //Reset the startDelay innerHTML to it's default value
             document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause button = height of the first line of the feedback message
-            document.getElementById("feedbackMessage").innerHTML = ""; //Clear the feedback message innerHTML
+            document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML
+            elementDisplay("show", "pauseControls"); //Display the Pause Button
             startTurnTimer(); //Start the turn timer (and therefore the game)
             showGameSideNavMenu(); //Show the relevant links on the sideNav
         }
