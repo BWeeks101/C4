@@ -343,8 +343,6 @@ function feedbackWinner(result) {
     elementDisplay("hide", "pauseControls"); //Hide the Pause Controls
     elementDisplay("show", "gameOverControls"); //Show the Rematch & Quit buttons
     document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
-
-    mainOnResize();
 }
 
 /* Switch the active player */
