@@ -133,9 +133,8 @@
 /* Feedback Elements */
 .feedback-container {
     width: 100%;
-    min-height: 87px;
     padding: 5px 0;
-    color: var(--feedbackText);
+    color: var(--feedbackText);    
 }
 
 .feedback-control-container .lcol {
@@ -153,8 +152,10 @@
 
 .feedback-message {
     padding-bottom: 5px;
+    font-size: 25.568px;
+    min-width: 260px;
 }
 
 .feedback-message h2 {
-    margin: 0;
+    margin: 0;    
 }
