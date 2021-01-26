@@ -369,14 +369,14 @@ function switchPlayer() {
         document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
         document.getElementById("player1Info").style.textDecoration = "underline";
         document.getElementById("player2Info").style.removeProperty("text-decoration");
-        document.getElementById("player2Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        document.getElementById("player2Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");
         break;
     case 2:
         /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
         document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
         document.getElementById("player2Info").style.textDecoration = "underline";
         document.getElementById("player1Info").style.removeProperty("text-decoration");
-        document.getElementById("player1Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        document.getElementById("player1Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");
         break;
     }
 }
@@ -450,14 +450,14 @@ function getActivePlayer() {
         document.getElementById("player1Info").style.color = c4.game.p1.tokenColor;
         document.getElementById("player1Info").style.textDecoration = "underline";
         document.getElementById("player2Info").style.removeProperty("text-decoration");
-        document.getElementById("player2Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        document.getElementById("player2Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");        
         break;
     case 2:
         /* set the color style property of the player2Info element to match the p2 tokenColor and underline, remove underline from the player1Info element and set the color style property to match the --inactivePlayer css variable */
         document.getElementById("player2Info").style.color = c4.game.p2.tokenColor;
         document.getElementById("player2Info").style.textDecoration = "underline";
         document.getElementById("player1Info").style.removeProperty("text-decoration");
-        document.getElementById("player1Info").style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--inactivePlayer`).trim();
+        document.getElementById("player1Info").style.color = getElementPropertyVal(document.documentElement, "--inactivePlayer");
         break;
     default:
         switchPlayer();  //No player is set as active, so switchPlayer() to set one
