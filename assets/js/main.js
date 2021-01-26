@@ -207,6 +207,12 @@ function feedbackMessageFontResize() {
     document.getElementById("quitGameButton").style.fontSize = `${fontSize}px`;
     document.getElementById("pauseButton").style.fontSize = `${fontSize}px`;
     document.getElementById("resumeButton").style.fontSize = `${fontSize}px`;
+
+    /* If the game is not paused, then update the margin-top value for the pauseControls element to maintain distance from the game board */
+    if (document.getElementById("resumeButton").classList.contains("d-none") === true) {
+        pauseControlMarginTop = getElementPropertyVal(document.getElementById("feedbackMessage").firstElementChild, "line-height", "float"); //#feedbackMessage h2 has no padding so height = line-height. Use this when the element is not displayed.
+        document.getElementById("pauseControls").style.marginTop = `${pauseControlMarginTop}px`;
+    }
 }
 
 function logoResize() {
