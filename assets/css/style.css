@@ -132,9 +132,9 @@ a:hover, .header-nav-link-text:hover {
 
 .navbar-dark .navbar-toggler {
     border-color: var(--darkToggler);
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+    -webkit-transition: color 0.5s, border-color 0.5s;    
+    -o-transition: color 0.5s, border-color 0.5s;    
+    transition: color 0.5s, border-color 0.5s;
 }
 
 .navbar-toggler:hover {
