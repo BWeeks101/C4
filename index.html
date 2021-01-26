@@ -122,15 +122,21 @@
                     </div>
                     <div class="feedback-container" id="feedbackContainer">                        
                         <div class="feedback-message" id="feedbackMessage">
-                            <!--Feedback Message Here-->
+                            <h2>
+                                Feedback Message
+                                <!--Feedback Message Here-->
+                            </h2>
+                            <h2 class="d-none" id="startDelay">
+                                5 <!--Start Game Delay Value-->
+                            </h2>
                         </div>
                         <div class="feedback-control-container" id="feedbackControlContainer">
                             <div class="row feedback-control-row game-over-controls d-none" id="gameOverControls">
                                 <div class="col-6 lcol">
-                                    <button class="c4-control c4-button c4-control-full-width" onclick="refreshGameBoard()">Rematch</button>
+                                    <button class="c4-control c4-button c4-control-full-width" id="refreshGameButton" onclick="refreshGameBoard()">Rematch</button>
                                 </div>
                                 <div class="col-6 rcol">
-                                    <button class="c4-control c4-button c4-control-full-width" onclick="quitGame()">Quit</button>
+                                    <button class="c4-control c4-button c4-control-full-width" id="quitGameButton" onclick="quitGame()">Quit</button>
                                 </div>
                             </div>
                             <div class="row feedback-control-row pause-controls" id="pauseControls">
