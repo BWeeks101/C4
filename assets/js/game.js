@@ -11,7 +11,7 @@
 /*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
 createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
 dataGridDisplayRemove, menuBackButton, checkSideNavState, togglePauseLink, pauseTurnTimer,
-resumeTurnTimer, togglePauseButton, getElementPos */
+resumeTurnTimer, togglePauseButton, getElementPos, mainOnResize */
 
 /* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally */
 /* from this file */
@@ -324,15 +324,16 @@ function feedbackWinner(result) {
         document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color"); //Set the turnTimeLimit text to the default color
         document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Draw!"; //Display the draw message in the turnTimeLimit column
     } else {
-        document.getElementById("feedbackMessage").innerHTML = `<h2>P${c4.game.activePlayer} Wins!</h2>`; //The result is not a draw, so set the feedback message innerHTML value to show the activePlayer as the winner
-        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Winner!"; //Displayer the winner text in the turnTimeLimit column
-        /* Set the feedback message text color and turnTimeLimit text color to that of the tokenColor of the winning player */
+        document.getElementById("turnTimeLimit").firstElementChild.innerHTML = "Winner!"; //Display the winner text in the turnTimeLimit column
+        /* Set the feedback message text. Set the feedback message text color and turnTimeLimit text color to that of the tokenColor of the winning player */
         switch (c4.game.activePlayer) {
         case 1:
+            document.getElementById("feedbackMessage").innerHTML = `<h2>${c4.game.p1.name} Wins!</h2>`;
             document.getElementById("feedbackMessage").style.color = c4.game.p1.tokenColor;
             document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p1.tokenColor;
             break;
         case 2:
+            document.getElementById("feedbackMessage").innerHTML = `<h2>${c4.game.p2.name} Wins!</h2>`;
             document.getElementById("feedbackMessage").style.color = c4.game.p2.tokenColor;
             document.getElementById("turnTimeLimit").firstElementChild.style.color = c4.game.p2.tokenColor;
             break;
@@ -342,6 +343,8 @@ function feedbackWinner(result) {
     elementDisplay("hide", "pauseControls"); //Hide the Pause Controls
     elementDisplay("show", "gameOverControls"); //Show the Rematch & Quit buttons
     document.getElementById("ctrlResetLink").innerHTML = "Rematch"; //Alter the innerHTML value of the Reset link to display 'Rematch'
+
+    mainOnResize();
 }
 
 /* Switch the active player */
