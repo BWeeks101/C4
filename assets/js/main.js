@@ -163,8 +163,8 @@ function logoFontResize() {
 
 /* Player Info Font Resize */
 function playerInfoFontResize() {
-    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue("font-size").trim()); //Min Supported Player Info Font Size in px
-    let minPlayerInfoWidth = parseFloat(window.getComputedStyle(document.getElementById("playerInfoContainer").firstElementChild).getPropertyValue("min-width").trim()); //Width of a Player Info Col-4 element in px
+    let minFontSizePx = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "font-size", "float"); //Min Supported Player Info Font Size in px
+    let minPlayerInfoWidth = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "min-width", "float"); //Width of a Player Info Col-4 element in px
     let maxPlayerInfoWidth = 240;
     let fontPlayerInfoScale = (minFontSizePx / minPlayerInfoWidth) * 100;
     let maxFontSizePx = (maxPlayerInfoWidth / 100) * fontPlayerInfoScale;
