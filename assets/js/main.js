@@ -17,7 +17,7 @@ initC4Select, $ */
 /* JSHint Warns that the hideAll() function is unusued.  The function is called externally from this file */
 
 /* Initialise global settings object */
-let c4 = new appGlobals();
+let c4 = appGlobals();
 
 /* Switch between light and dark themes */
 /* Requires: */
@@ -75,7 +75,7 @@ function getElementPropertyVal(element, propertyName, resFormat) {
         propertyVal = window.getComputedStyle(document.getElementById(element), null).getPropertyValue(propertyName);
     } else if (typeof element === "object") {
         propertyVal = window.getComputedStyle(element, null).getPropertyValue(propertyName);
-    }    
+    }
     let propertyNum;
     let propertyFloat;
     switch (resFormat) {
@@ -209,6 +209,7 @@ function feedbackMessageFontResize() {
     document.getElementById("resumeButton").style.fontSize = `${fontSize}px`;
 
     /* If the game is not paused, then update the margin-top value for the pauseControls element to maintain distance from the game board */
+    let pauseControlMarginTop;
     if (document.getElementById("resumeButton").classList.contains("d-none") === true) {
         pauseControlMarginTop = getElementPropertyVal(document.getElementById("feedbackMessage").firstElementChild, "line-height", "float"); //#feedbackMessage h2 has no padding so height = line-height. Use this when the element is not displayed.
         document.getElementById("pauseControls").style.marginTop = `${pauseControlMarginTop}px`;
@@ -375,7 +376,7 @@ function mainBlockResize() {
 
             /* Get the height of the feedback container */
             let feedbackContainerHeight = getElementPos("feedbackContainer").height;
-            
+
             /* Set the max height of the gboard content container */
             let gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight; //gboard content container max height = game container height - feedback container height
             document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
