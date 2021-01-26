@@ -137,10 +137,10 @@ label {
     min-height: 33.2px;
     min-width: 46px;
     border-width: 1px;
-    border-style: solid;
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+    border-style: solid;    
+    -webkit-transition: color 0.5s, border-color 0.5s;    
+    -o-transition: color 0.5s, border-color 0.5s;    
+    transition: color 0.5s, border-color 0.5s;
     color: var(--togglerIconBackground);
     border-color: var(--darkToggler);
     background-color: var(--mainBackground);
