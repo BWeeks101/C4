@@ -17,7 +17,7 @@ initC4Select, $ */
 /* JSHint Warns that the hideAll() function is unusued.  The function is called externally from this file */
 
 /* Initialise global settings object */
-let c4 = appGlobals();
+let c4 = new appGlobals();
 
 /* Switch between light and dark themes */
 /* Requires: */
