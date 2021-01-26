@@ -178,6 +178,32 @@ function playerInfoFontResize() {
     document.getElementById("player2Info").firstElementChild.style.fontSize = `${fontSize}px`;
 }
 
+/* Feedback Message Font Resize */
+function feedbackMessageFontResize() {
+    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("feedbackMessage")).getPropertyValue("font-size").trim()); //Min Supported Feedback Message Font Size in px
+    let minFeedbackMessageWidth = parseFloat(window.getComputedStyle(document.getElementById("feedbackMessage")).getPropertyValue("min-width").trim()); //Width of the Feedback Message element in px
+    let maxFeedbackMessageWidth = 720;
+    let fontFeedbackMessageScale = (minFontSizePx / minFeedbackMessageWidth) * 100;
+    let maxFontSizePx = (maxFeedbackMessageWidth / 100) * fontFeedbackMessageScale;
+
+    let feedbackMessageWidth = getElementPos(document.getElementById("feedbackMessage")).width;
+
+    let fontSize = (feedbackMessageWidth / 100) * fontFeedbackMessageScale; //Calculate font size based on the current width of the feedback message, and the fontFeedbackMessageScale value
+    if (fontSize > maxFontSizePx) {
+        fontSize = maxFontSizePx; //Do not exceed max font size in px
+    } else if (fontSize < minFontSizePx) {
+        fontSize = minFontSizePx; //Do Not exceed min font size in px
+    }
+
+    document.getElementById("feedbackMessage").firstElementChild.style.fontSize = `${fontSize}px`;
+    document.getElementById("startDelay").style.fontSize = `${fontSize}px`;
+
+    document.getElementById("refreshGameButton").style.fontSize = `${fontSize}px`;
+    document.getElementById("quitGameButton").style.fontSize = `${fontSize}px`;
+    document.getElementById("pauseButton").style.fontSize = `${fontSize}px`;
+    document.getElementById("resumeButton").style.fontSize = `${fontSize}px`;
+}
+
 function logoResize() {
     if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed during resize
         return; //Do not continue
@@ -336,19 +362,9 @@ function mainBlockResize() {
             let gameContainerHeight = gameBoardContainerHeight - playerInfoContainerHeight; //The game container height = game board container height - player info container height
             document.getElementById("gameContainer").style.height = `${gameContainerHeight}px`;
 
-            /* Set the height of the feedback container, message and control rows */
-            let feedbackMessageHeight = getElementPos("feedbackMessage").height; //Get the height of the feedback message
-            let feedbackControlContainerHeight = getElementPos("feedbackControlContainer").height; //Get the height of the control row
-            let feedbackContainerMinHeight = parseFloat(window.getComputedStyle(document.getElementById("feedbackContainer")).getPropertyValue(`min-height`).trim());
-            let feedbackContainerPadTop = getElementPropertyVal("feedbackContainer", "padding-top", "int");
-            let feedbackContainerPadBottom = getElementPropertyVal("feedbackContainer", "padding-top", "int");
-            let feedbackContainerPadding = feedbackContainerPadTop + feedbackContainerPadBottom;
-            let feedbackContainerHeight = feedbackMessageHeight + feedbackControlContainerHeight + feedbackContainerPadding; //the container height = message height + control row height, respecting the min-height set in game.css
-            if (feedbackContainerHeight < feedbackContainerMinHeight) {
-                feedbackContainerHeight = feedbackContainerMinHeight;
-            }
-            document.getElementById("feedbackContainer").style.height = `${feedbackContainerHeight}px`;
-
+            /* Get the height of the feedback container */
+            let feedbackContainerHeight = getElementPos("feedbackContainer").height;
+            
             /* Set the max height of the gboard content container */
             let gBoardContentContainerMaxHeight = gameContainerHeight - feedbackContainerHeight; //gboard content container max height = game container height - feedback container height
             document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
@@ -372,8 +388,11 @@ function mainBlockResize() {
             let gBoardHeight = gBoardContentContainerHeight;
             document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
 
-            playerInfoFontResize();
-            playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the height of the player info container
+            playerInfoFontResize(); //Scale player info font size
+            playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the updated height of the player info container
+
+            feedbackMessageFontResize(); //Scale feedback message font size
+            feedbackContainerHeight = getElementPos("feedbackContainer").height;
 
             let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2;
             document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
