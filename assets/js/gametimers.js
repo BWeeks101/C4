@@ -8,7 +8,7 @@
 
 /*jshint maxlen: 250 */
 
-/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu, getElementPos */
+/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu, getElementPos, mainOnResize */
 
 /* JSHint warns that pauseTurnTimer, resumeTurnTimer, restartTurnTimer, feedbackStartDelay are unusued.  These are called externally from this file */
 
@@ -96,7 +96,7 @@ function feedbackStartDelay() {
         if (timerVal > 0) {
             document.getElementById("startDelay").innerHTML = `${timerVal - 1}`; //If we're not at 0, then reduce the timer by 1
         } else {
-            stopStartDelay(); //We're at 0, so stop the timer            
+            stopStartDelay(); //We're at 0, so stop the timer
             elementDisplay("hide", "startDelay"); //Hide the startDelay element
             document.getElementById("startDelay").innerHTML = "5"; //Reset the startDelay innerHTML to it's default value
             document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause button = height of the first line of the feedback message
