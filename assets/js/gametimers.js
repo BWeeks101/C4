@@ -16,13 +16,11 @@
 function feedbackPauseMessage(action) {
     if (action === "show") {
         document.getElementById("feedbackMessage").firstElementChild.innerHTML = "PAUSED"; //Set the feedback message text
-        mainOnResize();
         return;
     }
 
     if (action === "hide") {
         document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML
-        mainOnResize();
         return;
     }
 }
@@ -104,6 +102,7 @@ function feedbackStartDelay() {
             document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause button = height of the first line of the feedback message
             document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML
             elementDisplay("show", "pauseControls"); //Display the Pause Button
+            mainOnResize();
             startTurnTimer(); //Start the turn timer (and therefore the game)
             showGameSideNavMenu(); //Show the relevant links on the sideNav
         }
