@@ -169,7 +169,7 @@ function playerInfoFontResize() {
     let fontPlayerInfoScale = (minFontSizePx / minPlayerInfoWidth) * 100;
     let maxFontSizePx = (maxPlayerInfoWidth / 100) * fontPlayerInfoScale;
 
-    let playerInfoWidth = getElementPos(document.getElementById("player1Info")).width;
+    let playerInfoWidth = getElementPos("player1Info").width;
 
     let fontSize = (playerInfoWidth / 100) * fontPlayerInfoScale; //Calculate font size based on the current width of the player info container columns, and the fontPlayerInfoScale value
     if (fontSize > maxFontSizePx) {
@@ -191,7 +191,7 @@ function feedbackMessageFontResize() {
     let fontFeedbackMessageScale = (minFontSizePx / minFeedbackMessageWidth) * 100;
     let maxFontSizePx = (maxFeedbackMessageWidth / 100) * fontFeedbackMessageScale;
 
-    let feedbackMessageWidth = getElementPos(document.getElementById("feedbackMessage")).width;
+    let feedbackMessageWidth = getElementPos("feedbackMessage").width;
 
     let fontSize = (feedbackMessageWidth / 100) * fontFeedbackMessageScale; //Calculate font size based on the current width of the feedback message, and the fontFeedbackMessageScale value
     if (fontSize > maxFontSizePx) {

@@ -80,9 +80,9 @@ function feedbackStartDelay() {
     document.getElementById("feedbackMessage").style.removeProperty("color");
     document.getElementById("feedbackMessage").firstElementChild.innerHTML = "Game Start In:";
     mainOnResize(); //Call a resize to ensure the feedbackMessage text is scaled correctly
-    let feedbackControlContainerHeight = getElementPos(document.getElementById("feedbackControlContainer")).height; //Get the height of the feedbackControlContainer
+    let feedbackControlContainerHeight = getElementPos("feedbackControlContainer").height; //Get the height of the feedbackControlContainer
     elementDisplay("show", "startDelay"); //Show the startDelay element so that we can get it's height
-    let startDelayHeight = getElementPos(document.getElementById("startDelay")).height;  //Get the height of the startDelay element
+    let startDelayHeight = getElementPos("startDelay").height;  //Get the height of the startDelay element
     /* Calculate the difference in height between the startDelay and feedbackContainer elements, and apply a margin-top to the startDelay to compensate */
     let startDelayMarginTop = feedbackControlContainerHeight - startDelayHeight;
     document.getElementById("startDelay").style.marginTop = `${startDelayMarginTop}px`;
