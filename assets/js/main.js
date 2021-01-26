@@ -127,9 +127,9 @@ function getElementPos(element) {
 
 /* Logo Font Resize */
 function logoFontResize() {
-    let minFontSizePx = parseFloat(window.getComputedStyle(document.getElementById("logoGridHcol-0").firstElementChild).getPropertyValue(`font-size`).trim()); //Min Supported Logo Font Size in px
-    let minLogoContentSize = parseFloat(window.getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`min-width`).trim()); //Min Logo Content Size in px
-    let maxLogoContentSize = parseFloat(window.getComputedStyle(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild).getPropertyValue(`max-width`).trim()); //Max Logo Content Size in px
+    let minFontSizePx = getElementPropertyVal(document.getElementById("logoGridHcol-0").firstElementChild, "font-size", "float"); //Min Supported Logo Font Size in px
+    let minLogoContentSize = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "min-width", "float"); //Min Logo Content Size in px
+    let maxLogoContentSize = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "max-width", "float"); //Max Logo Content Size in px
     let fontLogoScale = (minFontSizePx / minLogoContentSize) * 100; //Percentage difference betwen font and logo content
     let maxFontSizePx = (maxLogoContentSize / 100) * fontLogoScale; //Max Logo Font Size in px
 
