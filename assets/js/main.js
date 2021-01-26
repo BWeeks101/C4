@@ -270,7 +270,7 @@ function calcBlockHeight() {
     let wHeight = window.innerHeight;
 
     /* Min Supported Browser Height */
-    let minWHeight = parseFloat(window.getComputedStyle(document.getElementsByTagName("body")[0]).getPropertyValue(`min-height`).trim());
+    let minWHeight = getElementPropertyVal(document.getElementsByTagName("body")[0], "min-height", "float");
     if (wHeight < minWHeight) {
         wHeight = minWHeight;
     }
@@ -388,7 +388,7 @@ function mainBlockResize() {
             /* Get the default max width of the game board container per index.css */
             /* Utilise the value for the rules container as this will never change, so we will always get the default value */
             /* (rulesContainer and gameBoardContainer share width and max-width style rules) */
-            let gameBoardContainerMaxWidthPerStyle = parseFloat(window.getComputedStyle(document.getElementById("rulesContainer")).getPropertyValue(`max-width`).trim());
+            let gameBoardContainerMaxWidthPerStyle = getElementPropertyVal("rulesContainer", "max-width", "float");
             if (gameBoardContainerMaxWidth > gameBoardContainerMaxWidthPerStyle) {
                 gameBoardContainerMaxWidth = gameBoardContainerMaxWidthPerStyle; //Do not exceed the max-width value set in index.css
             }
