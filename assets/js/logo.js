@@ -94,17 +94,17 @@ function dropChar(colId, targetPoint, final) {
         if (pos === targetPoint) { //If we have hit the targetPoint
             clearInterval(id); //Stop animating
             if (colId % 2 === 0) { //If the column Id is even, apply the --p1TokenColor style value to the background of the content column
-                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = window.getComputedStyle(document.documentElement).getPropertyValue(`--p1TokenColor`).trim();
-                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--logoText`).trim();
+                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getElementPropertyVal(document.documentElement, "--p1TokenColor");
+                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = getElementPropertyVal(document.documentElement, "--logoText");
             } else { //Otherwise the column Id is odd, so apply the --p2TokenColor style instead
-                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = window.getComputedStyle(document.documentElement).getPropertyValue(`--p2TokenColor`).trim();
-                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = window.getComputedStyle(document.documentElement).getPropertyValue(`--logoText`).trim();
+                document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild.style.backgroundColor = getElementPropertyVal(document.documentElement, "--p2TokenColor");
+                document.getElementById(`logoGridHcol-${colId}`).firstElementChild.style.color = getElementPropertyVal(document.documentElement, "--logoText");
             }
             /* If this is the last column to be animated, set the global logo.animState property value to false, and remove the min/max width inline styles to allow resize */
             if (final === true) {
                 /* Wait until the background-color transition has finished on the content column */
                 /* Get the transition duration (in s), convert the value to a float, then multiply by 1000 to get a millisecond value for setTimeout() */
-                let delay = parseFloat(window.getComputedStyle(document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild, null).getPropertyValue(`transition-duration`)) * 1000;
+                let delay = getElementPropertyVal(document.getElementById(`logoGridCol${colId}RowId0`).firstElementChild.lastElementChild, "transition-duration", "float") * 1000;
                 setTimeout(function () {
                     c4.logo.animState = false; //Change the global logo.animState to false
                     document.getElementById("logoContainer").style.removeProperty("max-width"); //Remove max/min width styling to allow resize
