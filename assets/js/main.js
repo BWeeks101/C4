@@ -198,33 +198,22 @@ function playerInfoFontResize(playerInfoContainerHeight) {
     document.getElementById("player2Info").firstElementChild.style.fontSize = `${fontSize}px`;
 }
 
-/* Pause Controls Margin Top */
-function setPauseControlMargin(feedbackMessageHeight) {
-    let feedbackMessageMinHeight;
-    let pauseControlMarginTop;
-    if (document.getElementById("resumeButton").classList.contains("d-none") === true) { //If the game is not paused set the Pause Controls margin-top to maintain vertical spacing
-        feedbackMessageMinHeight = getElementPropertyVal("feedbackMessage", "min-height", "float"); //Feedback Message container min-height
-        pauseControlMarginTop = feedbackMessageHeight - feedbackMessageMinHeight;
-        document.getElementById("pauseControls").style.marginTop = `${pauseControlMarginTop}px`;
-    }
-}
-
 /* Feedback Message Font Resize */
 function feedbackMessageFontResize(feedbackContainerHeight) {
     let minFontSizePx = getElementPropertyVal("feedbackMessage", "font-size", "float"); //Min Supported Feedback Message Font Size in px
     let feedbackMessageMinWidth = getElementPropertyVal("feedbackMessage", "min-width", "float"); //Width of the Feedback Message element in px
     let feedbackMessageFontScale = (minFontSizePx / feedbackMessageMinWidth) * 100;
 
-    let feedbackMessagePadTop = getElementPropertyVal("feedbackMessage", "padding-top", "float") //Feedback Message container padding-top
-    let feedbackMessagePadBottom = getElementPropertyVal("feedbackMessage", "padding-bottom", "float") //Feedback Message container padding-bottom
+    let feedbackMessagePadTop = getElementPropertyVal("feedbackMessage", "padding-top", "float"); //Feedback Message container padding-top
+    let feedbackMessagePadBottom = getElementPropertyVal("feedbackMessage", "padding-bottom", "float"); //Feedback Message container padding-bottom
     let feedbackMessagePadTotal = feedbackMessagePadTop + feedbackMessagePadBottom;
 
     let feedbackMessageMinHeight = getElementPropertyVal("feedbackMessage", "min-height", "float"); //Feedback Message container min-height
-    let feedbackContainerMinHeight = getElementPropertyVal("feedbackContainer", "min-height", "float") //Feedback container min-height
+    let feedbackContainerMinHeight = getElementPropertyVal("feedbackContainer", "min-height", "float"); //Feedback container min-height
     let feedbackMessageHeightPercentage = (feedbackMessageMinHeight / feedbackContainerMinHeight) * 100; //Calculate Feedback Message height percentage
 
     let feedbackMessageHeight = (feedbackContainerHeight / 100) * feedbackMessageHeightPercentage; //Calculate Feedback Message Height
-    
+
     let feedbackMessageHeightAsPercentageOfWidth = (feedbackMessageMinHeight / feedbackMessageMinWidth) * 100; //Express Feedback Message Min Height as percentage of Feedback Message Min Width
     let feedbackMessageWidth = getElementPos("feedbackMessage").width; //Current Feedback Message width
     let feedbackMessageHeightVsWidth = (feedbackMessageWidth / 100) * feedbackMessageHeightAsPercentageOfWidth; //Calculate Feedback Message Height as percentage of Current Width
@@ -257,6 +246,22 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
         fontSize = minFontSizePx; //Do Not exceed min font size in px
     }
 
+    /* Calculate height for each Feedback Control Button element */
+    let feedbackButtonLineHeight = getElementPropertyVal("pauseButton", "line-height", "float");
+    let feedbackButtonPadTop = getElementPropertyVal("pauseButton", "padding-top", "float");
+    let feedbackButtonPadBottom = getElementPropertyVal("pauseButton", "padding-bottom", "float");
+    let feedbackButtonPadTotal = feedbackButtonPadTop + feedbackButtonPadBottom;
+    let feedbackButtonBorderTop = getElementPropertyVal("pauseButton", "border-top-width", "float");
+    let feedbackButtonBorderBottom = getElementPropertyVal("pauseButton", "border-bottom-width", "float");
+    let feedbackButtonBorderTotal = feedbackButtonBorderTop + feedbackButtonBorderBottom;
+    let feedbackButtonHeight = feedbackButtonLineHeight + feedbackButtonPadTotal + feedbackButtonBorderTotal;
+    
+    /* Calculate top-margin of startDelay element */
+    let startDelayMarginTop = (feedbackButtonHeight - feedbackMessageHeight);
+
+    /* Set height for Feedback Message element */
+    document.getElementById("feedbackMessage").style.height = `${feedbackMessageHeight}px`;
+
     /* Set font size for each Feedback Message H2 element */
     document.getElementById("feedbackMessage").firstElementChild.style.fontSize = `${fontSize}px`;
     document.getElementById("startDelay").firstElementChild.style.fontSize = `${fontSize}px`;
@@ -267,8 +272,15 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     document.getElementById("pauseButton").style.fontSize = `${fontSize}px`;
     document.getElementById("resumeButton").style.fontSize = `${fontSize}px`;
 
-    /* Update the margin-top value for the pauseControls element to maintain distance from the game board */
-    setPauseControlMargin(feedbackMessageHeight);
+    /* Set height for each Feedback Control Button element */
+    document.getElementById("refreshGameButton").style.height = `${feedbackButtonHeight}px`;
+    document.getElementById("quitGameButton").style.height = `${feedbackButtonHeight}px`;
+    document.getElementById("pauseButton").style.height = `${feedbackButtonHeight}px`;
+    document.getElementById("resumeButton").style.height = `${feedbackButtonHeight}px`;    
+    
+    /* Set height and margin-top for startDelay element */
+    document.getElementById("startDelay").style.height = `${feedbackMessageHeight}px`;
+    document.getElementById("startDelay").style.marginTop = `${startDelayMarginTop}px`;
 }
 
 function logoResize() {
@@ -481,13 +493,7 @@ function mainBlockResize() {
             /* Set the height of the gboard to equal the height of the gboard content container */
             let gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
             let gBoardHeight = gBoardContentContainerHeight;
-            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
-
-            //playerInfoFontResize(); //Scale player info font size
-            //playerInfoContainerHeight = getElementPos("playerInfoContainer").height; //Get the updated height of the player info container
-
-            //feedbackMessageFontResize(); //Scale feedback message font size
-            //feedbackContainerHeight = getElementPos("feedbackContainer").height;
+            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;;
 
             let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2; //Center the game elements vertically
             document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
