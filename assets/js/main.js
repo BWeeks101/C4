@@ -229,7 +229,7 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     let feedbackMessageWidth = getElementPos("feedbackMessage").width; //Current Feedback Message width
     let feedbackMessageHeightVsWidth = (feedbackMessageWidth / 100) * feedbackMessageHeightAsPercentageOfWidth; //Calculate Feedback Message Height as percentage of Current Width
     if (feedbackMessageHeight > feedbackMessageHeightVsWidth) {
-        feedbackMessageHeight = feedbackMessageHeightVsWidth; //Prevent extraneous vertical spacing on long thin displays by capping height based on width
+        feedbackMessageHeight = feedbackMessageHeightVsWidth; //Prevent extraneous vertical spacing on thin displays by capping height based on width
     }
 
     let feedbackMessageMaxHeight = getElementPropertyVal("feedbackMessage", "max-height", "float"); //Feedback Message container max-height
@@ -259,7 +259,7 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
 
     /* Set font size for each Feedback Message H2 element */
     document.getElementById("feedbackMessage").firstElementChild.style.fontSize = `${fontSize}px`;
-    document.getElementById("startDelay").style.fontSize = `${fontSize}px`;
+    document.getElementById("startDelay").firstElementChild.style.fontSize = `${fontSize}px`;
 
     /* Set font size for each Feedback Control Button element */
     document.getElementById("refreshGameButton").style.fontSize = `${fontSize}px`;
