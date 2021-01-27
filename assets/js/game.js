@@ -515,14 +515,12 @@ function pauseGameToggle() {
 /* Pause the game */
 function pauseGame() {
     pauseGameToggle();
-    document.getElementById("pauseControls").style.removeProperty("margin-top"); //Clear the margin top from the pause controls to maintain vertical position when the feedback text is visible
     pauseTurnTimer(); //Pause the turn time limit timer
 }
 
 /* Resume the game */
 function resumeGame() {
-    pauseGameToggle();    
-    setPauseControlMargin(getElementPos(document.getElementById("feedbackMessage")).height); //Set the Pause Controls margin-top to maintain vertical position when no feedback text is visible
+    pauseGameToggle();
     resumeTurnTimer(); //Resume the turn time limit timer
 }
 
