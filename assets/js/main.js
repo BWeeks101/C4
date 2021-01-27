@@ -164,9 +164,9 @@ function logoFontResize() {
 
 /* Player Info Font Resize */
 function playerInfoFontResize(playerInfoContainerHeight) {
-    let minFontSizePx = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "font-size", "float"); //Min Supported Player Info Font Size in px
+    let fontMinSizePx = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "font-size", "float"); //Min Supported Player Info Font Size in px
     let playerInfoMinWidth = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "min-width", "float"); //Min width of a Player Info Col-4 element in px
-    let playerInfoFontScale = (minFontSizePx / playerInfoMinWidth) * 100;
+    let playerInfoFontScale = (fontMinSizePx / playerInfoMinWidth) * 100;
 
     let playerInfoContainerPadTop = getElementPropertyVal("playerInfoContainer", "padding-top", "float"); //Player Info container padding-top
     let playerInfoContainerPadBottom = getElementPropertyVal("playerInfoContainer", "padding-bottom", "float"); //Player Info container padding-bottom
@@ -178,18 +178,18 @@ function playerInfoFontResize(playerInfoContainerHeight) {
     let playerInfoLineHeight = getElementPropertyVal(document.getElementById("player1Info").firstElementChild, "line-height", "float"); //Player Info H3 line-height in px
     playerInfoLineHeight = playerInfoLineHeight / playerInfoFontSize; //Convert Player Info H3 line-height pixel value to multiplier
 
-    let maxFontSizePx = playerInfoInnerHeight / playerInfoLineHeight; //Calculate max font size based on the height of the player info container
-    if (maxFontSizePx < minFontSizePx) {
-        maxFontSizePx = minFontSizePx; //Do not exceed min font size in px
+    let fontMaxSizePx = playerInfoInnerHeight / playerInfoLineHeight; //Calculate max font size based on the height of the player info container
+    if (fontMaxSizePx < fontMinSizePx) {
+        fontMaxSizePx = fontMinSizePx; //Do not exceed min font size in px
     }
 
     let playerInfoWidth = getElementPos("player1Info").width; //Player Info Col-4 width
 
     let fontSize = (playerInfoWidth / 100) * playerInfoFontScale; //Calculate font size based on the current width of the Player Info Col-4 elements, and the playerInfoFontScale value
-    if (fontSize > maxFontSizePx) {
-        fontSize = maxFontSizePx; //Do not exceed max font size in px
-    } else if (fontSize < minFontSizePx) {
-        fontSize = minFontSizePx; //Do not exceed min font size in px
+    if (fontSize > fontMaxSizePx) {
+        fontSize = fontMaxSizePx; //Do not exceed max font size in px
+    } else if (fontSize < fontMinSizePx) {
+        fontSize = fontMinSizePx; //Do not exceed min font size in px
     }
 
     /* Set font size for each Player Info H3 element */
@@ -200,9 +200,9 @@ function playerInfoFontResize(playerInfoContainerHeight) {
 
 /* Feedback Message Font Resize */
 function feedbackMessageFontResize(feedbackContainerHeight) {
-    let minFontSizePx = getElementPropertyVal("feedbackMessage", "font-size", "float"); //Min Supported Feedback Message Font Size in px
+    let fontMinSizePx = getElementPropertyVal("feedbackMessage", "font-size", "float"); //Min Supported Feedback Message Font Size in px
     let feedbackMessageMinWidth = getElementPropertyVal("feedbackMessage", "min-width", "float"); //Width of the Feedback Message element in px
-    let feedbackMessageFontScale = (minFontSizePx / feedbackMessageMinWidth) * 100;
+    let feedbackMessageFontScale = (fontMinSizePx / feedbackMessageMinWidth) * 100;
 
     let feedbackMessagePadTop = getElementPropertyVal("feedbackMessage", "padding-top", "float"); //Feedback Message container padding-top
     let feedbackMessagePadBottom = getElementPropertyVal("feedbackMessage", "padding-bottom", "float"); //Feedback Message container padding-bottom
@@ -234,16 +234,16 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     let feedbackMessageLineHeight = getElementPropertyVal(document.getElementById("feedbackMessage").firstElementChild, "line-height", "float"); //Feedback Message H2 line-height in px
     feedbackMessageLineHeight = feedbackMessageLineHeight / feedbackMessageFontSize; //Convert Feedback Message H2 line-height pixel value to multiplier
 
-    let maxFontSizePx = feedbackMessageInnerHeight / feedbackMessageLineHeight; //Calculate max font size based on the height of the Feedback Message container
-    if (maxFontSizePx < minFontSizePx) {
-        maxFontSizePx = minFontSizePx; //Do not exceed min font size in px
+    let fontMaxSizePx = feedbackMessageInnerHeight / feedbackMessageLineHeight; //Calculate max font size based on the height of the Feedback Message container
+    if (fontMaxSizePx < fontMinSizePx) {
+        fontMaxSizePx = fontMinSizePx; //Do not exceed min font size in px
     }
 
     let fontSize = (feedbackMessageWidth / 100) * feedbackMessageFontScale; //Calculate font size based on the current width of the feedback message, and the fontFeedbackMessageScale value
-    if (fontSize > maxFontSizePx) {
-        fontSize = maxFontSizePx; //Do not exceed max font size in px
-    } else if (fontSize < minFontSizePx) {
-        fontSize = minFontSizePx; //Do Not exceed min font size in px
+    if (fontSize > fontMaxSizePx) {
+        fontSize = fontMaxSizePx; //Do not exceed max font size in px
+    } else if (fontSize < fontMinSizePx) {
+        fontSize = fontMinSizePx; //Do Not exceed min font size in px
     }
 
     /* Calculate height for each Feedback Control Button element */
