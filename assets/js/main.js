@@ -128,11 +128,11 @@ function getElementPos(element) {
 
 /* Logo Font Resize */
 function logoFontResize() {
-    let minFontSizePx = getElementPropertyVal(document.getElementById("logoGridHcol-0").firstElementChild, "font-size", "float"); //Min Supported Logo Font Size in px
-    let minLogoContentSize = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "min-width", "float"); //Min Logo Content Size in px
-    let maxLogoContentSize = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "max-width", "float"); //Max Logo Content Size in px
-    let fontLogoScale = (minFontSizePx / minLogoContentSize) * 100; //Percentage difference betwen font and logo content
-    let maxFontSizePx = (maxLogoContentSize / 100) * fontLogoScale; //Max Logo Font Size in px
+    let fontMinSizePx = getElementPropertyVal(document.getElementById("logoGridHcol-0").firstElementChild, "font-size", "float"); //Min Supported Logo Font Size in px
+    let logoContentMinWidth = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "min-width", "float"); //Min Logo Content Size in px
+    let logoContentMaxWidth = getElementPropertyVal(document.getElementById("logoGridCol0RowId0").firstElementChild.lastElementChild, "max-width", "float"); //Max Logo Content Size in px
+    let logoFontScale = (fontMinSizePx / logoContentMinWidth) * 100; //Percentage difference betwen font and logo content
+    let fontMaxSizePx = (logoContentMaxWidth / 100) * logoFontScale; //Max Logo Font Size in px
 
     let gridCounts = dataGridDisplayGetCounts("logoGrid"); //Get the number of rows and columns for the logoGrid element
     if (gridCounts === false) { //If false, then we could not return the values, so return false
@@ -150,11 +150,11 @@ function logoFontResize() {
         }
     }
 
-    let fontSize = (contentWidth / 100) * fontLogoScale; //Calculate font size based on current content col width, and the fontLogoScale value
-    if (fontSize > maxFontSizePx) {
-        fontSize = maxFontSizePx; //Do not exceed max font size in px
-    } else if (fontSize < minFontSizePx) {
-        fontSize = minFontSizePx; //Do not exceed min font size in px
+    let fontSize = (contentWidth / 100) * logoFontScale; //Calculate font size based on current content col width, and the fontLogoScale value
+    if (fontSize > fontMaxSizePx) {
+        fontSize = fontMaxSizePx; //Do not exceed max font size in px
+    } else if (fontSize < fontMinSizePx) {
+        fontSize = fontMinSizePx; //Do not exceed min font size in px
     }
 
     for (i = 0; i < gridCounts[0]; i += 1) {
