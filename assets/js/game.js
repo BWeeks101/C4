@@ -11,7 +11,7 @@
 /*global c4, dataGridDisplayClicked, stopTurnTimer, elementDisplay, restartTurnTimer,
 createDynamicGameStyle, setTurnTimeLimit, saveTurnTimeLimit, show, stopStartDelay,
 dataGridDisplayRemove, menuBackButton, checkSideNavState, togglePauseLink, pauseTurnTimer,
-resumeTurnTimer, togglePauseButton, getElementPos, mainOnResize, getElementPropertyVal */
+resumeTurnTimer, togglePauseButton, getElementPropertyVal */
 
 /* JSHint warns that selectRandCol, gameClicked, startGame, refreshGame, quitGame, pauseGame, resumeGame, resetGame are unusued.  These are called externally */
 /* from this file */
