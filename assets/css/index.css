@@ -75,6 +75,11 @@
     max-width: 720px;
 }
 
+#gameBoardContainer {
+    min-width: 260px;
+    min-height: 432px;
+}
+
 #rulesContainer {
     text-align: left;    
 }
