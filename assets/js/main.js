@@ -218,17 +218,25 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     let feedbackMessagePadTop = getElementPropertyVal("feedbackMessage", "padding-top", "float") //Feedback Message container padding-top
     let feedbackMessagePadBottom = getElementPropertyVal("feedbackMessage", "padding-bottom", "float") //Feedback Message container padding-bottom
     let feedbackMessagePadTotal = feedbackMessagePadTop + feedbackMessagePadBottom;
-    
+
     let feedbackMessageMinHeight = getElementPropertyVal("feedbackMessage", "min-height", "float"); //Feedback Message container min-height
     let feedbackContainerMinHeight = getElementPropertyVal("feedbackContainer", "min-height", "float") //Feedback container min-height
     let feedbackMessageHeightPercentage = (feedbackMessageMinHeight / feedbackContainerMinHeight) * 100; //Calculate Feedback Message height percentage
 
-    let feedbackMessageMaxHeight = getElementPropertyVal("feedbackMessage", "max-height", "float"); //Feedback Message container max-height
     let feedbackMessageHeight = (feedbackContainerHeight / 100) * feedbackMessageHeightPercentage; //Calculate Feedback Message Height
+    
+    let feedbackMessageHeightAsPercentageOfWidth = (feedbackMessageMinHeight / feedbackMessageMinWidth) * 100; //Express Feedback Message Min Height as percentage of Feedback Message Min Width
+    let feedbackMessageWidth = getElementPos("feedbackMessage").width; //Current Feedback Message width
+    let feedbackMessageHeightVsWidth = (feedbackMessageWidth / 100) * feedbackMessageHeightAsPercentageOfWidth; //Calculate Feedback Message Height as percentage of Current Width
+    if (feedbackMessageHeight > feedbackMessageHeightVsWidth) {
+        feedbackMessageHeight = feedbackMessageHeightVsWidth; //Prevent extraneous vertical spacing on long thin displays by capping height based on width
+    }
+
+    let feedbackMessageMaxHeight = getElementPropertyVal("feedbackMessage", "max-height", "float"); //Feedback Message container max-height
     if (feedbackMessageHeight > feedbackMessageMaxHeight) {
-        feedbackMessageHeight = feedbackMessageMaxHeight;
+        feedbackMessageHeight = feedbackMessageMaxHeight; //Do not exceed max-height
     } else if (feedbackMessageHeight < feedbackMessageMinHeight) {
-        feedbackMessageHeight = feedbackMessageMinHeight;
+        feedbackMessageHeight = feedbackMessageMinHeight; //Do not exceed min-height
     }
 
     let feedbackMessageInnerHeight = feedbackMessageHeight - feedbackMessagePadTotal; //Feedback Message height minus padding
@@ -242,8 +250,6 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
         maxFontSizePx = minFontSizePx; //Do not exceed min font size in px
     }
     
-    let feedbackMessageWidth = getElementPos("feedbackMessage").width;
-
     let fontSize = (feedbackMessageWidth / 100) * feedbackMessageFontScale; //Calculate font size based on the current width of the feedback message, and the fontFeedbackMessageScale value
     if (fontSize > maxFontSizePx) {
         fontSize = maxFontSizePx; //Do not exceed max font size in px
