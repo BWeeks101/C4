@@ -17,7 +17,7 @@ initC4Select, $ */
 /* JSHint Warns that the hideAll() function is unusued.  The function is called externally from this file */
 
 /* Initialise global settings object */
-let c4 = new appGlobals();
+let c4 = appGlobals();
 
 /* Switch between light and dark themes */
 /* Requires: */
@@ -168,8 +168,8 @@ function playerInfoFontResize(playerInfoContainerHeight) {
     let playerInfoMinWidth = getElementPropertyVal(document.getElementById("playerInfoContainer").firstElementChild, "min-width", "float"); //Min width of a Player Info Col-4 element in px
     let playerInfoFontScale = (minFontSizePx / playerInfoMinWidth) * 100;
 
-    let playerInfoContainerPadTop = getElementPropertyVal("playerInfoContainer", "padding-top", "float") //Player Info container padding-top
-    let playerInfoContainerPadBottom = getElementPropertyVal("playerInfoContainer", "padding-bottom", "float") //Player Info container padding-bottom
+    let playerInfoContainerPadTop = getElementPropertyVal("playerInfoContainer", "padding-top", "float"); //Player Info container padding-top
+    let playerInfoContainerPadBottom = getElementPropertyVal("playerInfoContainer", "padding-bottom", "float"); //Player Info container padding-bottom
     let playerInfoContainerPadTotal = playerInfoContainerPadTop + playerInfoContainerPadBottom;
 
     let playerInfoInnerHeight = playerInfoContainerHeight - playerInfoContainerPadTotal; //Player Info height minus padding
@@ -185,7 +185,7 @@ function playerInfoFontResize(playerInfoContainerHeight) {
 
     let playerInfoWidth = getElementPos("player1Info").width; //Player Info Col-4 width
 
-    let fontSize = (playerInfoWidth / 100) * playerInfoFontScale; //Calculate font size based on the current width of the Player Info Col-4 elements, and the playerInfoFontScale value    
+    let fontSize = (playerInfoWidth / 100) * playerInfoFontScale; //Calculate font size based on the current width of the Player Info Col-4 elements, and the playerInfoFontScale value
     if (fontSize > maxFontSizePx) {
         fontSize = maxFontSizePx; //Do not exceed max font size in px
     } else if (fontSize < minFontSizePx) {
@@ -238,7 +238,7 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     if (maxFontSizePx < minFontSizePx) {
         maxFontSizePx = minFontSizePx; //Do not exceed min font size in px
     }
-    
+
     let fontSize = (feedbackMessageWidth / 100) * feedbackMessageFontScale; //Calculate font size based on the current width of the feedback message, and the fontFeedbackMessageScale value
     if (fontSize > maxFontSizePx) {
         fontSize = maxFontSizePx; //Do not exceed max font size in px
@@ -255,7 +255,7 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     let feedbackButtonBorderBottom = getElementPropertyVal("pauseButton", "border-bottom-width", "float");
     let feedbackButtonBorderTotal = feedbackButtonBorderTop + feedbackButtonBorderBottom;
     let feedbackButtonHeight = feedbackButtonLineHeight + feedbackButtonPadTotal + feedbackButtonBorderTotal;
-    
+
     /* Calculate top-margin of startDelay element */
     let startDelayMarginTop = (feedbackButtonHeight - feedbackMessageHeight);
 
@@ -276,8 +276,8 @@ function feedbackMessageFontResize(feedbackContainerHeight) {
     document.getElementById("refreshGameButton").style.height = `${feedbackButtonHeight}px`;
     document.getElementById("quitGameButton").style.height = `${feedbackButtonHeight}px`;
     document.getElementById("pauseButton").style.height = `${feedbackButtonHeight}px`;
-    document.getElementById("resumeButton").style.height = `${feedbackButtonHeight}px`;    
-    
+    document.getElementById("resumeButton").style.height = `${feedbackButtonHeight}px`;
+
     /* Set height and margin-top for startDelay element */
     document.getElementById("startDelay").style.height = `${feedbackMessageHeight}px`;
     document.getElementById("startDelay").style.marginTop = `${startDelayMarginTop}px`;
@@ -450,7 +450,7 @@ function mainBlockResize() {
             } else if (playerInfoContainerHeight < playerInfoContainerMinHeight) {
                 playerInfoContainerHeight = playerInfoContainerMinHeight;
             }
-            
+
             playerInfoFontResize(playerInfoContainerHeight);
 
             /* Set the height of the feedback container */
@@ -493,7 +493,7 @@ function mainBlockResize() {
             /* Set the height of the gboard to equal the height of the gboard content container */
             let gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
             let gBoardHeight = gBoardContentContainerHeight;
-            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;;
+            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
 
             let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2; //Center the game elements vertically
             document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
