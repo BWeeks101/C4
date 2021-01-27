@@ -79,7 +79,7 @@ function feedbackStartDelay() {
     document.getElementById("turnTimeLimit").firstElementChild.style.removeProperty("color");
     document.getElementById("feedbackMessage").style.removeProperty("color");
     document.getElementById("feedbackMessage").firstElementChild.innerHTML = "Game Start In:";
-    
+
     elementDisplay("show", "startDelay"); //Show the startDelay element
     elementDisplay("hide", "pauseControls"); //Hide the pause button
     elementDisplay("show", "feedbackContainer"); //Show visible feedback elements
@@ -94,8 +94,8 @@ function feedbackStartDelay() {
         } else {
             stopStartDelay(); //We're at 0, so stop the timer
             elementDisplay("hide", "startDelay"); //Hide the startDelay element
-            document.getElementById("startDelay").firstElementChild.innerHTML = "5"; //Reset the startDelay innerHTML to it's default value            
-            document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML            
+            document.getElementById("startDelay").firstElementChild.innerHTML = "5"; //Reset the startDelay innerHTML to it's default value
+            document.getElementById("feedbackMessage").firstElementChild.innerHTML = ""; //Clear the feedback message innerHTML
             elementDisplay("show", "pauseControls"); //Display the Pause Button
             startTurnTimer(); //Start the turn timer (and therefore the game)
             showGameSideNavMenu(); //Show the relevant links on the sideNav
