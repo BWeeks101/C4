@@ -521,8 +521,8 @@ function pauseGame() {
 
 /* Resume the game */
 function resumeGame() {
-    pauseGameToggle();
-    document.getElementById("pauseControls").style.marginTop = `${getElementPos(document.getElementById("feedbackMessage").firstElementChild).height}px`; //Margin top of the Pause controls = height of the first line of the feedback message
+    pauseGameToggle();    
+    setPauseControlMargin(getElementPos(document.getElementById("feedbackMessage")).height); //Set the Pause Controls margin-top to maintain vertical position when no feedback text is visible
     resumeTurnTimer(); //Resume the turn time limit timer
 }
 
