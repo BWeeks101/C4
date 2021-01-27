@@ -139,7 +139,7 @@
 .feedback-container {
     width: 100%;
     min-height: 90.5938px;
-    max-height: 150.984;    
+    max-height: 150.984px;    
     padding: 10px 0 5px;
     color: var(--feedbackText);    
 }
@@ -158,7 +158,6 @@
 }
 
 .feedback-message {
-    padding-bottom: 5px;    
     font-size: 22px;
     min-width: 260px;
     min-height: 31px;
@@ -167,4 +166,8 @@
 
 .feedback-message h2 {
     margin: 0;    
+}
+
+#feedbackMessage {
+    padding-bottom: 5px
 }
