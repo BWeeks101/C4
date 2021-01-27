@@ -8,7 +8,7 @@
 
 /*jshint maxlen: 250 */
 
-/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu, getElementPos, mainOnResize */
+/*global parseColSelection, selectRandCol, c4, elementDisplay, showGameSideNavMenu, mainOnResize */
 
 /* JSHint warns that pauseTurnTimer, resumeTurnTimer, restartTurnTimer, feedbackStartDelay are unusued.  These are called externally from this file */
 
