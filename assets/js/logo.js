@@ -243,12 +243,19 @@ function displayLogo() {
     return true;
 }
 
-/* Refresh the logo dataGridDisplay */
-function refreshLogoGrid() {
+/* Remove the logo dataGridDisplay and remove the max-width/max-height values from the logoContainer */
+function removeLogoGrid() {
     /* Remove max/min width styling to allow resize on draw */ 
     document.getElementById("logoContainer").style.removeProperty("max-width");
     document.getElementById("logoContainer").style.removeProperty("min-width");
-    
+
+    c4.logo.animState = false; //Set the global animState to false to stop any active animations
+
     dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
+}
+
+/* Refresh the logo dataGridDisplay */
+function refreshLogoGrid() {
+    removeLogoGrid(); //Remove the logoGrid
     drawLogoGrid(); //Redraw the logoGrid
 }
