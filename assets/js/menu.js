@@ -86,8 +86,8 @@ function mainShow(option) {
     case "rules":
         /* Display the rules container */
         c4.uiState = "rules";
+        elementDisplay("hide", "logoContainer");
         elementDisplay("show", "rulesContainer");
-        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
         break;
     case "settings":
         c4.uiState = "settings";
@@ -96,8 +96,8 @@ function mainShow(option) {
         document.getElementById("p1TokenColor").value = c4.game.p1.tokenColor;
         document.getElementById("p2UserName").value = c4.game.p2.name;
         document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
+        elementDisplay("hide", "logoContainer");
         elementDisplay("show", "menuSettings");
-        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
         break;
     case "startGame":
         c4.uiState = "startGame";
@@ -107,7 +107,7 @@ function mainShow(option) {
         displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
         dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board
         elementDisplay("show", "gameBoardContainer"); //Show the game board container
-        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
+        elementDisplay("hide", "logoContainer");
         feedbackStartDelay(); //Begin the game start countdown
         break;
     case "turnTimeLimit":
@@ -190,23 +190,9 @@ function show(option, newstate) {
     }); //Check the state of the sideNav (waiting for close if open), the run sideNavShow() against the value of the option argument
 }
 
-/* Determine which pane is shown, apply the appropriate action, then show the main pane */
+/* Show the default pane */
 function menuBackButton() {
-    let validated;
-    switch (c4.uiState) {
-    case "startGame": //game board, rules pane or player settings menu. Show the default pane then refresh the logo
-    case "rules":
-    case "settings":
-        validated = show("default");
-        if (validated !== false) { //If show("default") did not return false, then continue.
-            refreshLogoGrid();
-            mainOnResize();
-        }
-        break;
-    case "turnTimeLimit": //turn time limit pane.  Load the default pane, do not refresh the logo
-        show("default");
-        break;
-    }
+    show("default"); //Load the default pane.
 }
 
 /* Toggle between the Pause and Resume links on the sideNav */
