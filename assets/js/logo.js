@@ -156,7 +156,7 @@ function queue(i, targetPoint, delay, final) {
 /*      colCount: Integer.  Number of columns in header */
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
-    /* Set the global log.animState property value to true, set min and max widths to current width to lock resize */
+    /* Set the global logo.animState property value to true, set min and max widths to current width to lock resize */
     c4.logo.animState = true;
     document.getElementById("logoContainer").style.maxWidth = `${getElementPos("logoContainer").width}px`;
     document.getElementById("logoContainer").style.minWidth = `${getElementPos("logoContainer").width}px`;
@@ -172,6 +172,7 @@ function animateLogo(colCount, colCenter) {
         for (i = 0; i < colCount; i += 1) {
 
             if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed during queue preparation
+                c4.logo.animState = false; //set the global logo.animState property value to false
                 return; //Do not continue
             }
 
