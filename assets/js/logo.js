@@ -230,7 +230,7 @@ function drawLogoGrid() {
     }
 
     /* Begin animation */
-    animateLogo(c4.logo.logoId, gridCounts[0], colCenter);
+    animateLogo(gridCounts[0], colCenter);
 }
 
 /* Draw the logoGrid. */
