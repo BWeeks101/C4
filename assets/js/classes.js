@@ -53,6 +53,7 @@ class gameSettings {
 class logoSettings {
     constructor() {
         this.animState = false;
+        this.logoId = 0;
         this.grid = new DataGrid(["C","O","N","N","E","C","T","4"], [[undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined], [undefined]]);
         this.smGrid = new DataGrid(["C", "4"], [[undefined], [undefined]]);
     }
