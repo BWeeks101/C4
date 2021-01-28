@@ -424,21 +424,14 @@ function mainBlockResize() {
         /* If the game board container is visible, then calculate and apply height and width properties for it and it's children to ensure we do not scroll the page */
         if (document.getElementById("gameBoardContainer").classList.contains("d-none") === false) {
             /* Remove any existing height, max-height, or max-width style properties from the game board container and appropriate children */
-            document.getElementById("gameBoardContainer").style.removeProperty("height");
             document.getElementById("gameBoardContainer").style.removeProperty("max-width");
             document.getElementById("playerInfoContainer").style.removeProperty("margin-top");
-            document.getElementById("gameContainer").style.removeProperty("height");
-            document.getElementById("feedbackContainer").style.removeProperty("height");
-            document.getElementById("gBoardContentContainer").style.removeProperty("max-height");
-            document.getElementById("gBoard").style.removeProperty("height");
 
             let gameBoardContainerMinHeight = getElementPropertyVal("gameBoardContainer", "min-height", "float"); //Min height of the Game Board container in px
 
-            /* Set the game board container height to equal the height of the parent - padding */
-            let gameBoardContainerHeight = mainBlockContainerHeight - mainBlockContainerPadTotal;
-            document.getElementById("gameBoardContainer").style.height = `${gameBoardContainerHeight}px`;
+            let gameBoardContainerHeight = mainBlockContainerHeight - mainBlockContainerPadTotal; //Calculate the game board container height
 
-            /* Set the height of the player info container */
+            /* Calculate the height of the player info container and scale text elements */
             let playerInfoContainerMinHeight = getElementPropertyVal("playerInfoContainer", "min-height", "float"); //Min height of the Player Info container in px
             let playerInfoContainerHeightPercentage = (playerInfoContainerMinHeight / gameBoardContainerMinHeight) * 100;
 
@@ -446,14 +439,14 @@ function mainBlockResize() {
             let playerInfoContainerHeight = (gameBoardContainerHeight / 100) * playerInfoContainerHeightPercentage;
 
             if (playerInfoContainerHeight > playerInfoContainerMaxHeight) {
-                playerInfoContainerHeight = playerInfoContainerMaxHeight;
+                playerInfoContainerHeight = playerInfoContainerMaxHeight; //Do not exceed the max height
             } else if (playerInfoContainerHeight < playerInfoContainerMinHeight) {
-                playerInfoContainerHeight = playerInfoContainerMinHeight;
+                playerInfoContainerHeight = playerInfoContainerMinHeight; //Do not exceed the min height
             }
 
             playerInfoFontResize(playerInfoContainerHeight);
 
-            /* Set the height of the feedback container */
+            /* Calculate the height of the feedback container and scale text and button elements */
             let feedbackContainerMinHeight = getElementPropertyVal("feedbackContainer", "min-height", "float"); //Min height of the Feedback container in px
             let feedbackContainerHeightPercentage = (feedbackContainerMinHeight / gameBoardContainerMinHeight) * 100;
 
@@ -461,45 +454,36 @@ function mainBlockResize() {
             let feedbackContainerHeight = (gameBoardContainerHeight / 100) * feedbackContainerHeightPercentage;
 
             if (feedbackContainerHeight > feedbackContainerMaxHeight) {
-                feedbackContainerHeight = feedbackContainerMaxHeight;
+                feedbackContainerHeight = feedbackContainerMaxHeight; //Do not exceed the max height
             } else if (feedbackContainerHeight < feedbackContainerMinHeight) {
-                feedbackContainerHeight = feedbackContainerMinHeight;
+                feedbackContainerHeight = feedbackContainerMinHeight; //Do not exceed the min height
             }
 
             feedbackMessageFontResize(feedbackContainerHeight);
 
-            /* Set the height of the game container element */
-            let gameContainerHeight = gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight);
-            document.getElementById("gameContainer").style.height = `${gameContainerHeight}px`;
+            let gBoardContentContainerMaxHeight = gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight); //Calculate the max height of the gboard content container
 
-            /* Set the max height of the gboard content container */
-            let gBoardContentContainerMaxHeight = gameContainerHeight; //gboard content container max height = game container height - feedback container height
-            document.getElementById("gBoardContentContainer").style.maxHeight = `${gBoardContentContainerMaxHeight}px`;
-
-            /* Calculate the max width of the game board container */
             let gameBoardContainerMaxWidth = (gBoardContentContainerMaxHeight / 85.8) * 100;  //game board container max width =  116.55% of the game board container max height
 
             /* Get the default max width of the game board container per index.css */
-            /* Utilise the value for the rules container as this will never change, so we will always get the default value */
-            /* (rulesContainer and gameBoardContainer share width and max-width style rules) */
+            /* rulesContainer and gameBoardContainer share width and max-width style rules */
+            /* Utilise the value for the rules container as this will never change, so we will always get the "default" value */
             let gameBoardContainerMaxWidthPerStyle = getElementPropertyVal("rulesContainer", "max-width", "float");
             if (gameBoardContainerMaxWidth > gameBoardContainerMaxWidthPerStyle) {
                 gameBoardContainerMaxWidth = gameBoardContainerMaxWidthPerStyle; //Do not exceed the max-width value set in index.css
             }
 
-            /* Set the max width of the game board container */
-            document.getElementById("gameBoardContainer").style.maxWidth = `${gameBoardContainerMaxWidth}px`;
+            document.getElementById("gameBoardContainer").style.maxWidth = `${gameBoardContainerMaxWidth}px`; //Set max width of the game board container allowing game board elements to scale within desired boundaries
 
-            /* Set the height of the gboard to equal the height of the gboard content container */
-            let gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height;
-            let gBoardHeight = gBoardContentContainerHeight;
-            document.getElementById("gBoard").style.height = `${gBoardHeight}px`;
+            let gBoardContentContainerHeight = getElementPos("gBoardContentContainer").height; //Get the height of the gboard content container
 
-            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardHeight)) / 2; //Center the game elements vertically
-            document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`;
-
-            gameContainerHeight = gBoardHeight; //Reduce the height of the game container element to fit the height of the game board and feedback container elements
-            document.getElementById("gameContainer").style.height = `${gameContainerHeight}px`;
+            /* Calculate half the remaining unused height above the game board elements, and set this as a margin-top on the playerInfoContainer to vertically center the content */
+            let playerInfoContainerMarginTop = (gameBoardContainerHeight - (playerInfoContainerHeight + feedbackContainerHeight + gBoardContentContainerHeight)) / 2;
+            if (playerInfoContainerMarginTop <= 0) {
+                document.getElementById("playerInfoContainer").style.removeProperty("margin-top"); //if game board content = full height remove the margin-top property
+            } else {
+                document.getElementById("playerInfoContainer").style.marginTop = `${playerInfoContainerMarginTop}px`; //otherwise set the margin-top
+            }
 
             return;
         }
