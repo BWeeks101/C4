@@ -134,23 +134,22 @@ function dropChar(animId, colId, targetPoint, final) {
 
 /* Wait for the provided delay time, then start the drop animation for the specified column */
 /* Requires: */
+/*      animId: Integer. Id of the logo we are going to animate */
 /*      i: Integer.  Id of header column to animate */
 /*      targetPoint: Number of pixels to adjust header content by */
 /*      delay: Number of miliseconds to delay starting the animation */
 /*      final (OPTIONAL): boolean.  True for the last item in the queue */
-function queue(i, targetPoint, delay, final) {
-    if (document.getElementById("logoGrid").firstElementChild === null || c4.logo.animState === false) { //If the logoGrid is removed during queue generation or the global logo.animState value is false
-        if (c4.logo.animState === true) {
-            c4.logo.animState = false; //set the global logo.animState property value to false
-        }
+function queue(animId, i, targetPoint, delay, final) {
+    /* If the global logo.animState value is false, or the animId does not match the global logo.logoId */
+    if (c4.logo.animState === false || c4.logo.logoId !== animId) {
         return; //Do not start another animation
     }
 
     setTimeout(function () {
         if (final === true) {
-            dropChar(i, targetPoint, final);
+            dropChar(animId, i, targetPoint, final);
         } else {
-            dropChar(i, targetPoint);
+            dropChar(animId, i, targetPoint);
         }
     }, delay);
 }
