@@ -245,6 +245,10 @@ function displayLogo() {
 
 /* Refresh the logo dataGridDisplay */
 function refreshLogoGrid() {
+    /* Remove max/min width styling to allow resize on draw */ 
+    document.getElementById("logoContainer").style.removeProperty("max-width");
+    document.getElementById("logoContainer").style.removeProperty("min-width");
+    
     dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
     drawLogoGrid(); //Redraw the logoGrid
 }
