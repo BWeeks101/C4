@@ -87,7 +87,7 @@ function mainShow(option) {
         /* Display the rules container */
         c4.uiState = "rules";
         elementDisplay("show", "rulesContainer");
-        dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
+        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
         break;
     case "settings":
         c4.uiState = "settings";
@@ -97,7 +97,7 @@ function mainShow(option) {
         document.getElementById("p2UserName").value = c4.game.p2.name;
         document.getElementById("p2TokenColor").value = c4.game.p2.tokenColor;
         elementDisplay("show", "menuSettings");
-        dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
+        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
         break;
     case "startGame":
         c4.uiState = "startGame";
@@ -107,7 +107,7 @@ function mainShow(option) {
         displayDataGrid(c4.game.gBoardDG, "gBoard", "col", false); //Recreate the game board
         dataGridDisplaySetOnClick("gBoard", "gameClicked(this)"); //Replace the default datagrid onclick function for the game board
         elementDisplay("show", "gameBoardContainer"); //Show the game board container
-        dataGridDisplayRemove("logoGrid"); //Remove the logoGrid dataGridDisplay
+        removeLogoGrid(); //Remove the logoGrid dataGridDisplay
         feedbackStartDelay(); //Begin the game start countdown
         break;
     case "turnTimeLimit":
