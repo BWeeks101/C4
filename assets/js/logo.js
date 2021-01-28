@@ -161,10 +161,13 @@ function queue(animId, i, targetPoint, delay, final) {
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
     /* Set the global logo.animState property value to true, set min and max widths to current width to lock resize */
-    c4.logo.animState = true;
+    c4.logo.animState = true;    
     document.getElementById("logoContainer").style.maxWidth = `${getElementPos("logoContainer").width}px`;
     document.getElementById("logoContainer").style.minWidth = `${getElementPos("logoContainer").width}px`;
-
+    
+    /* Get the current global logo.logoId */
+    let animId = c4.logo.logoId;
+    
     /* Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay */
     setTimeout(function () {
         let numFrames;
@@ -175,8 +178,8 @@ function animateLogo(colCount, colCenter) {
         let targetPoint;
         for (i = 0; i < colCount; i += 1) {
 
-            if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed during queue preparation
-                c4.logo.animState = false; //set the global logo.animState property value to false
+            /* If the global logo.animState value is false, or the animId does not match the global logo.logoId */
+            if (c4.logo.animState === false || c4.logo.logoId !== animId) {
                 return; //Do not continue
             }
 
@@ -189,9 +192,9 @@ function animateLogo(colCount, colCenter) {
             delay = percentComplete * i; //Multiply percentComplete by the id of the current column to create a staggered drop effect
 
             if (i === colCount - 1) {
-                queue(i, targetPoint, delay, true); //Queue up the animation start call for the final column
+                queue(animId, i, targetPoint, delay, true); //Queue up the animation start call for the final column
             } else {
-                queue(i, targetPoint, delay); //Queue up the animation start call
+                queue(animId, i, targetPoint, delay); //Queue up the animation start call
             }
         }
     }, 2000);
