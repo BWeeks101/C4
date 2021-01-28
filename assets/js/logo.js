@@ -81,12 +81,14 @@ function getLogoGridColCenter(colId) {
 /* Increase the TOP style value of the selected column until it meets the targetPoint */
 /* If the column id is even, then the content background is changed to the default p1TokenColor, otherwise it changes to the default p2TokenColor */
 /* Requires: */
+/*      animId: Integer. Id of the logo we are going to animate */
 /*      colId: Integer.  Id of the column header we are going to animate */
 /*      targetPoint: Number of pixels to adjust the header content by */
 /*      final (OPTIONAL): boolean.  True indicates that this is the last column to be animated, so we will update the global c4.logo.animState to false on completion */
-function dropChar(colId, targetPoint, final) {
+function dropChar(animId, colId, targetPoint, final) {
     function frame() {
-        if (document.getElementById("logoGrid").firstElementChild === null || c4.logo.animState === false) { //If the logoGrid is removed mid animation or the global logo.animState is changed
+        /* If the global logo.animState value is false, or the animId does not match the global logo.logoId */
+        if (c4.logo.animState === false || c4.logo.logoId !== animId) {
             clearInterval(id); //Stop animating
             if (c4.logo.animState === true) {
                 c4.logo.animState = false; //Change the global logo.animState to false
