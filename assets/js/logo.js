@@ -137,7 +137,10 @@ function dropChar(colId, targetPoint, final) {
 /*      delay: Number of miliseconds to delay starting the animation */
 /*      final (OPTIONAL): boolean.  True for the last item in the queue */
 function queue(i, targetPoint, delay, final) {
-    if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed during queue generation
+    if (document.getElementById("logoGrid").firstElementChild === null || c4.logo.animState === false) { //If the logoGrid is removed during queue generation or the global logo.animState value is false
+        if (c4.logo.animState === true) {
+            c4.logo.animState = false; //set the global logo.animState property value to false
+        }
         return; //Do not start another animation
     }
 
