@@ -9,7 +9,7 @@
 /*jshint maxlen: 250 */
 
 /*global elementDisplay, dataGridDisplayGetCounts, getElementPos, displayDataGrid, c4,
-logoFontResize, dataGridDisplayRemove, logoResize, getElementPropertyVal */
+logoFontResize, dataGridDisplayRemove, logoResize, getElementPropertyVal, mainOnResize */
 
 /* JSHint warns that displayLogo, refreshLogoGrid are unusued.  These are called externally from this file */
 
@@ -92,7 +92,7 @@ function dropChar(animId, colId, targetPoint, final) {
             clearInterval(id); //Stop animating
             if (c4.logo.animState === true) {
                 c4.logo.animState = false; //Change the global logo.animState to false
-            }            
+            }
             return;
         }
 
@@ -161,13 +161,13 @@ function queue(animId, i, targetPoint, delay, final) {
 /*      colCenter: Object.  Center coordinates of header and content columns */
 function animateLogo(colCount, colCenter) {
     /* Set the global logo.animState property value to true, set min and max widths to current width to lock resize */
-    c4.logo.animState = true;    
+    c4.logo.animState = true;
     document.getElementById("logoContainer").style.maxWidth = `${getElementPos("logoContainer").width}px`;
     document.getElementById("logoContainer").style.minWidth = `${getElementPos("logoContainer").width}px`;
-    
+
     /* Get the current global logo.logoId */
     let animId = c4.logo.logoId;
-    
+
     /* Delay for 2s, then call the queue function sequentially for each column in the logo dataGridDisplay */
     setTimeout(function () {
         let numFrames;
@@ -202,7 +202,7 @@ function animateLogo(colCount, colCenter) {
 
 /* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
-    c4.logo.logoId += 1 //Increment the global logoId value
+    c4.logo.logoId += 1; //Increment the global logoId value
     let result = displayDataGrid(c4.logo.grid, "logoGrid", "off", false); //Create the dataGrid display
     if (result === false) { //If false, then we could not create the display, so return false
         console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logo.grid}, "logoGrid", "off", false).`);
@@ -250,7 +250,7 @@ function displayLogo() {
 
 /* Remove the logo dataGridDisplay and remove the max-width/max-height values from the logoContainer */
 function removeLogoGrid() {
-    /* Remove max/min width styling to allow resize on draw */ 
+    /* Remove max/min width styling to allow resize on draw */
     document.getElementById("logoContainer").style.removeProperty("max-width");
     document.getElementById("logoContainer").style.removeProperty("min-width");
 
