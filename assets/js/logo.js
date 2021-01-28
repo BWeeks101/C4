@@ -198,6 +198,7 @@ function animateLogo(colCount, colCenter) {
 
 /* Create the logo dataGridDisplay then begin the logo animation */
 function drawLogoGrid() {
+    c4.logo.logoId += 1 //Increment the global logoId value
     let result = displayDataGrid(c4.logo.grid, "logoGrid", "off", false); //Create the dataGrid display
     if (result === false) { //If false, then we could not create the display, so return false
         console.log(`Function drawLogoGrid failed.  Cascade failure originating with displayDataGrid(${c4.logo.grid}, "logoGrid", "off", false).`);
@@ -229,7 +230,7 @@ function drawLogoGrid() {
     }
 
     /* Begin animation */
-    animateLogo(gridCounts[0], colCenter);
+    animateLogo(c4.logo.logoId, gridCounts[0], colCenter);
 }
 
 /* Draw the logoGrid. */
