@@ -86,8 +86,11 @@ function getLogoGridColCenter(colId) {
 /*      final (OPTIONAL): boolean.  True indicates that this is the last column to be animated, so we will update the global c4.logo.animState to false on completion */
 function dropChar(colId, targetPoint, final) {
     function frame() {
-        if (document.getElementById("logoGrid").firstElementChild === null) { //If the logoGrid is removed mid animation
+        if (document.getElementById("logoGrid").firstElementChild === null || c4.logo.animState === false) { //If the logoGrid is removed mid animation or the global logo.animState is changed
             clearInterval(id); //Stop animating
+            if (c4.logo.animState === true) {
+                c4.logo.animState = false; //Change the global logo.animState to false
+            }            
             return;
         }
 
@@ -109,7 +112,7 @@ function dropChar(colId, targetPoint, final) {
                     c4.logo.animState = false; //Change the global logo.animState to false
                     document.getElementById("logoContainer").style.removeProperty("max-width"); //Remove max/min width styling to allow resize
                     document.getElementById("logoContainer").style.removeProperty("min-width");
-                    logoResize(); //Call resize in case the window size has adjusted
+                    mainOnResize(); //Call resize in case the window size has adjusted
                 }, delay);
             }
             return true;
