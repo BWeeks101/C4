@@ -349,4 +349,4 @@ I received inspiration for this project from my mentor, Adegbenga Adeye (@gbenga
 *  [CSS-Tricks.com](https://css-tricks.com/)
 *  [Stack Overflow](https://stackoverflow.com/)*
 
-*It is almost impossible to search for any coding related issue online without encountering Stack Overflow links towards the top of the results. Whilst I certainly read Stack Overflow when researching solutions to challenges, I have not (to the best of my recollection or per my notes) utilised any code directly, in whole or in part, (with the exception of the workaround listed in the [credits](#credits) above).
+*It is almost impossible to search for any coding related issue online without encountering Stack Overflow links towards the top of the results. Whilst I certainly read Stack Overflow when researching solutions to challenges, I have not (to the best of my recollection or per my notes) utilised any code directly, in whole or in part, (with the exception of the workaround for this readme listed in the [credits](#credits) above).
