@@ -91,11 +91,12 @@ Dark Theme primary colours:
 * Background: ![#262626](https://via.placeholder.com/15/262626/000000?text=+) #262626
 * Fonts and links: ![#fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) #fafafa
 * Hover: ![#ec4c4c](https://via.placeholder.com/15/ec4c4c/000000?text=+) #ec4c4c
-`#ec4c4c`
+
 Light Theme primary colours:
 * Background: ![#f7f9fa](https://via.placeholder.com/15/f7f9fa/000000?text=+) #f7f9fa
-* Fonts and links: ![#262626](https://via.placeholder.com/15/262626/000000?text=+)#262626
-* Hover: ![#4b4bec](https://via.placeholder.com/15/4b4bec/000000?text=+)#4B4BEC
+* Fonts and links: ![#262626](https://via.placeholder.com/15/262626/000000?text=+) #262626
+* Hover: ![#4b4bec](https://via.placeholder.com/15/4b4bec/000000?text=+) #4B4BEC
+
 
 ### Fonts
 I used Serif throughout the site.
