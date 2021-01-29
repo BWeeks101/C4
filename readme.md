@@ -2,21 +2,52 @@
 
 ### Interactive Front-End Development Milestone Project
 
+<img  src="wireframes/c4mobile-tablet-composite-1349.png">
+
 C4 is a JavaScript version of the classic 'Connect 4' board game, from Hasbro.
 
 Unlike the traditional game, C4's twist limits each players turn to 5s by default (this can be adjusted up to 30s if the player is finding things too challenging).
 
-#### View the live site [here](https://bweeks101.github.io/C4/).
+### View the live site [here](https://bweeks101.github.io/C4/).
 
+---
+# Table of Contents
+- [UX](#ux)
+	- [User Stories](#user-stories)
+		- [New User Goals](#new-user-goals)
+		- [Returning User Goals](#returning-user-goals)
+	- [Wireframes](#wireframes)
+		- [Differences between the Wireframes and final design](#differences-between-the-wireframes-and-final-design)
+	- [Surface](#surface)
+		- [Colours](#colours)
+		- [Fonts](#fonts)
+		- [Images](#images)
+- [Features](#features)
+	- [Desired Features based on User Stories](#desired-features-based-on-user-stories)
+	- [Existing Features](#existing-features)
+	- [Features Left to Implement](#features-left-to-implement)
+	- [Outstanding Issues](#outstanding-issues)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+	- [Performance Testing](#performance-testing)
+	- [Functionality Testing](#functionality-testing)
+- [Notable Challenges](#notable-challenges)
+	- [datagrid.js](#datagrid.js)
+	- [jQuery](#jquery)
+	- [JavaScript animations and dynamic scaling](#javascript-animations-and-dynamic-scaling)
+- [Deployment](#deployment)
+- [Credits](#credits)
+	- [Content](#content)
+	- [Acknowledgements](#acknowledgements)
+	- [Research](#research)
+___
 ## UX
 
-<img src="/wireframes/c4mobile-tablet-composite-675.png">
+C4, (based on the classic 'Connect 4' game from Hasbro), is quick and easy to play, yet difficult to master. Using the default setting of 5s per player turn, a single game will be completed in under 4 minutes. This makes it ideal for play with a friend during short work/education breaks, or whilst waiting for the kettle to boil!
 
 C4 has a light, minimalist design - it is a single responsive page with no images beyond social media icons. The site is functional on desktops, laptops and mobile devices, with a minimum supported horizontal resolution of 280px, and minimum supported vertical resolution of 568px.
 
 *NB: The site will function on lower horizontal/vertical resolutions, but the page will scroll as required.  This may interfere with gameplay.*
-
-C4, (based on the classic 'Connect 4' game from Hasbro), is quick and easy to play, yet difficult to master. Using the default setting of 5s per player turn, a single game will be completed in under 4 minutes. This makes it ideal for play with a friend during short work/education breaks, or whilst waiting for the kettle to boil!
 
 ### User Stories
 
@@ -34,9 +65,9 @@ C4, (based on the classic 'Connect 4' game from Hasbro), is quick and easy to pl
 
 6. Be able to adjust the challenge of the game by altering time limits for each turn to further refine challenge and the game experience.
 
-7. As a User, I want to be able to use the site effectively on mobile devices, tablets, laptops, and desktops so that I am not limited to playing in a single location or with a single device.
+7. Be able to use the site effectively on mobile devices, tablets, laptops, and desktops so that I am not limited to playing in a single location or with a single device.
 
-8. As a User, I want to be able to review the rules of the game so that I can learn how to play.
+8. Be able to review the rules of the game so that I can learn how to play.
 
 #### Returning User Goals
 
@@ -46,15 +77,40 @@ C4, (based on the classic 'Connect 4' game from Hasbro), is quick and easy to pl
 
 ### Wireframes
 
-Wireframes created in Balsamiq, and exported to /wireframes/c4-wireframes.pdf
+Wireframes created in [Balsamiq](https://balsamiq.com/wireframes/), and exported to [/wireframes/c4-wireframes.pdf](wireframes/c4-wireframes.pdf)
 
-### Differences between the Wireframes and Final Design
+#### Differences between the Wireframes and final design
 
 Whilst the site follows the same basic structure as the design wireframes, significant compromises had to be made due to time restrictions and technology availability. The site currently features a main page, where the user can see an animated logo, review the rules, customise player names and token colours, or start a local 'hotseat' multiplayer game. The side navigation menu also features the option to switch between light and dark modes (with dark being the default).  The player can also specify the turn time length for games.  These preferences are all written to local storage.
 
 It was not possible to implement online multiplayer, leaderboards/stat tracking, player accounts, or the uploading of profile images without a more comprehensive backend and database structure that are currently unavailable. A single player AI was desired, but unfortunately was not achievable within the given timeframe.
 
-## Desired Features based on User Stories
+## Surface
+### Colours
+Dark Theme primary colours:
+Background: ![#262626](https://via.placeholder.com/15/262626/000000?text=+) #262626
+Fonts and links: ![#fafafa](https://via.placeholder.com/15/fafafa/000000?text=+) #fafafa
+Hover: ![#ec4c4c](https://via.placeholder.com/15/ec4c4c/000000?text=+) #ec4c4c
+`#ec4c4c`
+Light Theme primary colours:
+Background: ![#f7f9fa](https://via.placeholder.com/15/f7f9fa/000000?text=+) #f7f9fa
+Fonts and links: ![#262626](https://via.placeholder.com/15/262626/000000?text=+)#262626
+Hover: ![#4b4bec](https://via.placeholder.com/15/4b4bec/000000?text=+)#4B4BEC
+
+### Fonts
+I used Serif throughout the site.
+
+### Images
+ * Favicon created by myself using [GIMP](https://www.gimp.org/)
+ * SVG Masks utilised on the Nav button served by the [W3 SVG XML Namespace](http://www.w3.org/2000/svg)
+	 * SVG Mask URLs for both Dark and Light themes were copied from the [Bootstrap](https://getbootstrap.com) '.navbar-dark .navbar-toggler-icon' style rule, and modified.
+ * Social media icons served by [Font Awesome](https://fontawesome.com/)
+
+[Back to Table of contents](#table-of-contents)
+___
+## Features
+
+### Desired Features based on User Stories
 
 1. Fully responsive mobile first design allows for a functional site on mobile, tablet, laptop and desktop, with a minimum. resolution of 280px x 568px.
 2. Minimalist design allows users to quickly setup a game and get straight to the fun!
@@ -77,7 +133,7 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 	>Using the default settings, a player can get into a game with just 2 clicks.
 
 3. User selected turn time limits allow players to decrease/increase the pressure in line with their own skill level/preferences.
-	- Time limits can be set in increments of 5 seconds, starting with the default of 5 to a maximum of 30.
+	>Time limits can be set in increments of 5 seconds, starting with the default of 5 to a maximum of 30.
 
 4. User preferences allow selection of colours used for both players tokens.
 	>Users settings are available to customise both player names, and their chosen token colours.
@@ -113,6 +169,11 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 1. When viewing the site through browser dev tools, changing the device or directly altering the device resolution can lead to rendering inconsistencies.
 	>My previous project made extensive use of media queries. For this project I wanted to heavily focus on JavaScript, so instead of media queries I have made use of the onresize attribute. Changing the device or directly altering the resolution values within dev tools does not seem to consistently trigger onresize.  Any rendering inconsistencies can be resolved by refreshing the page, or manually resizing the device display to trigger the onresize function.
 
+2. When resizing the site whilst the logo animation plays, elements on the page will not resize until the animation is complete.
+	>When the animation completes, elements will automatically resize correctly.  With more time I would look to implement functionality into the animation to pause it during resize, then restart when the resize is complete.
+
+[Back to Table of contents](#table-of-contents)
+___
 ## Technologies Used
 
 * [HTML5](https://en.wikipedia.org/wiki/HTML5/)
@@ -136,6 +197,8 @@ It was not possible to implement online multiplayer, leaderboards/stat tracking,
 * [Mermaid.js Live Editor](https://mermaid-js.github.io/mermaid-live-editor/)
 	- I used the **Mermaid.js** Live Editor to create the flowcharts used for testing
 
+[Back to Table of contents](#table-of-contents)
+___
 ## Testing
 
 All testing was conducted manually, making extensive use of Dev Tools within Mozilla Firefox, Google Chrome and Microsoft Edge.
@@ -144,9 +207,9 @@ All testing was conducted manually, making extensive use of Dev Tools within Moz
 I used [Lighthouse](https://developers.google.com/web/tools/lighthouse/) within Google Chrome Dev Tools for performance testing.  Although variation should be expected, the results below were consistently achieved.
 
 Desktop Results
-<img  src="/wireframes/chrome-lighthouse-desktop.png">
+<img  src="wireframes/chrome-lighthouse-desktop.png">
 Mobile Results
- <img  src="/wireframes/chrome-lighthouse-mobile.png">
+ <img  src="wireframes/chrome-lighthouse-mobile.png">
 
 ### Functionality Testing
 Devices tested in browser dev tools include:
@@ -177,22 +240,26 @@ The minimum supported width is 280px, and the minimum supported height is 568px.
 Testing was performed using the following flowcharts:
 
 1. Logo Animation
-	[logo-animation.pdf](https://bweeks101.github.io/C4/wireframes/logo-animation.pdf)
+	[logo-animation.pdf](wireframes/logo-animation.pdf)
 
 2. Rules
-	[rules.pdf](https://bweeks101.github.io/C4/wireframes/rules.pdf)
+	[rules.pdf](wireframes/rules.pdf)
 
 3. User Settings
-	[user-settings.pdf](https://bweeks101.github.io/C4/wireframes/user-settings.pdf)
-	[user-settings-validation-alert.pdf](https://bweeks101.github.io/C4/wireframes/user-settings-validation-alert.pdf)
+	[user-settings.pdf](wireframes/user-settings.pdf)
+	[user-settings-validation-alert.pdf](wireframes/user-settings-validation-alert.pdf)
 	
 4. SideNav:
-	[sidenav.pdf](https://bweeks101.github.io/C4/wireframes/sidenav.pdf)
+	[sidenav.pdf](wireframes/sidenav.pdf)
 
 5. Start a Game
-	[start-game.pdf](https://bweeks101.github.io/C4/wireframes/start-game.pdf)
+	[start-game.pdf](wireframes/start-game.pdf)
 	
-### Notable Challenge - datagrid.js
+[Back to Table of contents](#table-of-contents)
+___
+## Notable Challenges
+
+### datagrid.js
 
 The original UX design of the site necessitated multiple user selectable datagrids. The original concept involved pulling data from databases into objects, which would display as a fairly traditional datagrid, with fixed headers, content scroll and options to select entire columns or rows with a single click. eg:
 
@@ -216,16 +283,18 @@ Please see the comments within datagrid.js and datagrid.css for more details (in
 
 In the future I would like to resolve the noted limitations (max of 12 columns within a screen, only vertical scroll with locked headers) and remove the reliance on bootstrap.  
 
-### Notable Challenge - jQuery
+###  jQuery
 
-As I had never worked with JavaScript before, I wanted to become as familiar with it as possible. Therefore I made the decision to avoid using jQuery for this project, with the exception of a single $(document).ready() call.   I would like to understand how JavaScript works before I start using custom solutions and shortcuts (however widespread and useful).
+As I had never worked with JavaScript before, I wanted to become as familiar with it as possible. Therefore I made the decision to avoid using jQuery for this project, with the exception of a single $(document).ready() call.   I wanted to become familiar with JavaScript before I started using custom solutions and shortcuts.
 
-### Notable Challenge - JavaScript animations and dynamic scaling
+### JavaScript animations and dynamic scaling
 
 Although I wanted to keep the site as lean as possible with very few images and no media-queries, the design still required a logo and small navbar logo. I decided to make further use of my datagrid for both, and learn how to animate with JavaScript at the same time. This also provided an opportunity to learn how to dynamically scale text on resize relative to other dynamically resized elements.
 
 The site is supported on devices with a minimum width of 280px (based on the Galaxy Fold in dev tools), and a minimum height of 568px (based on the iPhone5 in dev tools). Dynamic scaling is achieved by utilising JavaScript functions attached to the onresize attribute of the body element.
 
+[Back to Table of contents](#table-of-contents)
+___
 ## Deployment
 
 The project was deployed to GitHub Pages using the following method:
@@ -246,6 +315,8 @@ Running the code locally would involve installing a webhost, downloading the lat
 
 There are far too many potential applications and configurations to list them here in detail. The site contains HTML, CSS, and JavaScript so should not be complex to host, however I would recommend sticking to the hosted site on [GitHub Pages](https://bweeks101.github.io/C4/).
 
+[Back to Table of contents](#table-of-contents)
+___
 ## Credits
 
 * Connect 4 board game from [Hasbro](https://products.hasbro.com/en-gb/product/connect-4-game:80FB5BCA-5056-9047-F5F4-5EB5DF88DAF4)
@@ -254,6 +325,9 @@ There are far too many potential applications and configurations to list them he
 * Customised Select Control from [W3 Schools Example](https://www.w3schools.com/howto/howto_custom_select.asp)
 * Animation Function Structure from [W3 Schools Example](https://www.w3schools.com/howto/howto_js_animate.asp)
 * Change colour of svg on hover (mask method) from [CSS-Tricks.com](https://css-tricks.com/change-color-of-svg-on-hover/#use-a-mask-instead-of-a-background-image)
+* SVG Mask URLs for both Dark and Light themes were copied from the [Bootstrap](https://getbootstrap.com) '.navbar-dark .navbar-toggler-icon' style rule, and modified.
+* '.c4-button-large' style rule copied from [Bootstrap](https://getbootstrap.com) '.btn-lg' style rule and modified.
+* I utilised a workaround proposed by [Alec Rust](https://stackoverflow.com/users/312681/alecrust) on [Stack Overflow](https://stackoverflow.com/) to [add colour samples](https://stackoverflow.com/questions/11509830/how-to-add-color-to-githubs-readme-md-file/41247934#41247934)  to the [Surface](#surface) section of this readme.
 
 ### Content
 
@@ -275,4 +349,4 @@ I received inspiration for this project from my mentor, Adegbenga Adeye (@gbenga
 *  [CSS-Tricks.com](https://css-tricks.com/)
 *  [Stack Overflow](https://stackoverflow.com/)*
 
-*It is almost impossible to search for any coding related issue online without encountering Stack Overflow links towards the top of the results. Whilst I certainly read Stack Overflow when researching solutions to challenges, I have not (to the best of my recollection or per my notes) utilised any code directly, in whole or in part.
+*It is almost impossible to search for any coding related issue online without encountering Stack Overflow links towards the top of the results. Whilst I certainly read Stack Overflow when researching solutions to challenges, I have not (to the best of my recollection or per my notes) utilised any code directly, in whole or in part, (with the exception of the workaround listed in the [credits](#credits) above).
