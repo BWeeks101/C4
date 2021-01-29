@@ -327,23 +327,22 @@ The site is supported on devices with a minimum width of 280px (based on the Gal
 ___
 # Deployment
 
-The project was deployed to GitHub Pages using the following method:
+The project was developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in Gitpod were committed (`git commit`) and pushed (`git push`) to GitHub frequently throughout the development process.
 
-1. Open the [Code Institute Gitpod Template](https://github.com/Code-Institute-Org/gitpod-full-template/)
-2. Click [Use this template](https://github.com/Code-Institute-Org/gitpod-full-template/generate/)
-3. Provide a Name
-4. Provide a Description
-5. Choose Public
-6. Click 'Create Repository from template'. GitHub will create the repository and open it.
-7. Click 'Settings'
-8. Scroll down to 'GitHub Pages'
-9. Change Source from 'none' to 'master' and click 'Save'
+The project was deployed to GitHub Pages.
 
-The project was then developed using [Gitpod](https://gitpod.io/). There are no differences between the developed and deployed versions, and no additional code branches. Changes saved in Gitpod were committed and pushed to GitHub frequently throughout the development process.
+* I deployed the project using the following method:
+	1. Log into GitHub and select the [C4](https://github.com/BWeeks101/C4) repository.
+	2. Click 'Settings'.
+	3. Scroll down to 'GitHub Pages'.
+	4. Change Source from 'none' to 'master' and click 'Save'.
 
-Running the code locally would involve installing a webhost, downloading the latest [commit](https://github.com/BWeeks101/C4/archive/master.zip), then extracting that zip to an appropriate folder to be hosted by the local webhost.
+* To deploy locally:
+	1. Log into GitHub and open the [C4](https://github.com/BWeeks101/C4) repository.
+	2. Select 'code' then 'Download ZIP'.
+	3. Extract the contents of the ZIP file for use in your own environment.
 
-There are far too many potential applications and configurations to list them here in detail. The site contains HTML, CSS, and JavaScript so should not be complex to host, however I would recommend sticking to the hosted site on [GitHub Pages](https://bweeks101.github.io/C4/).
+* Alternatively you can [Clone](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) or [Fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) the [C4](https://github.com/BWeeks101/C4) repository into your own GitHub account.
 
 [Back to Table of contents](#table-of-contents)
 ___
