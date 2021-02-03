@@ -369,10 +369,10 @@ I received inspiration for this project from my mentor, Adegbenga Adeye (@gbenga
 
 ## Research:
 
-* CI Course Material and example projects
-* W3C Schools [CSS](https://www.w3schools.com/css/default.asp/), [HTML](https://www.w3schools.com/html/default.asp/) and [JavaScript](https://www.w3schools.com/js/DEFAULT.asp) Documentation
-*  [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) Documentation
-* MDN web docs ([JavaScript](https://developer.mozilla.org/en-US/docs/Web/javascript), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/), [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/))
+* [Code Institute](https://codeinstitute.net/) course material and example projects.
+* W3C Schools [CSS](https://www.w3schools.com/css/default.asp/), [HTML](https://www.w3schools.com/html/default.asp/) and [JavaScript](https://www.w3schools.com/js/DEFAULT.asp) documentation.
+*  [Bootstrap](https://getbootstrap.com/docs/4.5/getting-started/introduction/) documentation.
+* MDN web docs ([JavaScript](https://developer.mozilla.org/en-US/docs/Web/javascript), [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/), and [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/)).
 *  [Adobe Colour Wheel](https://color.adobe.com/create/color-wheel/)
 *  [ColorHexa.com](https://www.colorhexa.com/)
 *  [Coolors.co](https://coolors.co/)
