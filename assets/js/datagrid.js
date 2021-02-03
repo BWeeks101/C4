@@ -485,8 +485,6 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
 
     let i;
     let ii;
-    let iii;
-    let iiii;
     for (i = 0; i < elementCollection.length; i += 1) { //Iterate through the collection
         for (ii = 0; ii < elementCollection[i].classList.length; ii += 1) { //Iterate through the classList of each element
             if (elementCollection[i].classList.item(ii).slice(0, 3) === "col") {
@@ -511,8 +509,8 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
         }
 
         /* Remove all classes in the removal list array from this element */
-        for (iii = 0; iii < removalList.length; iii += 1) {
-            elementCollection[i].classList.remove(removalList[iii]);
+        for (ii = 0; ii < removalList.length; ii += 1) {
+            elementCollection[i].classList.remove(removalList[ii]);
         }
 
         /* Clear the removal list array */
@@ -520,8 +518,8 @@ function dataGridDisplaySetCols(dataGridDisplayId, cols) {
 
         /* Process colClass as array if isArray true */
         if (Array.isArray(colClass) === true) {
-            for (iiii = 0; iiii < colClass.length; iiii += 1) {
-                elementCollection[i].classList.add(colClass[iiii]); //Add each value from the colClass array as a class to the current element
+            for (ii = 0; ii < colClass.length; ii += 1) {
+                elementCollection[i].classList.add(colClass[ii]); //Add each value from the colClass array as a class to the current element
             }
         } else { /* Else process as string */
             elementCollection[i].classList.add(colClass); //Add the colClass string value as a class to the parent element
