@@ -1,7 +1,7 @@
 /*
 * Custom Select Control taken from W3 Schools Example
 * Minor modifications.
-* Main code block and document click event listener wrapped in initC4Select() function.
+* Main code block wrapped in initC4Select() function.
 * Class names prefixed with c4-
 * Variable and function declarations moved out of loops
 * var replaced with let
@@ -23,10 +23,10 @@
 function closeAllSelect(element) {
     /*a function that will close all select boxes in the document,
     except the current select box:*/
-    let selectSelectedCollection = document.getElementsByClassName("c4-select-selected");    
+    let selectSelectedCollection = document.getElementsByClassName("c4-select-selected");
     let selectSelectedCollectionLength = selectSelectedCollection.length;
     let selectItemsCollection = document.getElementsByClassName("c4-select-items");
-    let selectItemsCollectionLength = selectItemsCollection.length;    
+    let selectItemsCollectionLength = selectItemsCollection.length;
     let i;
     let elementIndexArray = [];
     for (i = 0; i < selectSelectedCollectionLength; i += 1) {
@@ -35,12 +35,48 @@ function closeAllSelect(element) {
         } else {
             selectSelectedCollection[i].classList.remove("c4-select-arrow-active");
         }
-    }    
+    }
     for (i = 0; i < selectItemsCollectionLength; i += 1) {
         if (elementIndexArray.indexOf(i)) {
             selectItemsCollection[i].classList.add("c4-select-hide");
         }
     }
+}
+
+function updateSelectBox() {
+    /*when an item is clicked, update the original select box,
+    and the selected item:*/
+    let selectTagCollection = this.parentNode.parentNode.getElementsByTagName("select")[0];
+    let selectTagCollectionLength = selectTagCollection.length;
+    let selectSelectedElement = this.parentNode.previousSibling;
+    let sameAsSelectedCollection;
+    let sameAsSelectedCollectionLength;
+
+    let i;
+    let ii;
+    for (i = 0; i < selectTagCollectionLength; i += 1) {
+        if (selectTagCollection.options[i].innerHTML === this.innerHTML) {
+            selectTagCollection.selectedIndex = i;
+            selectSelectedElement.innerHTML = this.innerHTML;
+            sameAsSelectedCollection = this.parentNode.getElementsByClassName("c4-same-as-selected");
+            sameAsSelectedCollectionLength = sameAsSelectedCollection.length;
+            for (ii = 0; ii < sameAsSelectedCollectionLength; ii += 1) {
+                sameAsSelectedCollection[ii].removeAttribute("class");
+            }
+            this.setAttribute("class", "c4-same-as-selected");
+            break;
+        }
+    }
+    selectSelectedElement.click();
+}
+
+function toggleSelectBox() {
+    /*when the select box is clicked, close any other select boxes,
+    and open/close the current select box:*/
+    event.stopPropagation();
+    closeAllSelect(this);
+    this.nextSibling.classList.toggle("c4-select-hide");
+    this.classList.toggle("c4-select-arrow-active");
 }
 
 /* Initialise Custom Select Control */
@@ -55,42 +91,6 @@ function initC4Select() {
     let optionListContainer;
     let ii;
     let optionListItem;
-    let selectTagCollection;
-    let selectTagCollectionLength;
-    let selectSelectedElement;
-    let sameAsSelectedCollection;
-    let sameAsSelectedCollectionLength;
-
-    function updateSelectBox() {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        selectTagCollection = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        selectTagCollectionLength = selectTagCollection.length;
-        selectSelectedElement = this.parentNode.previousSibling;
-        for (i = 0; i < selectTagCollectionLength; i += 1) {
-            if (selectTagCollection.options[i].innerHTML === this.innerHTML) {
-                selectTagCollection.selectedIndex = i;
-                selectSelectedElement.innerHTML = this.innerHTML;
-                sameAsSelectedCollection = this.parentNode.getElementsByClassName("c4-same-as-selected");
-                sameAsSelectedCollectionLength = sameAsSelectedCollection.length;
-                for (ii = 0; ii < sameAsSelectedCollectionLength; ii += 1) {
-                    sameAsSelectedCollection[ii].removeAttribute("class");
-                }
-                this.setAttribute("class", "c4-same-as-selected");
-                break;
-            }
-        }
-        selectSelectedElement.click();
-    }
-
-    function toggleSelectBox() {
-        /*when the select box is clicked, close any other select boxes,
-        and open/close the current select box:*/
-        event.stopPropagation();
-        closeAllSelect(this);
-        this.nextSibling.classList.toggle("c4-select-hide");
-        this.classList.toggle("c4-select-arrow-active");
-    }
 
     for (i = 0; i < selectCollectionLength; i += 1) {
         selectedElement = selectCollection[i].getElementsByTagName("select")[0];
