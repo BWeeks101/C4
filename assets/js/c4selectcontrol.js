@@ -29,7 +29,7 @@ function closeAllSelect(element) {
     let elementIndexArray = [];
     let selectItemsCollection = document.getElementsByClassName("c4-select-items");
     let selectItemsCollectionLength = selectItemsCollection.length;
-    
+
     let i;
     for (i = 0; i < selectSelectedCollectionLength; i += 1) {
         if (element === selectSelectedCollection[i]) {
