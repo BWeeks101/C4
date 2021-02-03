@@ -4,6 +4,7 @@
 * Main code block wrapped in initC4Select() function.
 * Class names prefixed with c4-
 * Variable and function declarations moved out of loops
+* Single letter variables altered to be more descriptive
 * var replaced with let
 * https://www.w3schools.com/howto/howto_custom_select.asp
 */
@@ -25,10 +26,11 @@ function closeAllSelect(element) {
     except the current select box:*/
     let selectSelectedCollection = document.getElementsByClassName("c4-select-selected");
     let selectSelectedCollectionLength = selectSelectedCollection.length;
+    let elementIndexArray = [];
     let selectItemsCollection = document.getElementsByClassName("c4-select-items");
     let selectItemsCollectionLength = selectItemsCollection.length;
+    
     let i;
-    let elementIndexArray = [];
     for (i = 0; i < selectSelectedCollectionLength; i += 1) {
         if (element === selectSelectedCollection[i]) {
             elementIndexArray.push(i);
@@ -84,14 +86,14 @@ function initC4Select() {
     /*look for any elements with the class "c4-select":*/
     let selectCollection = document.getElementsByClassName("c4-select");
     let selectCollectionLength = selectCollection.length;
-    let i;
     let selectedElement;
     let selectedElementLength;
     let selectedItem;
     let optionListContainer;
-    let ii;
     let optionListItem;
 
+    let i;
+    let ii;
     for (i = 0; i < selectCollectionLength; i += 1) {
         selectedElement = selectCollection[i].getElementsByTagName("select")[0];
         selectedElementLength = selectedElement.length;
