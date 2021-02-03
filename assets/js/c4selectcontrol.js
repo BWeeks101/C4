@@ -20,25 +20,25 @@
 
 /* JSHint warns that initC4Select is unused.  This is called externally from this file. */
 
-function closeAllSelect(elmnt) {
+function closeAllSelect(element) {
     /*a function that will close all select boxes in the document,
     except the current select box:*/
-    let x = document.getElementsByClassName("c4-select-items");
-    let y = document.getElementsByClassName("c4-select-selected");
-    let xl = x.length;
-    let yl = y.length;
+    let selectSelectedCollection = document.getElementsByClassName("c4-select-selected");    
+    let selectSelectedCollectionLength = selectSelectedCollection.length;
+    let selectItemsCollection = document.getElementsByClassName("c4-select-items");
+    let selectItemsCollectionLength = selectItemsCollection.length;    
     let i;
-    let arrNo = [];
-    for (i = 0; i < yl; i += 1) {
-        if (elmnt === y[i]) {
-            arrNo.push(i);
+    let elementIndexArray = [];
+    for (i = 0; i < selectSelectedCollectionLength; i += 1) {
+        if (element === selectSelectedCollection[i]) {
+            elementIndexArray.push(i);
         } else {
-            y[i].classList.remove("c4-select-arrow-active");
+            selectSelectedCollection[i].classList.remove("c4-select-arrow-active");
         }
-    }
-    for (i = 0; i < xl; i += 1) {
-        if (arrNo.indexOf(i)) {
-            x[i].classList.add("c4-select-hide");
+    }    
+    for (i = 0; i < selectItemsCollectionLength; i += 1) {
+        if (elementIndexArray.indexOf(i)) {
+            selectItemsCollection[i].classList.add("c4-select-hide");
         }
     }
 }
