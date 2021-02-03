@@ -46,42 +46,41 @@ function closeAllSelect(element) {
 /* Initialise Custom Select Control */
 function initC4Select() {
     /*look for any elements with the class "c4-select":*/
-    let x = document.getElementsByClassName("c4-select");
-    let l = x.length;
+    let selectCollection = document.getElementsByClassName("c4-select");
+    let selectCollectionLength = selectCollection.length;
     let i;
-    let selElmnt;
-    let ll;
-    let a;
-    let b;
-    let j;
-    let c;
-    let s;
-    let sl;
-    let h;
-    let y;
-    let yl;
-    let k;
+    let selectedElement;
+    let selectedElementLength;
+    let selectedItem;
+    let optionListContainer;
+    let ii;
+    let optionListItem;
+    let selectTagCollection;
+    let selectTagCollectionLength;
+    let selectSelectedElement;
+    let sameAsSelectedCollection;
+    let sameAsSelectedCollectionLength;
 
     function updateSelectBox() {
         /*when an item is clicked, update the original select box,
         and the selected item:*/
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i += 1) {
-            if (s.options[i].innerHTML === this.innerHTML) {
-                s.selectedIndex = i;
-                h.innerHTML = this.innerHTML;
-                y = this.parentNode.getElementsByClassName("c4-same-as-selected");
-                yl = y.length;
-                for (k = 0; k < yl; k += 1) {
-                    y[k].removeAttribute("class");
+        selectTagCollection = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        selectTagCollectionLength = selectTagCollection.length;
+        selectSelectedElement = this.parentNode.previousSibling;
+        for (i = 0; i < selectTagCollectionLength; i += 1) {
+            if (selectTagCollection.options[i].innerHTML === this.innerHTML) {
+                selectTagCollection.selectedIndex = i;
+                selectSelectedElement.innerHTML = this.innerHTML;
+                sameAsSelectedCollection = this.parentNode.getElementsByClassName("c4-same-as-selected");
+                sameAsSelectedCollectionLength = sameAsSelectedCollection.length;
+                for (ii = 0; ii < sameAsSelectedCollectionLength; ii += 1) {
+                    sameAsSelectedCollection[ii].removeAttribute("class");
                 }
                 this.setAttribute("class", "c4-same-as-selected");
                 break;
             }
         }
-        h.click();
+        selectSelectedElement.click();
     }
 
     function toggleSelectBox() {
@@ -93,27 +92,27 @@ function initC4Select() {
         this.classList.toggle("c4-select-arrow-active");
     }
 
-    for (i = 0; i < l; i += 1) {
-        selElmnt = x[i].getElementsByTagName("select")[0];
-        ll = selElmnt.length;
+    for (i = 0; i < selectCollectionLength; i += 1) {
+        selectedElement = selectCollection[i].getElementsByTagName("select")[0];
+        selectedElementLength = selectedElement.length;
         /*for each element, create a new DIV that will act as the selected item:*/
-        a = document.createElement("DIV");
-        a.setAttribute("class", "c4-select-selected");
-        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-        x[i].appendChild(a);
+        selectedItem = document.createElement("DIV");
+        selectedItem.setAttribute("class", "c4-select-selected");
+        selectedItem.innerHTML = selectedElement.options[selectedElement.selectedIndex].innerHTML;
+        selectCollection[i].appendChild(selectedItem);
         /*for each element, create a new DIV that will contain the option list:*/
-        b = document.createElement("DIV");
-        b.setAttribute("class", "c4-select-items c4-select-hide");
-        for (j = 0; j < ll; j += 1) {
+        optionListContainer = document.createElement("DIV");
+        optionListContainer.setAttribute("class", "c4-select-items c4-select-hide");
+        for (ii = 0; ii < selectedElementLength; ii += 1) {
             /*for each option in the original select element,
             create a new DIV that will act as an option item:*/
-            c = document.createElement("DIV");
-            c.innerHTML = selElmnt.options[j].innerHTML;
-            c.addEventListener("click", updateSelectBox);
-            b.appendChild(c);
+            optionListItem = document.createElement("DIV");
+            optionListItem.innerHTML = selectedElement.options[ii].innerHTML;
+            optionListItem.addEventListener("click", updateSelectBox);
+            optionListContainer.appendChild(optionListItem);
         }
-        x[i].appendChild(b);
-        a.addEventListener("click", toggleSelectBox);
+        selectCollection[i].appendChild(optionListContainer);
+        selectedItem.addEventListener("click", toggleSelectBox);
     }
 
     /*if the user clicks anywhere outside the select box,
